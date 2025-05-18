@@ -1,7 +1,7 @@
-import { jwtVerify } from 'jose'
 import { cookie } from '../cookie'
 import type { Req } from '../request'
 import type { Res } from '../response'
+import { jwt } from '../security/jwt'
 
 type Strategy = 'cookie' | 'header' | 'query'
 
@@ -77,11 +77,7 @@ export const auth = <T = unknown>({
 
     let decoded: T | null = null
     try {
-      const { payload } = await jwtVerify<T>(
-        token as string,
-        new TextEncoder().encode(secret)
-      )
-      decoded = payload
+      decoded = await jwt(secret).verify<T>(token)
     } catch (error) {
       console.error('JWT error:', error)
       return res.status(401).json({

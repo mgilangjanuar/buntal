@@ -1,9 +1,9 @@
-import { auth, cookie, h } from 'buntal'
-import { SignJWT } from 'jose'
+import { auth, cookie, h, hash, jwt } from 'buntal'
 
 type User = {
   id: string
-  name: string
+  name: string,
+  password: string
 }
 
 const DONT_TRY_THIS_AT_HOME = 'your-secret-key'
@@ -35,12 +35,11 @@ export const POST = h(
     const user: User = {
       id: '123',
       name: 'John Doe',
+      password: hash('password')
     }
-    const token = await new SignJWT(user)
-      .setExpirationTime('2h')
-      .setIssuedAt()
-      .setProtectedHeader({ alg: 'HS256' })
-      .sign(new TextEncoder().encode(DONT_TRY_THIS_AT_HOME))
+    const token = await jwt(DONT_TRY_THIS_AT_HOME).sign(user, {
+      expiresIn: '2h'
+    })
     cookie.set(res, 'access_token', token, {
       maxAge: 60 * 60 * 2,
       httpOnly: true,

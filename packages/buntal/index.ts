@@ -9,3 +9,5 @@ export {
 } from './http/handler'
 
 export { cors } from './http/middlewares/cors'
+
+export { cookie } from './http/cookie'

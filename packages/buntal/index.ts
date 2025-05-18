@@ -8,4 +8,4 @@ export {
   type AtomicHandlerWithVoid
 } from './http/handler'
 
-export { cors } from './middlewares/cors'
+export { cors } from './http/middlewares/cors'

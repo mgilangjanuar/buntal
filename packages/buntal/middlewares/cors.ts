@@ -18,10 +18,7 @@ export const cors = (opts: Options = {
   maxAge: 600,
   credentials: true
 }) => {
-  return async (req: Req, res: Res) => {
-    if (req.method === 'OPTIONS') {
-      return res.send('departed')
-    }
+  return async (_: Req, res: Res) => {
     res.headers({
       'Access-Control-Allow-Origin': Array.isArray(opts.origin) ? opts.origin.join(', ') : opts.origin,
       'Access-Control-Allow-Methods': Array.isArray(opts.methods) ? opts.methods.join(', ') : opts.methods,

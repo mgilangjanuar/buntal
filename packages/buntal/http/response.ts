@@ -7,7 +7,9 @@ export class Res {
     headers: Record<string, string>
   } = {
     status: 200,
-    headers: {}
+    headers: {
+      'X-Powered-By': 'Buntal v0.0.1',
+    }
   }
 
   constructor() {}

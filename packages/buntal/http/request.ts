@@ -1,5 +1,5 @@
-export type Req<T = unknown> = Request & {
-  params?: Record<string, string>,
+export type Req<P = Record<string, string>, T = unknown> = Request & {
+  params: P,
   query?: Record<string, string>,
   context?: T
 }

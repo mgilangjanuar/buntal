@@ -1,10 +1,18 @@
-import { Http } from 'buntal'
+import { cors, Http } from 'buntal'
 
 const app = new Http({
   port: 4001,
   appDir: './app'
 })
 
-const server = app.start()
+app.use(cors())
 
-console.log(`Server running at http://localhost:${server.port}`)
+app.get('/hello/:name', (req, res) => {
+  return res.json({
+    hello: `Hello ${req.params.name}`
+  })
+})
+
+app.start()
+
+console.log(`Server running at http://localhost:${app.server?.port}`)

@@ -31,6 +31,7 @@ export class Http {
 
     const server = Bun.serve({
       port: this.config.port,
+      reusePort: true,
       routes: this.routes,
       fetch: this.config.appDir ? async (raw: Request) => {
         if (raw.method === 'OPTIONS') {

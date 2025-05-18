@@ -1,5 +1,4 @@
 import type { BodyInit } from 'bun'
-import { ALLOWED_METHODS } from './methods'
 
 export class Res {
   private options: {

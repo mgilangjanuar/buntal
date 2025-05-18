@@ -1,4 +1,5 @@
 import type { Req } from './request'
+import type { Res } from './response'
 
 type CookieOptions = {
   maxAge?: number
@@ -10,8 +11,8 @@ type CookieOptions = {
   sameSite?: 'Strict' | 'Lax' | 'None'
 }
 
-export const cookie = (req: Req) => ({
-  get: (name: string) => {
+export const cookie = ({
+  get: (req: Req, name: string) => {
     const cookies = req.headers.get('cookie')
     if (!cookies) return null
     const cookieArray = cookies.split('; ')
@@ -23,7 +24,7 @@ export const cookie = (req: Req) => ({
     }
     return null
   },
-  set: (name: string, value: string, {
+  set: (res: Res, name: string, value: string, {
     maxAge,
     expires,
     path,
@@ -54,9 +55,16 @@ export const cookie = (req: Req) => ({
     if (sameSite) {
       cookieString += `; SameSite=${sameSite}`
     }
+    res.headers({
+      'Set-Cookie': cookieString
+    })
     return cookieString
   },
-  delete: (name: string) => {
-    return `${name}=; Max-Age=0; path=/`
+  delete: (res: Res, name: string) => {
+    const cookieString = `${name}=; Max-Age=0; path=/`
+    res.headers({
+      'Set-Cookie': cookieString
+    })
+    return cookieString
   }
 })

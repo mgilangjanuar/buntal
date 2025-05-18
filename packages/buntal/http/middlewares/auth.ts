@@ -23,7 +23,7 @@ type Options<T = unknown> = {
 const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
   switch (strategy) {
     case 'cookie':
-      return cookie(req).get(opts?.cookie?.key || 'access_token')
+      return cookie.get(req, opts?.cookie?.key || 'access_token')
     case 'header':
       return req.headers.get(opts?.header?.key || 'Authorization')?.replace(/^Bearer\ /, '')
     case 'query':

@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "buntal": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

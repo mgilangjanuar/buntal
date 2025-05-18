@@ -13,6 +13,11 @@ export const GET = h<{}, User>(
     strategy: 'header',
     secret: DONT_TRY_THIS_AT_HOME,
     onVerified: async (req, res, decoded) => {
+      if (decoded.id !== '123') {
+        return res.status(401).json({
+          message: 'Unauthorized',
+        })
+      }
       req.context = decoded
     }
   }),

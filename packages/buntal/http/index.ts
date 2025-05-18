@@ -6,7 +6,7 @@ import { buildRouter } from './router'
 
 type Config = {
   port: number
-  appDir: string
+  appDir?: string
 }
 
 type ExtractRouteParams<Path extends string> =
@@ -26,20 +26,22 @@ export class Http {
   constructor(private config: Config) {}
 
   start() {
-    const router = buildRouter(this.config.appDir)
     const res = new Res()
     const middlewares = this.middlewares
 
     const server = Bun.serve({
       port: this.config.port,
       routes: this.routes,
-      fetch: async (raw: Request) => {
+      fetch: this.config.appDir ? async (raw: Request) => {
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
         }
 
         const req = raw as Req
+
+        const router = buildRouter(this.config.appDir!)
         const match = router.match(req)
+
         if (match) {
           req.params = match.params || {}
           req.query = match.query || {}
@@ -48,6 +50,14 @@ export class Http {
           if (handler[req.method]) {
             return h(...middlewares, handler[req.method])(req, res)
           }
+        }
+
+        return res.status(404).json({
+          error: 'Not found'
+        })
+      } : async (raw: Request) => {
+        if (raw.method === 'OPTIONS') {
+          return res.send('departed')
         }
 
         return res.status(404).json({
@@ -72,31 +82,31 @@ export class Http {
 
   get<R extends string, P = ExtractRouteParams<R>>(route: R, handler: AtomicHandler<P>) {
     this.routes[route] = {
-      'GET': req => handler(req as Req<P>, new Res()),
+      'GET': req => h<P>(...this.middlewares as AtomicHandlerWithVoid<P>[], handler)(req as Req<P>, new Res()),
     }
   }
 
   post<R extends string, P = ExtractRouteParams<R>>(route: R, handler: AtomicHandler<P>) {
     this.routes[route] = {
-      'POST': req => handler(req as Req<P>, new Res()),
+      'POST': req => h<P>(...this.middlewares as AtomicHandlerWithVoid<P>[], handler)(req as Req<P>, new Res()),
     }
   }
 
   put<R extends string, P = ExtractRouteParams<R>>(route: R, handler: AtomicHandler<P>) {
     this.routes[route] = {
-      'PUT': req => handler(req as Req<P>, new Res()),
+      'PUT': req => h<P>(...this.middlewares as AtomicHandlerWithVoid<P>[], handler)(req as Req<P>, new Res()),
     }
   }
 
   delete<R extends string, P = ExtractRouteParams<R>>(route: R, handler: AtomicHandler<P>) {
     this.routes[route] = {
-      'DELETE': req => handler(req as Req<P>, new Res()),
+      'DELETE': req => h<P>(...this.middlewares as AtomicHandlerWithVoid<P>[], handler)(req as Req<P>, new Res()),
     }
   }
 
   patch<R extends string, P = ExtractRouteParams<R>>(route: R, handler: AtomicHandler<P>) {
     this.routes[route] = {
-      'PATCH': req => handler(req as Req<P>, new Res()),
+      'PATCH': req => h<P>(...this.middlewares as AtomicHandlerWithVoid<P>[], handler)(req as Req<P>, new Res()),
     }
   }
 }

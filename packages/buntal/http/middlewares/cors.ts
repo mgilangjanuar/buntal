@@ -1,3 +1,4 @@
+import type { AtomicHandler } from '../handler'
 import type { Req } from '../request'
 import type { Res } from '../response'
 
@@ -17,7 +18,7 @@ export const cors = ({
   exposedHeaders = '',
   maxAge = 600,
   credentials = true
-}: Options = {}) => {
+}: Options = {}): AtomicHandler => {
   return async (_: Req, res: Res) => {
     res.headers({
       'Access-Control-Allow-Origin': Array.isArray(origin) ? origin.join(', ') : origin,

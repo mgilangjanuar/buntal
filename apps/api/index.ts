@@ -1,4 +1,5 @@
-import { cors, Http } from 'buntal'
+import { Http } from 'buntal/http'
+import { cors } from 'buntal/http/middlewares'
 
 const app = new Http({
   port: 4001,

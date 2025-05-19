@@ -1,7 +1,8 @@
+import { jwt } from '../../security'
 import { cookie } from '../cookie'
+import type { AtomicHandler } from '../handler'
 import type { Req } from '../request'
 import type { Res } from '../response'
-import { jwt } from '../security/jwt'
 
 type Strategy = 'cookie' | 'header' | 'query'
 
@@ -17,7 +18,7 @@ type Options<T = unknown> = {
   query?: {
     key: string
   },
-  onVerified?: (req: Req, res: Res, decoded: T) => void | Response | Promise<void | Response>
+  onVerified?: (req: Req<Record<string, string>, T>, res: Res, decoded: T) => void | Response | Promise<void | Response>
 }
 
 const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
@@ -48,8 +49,8 @@ export const auth = <T = unknown>({
   onVerified
 }: Options<T> = {
   secret: process.env.JWT_SECRET || process.env.SECRET || '',
-}) => {
-  return async (req: Req, res: Res) => {
+}): AtomicHandler<Record<string, string>, T> => {
+  return async (req, res: Res) => {
     let token: string | null | undefined
 
     if (Array.isArray(strategy)) {

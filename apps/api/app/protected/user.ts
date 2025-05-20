@@ -1,5 +1,5 @@
-import { cookie, h } from 'buntal/http'
-import { auth } from 'buntal/http/middlewares'
+import { cookie, h } from 'buntal'
+import { auth } from 'buntal/middlewares'
 import { hash, jwt } from 'buntal/security'
 
 type User = {

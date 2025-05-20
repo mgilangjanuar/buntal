@@ -1,8 +1,5 @@
-import { jwt } from '../../security'
-import { cookie } from '../cookie'
-import type { AtomicHandler } from '../handler'
-import type { Req } from '../request'
-import type { Res } from '../response'
+import { cookie, type AtomicHandler, type Req, type Res } from '../http'
+import { jwt } from '../security'
 
 type Strategy = 'cookie' | 'header' | 'query'
 

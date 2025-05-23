@@ -1,8 +1,8 @@
-import { h, type AtomicHandler } from './handler'
-import { ALLOWED_METHODS } from './methods'
-import type { Req } from './request'
-import { Res } from './response'
-import { buildRouter } from './router'
+import { h, type AtomicHandler } from '@/http/handler'
+import { ALLOWED_METHODS } from '@/http/methods'
+import type { Req } from '@/http/request'
+import { Res } from '@/http/response'
+import { buildRouter } from '@/http/router'
 
 type Config = {
   port: number

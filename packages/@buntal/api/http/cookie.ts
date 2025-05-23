@@ -1,5 +1,5 @@
-import type { Req } from './request'
-import type { Res } from './response'
+import type { Req } from '@/http/request'
+import type { Res } from '@/http/response'
 
 type CookieOptions = {
   maxAge?: number

@@ -1,4 +1,4 @@
-import { type AtomicHandler, type Req, type Res } from '../http'
+import { type AtomicHandler, type Req, type Res } from '@/http'
 
 type Options = {
   origin?: string | string[]

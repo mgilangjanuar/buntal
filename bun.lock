@@ -45,9 +45,20 @@
         "typescript": "^5",
       },
     },
+    "packages/@buntal/web": {
+      "name": "@buntal/web",
+      "devDependencies": {
+        "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
   },
   "packages": {
     "@buntal/api": ["@buntal/api@workspace:packages/@buntal/api"],
+
+    "@buntal/web": ["@buntal/web@workspace:packages/@buntal/web"],
 
     "@types/bun": ["@types/bun@1.2.14", "", { "dependencies": { "bun-types": "1.2.14" } }, "sha512-VsFZKs8oKHzI7zwvECiAJ5oSorWndIWEVhfbYqZd4HI/45kzW7PN2Rr5biAzvGvRuNmYLSANY+H59ubHq8xw7Q=="],
 

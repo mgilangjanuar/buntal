@@ -22,6 +22,7 @@ type ExtractRouteParams<Path extends string> =
 export class Http {
   private middlewares: AtomicHandler[] = []
   private routes: Record<string, { [K in typeof ALLOWED_METHODS[number] | string]?: AtomicHandler }> = {}
+  private errorHandler: ((error: Error) => Response | Promise<Response>) | null = null
   public server: Bun.Server | undefined
 
   constructor(private config: Config) {}
@@ -75,8 +76,11 @@ export class Http {
           error: 'Not found'
         })
       },
-      error: (error: Error) => {
-        return new Res().status(500).json({
+      error: async (error: Error) => {
+        if (this.errorHandler) {
+          return await this.errorHandler(error)
+        }
+        return res.status(500).json({
           error: error.message,
           details: error.stack
         })
@@ -85,6 +89,10 @@ export class Http {
 
     this.server = server
     return server
+  }
+
+  onError(handler: (error: Error) => Response | Promise<Response>) {
+    this.errorHandler = handler
   }
 
   use(handler: AtomicHandler) {

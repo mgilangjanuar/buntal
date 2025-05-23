@@ -7,7 +7,7 @@
     "apps/api": {
       "name": "api",
       "dependencies": {
-        "@buntal/server": "*",
+        "@buntal/server": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "latest",

@@ -10,6 +10,12 @@ const app = new Http({
 // Add middleware to handle CORS
 app.use(cors())
 
+app.use((req, res) => {
+  return res.json({
+    message: 'Hello from Buntal API!'
+  })
+})
+
 // Define a simple GET endpoint with a type-safe params
 app.get('/hello/:name', (req, res) => {
   return res.json({

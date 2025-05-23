@@ -1,8 +1,8 @@
-import { h, type AtomicHandler } from '@/http/handler'
-import { ALLOWED_METHODS } from '@/http/methods'
-import type { Req } from '@/http/request'
-import { Res } from '@/http/response'
-import { buildRouter } from '@/http/router'
+import { h, type AtomicHandler } from './handler'
+import { ALLOWED_METHODS } from './methods'
+import type { Req } from './request'
+import { Res } from './response'
+import { buildRouter } from './router'
 
 type Config = {
   port: number
@@ -53,9 +53,9 @@ export class Http {
           }
         }
 
-        return res.status(404).json({
+        return h(...middlewares, (_, res) => res.status(404).json({
           error: 'Not found'
-        })
+        }))(req, res)
       } : async (raw: Request) => {
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
@@ -77,8 +77,8 @@ export class Http {
     return server
   }
 
-  use(middleware: AtomicHandler) {
-    this.middlewares.push(middleware)
+  use(handler: AtomicHandler) {
+    this.middlewares.push(handler)
   }
 
   get<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {

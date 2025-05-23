@@ -1,5 +1,5 @@
-import type { Req } from '@/http/request'
-import { Res } from '@/http/response'
+import type { Req } from './request'
+import { Res } from './response'
 
 export type AtomicHandler<P = Record<string, string>, T = unknown, R = Response | void | undefined | Promise<Response | void | undefined>> = {
   (req: Req<P, T>, res: Res): R

@@ -1,2 +1,2 @@
-export { auth } from '@/middlewares/auth'
-export { cors } from '@/middlewares/cors'
+export { auth } from './auth'
+export { cors } from './cors'

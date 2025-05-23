@@ -1,7 +1,7 @@
 {
   "name": "buntal",
   "workspaces": [
-    "packages/*",
+    "packages/@buntal/*",
     "apps/*"
   ],
   "version": "0.0.1"

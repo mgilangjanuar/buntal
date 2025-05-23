@@ -1,31 +1,30 @@
 import { cookie, type AtomicHandler, type Req, type Res } from '../http'
 import { jwt } from '../security'
 
-type Strategy = 'cookie' | 'header' | 'query'
+type Strategy = 'cookie' | 'header' | 'both'
 
 type Options<T = unknown> = {
   secret: string,
-  strategy?: Strategy | Strategy[],
+  strategy?: Strategy,
   cookie?: {
     key: string
   },
   header?: {
     key: string
   },
-  query?: {
-    key: string
-  },
   onVerified?: (req: Req<Record<string, string>, T>, res: Res, decoded: T) => void | Response | Promise<void | Response>
 }
 
 const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
+  const cookieValue = cookie.get(req, opts?.cookie?.key || 'access_token')
+  const headerValue = req.headers.get(opts?.header?.key || 'Authorization')?.replace(/^Bearer\ /, '')
   switch (strategy) {
     case 'cookie':
-      return cookie.get(req, opts?.cookie?.key || 'access_token')
+      return cookieValue
     case 'header':
-      return req.headers.get(opts?.header?.key || 'Authorization')?.replace(/^Bearer\ /, '')
-    case 'query':
-      return req.query?.[opts?.query?.key || 'token']
+      return headerValue
+    case 'both':
+      return cookieValue || headerValue
     default:
       return null
   }
@@ -40,9 +39,6 @@ export const auth = <T = unknown>({
   header = {
     key: 'Authorization'
   },
-  query = {
-    key: 'token'
-  },
   onVerified
 }: Options<T> = {
   secret: process.env.JWT_SECRET || process.env.SECRET || '',
@@ -55,7 +51,6 @@ export const auth = <T = unknown>({
         token = getToken(req, strat, {
           cookie,
           header,
-          query
         })
         if (token) break
       }
@@ -63,7 +58,6 @@ export const auth = <T = unknown>({
       token = getToken(req, strategy, {
         cookie,
         header,
-        query
       })
     }
 

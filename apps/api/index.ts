@@ -1,10 +1,10 @@
-import { Http } from 'buntal'
-import { cors } from 'buntal/middlewares'
+import { Http } from '@buntal/server'
+import { cors } from '@buntal/server/middlewares'
 
 // Initialize the HTTP server
 const app = new Http({
   port: 4001,
-  appDir: './app'
+  appDir: './app'   // Enable file-based routing!
 })
 
 // Add middleware to handle CORS

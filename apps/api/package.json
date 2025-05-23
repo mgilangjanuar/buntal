@@ -7,7 +7,7 @@
     "@types/bun": "latest"
   },
   "dependencies": {
-    "buntal": "workspaces:^"
+    "@buntal/server": "*"
   },
   "peerDependencies": {
     "typescript": "^5"

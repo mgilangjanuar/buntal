@@ -1,5 +1,5 @@
 {
-  "name": "buntal",
+  "name": "@buntal/server",
   "version": "0.0.1",
   "description": "HTTP client framework for Bun",
   "type": "module",

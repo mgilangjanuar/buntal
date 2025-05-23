@@ -1,6 +1,6 @@
-import { cookie, h } from 'buntal'
-import { auth } from 'buntal/middlewares'
-import { hash, jwt } from 'buntal/security'
+import { cookie, h } from '@buntal/server'
+import { auth } from '@buntal/server/middlewares'
+import { hash, jwt } from '@buntal/server/security'
 
 type User = {
   id: string
@@ -38,7 +38,7 @@ const DONT_TRY_THIS_AT_HOME = 'your-secret-key'
 export const GET = h<{}, User>(
   auth<User>({
     secret: DONT_TRY_THIS_AT_HOME,
-    strategy: 'cookie',
+    strategy: 'both',
     cookie: {
       key: 'access_token'
     },

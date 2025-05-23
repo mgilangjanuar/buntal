@@ -1,5 +1,5 @@
 import { Http } from '@buntal/api'
-import { cors } from '@buntal/api/middlewares'
+import { cors, logger } from '@buntal/api/middlewares'
 
 // Initialize the HTTP server
 const app = new Http({
@@ -7,8 +7,9 @@ const app = new Http({
   appDir: './app'   // Enable file-based routing!
 })
 
-// Add middleware to handle CORS
+// Add middlewares
 app.use(cors())
+app.use(logger())
 
 // Define a simple GET endpoint with a type-safe params
 app.get('/hello/:name', (req, res) => {
@@ -18,6 +19,6 @@ app.get('/hello/:name', (req, res) => {
 })
 
 // Start the server!
-app.start()
-
-console.log(`Server running at http://localhost:${app.server?.port}`)
+app.start(server => {
+  console.log(`Server running at http://localhost:${server.port}`)
+})

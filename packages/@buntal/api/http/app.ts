@@ -23,11 +23,10 @@ export class Http {
   private middlewares: AtomicHandler[] = []
   private routes: Record<string, { [K in typeof ALLOWED_METHODS[number] | string]?: AtomicHandler }> = {}
   private errorHandler: ((error: Error) => Response | Promise<Response>) | null = null
-  public server: Bun.Server | undefined
 
   constructor(private config: Config) {}
 
-  start() {
+  start(cb?: (server: Bun.Server) => void) {
     const res = new Res()
     const middlewares = this.middlewares
 
@@ -87,7 +86,7 @@ export class Http {
       }
     })
 
-    this.server = server
+    cb?.(server)
     return server
   }
 

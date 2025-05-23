@@ -7,7 +7,7 @@
     "apps/api": {
       "name": "api",
       "dependencies": {
-        "@buntal/server": "workspace:^",
+        "@buntal/api": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -31,8 +31,8 @@
         "typescript": "^5",
       },
     },
-    "packages/@buntal/server": {
-      "name": "@buntal/server",
+    "packages/@buntal/api": {
+      "name": "@buntal/api",
       "version": "0.0.1",
       "dependencies": {
         "bcryptjs": "^3.0.2",
@@ -47,7 +47,7 @@
     },
   },
   "packages": {
-    "@buntal/server": ["@buntal/server@workspace:packages/@buntal/server"],
+    "@buntal/api": ["@buntal/api@workspace:packages/@buntal/api"],
 
     "@types/bun": ["@types/bun@1.2.14", "", { "dependencies": { "bun-types": "1.2.14" } }, "sha512-VsFZKs8oKHzI7zwvECiAJ5oSorWndIWEVhfbYqZd4HI/45kzW7PN2Rr5biAzvGvRuNmYLSANY+H59ubHq8xw7Q=="],
 

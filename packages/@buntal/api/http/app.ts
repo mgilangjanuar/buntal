@@ -6,7 +6,8 @@ import { buildRouter } from './router'
 
 type Config = {
   port: number
-  appDir?: string
+  appDir?: string,
+  injectHandler?: (payload: { req: Req, match: Bun.MatchedRoute, handler: any }) => Promise<Response | void>
 }
 
 type ExtractRouteParams<Path extends string> =
@@ -48,7 +49,16 @@ export class Http {
           req.query = match.query || {}
 
           const handler = await import(match.filePath)
-          if (handler[req.method]) {
+          const injected = await this.config.injectHandler?.({
+            req,
+            match,
+            handler
+          })
+          if (injected instanceof Response) {
+            return injected
+          }
+
+          if (req.method in handler) {
             return h(...middlewares, handler[req.method])(req, res)
           }
         }

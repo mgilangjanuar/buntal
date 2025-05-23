@@ -4,7 +4,7 @@
     "": {
       "name": "buntal",
     },
-    "apps/api": {
+    "apps/simple-api": {
       "name": "api",
       "dependencies": {
         "@buntal/api": "workspace:^",
@@ -16,7 +16,7 @@
         "typescript": "^5",
       },
     },
-    "apps/web-simple": {
+    "apps/simple-web": {
       "name": "web-simple",
       "dependencies": {
         "react": "^19.1.0",
@@ -57,7 +57,7 @@
 
     "@types/react-dom": ["@types/react-dom@19.1.5", "", { "peerDependencies": { "@types/react": "^19.0.0" } }, "sha512-CMCjrWucUBZvohgZxkjd6S9h0nZxXjzus6yDfUb+xLxYM7VvjKNH1tQrE9GWLql1XoOP4/Ds3bwFqShHUYraGg=="],
 
-    "api": ["api@workspace:apps/api"],
+    "api": ["api@workspace:apps/simple-api"],
 
     "bcryptjs": ["bcryptjs@3.0.2", "", { "bin": { "bcrypt": "bin/bcrypt" } }, "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog=="],
 
@@ -77,6 +77,6 @@
 
     "undici-types": ["undici-types@6.21.0", "", {}, "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="],
 
-    "web-simple": ["web-simple@workspace:apps/web-simple"],
+    "web-simple": ["web-simple@workspace:apps/simple-web"],
   }
 }

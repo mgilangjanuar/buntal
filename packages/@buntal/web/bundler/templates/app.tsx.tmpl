@@ -1,0 +1,22 @@
+import { useEffect } from 'react'
+
+export function App({ routes }: Readonly<{
+  routes: {
+    route: string,
+    path: string,
+    regex: string,
+    layouts: string[],
+    ssr?: boolean,
+  }[]
+}>) {
+
+  useEffect(() => {
+    console.log('Buntal App initialized')
+    window.addEventListener('popstate', e => {
+      console.log('Popstate event:', e)
+      e.preventDefault()
+    })
+  }, [])
+
+  return <></>
+}

@@ -12,15 +12,12 @@ export async function runServer(appDir: string = './app') {
     appDir: appDir,
     injectHandler: async ({ req, match, handler }) => {
       const route = routes.find(r => r.route === match.name)
-      if (route && 'default' in handler) {
-        if (!route.layouts.length) {
-          throw new Error(`No layout found for route: ${match.name}`)
-        }
+      if (route?.layouts.length && 'default' in handler) {
         const createComponent = async (layouts: string[]): Promise<ReactNode> => {
-          if (!layouts?.length) {
+          if (!layouts?.[0]) {
             return handler.default() as ReactNode
           }
-          const layout = await import(layouts[0] as string)
+          const layout = await import(layouts[0])
           return layout.default({
             children: await createComponent(layouts.slice(1)),
           }) as ReactNode

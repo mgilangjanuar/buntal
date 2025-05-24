@@ -17,7 +17,7 @@ export const builder = async (appDir: string = 'app') => {
         const parsedPaths = filePath.replace(process.cwd(), '').split('/')
         for (const [i, path] of Object.entries(parsedPaths)) {
           const layoutPath = `${process.cwd()}${parsedPaths.slice(0, Number(i)).join('/')}/${path}/layout.tsx`
-          if (await Bun.file(layoutPath).exists()) {
+          if (await Bun.file(layoutPath).exists() && 'default' in await import(layoutPath)) {
             layouts.push(layoutPath)
           }
         }

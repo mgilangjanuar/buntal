@@ -7,12 +7,13 @@ import { staticHandler } from './static'
 
 export async function runServer(appDir: string = './app') {
   const routes = await builder(appDir)
-  await Bun.write('.buntal/routes.manifest.json', JSON.stringify(routes, null, 2))
+  await Bun.write('.buntal/routes.manifest.json',
+    JSON.stringify(routes, null, 2))
 
   const app = new Http({
     port: 3000,
     appDir: appDir,
-    injectHandler: params =>  injectHandler(routes, params),
+    injectHandler: injectHandler(routes),
   })
 
   app.onNotFound(async (req, res) => {

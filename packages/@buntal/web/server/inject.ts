@@ -3,11 +3,11 @@ import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 import { builder } from '../router'
 
-export async function injectHandler(routes: Awaited<ReturnType<typeof builder>>, { req, match, handler }: {
+export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => async ({ req, match, handler }: {
   req: Req,
   match: Bun.MatchedRoute,
   handler: any
-}) {
+}) => {
   const route = routes.find(r => r.route === match.name)
   if (route && 'default' in handler) {
     const args = {

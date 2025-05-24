@@ -14,7 +14,7 @@ export default function HomePage() {
         </button>
       </div>
       <p>
-        <Link href="/rsc">RSC</Link>
+        <Link href="/hello/gilang">Gilang</Link>
       </p>
     </div>
   )

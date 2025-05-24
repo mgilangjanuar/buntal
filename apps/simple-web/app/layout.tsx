@@ -1,3 +1,5 @@
+import { Head } from '@buntal/web'
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return <html>
     <Head />

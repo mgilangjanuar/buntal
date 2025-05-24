@@ -3,12 +3,13 @@ import { logger } from '@buntal/server/middlewares'
 import { networkInterfaces } from 'os'
 import { renderToReadableStream } from 'react-dom/server'
 
-export function runServer(appDir?: string) {
+export function runServer(appDir: string = './app') {
   const app = new Http({
     port: 3000,
-    appDir: appDir || './app',
+    appDir: appDir,
     injectHandler: async ({ req, match, handler }) => {
       if ('default' in handler) {
+        console.log(match.filePath.replace(process.cwd(), ''))
         return new Response(await renderToReadableStream(handler.default()), {
           headers: {
             'Content-Type': 'text/html',

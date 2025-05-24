@@ -7,20 +7,24 @@ import { builder } from '../router'
 
 export async function runServer(appDir: string = './app') {
   const routes = await builder(appDir)
+
   const app = new Http({
     port: 3000,
     appDir: appDir,
     injectHandler: async ({ req, match, handler }) => {
       const route = routes.find(r => r.route === match.name)
       if (route?.layouts.length && 'default' in handler) {
+        const args = {
+          query: req.query,
+          params: req.params,
+          data: route.ssr ? await handler.$(req) : {}
+        }
         const createComponent = async (layouts: string[]): Promise<ReactNode> => {
           if (!layouts?.[0]) {
-            return handler.default() as ReactNode
+            return handler.default(args) as ReactNode
           }
           const layout = await import(layouts[0])
-          return layout.default({
-            children: await createComponent(layouts.slice(1)),
-          }) as ReactNode
+          return layout.default(args) as ReactNode
         }
         return new Response(await renderToReadableStream(await createComponent(route.layouts)), {
           headers: {

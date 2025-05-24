@@ -1,5 +1,5 @@
 import type { Req } from '@buntal/server'
-import type { ReactNode } from 'react'
+import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 import { builder } from '../router'
 
@@ -19,13 +19,13 @@ export async function injectHandler(routes: Awaited<ReturnType<typeof builder>>,
     // Recursively create the component with layouts
     const createComponent = async (layouts: string[]): Promise<ReactNode> => {
       if (!layouts?.[0]) {
-        return handler.default(args) as ReactNode
+        return createElement(handler.default, args)
       }
       const layout = await import(layouts[0])
-      return layout.default({
+      return createElement(layout.default, {
         ...args,
         children: await createComponent(layouts.slice(1))
-      }) as ReactNode
+      })
     }
 
     // Render the component to a readable stream

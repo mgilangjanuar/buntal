@@ -1,6 +1,6 @@
-import { cookie, h } from '@buntal/api'
-import { auth } from '@buntal/api/middlewares'
-import { hash, jwt } from '@buntal/api/security'
+import { cookie, h } from '@buntal/server'
+import { auth } from '@buntal/server/middlewares'
+import { hash, jwt } from '@buntal/server/security'
 
 type User = {
   id: string

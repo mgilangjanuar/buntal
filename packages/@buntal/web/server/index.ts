@@ -13,7 +13,7 @@ export async function runServer(appDir: string = './app') {
     appDir: appDir,
     injectHandler: async ({ req, match, handler }) => {
       const route = routes.find(r => r.route === match.name)
-      if (route?.layouts.length && 'default' in handler) {
+      if (route && 'default' in handler) {
         const args = {
           query: req.query,
           params: req.params,
@@ -24,7 +24,10 @@ export async function runServer(appDir: string = './app') {
             return handler.default(args) as ReactNode
           }
           const layout = await import(layouts[0])
-          return layout.default(args) as ReactNode
+          return layout.default({
+            ...args,
+            children: await createComponent(layouts.slice(1))
+          }) as ReactNode
         }
         return new Response(await renderToReadableStream(await createComponent(route.layouts)), {
           headers: {
@@ -33,6 +36,21 @@ export async function runServer(appDir: string = './app') {
         })
       }
     },
+  })
+
+  app.onNotFound(async (req, res) => {
+    const { pathname } = new URL(req.url)
+    if (await Bun.file(`./public${pathname}`).exists()) {
+      const file = Bun.file(`./public${pathname}`)
+      return new Response(file, {
+        headers: {
+          'content-type': file.type
+        }
+      })
+    }
+    return res.status(404).json({
+      error: 'Not found'
+    })
   })
 
   app.use(logger())

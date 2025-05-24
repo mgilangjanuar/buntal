@@ -23,6 +23,9 @@ export class Http {
   private middlewares: AtomicHandler[] = []
   private routes: Record<string, { [K in typeof ALLOWED_METHODS[number] | string]?: AtomicHandler }> = {}
   private errorHandler: ((error: Error) => Response | Promise<Response>) | null = null
+  private notFoundHandler: AtomicHandler = (_, res) => res.status(404).json({
+    error: 'Not found'
+  })
 
   constructor(private config: Config) {}
 
@@ -63,9 +66,7 @@ export class Http {
           }
         }
 
-        return h(...middlewares, (_, res) => res.status(404).json({
-          error: 'Not found'
-        }))(req, res)
+        return h(...middlewares, this.notFoundHandler)(req, res)
       } : async (raw: Request) => {
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
@@ -92,6 +93,10 @@ export class Http {
 
   onError(handler: (error: Error) => Response | Promise<Response>) {
     this.errorHandler = handler
+  }
+
+  onNotFound(handler: AtomicHandler) {
+    this.notFoundHandler = handler
   }
 
   use(handler: AtomicHandler) {

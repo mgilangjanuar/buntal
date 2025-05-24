@@ -6,7 +6,7 @@ export const $ = async (req: Request) => {
   }
 }
 
-export default function RSC({ data }: { data: Awaited<ReturnType<typeof $>> }) {
+export default function RSC({ data }: { data?: Awaited<ReturnType<typeof $>> }) {
   return (
     <div>
       <h1>RSC Page</h1>

@@ -1,3 +1,4 @@
+import { Link } from '@buntal/web/navigation'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -13,7 +14,7 @@ export default function HomePage() {
         </button>
       </div>
       <p>
-        <a href="/about">About</a>
+        <Link href="/nested">Nested</Link>
       </p>
     </div>
   )

@@ -1,22 +1,39 @@
-import { useEffect } from 'react'
+import { createElement, ReactNode, useCallback, useEffect, useState } from 'react'
 
 export function App({ routes }: Readonly<{
   routes: {
     route: string,
-    path: string,
     regex: string,
-    layouts: string[],
-    ssr?: boolean,
+    element: (data: any) => ReactNode,
+    layouts: ((data: any) => ReactNode)[]
   }[]
 }>) {
+  const [activeRoute, setActiveRoute] = useState<string>(window.location.pathname)
+  const [router, setRouter] = useState<typeof routes[number] | null>(null)
 
   useEffect(() => {
-    console.log('Buntal App initialized')
-    window.addEventListener('popstate', e => {
-      console.log('Popstate event:', e)
-      e.preventDefault()
-    })
+    const handler = () => {
+      setActiveRoute(window.location.pathname)
+    }
+    window.addEventListener('popstate', handler)
+    return () => {
+      window.removeEventListener('popstate', handler)
+    }
   }, [])
 
-  return <></>
+  useEffect(() => {
+     setRouter(routes.find(r => new RegExp(r.regex).test(activeRoute)) || null)
+  }, [activeRoute])
+
+  const buildPage = useCallback((layouts: ((data: any) => ReactNode)[]) => {
+    if (!router) return null
+    if (!layouts?.[0]) {
+      return createElement(router.element, {})
+    }
+    return createElement(layouts[0], {
+      children: buildPage(layouts.slice(1))
+    })
+  }, [router])
+
+  return router ? buildPage(router.layouts) : null
 }

@@ -8,4 +8,13 @@ export const staticHandler = async (req: Request, dir: string = './public'): Pro
       }
     })
   }
+
+  if (await Bun.file(`.buntal/dist${pathname}`).exists()) {
+    const file = Bun.file(`.buntal/dist${pathname}`)
+    return new Response(file, {
+      headers: {
+        'content-type': file.type
+      }
+    })
+  }
 }

@@ -1,7 +1,7 @@
 import type { Req } from '@buntal/server'
 import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
-import { builder } from '../router'
+import { builder } from './router'
 
 export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => async ({ req, match, handler }: {
   req: Req,
@@ -31,7 +31,10 @@ export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => as
     // Render the component to a readable stream
     return new Response(
       await renderToReadableStream(
-        await createComponent(route.layouts)
+        await createComponent(route.layouts),
+        {
+          bootstrapModules: ['/_entrypoint.js']
+        }
       ), {
         headers: {
           'Content-Type': 'text/html',

@@ -1,3 +1,3 @@
 export { runServer } from './server'
-export { builder } from './router'
+export { builder } from './server/router'
 export * from './app'

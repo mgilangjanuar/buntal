@@ -5,6 +5,7 @@ export const builder = async (appDir: string = 'app') => {
   const results: {
     route: string,
     path: string,
+    regex: string,
     ssr?: boolean,
     layouts: string[]
   }[] = []
@@ -24,6 +25,8 @@ export const builder = async (appDir: string = 'app') => {
         results.push({
           route,
           path: filePath,
+          regex: `^${route.replace(/\//g, '\\/')
+            .replace(/\[[^\]]+\]/g, '[\\w\\+\\-]+')}$`,
           ssr: '$' in handler,
           layouts,
         })

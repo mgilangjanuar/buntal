@@ -29,11 +29,15 @@ export async function runServer(appDir: string = './app') {
             children: await createComponent(layouts.slice(1))
           }) as ReactNode
         }
-        return new Response(await renderToReadableStream(await createComponent(route.layouts)), {
-          headers: {
-            'Content-Type': 'text/html',
+        return new Response(
+          await renderToReadableStream(
+            await createComponent(route.layouts)
+          ), {
+            headers: {
+              'Content-Type': 'text/html',
+            }
           }
-        })
+        )
       }
     },
   })

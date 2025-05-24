@@ -7,6 +7,7 @@ import { builder } from '../router'
 
 export async function runServer(appDir: string = './app') {
   const routes = await builder(appDir)
+  await Bun.write('.buntal/routes.manifest.json', JSON.stringify(routes, null, 2))
 
   const app = new Http({
     port: 3000,
@@ -19,6 +20,8 @@ export async function runServer(appDir: string = './app') {
           params: req.params,
           data: route.ssr ? await handler.$(req) : {}
         }
+
+        // Recursively create the component with layouts
         const createComponent = async (layouts: string[]): Promise<ReactNode> => {
           if (!layouts?.[0]) {
             return handler.default(args) as ReactNode
@@ -29,6 +32,8 @@ export async function runServer(appDir: string = './app') {
             children: await createComponent(layouts.slice(1))
           }) as ReactNode
         }
+
+        // Render the component to a readable stream
         return new Response(
           await renderToReadableStream(
             await createComponent(route.layouts)
@@ -44,6 +49,8 @@ export async function runServer(appDir: string = './app') {
 
   app.onNotFound(async (req, res) => {
     const { pathname } = new URL(req.url)
+
+    // Handle static files
     if (await Bun.file(`./public${pathname}`).exists()) {
       const file = Bun.file(`./public${pathname}`)
       return new Response(file, {
@@ -66,7 +73,7 @@ export async function runServer(appDir: string = './app') {
     console.log(`
    -... ..- -. - .- .-..
    Local:\thttp://localhost:${server.port}
-   Network:\thttp://${ip}:${server.port}
+   Network:\thttp://${ip || '0.0.0.0'}:${server.port}
 `)
   })
 }

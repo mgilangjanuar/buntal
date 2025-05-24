@@ -1,4 +1,8 @@
+import { $ } from 'bun'
+
 export async function bundler() {
+  await $`cp -r ${process.cwd()}/app .buntal`
+
   await Bun.write('.buntal/app.tsx', await Bun.file(__dirname + '/templates/app.tsx.tmpl').text())
 
   const manifest = await Bun.file('.buntal/routes.manifest.json').json()

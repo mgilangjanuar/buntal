@@ -14,7 +14,7 @@ export default function HomePage() {
         </button>
       </div>
       <p>
-        <Link href="/nested">Nested</Link>
+        <Link href="/rsc">RSC</Link>
       </p>
     </div>
   )

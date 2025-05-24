@@ -35,5 +35,5 @@ export function App({ routes }: Readonly<{
     })
   }, [router])
 
-  return router ? buildPage(router.layouts) : null
+  return buildPage(router?.layouts || [])
 }

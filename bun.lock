@@ -32,21 +32,29 @@
         "typescript": "^5",
       },
     },
+    "packages/cli": {
+      "name": "buntal-cli",
+      "dependencies": {
+        "commander": "^14.0.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "@types/commander": "^2.12.5",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "packages/react": {
       "name": "buntal-react",
       "version": "0.0.1",
-      "bin": {
-        "buntal": "./cli/index.ts",
-      },
       "dependencies": {
         "buntal-server": "workspace:^",
-        "commander": "^14.0.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
       "devDependencies": {
         "@types/bun": "latest",
-        "@types/commander": "^2.12.5",
         "@types/react": "^19.1.5",
         "@types/react-dom": "^19.1.5",
       },
@@ -85,6 +93,8 @@
     "bcryptjs": ["bcryptjs@3.0.2", "", { "bin": { "bcrypt": "bin/bcrypt" } }, "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog=="],
 
     "bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
+
+    "buntal-cli": ["buntal-cli@workspace:packages/cli"],
 
     "buntal-react": ["buntal-react@workspace:packages/react"],
 

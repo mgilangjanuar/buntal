@@ -7,7 +7,7 @@
     "apps/simple-api": {
       "name": "api",
       "dependencies": {
-        "@buntal/server": "workspace:^",
+        "buntal-server": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -19,7 +19,7 @@
     "apps/simple-web": {
       "name": "web-simple",
       "dependencies": {
-        "@buntal/web": "workspace:^",
+        "buntal-react": "workspace:^",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
@@ -32,8 +32,8 @@
         "typescript": "^5",
       },
     },
-    "packages/@buntal/server": {
-      "name": "@buntal/server",
+    "packages/server": {
+      "name": "buntal-server",
       "version": "0.0.1",
       "dependencies": {
         "bcryptjs": "^3.0.2",
@@ -46,11 +46,11 @@
         "typescript": "^5",
       },
     },
-    "packages/@buntal/web": {
-      "name": "@buntal/web",
+    "packages/web": {
+      "name": "buntal-react",
       "version": "0.0.1",
       "dependencies": {
-        "@buntal/server": "workspace:^",
+        "buntal-server": "workspace:^",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
@@ -65,10 +65,6 @@
     },
   },
   "packages": {
-    "@buntal/server": ["@buntal/server@workspace:packages/@buntal/server"],
-
-    "@buntal/web": ["@buntal/web@workspace:packages/@buntal/web"],
-
     "@types/bun": ["@types/bun@1.2.14", "", { "dependencies": { "bun-types": "1.2.14" } }, "sha512-VsFZKs8oKHzI7zwvECiAJ5oSorWndIWEVhfbYqZd4HI/45kzW7PN2Rr5biAzvGvRuNmYLSANY+H59ubHq8xw7Q=="],
 
     "@types/node": ["@types/node@22.15.21", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-EV/37Td6c+MgKAbkcLG6vqZ2zEYHD7bvSrzqqs2RIhbA6w3x+Dqz8MZM3sP6kGTeLrdoOgKZe+Xja7tUB2DNkQ=="],
@@ -82,6 +78,10 @@
     "bcryptjs": ["bcryptjs@3.0.2", "", { "bin": { "bcrypt": "bin/bcrypt" } }, "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog=="],
 
     "bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
+
+    "buntal-react": ["buntal-react@workspace:packages/web"],
+
+    "buntal-server": ["buntal-server@workspace:packages/server"],
 
     "csstype": ["csstype@3.1.3", "", {}, "sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw=="],
 

@@ -12,6 +12,7 @@ export function App({ routes }: Readonly<{
   const [router, setRouter] = useState<typeof routes[number] | null>(null)
 
   useEffect(() => {
+    document.documentElement.innerHTML = ''
     const handler = () => {
       setActiveRoute(window.location.pathname)
     }

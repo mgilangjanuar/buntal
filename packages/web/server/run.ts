@@ -1,5 +1,5 @@
-import { Http } from '@buntal/server'
-import { logger } from '@buntal/server/middlewares'
+import { Http } from 'buntal-server'
+import { logger } from 'buntal-server/middlewares'
 import { networkInterfaces } from 'os'
 import { bundler } from '../bundler'
 import { injectHandler } from './inject'

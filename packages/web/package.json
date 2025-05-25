@@ -1,5 +1,5 @@
 {
-  "name": "@buntal/web",
+  "name": "buntal-server",
   "version": "0.0.1",
   "module": "index.ts",
   "type": "module",
@@ -12,7 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@buntal/server": "workspace:^",
+    "buntal-server": "workspace:^",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

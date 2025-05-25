@@ -1,4 +1,4 @@
-import { buildRouter } from '@buntal/server'
+import { buildRouter } from 'buntal-server'
 
 export const builder = async (appDir: string = 'app') => {
   const { routes } = buildRouter(appDir)

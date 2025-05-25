@@ -7,6 +7,7 @@ export async function bundler(routes: RouteBuilderResult[]) {
     }
     return acc
   }, [])
+  const notFoundPage = await Bun.file('app/404.tsx').exists()
   const entrypointScript = `/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
@@ -23,19 +24,31 @@ ${
     (layout, i) => `import Layout${i} from '${layout}'`
   ).join('\n')
 }
+${
+  notFoundPage ?
+  `import NotFound from '../app/404.tsx'`
+  : ''
+}
 
 const root = createRoot(document)
 root.render(<StrictMode>
-  <App routes={[
+  <App
+    routes={[
+      ${
+        routes.map(
+          (r, i) =>
+            `{ regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
+              r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
+            }] }`
+        ).join(',')
+      }
+    ]}
     ${
-      routes.map(
-        (r, i) =>
-          `{ regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
-            r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
-          }] }`
-      ).join(',')
+      notFoundPage ?
+      'notFound={<NotFound />}'
+      : ''
     }
-  ]} />
+  />
 </StrictMode>)
 `
   await Bun.write('.buntal/root.tsx', entrypointScript)

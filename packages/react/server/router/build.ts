@@ -15,7 +15,7 @@ export const builder = async (appDir: string = './app', source: string = '..') =
   const results: RouteBuilderResult[] = []
 
   for (const [route, filePath] of Object.entries(routes)) {
-    if (!filePath.endsWith('layout.tsx')) {
+    if (!filePath.endsWith('layout.tsx') && !filePath.endsWith('404.tsx')) {
       const handler = await import(filePath)
       if ('default' in handler) {
         const layouts: string[] = []

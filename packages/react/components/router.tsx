@@ -40,11 +40,13 @@ export const RouterContext = createContext<RouterType>({
 })
 
 type RouterProviderProps = {
-  routes: ServerRouterType[]
+  routes: ServerRouterType[],
+  notFound?: ReactNode
 }
 
 export function RouterProvider({
   routes,
+  notFound = <div>Not found</div>,
   ...props
 }: RouterProviderProps) {
   const [activeRoute, setActiveRoute] = useState<string>(window?.location.pathname)
@@ -104,7 +106,7 @@ export function RouterProvider({
 
   const buildPage = useCallback((layouts?: ((data: any) => ReactNode)[]): ReactNode => {
     if (router === null) {
-      return <div>Not found</div>
+      return notFound
     } else {
       if (router && args) {
         if (!layouts?.[0]) {

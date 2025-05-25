@@ -31,7 +31,7 @@ export const builder = async (appDir: string = './app', source: string = '..') =
           path: filePath,
           safeImport: filePath.replace(process.cwd(), source).replace(/\.tsx$/gi, ''),
           regex: `^${route.replace(/\//g, '\\/')
-            .replace(/\[([^\]]+)\]/g, '(?<$1>[\\w\\+\\-]+)')}$`,
+            .replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')}$`,
           ssr: '$' in handler,
           layouts,
           layoutsSafeImport: layouts.map(layout => layout.replace(process.cwd(), source).replace(/\.tsx$/gi, ''))

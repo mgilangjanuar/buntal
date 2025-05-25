@@ -78,7 +78,11 @@ export function RouterProvider({
     if (router) {
       const populateArgs = async () => {
         const match = new RegExp(router.regex).exec(window.location.pathname)
-        const params: Record<string, string> = match?.groups || {}
+        const params: Record<string, string> = Object.entries(
+          match?.groups || {}
+        ).reduce((acc, [key, value]) => {
+          return { ...acc, [key]: decodeURIComponent(value) }
+        }, {})
 
         const query: Record<string, string> = Object.fromEntries(
           new URLSearchParams(window.location.search)) || {}

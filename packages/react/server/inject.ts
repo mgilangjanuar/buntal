@@ -1,16 +1,16 @@
 import type { Req } from 'buntal-server'
 import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
-import { builder } from './router'
+import { type RouteBuilderResult } from './router'
 import { ssrHandler } from './ssr'
 
-export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => async ({ req, match, handler }: {
+export const injectHandler = (routes: RouteBuilderResult[]) => async ({ req, match, handler }: {
   req: Req,
   match: Bun.MatchedRoute,
   handler: any
 }) => {
   const route = routes.find(r => r.route === match.name)
-  if (route && 'default' in handler) {
+  if (route && new RegExp(route.regex).test(match.pathname) && 'default' in handler) {
     // Handle SSR requests
     if (req.query?._$ === '1' && route.ssr && req.method === 'GET') {
       const resp = await ssrHandler(req, handler)

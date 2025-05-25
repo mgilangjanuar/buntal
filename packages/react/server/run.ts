@@ -13,6 +13,12 @@ export async function runServer(appDir: string = './app') {
   const app = new Http({
     port: 3000,
     appDir: appDir,
+    websocket: {
+      message() {},
+      open() {},
+      close() {},
+      drain() {},
+    },
     injectHandler: injectHandler(routes),
   })
 

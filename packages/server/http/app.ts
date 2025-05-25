@@ -1,3 +1,4 @@
+import type { WebSocketHandler } from 'bun'
 import { h, type AtomicHandler } from './handler'
 import { ALLOWED_METHODS } from './methods'
 import type { Req } from './request'
@@ -7,6 +8,7 @@ import { buildRouter } from './router'
 type Config = {
   port: number
   appDir?: string,
+  websocket?: WebSocketHandler,
   injectHandler?: (payload: { req: Req, match: Bun.MatchedRoute, handler: any }) => Promise<Response | void>
 }
 
@@ -37,7 +39,10 @@ export class Http {
       port: this.config.port,
       reusePort: true,
       routes: this.routes,
-      fetch: this.config.appDir ? async (raw: Request) => {
+      websocket: this.config.websocket,
+      fetch: this.config.appDir ? async (raw: Request, server): Promise<Response | any> => {
+        if (server.upgrade(raw)) return
+
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
         }
@@ -67,7 +72,9 @@ export class Http {
         }
 
         return h(...middlewares, this.notFoundHandler)(req, res)
-      } : async (raw: Request) => {
+      } : async (raw: Request, server) => {
+        if (server.upgrade(raw)) return
+
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
         }

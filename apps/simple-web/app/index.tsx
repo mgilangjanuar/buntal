@@ -13,7 +13,7 @@ export default function HomePage() {
         <Link href="/hello/gilang">Gilang</Link>
         <Link href="/notfound">Not found</Link>
       </p>
-      <h1>Welcome to the Buntal App!</h1>
+      <h1 className="font-bold text-3xl mt-4">Welcome to the Buntal App!</h1>
       <p>This is a simple example of a Buntal application.</p>
       <div>
         <button onClick={() => setCount(count + 1)}>

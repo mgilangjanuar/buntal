@@ -25,6 +25,7 @@ type RouterType = {
   push: (url: string) => void
   replace: (url: string) => void
   back: () => void
+  reload: () => void
 }
 
 export const RouterContext = createContext<RouterType>({
@@ -36,7 +37,8 @@ export const RouterContext = createContext<RouterType>({
   hash: '',
   push: () => {},
   replace: () => {},
-  back: () => {}
+  back: () => {},
+  reload: () => {}
 })
 
 type RouterProviderProps = {
@@ -138,6 +140,10 @@ export function RouterProvider({
       },
       back: () => {
         window.history.back()
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      },
+      reload: () => {
+        window.history.replaceState({}, '', window.location.href)
         window.dispatchEvent(new PopStateEvent('popstate'))
       }
     }}>

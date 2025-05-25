@@ -1,3 +1,4 @@
+import { $ } from 'bun'
 import type { RouteBuilderResult } from '../server/router'
 
 export async function bundler(routes: RouteBuilderResult[]) {
@@ -42,11 +43,8 @@ root.render(<StrictMode>
             }] }`
         ).join(',')
       }
-    ]}
-    ${
-      notFoundPage ?
-      'notFound={<NotFound />}'
-      : ''
+    ]}${
+      notFoundPage ? ` notFound={<NotFound />}` : ''
     }
   />
 </StrictMode>)
@@ -63,4 +61,10 @@ root.render(<StrictMode>
       whitespace: true,
     }
   })
+  if (await Bun.file('app/globals.css').exists()) {
+    const packageJson = await Bun.file('package.json').json()
+    if ('tailwindcss' in packageJson.dependencies) {
+      await $`bunx @tailwindcss/cli -i app/globals.css -o .buntal/dist/globals.css`.quiet()
+    }
+  }
 }

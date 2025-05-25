@@ -6,10 +6,15 @@ To install dependencies:
 bun install
 ```
 
-To run:
+To link:
 
 ```bash
-bun run index.ts
+bun link && \
+bun link buntal-cli
 ```
 
-This project was created using `bun init` in bun v1.2.14. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Run the CLI in Buntal project:
+
+```bash
+buntal dev
+```

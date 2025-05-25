@@ -22,9 +22,11 @@ runServer()
       if (await Bun.file('app/globals.css').exists() && await Bun.file('package.json').exists()) {
         const packageJson = await Bun.file('package.json').json()
         if ('tailwindcss' in packageJson.dependencies) {
-          Bun.spawn(['bunx', '@tailwindcss/cli',
+          Bun.spawn([
+            'bunx', '@tailwindcss/cli',
             '-i', 'app/globals.css',
-            '-o', '.buntal/dist/globals.css', '--watch'], opts)
+            '-o', '.buntal/dist/globals.css', '--watch'
+          ], opts)
         }
       }
     }

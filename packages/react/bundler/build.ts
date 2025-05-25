@@ -24,10 +24,9 @@ ${
   layouts.map(
     (layout, i) => `import Layout${i} from '${layout}'`
   ).join('\n')
-}
-${
-  notFoundPage ?
-  `import NotFound from '../app/404.tsx'`
+}${
+  notFoundPage ? `
+import NotFound from '../app/404.tsx'`
   : ''
 }
 
@@ -64,7 +63,7 @@ root.render(<StrictMode>
   if (await Bun.file('app/globals.css').exists()) {
     const packageJson = await Bun.file('package.json').json()
     if ('tailwindcss' in packageJson.dependencies) {
-      await $`bunx @tailwindcss/cli -i app/globals.css -o .buntal/dist/globals.css`.quiet()
+      await $`bunx @tailwindcss/cli -i app/globals.css -o .buntal/dist/globals.css`
     }
   }
 }

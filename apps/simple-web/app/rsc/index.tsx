@@ -3,6 +3,10 @@ export const $ = async (req: Request) => {
     title: 'RSC Page',
     description: 'This is a simple React Server Component (RSC) page.',
     url: req.url,
+    _meta: {
+      title: 'RSC Page',
+      description: 'This is a simple React Server Component (RSC) page.',
+    }
   }
 }
 

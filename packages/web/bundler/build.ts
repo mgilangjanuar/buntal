@@ -30,7 +30,7 @@ root.render(<StrictMode>
     ${
       routes.map(
         (r, i) =>
-          `{ route: '${r.route}', regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
+          `{ regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
             r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
           }] }`
       ).join(',')

@@ -2,7 +2,6 @@ import { createElement, type ReactNode, useCallback, useEffect, useState } from 
 
 export function App({ routes }: Readonly<{
   routes: {
-    route: string,
     regex: string,
     ssr?: boolean,
     element: (data: any) => ReactNode,

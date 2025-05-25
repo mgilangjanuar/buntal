@@ -1,6 +1,6 @@
 #! /usr/bin/env bun
 
-import { $ } from 'bun'
+import type { SpawnOptions } from 'bun'
 import { program } from 'commander'
 
 program
@@ -11,8 +11,24 @@ program
 
 runServer()
 `)
+    const opts = {
+      stdin: 'inherit',
+      stdout: 'inherit',
+      stderr: 'inherit',
+    } as SpawnOptions.OptionsObject<'inherit', 'inherit', 'inherit'>
 
-    await $`bun --watch .buntal/index.ts`
+    const runner = async () => {
+      if (await Bun.file('app/globals.css').exists() && await Bun.file('package.json').exists()) {
+        const packageJson = await Bun.file('package.json').json()
+        if ('tailwindcss' in packageJson.dependencies) {
+          Bun.spawn(['bunx', '@tailwindcss/cli',
+            '-i', 'app/globals.css',
+            '-o', '.buntal/dist/globals.css', '--watch'], opts)
+        }
+      }
+      Bun.spawn(['bun', '--watch', '.buntal/index.ts'], opts)
+    }
+    await runner()
   })
 
 program.parse()

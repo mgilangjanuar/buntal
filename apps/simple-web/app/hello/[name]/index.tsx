@@ -1,4 +1,7 @@
-export default function Hello({ params, query }: { params: { name: string }, query?: Record<string, string> }) {
+export default function Hello({ params, query }: Readonly<{
+  params: { name: string },
+  query: Record<string, string>
+}>) {
   return (
     <div>
       <h1>Hello, {params?.name}!</h1>

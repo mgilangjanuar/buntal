@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 export function Link({
   href,
   ref,

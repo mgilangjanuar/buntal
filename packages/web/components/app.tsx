@@ -18,7 +18,6 @@ export function App({ routes }: Readonly<{
   }>()
 
   useEffect(() => {
-    document.documentElement.innerHTML = ''
     const handler = () => {
       setActiveRoute(window.location.pathname)
     }
@@ -29,20 +28,23 @@ export function App({ routes }: Readonly<{
   }, [])
 
   useEffect(() => {
-     setRouter(routes.find(r => new RegExp(r.regex).test(activeRoute)) || null)
+    const route = routes.find(r => new RegExp(r.regex).test(activeRoute)) || null
+    if (route) {
+      setRouter(route)
+    }
   }, [activeRoute])
 
   useEffect(() => {
-    if (router && activeRoute) {
+    if (router) {
       const populateArgs = async () => {
-        const match = new RegExp(router.regex).exec(activeRoute)
+        const match = new RegExp(router.regex).exec(window.location.pathname)
         const params: Record<string, string> = match?.groups || {}
 
         const query: Record<string, string> = Object.fromEntries(
           new URLSearchParams(window.location.search)) || {}
 
         const fetchData = async () => {
-          const resp = await fetch(`${activeRoute}?_$=1`)
+          const resp = await fetch(`${window.location.pathname}?_$=1`)
           if (resp.ok) {
             if (resp.headers.get('Content-Type')?.includes('application/json')) {
               return resp.json()
@@ -60,9 +62,9 @@ export function App({ routes }: Readonly<{
       }
       populateArgs()
     }
-  }, [router, activeRoute])
+  }, [router])
 
-  const buildPage = useCallback((layouts: ((data: any) => ReactNode)[]): ReactNode => {
+  const buildPage = useCallback((layouts?: ((data: any) => ReactNode)[]): ReactNode => {
     if (router && args) {
       if (!layouts?.[0]) {
         return createElement(router.element, args)

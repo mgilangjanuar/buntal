@@ -10,7 +10,8 @@ export async function bundler(routes: RouteBuilderResult[]) {
   const entrypointScript = `/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
-import { hydrateRoot } from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { App } from 'buntal-react/components'
 ${
   routes.map(
@@ -23,16 +24,19 @@ ${
   ).join('\n')
 }
 
-hydrateRoot(document, <App routes={[
-  ${
-    routes.map(
-      (r, i) =>
-        `{ route: '${r.route}', regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
-          r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
-        }] }`
-    ).join(',')
-  }
-]} />)
+const root = createRoot(document)
+root.render(<StrictMode>
+  <App routes={[
+    ${
+      routes.map(
+        (r, i) =>
+          `{ route: '${r.route}', regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
+            r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
+          }] }`
+      ).join(',')
+    }
+  ]} />
+</StrictMode>)
 `
   await Bun.write('.buntal/root.tsx', entrypointScript)
   await Bun.build({

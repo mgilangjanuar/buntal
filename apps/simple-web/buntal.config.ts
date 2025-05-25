@@ -1,5 +1,8 @@
 import type { ServerConfig } from 'buntal-react/server'
 
-const config = {} satisfies ServerConfig
+const config = {
+  env: 'development',
+  outDir: '.buntal'
+} satisfies ServerConfig
 
 export default config

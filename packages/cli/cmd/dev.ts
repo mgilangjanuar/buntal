@@ -4,17 +4,19 @@ import type { AppOptions } from '../types'
 export default async function() {
   // populate config
   const confFileExist = await Bun.file('buntal.config.ts').exists()
-  const config: AppOptions = confFileExist ? await import(process.cwd() + '/buntal.config.ts') : {}
+  const { default: config }: { default: AppOptions } = confFileExist
+    ? await import(process.cwd() + '/buntal.config.ts') : { default: {} }
   const params = {
-    env: config.env || 'development',
+    env: config.env || process.env.NODE_ENV || 'development',
     appDir: config.appDir || './app',
     outDir: config.outDir || '.buntal',
     staticDir: config.staticDir || './public',
   }
 
+  // init the entrypoint
   await Bun.write(params.outDir + '/index.ts', `import { runServer } from 'buntal-react/server'
 ${confFileExist ? `import config from '../buntal.config'\n` : ''}
-runServer(${confFileExist ? 'config' : undefined})
+runServer(${confFileExist ? 'config' : ''})
 `)
 
   const opts = {

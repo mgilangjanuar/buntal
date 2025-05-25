@@ -17,8 +17,5 @@ export async function bundler(routes: RouteBuilderResult[], {
 
   await buildRoot(routes, appDir, outDir)
   await buildFavicon(appDir, outDir)
-
-  if (env === 'development') {
-    await buildHotReloadScript(outDir)
-  }
+  await buildHotReloadScript(env, outDir)
 }

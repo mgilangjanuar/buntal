@@ -19,7 +19,7 @@ export default function RootLayout({ children, data }: Readonly<{
     </head>
     <body>
       {children}
-      <script async defer src="/hmr.js"></script>
+      <script async defer src="/🔥.js"></script>
     </body>
   </html>
 }

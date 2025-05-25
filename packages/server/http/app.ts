@@ -41,7 +41,7 @@ export class Http {
       routes: this.routes,
       websocket: this.config.websocket,
       fetch: this.config.appDir ? async (raw: Request, server): Promise<Response | any> => {
-        if (server.upgrade(raw)) return
+        if (this.config.websocket && server.upgrade(raw)) return
 
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
@@ -73,7 +73,7 @@ export class Http {
 
         return h(...middlewares, this.notFoundHandler)(req, res)
       } : async (raw: Request, server) => {
-        if (server.upgrade(raw)) return
+        if (this.config.websocket && server.upgrade(raw)) return
 
         if (raw.method === 'OPTIONS') {
           return res.send('departed')

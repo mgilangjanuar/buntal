@@ -9,8 +9,9 @@ export default function HomePage() {
       <p>
         <Link href="/about">About</Link>
         <Link href="/nested">Nested</Link>
-        <Link href="/rsc">rsc</Link>
-        <Link href="/hello/gilang?test=122">Gilang</Link>
+        <Link href="/ssr">SSR</Link>
+        <Link href="/hello/gilang">Gilang</Link>
+        <Link href="/notfound">Not found</Link>
       </p>
       <h1>Welcome to the Buntal App!</h1>
       <p>This is a simple example of a Buntal application.</p>

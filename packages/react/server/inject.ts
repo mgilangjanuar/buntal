@@ -12,7 +12,7 @@ export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => as
   const route = routes.find(r => r.route === match.name)
   if (route && 'default' in handler) {
     // Handle SSR requests
-    if (req.query?._$ === '1' && route.ssr) {
+    if (req.query?._$ === '1' && route.ssr && req.method === 'GET') {
       const resp = await ssrHandler(req, handler)
       if (resp) {
         return resp

@@ -67,9 +67,7 @@ export function RouterProvider({
 
   useEffect(() => {
     const route = routes.find(r => new RegExp(r.regex).test(activeRoute)) || null
-    if (route) {
-      setRouter(route)
-    }
+    setRouter(route)
   }, [activeRoute])
 
   useEffect(() => {
@@ -82,7 +80,9 @@ export function RouterProvider({
           new URLSearchParams(window.location.search)) || {}
 
         const fetchData = async () => {
-          const resp = await fetch(`${window.location.pathname}?_$=1`)
+          const resp = await fetch(`${window.location.pathname}?${new URLSearchParams({
+            ...query, _$: '1'
+          }).toString()}`)
           if (resp.ok) {
             if (resp.headers.get('Content-Type')?.includes('application/json')) {
               return resp.json()
@@ -103,14 +103,18 @@ export function RouterProvider({
   }, [router])
 
   const buildPage = useCallback((layouts?: ((data: any) => ReactNode)[]): ReactNode => {
-    if (router && args) {
-      if (!layouts?.[0]) {
-        return createElement(router.element, args)
+    if (router === null) {
+      return <div>Not found</div>
+    } else {
+      if (router && args) {
+        if (!layouts?.[0]) {
+          return createElement(router.element, args)
+        }
+        return createElement(layouts[0], {
+          ...args,
+          children: buildPage(layouts.slice(1))
+        })
       }
-      return createElement(layouts[0], {
-        ...args,
-        children: buildPage(layouts.slice(1))
-      })
     }
   }, [router, args])
 

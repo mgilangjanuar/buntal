@@ -4,10 +4,7 @@ export const ssrHandler = async (req: Req, handler: {
   $: (req: Req) => unknown
 }): Promise<Response | void> => {
   try {
-    const result = await handler.$({
-      ...req,
-      url: req.url.replace(/\?\_\$\=1/, ''),
-    })
+    const result = await handler.$(req)
     if (result instanceof Response) {
       return result
     }

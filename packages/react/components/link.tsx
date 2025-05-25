@@ -9,11 +9,15 @@ export function Link({
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 
   return <a
-    href={href}
+    href={href === '-1' ? '#' : href}
     onClick={e => {
       if (!href.startsWith('http')) {
         e.preventDefault()
-        window.history.pushState({}, '', href)
+        if (href === '-1') {
+          window.history.back()
+        } else {
+          window.history.pushState({}, '', href)
+        }
         window.dispatchEvent(new PopStateEvent('popstate'))
       }
     }}

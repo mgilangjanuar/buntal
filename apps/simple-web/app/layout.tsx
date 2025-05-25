@@ -1,4 +1,4 @@
-import { Meta, type MetaProps } from 'buntal-react'
+import { Link, Meta, type MetaProps } from 'buntal-react'
 
 export default function RootLayout({ children, data }: Readonly<{
   children: React.ReactNode,
@@ -16,6 +16,13 @@ export default function RootLayout({ children, data }: Readonly<{
       />
     </head>
     <body>
+      <p>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/nested">Nested</Link>
+        <Link href="/rsc">rsc</Link>
+        <Link href="/hello/gilang?test=122">Gilang</Link>
+      </p>
       {children}
     </body>
   </html>

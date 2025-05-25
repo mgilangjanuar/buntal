@@ -1,4 +1,3 @@
-import { Link } from 'buntal-react'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -13,12 +12,6 @@ export default function HomePage() {
           Count: {count}
         </button>
       </div>
-      <p>
-        <Link href="/about">About</Link>
-        <Link href="/nested">Nested</Link>
-        <Link href="/rsc">rsc</Link>
-        <Link href="/hello/gilang?test=122">Gilang</Link>
-      </p>
     </div>
   )
 }

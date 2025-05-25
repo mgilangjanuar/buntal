@@ -11,13 +11,10 @@ export async function runServer(appDir: string = './app') {
   await bundler(routes)
 
   const app = new Http({
-    port: 3000,
+    port: Number(process.env.PORT) || 3000,
     appDir: appDir,
     websocket: {
       message() {},
-      open() {},
-      close() {},
-      drain() {},
     },
     injectHandler: injectHandler(routes),
   })

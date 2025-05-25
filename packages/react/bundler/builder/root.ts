@@ -1,7 +1,6 @@
-import { $ } from 'bun'
-import type { RouteBuilderResult } from '../server/router'
+import type { RouteBuilderResult } from '../../server/router'
 
-export async function bundler(routes: RouteBuilderResult[]) {
+export async function buildRoot(routes: RouteBuilderResult[]) {
   const layouts: string[] = routes.reduce((acc: string[], cur: { layoutsSafeImport: string[] }) => {
     for (const layout of cur.layoutsSafeImport) {
       if (!acc.includes(layout)) acc.push(layout)
@@ -60,7 +59,4 @@ root.render(<StrictMode>
       whitespace: true,
     }
   })
-  if (await Bun.file('app/favicon.ico').exists()) {
-    await $`cp app/favicon.ico .buntal/dist/favicon.ico`
-  }
 }

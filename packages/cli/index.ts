@@ -18,6 +18,7 @@ runServer()
     } as SpawnOptions.OptionsObject<'inherit', 'inherit', 'inherit'>
 
     const runner = async () => {
+      Bun.spawn(['bun', '--watch', '.buntal/index.ts'], opts)
       if (await Bun.file('app/globals.css').exists() && await Bun.file('package.json').exists()) {
         const packageJson = await Bun.file('package.json').json()
         if ('tailwindcss' in packageJson.dependencies) {
@@ -26,7 +27,6 @@ runServer()
             '-o', '.buntal/dist/globals.css', '--watch'], opts)
         }
       }
-      Bun.spawn(['bun', '--watch', '.buntal/index.ts'], opts)
     }
     await runner()
   })

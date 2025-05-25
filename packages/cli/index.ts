@@ -1,3 +1,5 @@
+#! /usr/bin/env bun
+
 import { $ } from 'bun'
 import { program } from 'commander'
 

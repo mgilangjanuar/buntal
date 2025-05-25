@@ -2,6 +2,9 @@
   "name": "web-simple",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "buntal dev"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^19.1.4",

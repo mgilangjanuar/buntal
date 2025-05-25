@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "module": "index.ts",
   "type": "module",
+  "bin": {
+    "buntal": "./cli/index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/commander": "^2.12.5",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5"
   },
@@ -13,6 +17,7 @@
   },
   "dependencies": {
     "buntal-server": "workspace:^",
+    "commander": "^14.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

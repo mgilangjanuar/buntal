@@ -32,6 +32,28 @@
         "typescript": "^5",
       },
     },
+    "packages/react": {
+      "name": "buntal-react",
+      "version": "0.0.1",
+      "bin": {
+        "buntal": "./cli/index.ts",
+      },
+      "dependencies": {
+        "buntal-server": "workspace:^",
+        "commander": "^14.0.0",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "@types/commander": "^2.12.5",
+        "@types/react": "^19.1.5",
+        "@types/react-dom": "^19.1.5",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "packages/server": {
       "name": "buntal-server",
       "version": "0.0.1",
@@ -46,26 +68,11 @@
         "typescript": "^5",
       },
     },
-    "packages/web": {
-      "name": "buntal-react",
-      "version": "0.0.1",
-      "dependencies": {
-        "buntal-server": "workspace:^",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
-      },
-      "devDependencies": {
-        "@types/bun": "latest",
-        "@types/react": "^19.1.5",
-        "@types/react-dom": "^19.1.5",
-      },
-      "peerDependencies": {
-        "typescript": "^5",
-      },
-    },
   },
   "packages": {
     "@types/bun": ["@types/bun@1.2.14", "", { "dependencies": { "bun-types": "1.2.14" } }, "sha512-VsFZKs8oKHzI7zwvECiAJ5oSorWndIWEVhfbYqZd4HI/45kzW7PN2Rr5biAzvGvRuNmYLSANY+H59ubHq8xw7Q=="],
+
+    "@types/commander": ["@types/commander@2.12.5", "", { "dependencies": { "commander": "*" } }, "sha512-YXGZ/rz+s57VbzcvEV9fUoXeJlBt5HaKu5iUheiIWNsJs23bz6AnRuRiZBRVBLYyPnixNvVnuzM5pSaxr8Yp/g=="],
 
     "@types/node": ["@types/node@22.15.21", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-EV/37Td6c+MgKAbkcLG6vqZ2zEYHD7bvSrzqqs2RIhbA6w3x+Dqz8MZM3sP6kGTeLrdoOgKZe+Xja7tUB2DNkQ=="],
 
@@ -79,9 +86,11 @@
 
     "bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
 
-    "buntal-react": ["buntal-react@workspace:packages/web"],
+    "buntal-react": ["buntal-react@workspace:packages/react"],
 
     "buntal-server": ["buntal-server@workspace:packages/server"],
+
+    "commander": ["commander@14.0.0", "", {}, "sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA=="],
 
     "csstype": ["csstype@3.1.3", "", {}, "sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw=="],
 

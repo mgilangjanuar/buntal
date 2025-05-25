@@ -27,6 +27,7 @@
         "@types/bun": "latest",
         "@types/react": "^19.1.4",
         "@types/react-dom": "^19.1.5",
+        "buntal-cli": "workspace:^",
       },
       "peerDependencies": {
         "typescript": "^5",
@@ -34,6 +35,9 @@
     },
     "packages/cli": {
       "name": "buntal-cli",
+      "bin": {
+        "buntal": "./index.ts",
+      },
       "dependencies": {
         "commander": "^14.0.0",
       },

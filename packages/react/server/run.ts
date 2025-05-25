@@ -6,7 +6,7 @@ import { injectHandler } from './inject'
 import { builder } from './router'
 import { staticHandler } from './static'
 
-type Config = {
+export type ServerConfig = {
   env?: 'development' | 'production',
   appDir?: string,
   outDir?: string,
@@ -18,7 +18,7 @@ export async function runServer({
   appDir = './app',
   outDir = '.buntal',
   staticDir = './public',
-}: Config = {}) {
+}: ServerConfig = {}) {
   const routes = await builder(appDir)
   await bundler(routes, { env, appDir, outDir })
 

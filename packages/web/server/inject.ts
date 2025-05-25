@@ -2,6 +2,7 @@ import type { Req } from 'buntal-server'
 import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 import { builder } from './router'
+import { ssrHandler } from './ssr'
 
 export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => async ({ req, match, handler }: {
   req: Req,
@@ -10,6 +11,14 @@ export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => as
 }) => {
   const route = routes.find(r => r.route === match.name)
   if (route && 'default' in handler) {
+    // Handle SSR requests
+    if (req.query?._$ === '1' && route.ssr) {
+      const resp = await ssrHandler(req, handler)
+      if (resp) {
+        return resp
+      }
+    }
+
     const args = {
       query: req.query,
       params: req.params,

@@ -1,9 +1,6 @@
-import { $ } from 'bun'
 import type { RouteBuilderResult } from '../server/router'
 
 export async function bundler(routes: RouteBuilderResult[]) {
-  await $`cp -r ${process.cwd()}/app .buntal`
-
   const layouts: string[] = routes.reduce((acc: string[], cur: { layoutsSafeImport: string[] }) => {
     for (const layout of cur.layoutsSafeImport) {
       if (!acc.includes(layout)) acc.push(layout)
@@ -30,7 +27,7 @@ hydrateRoot(document, <App routes={[
   ${
     routes.map(
       (r, i) =>
-        `{ route: '${r.route}', regex: ${JSON.stringify(r.regex)}, element: Page${i}, layouts: [${
+        `{ route: '${r.route}', regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${
           r.layoutsSafeImport.map(layout => `Layout${layouts.findIndex(l => l === layout)}`).join(',')
         }] }`
     ).join(',')

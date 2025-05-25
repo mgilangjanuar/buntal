@@ -10,7 +10,7 @@ export type RouteBuilderResult = {
   layoutsSafeImport: string[]
 }
 
-export const builder = async (appDir: string = './app') => {
+export const builder = async (appDir: string = './app', source: string = '..') => {
   const { routes } = buildRouter(appDir)
   const results: RouteBuilderResult[] = []
 
@@ -29,12 +29,12 @@ export const builder = async (appDir: string = './app') => {
         results.push({
           route,
           path: filePath,
-          safeImport: filePath.replace(process.cwd(), '.').replace(/\.tsx$/gi, ''),
+          safeImport: filePath.replace(process.cwd(), source).replace(/\.tsx$/gi, ''),
           regex: `^${route.replace(/\//g, '\\/')
             .replace(/\[([^\]]+)\]/g, '(?<$1>[\\w\\+\\-]+)')}$`,
           ssr: '$' in handler,
           layouts,
-          layoutsSafeImport: layouts.map(layout => layout.replace(process.cwd(), '.').replace(/\.tsx$/gi, ''))
+          layoutsSafeImport: layouts.map(layout => layout.replace(process.cwd(), source).replace(/\.tsx$/gi, ''))
         })
       }
     }

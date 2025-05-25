@@ -2,15 +2,14 @@ import { useRef } from 'react'
 
 export function Link({
   href,
+  ref,
   children,
   ...props
 }: {
   href: string,
+  ref?: React.Ref<HTMLAnchorElement>,
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const ref = useRef<HTMLAnchorElement>(null)
-
   return <a
-    ref={ref}
     href={href}
     onClick={e => {
       e.preventDefault()

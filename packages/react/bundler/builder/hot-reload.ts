@@ -1,5 +1,5 @@
-export async function buildHotReloadScript() {
-  await Bun.write('.buntal/dist/hmr.js', `(() => {
+export async function buildHotReloadScript(outDir: string = '.buntal') {
+  await Bun.write(`${outDir}/dist/hmr.js`, `(() => {
   const socketUrl = "ws://localhost:${process.env.PORT || 3000}";
   let socket = new WebSocket(socketUrl);
   socket.addEventListener("close", () => {

@@ -1,7 +1,7 @@
 import { $ } from 'bun'
 
-export async function buildFavicon() {
-  if (await Bun.file('app/favicon.ico').exists()) {
-    await $`cp app/favicon.ico .buntal/dist/favicon.ico`
+export async function buildFavicon(appDir: string = './app', outDir: string = '.buntal') {
+  if (await Bun.file(appDir + '/favicon.ico').exists()) {
+    await $`cp ${appDir}/favicon.ico ${outDir}/dist/favicon.ico`
   }
 }

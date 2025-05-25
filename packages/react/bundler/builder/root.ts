@@ -1,13 +1,13 @@
 import type { RouteBuilderResult } from '../../server/router'
 
-export async function buildRoot(routes: RouteBuilderResult[]) {
+export async function buildRoot(routes: RouteBuilderResult[], appDir: string = './app', outDir: string = '.buntal') {
   const layouts: string[] = routes.reduce((acc: string[], cur: { layoutsSafeImport: string[] }) => {
     for (const layout of cur.layoutsSafeImport) {
       if (!acc.includes(layout)) acc.push(layout)
     }
     return acc
   }, [])
-  const notFoundPage = await Bun.file('app/404.tsx').exists()
+  const notFoundPage = await Bun.file(appDir + '/404.tsx').exists()
   const entrypointScript = `/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
@@ -25,7 +25,7 @@ ${
   ).join('\n')
 }${
   notFoundPage ? `
-import NotFound from '../app/404.tsx'`
+import NotFound from '../${appDir.replace(/^\.\//, '')}/404.tsx'`
   : ''
 }
 
@@ -47,10 +47,10 @@ root.render(<StrictMode>
   />
 </StrictMode>)
 `
-  await Bun.write('.buntal/root.tsx', entrypointScript)
+  await Bun.write(outDir + '/root.tsx', entrypointScript)
   await Bun.build({
-    entrypoints: ['.buntal/root.tsx'],
-    outdir: '.buntal/dist',
+    entrypoints: [outDir + '/root.tsx'],
+    outdir: outDir + '/dist',
     target: 'browser',
     splitting: true,
     minify: {

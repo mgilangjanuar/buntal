@@ -20,7 +20,7 @@ export async function runServer({
   staticDir = './public',
 }: Config = {}) {
   const routes = await builder(appDir)
-  await bundler(routes)
+  await bundler(routes, { env, appDir, outDir })
 
   const app = new Http({
     port: Number(process.env.PORT) || 3000,

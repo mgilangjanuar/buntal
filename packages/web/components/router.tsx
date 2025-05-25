@@ -27,7 +27,17 @@ type RouterType = {
   back: () => void
 }
 
-export const RouterContext = createContext<RouterType | null>(null)
+export const RouterContext = createContext<RouterType>({
+  pathname: '',
+  search: '',
+  href: '',
+  protocol: '',
+  hostname: '',
+  hash: '',
+  push: () => {},
+  replace: () => {},
+  back: () => {}
+})
 
 type RouterProviderProps = {
   routes: ServerRouterType[]

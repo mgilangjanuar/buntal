@@ -1,7 +1,7 @@
 #! /usr/bin/env bun
 
 import { program } from 'commander'
-import dev from './command/dev'
+import dev from './cmd/dev'
 
 program
   .command('dev')

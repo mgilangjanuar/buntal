@@ -14,7 +14,8 @@ export default function RootLayout({ children, data }: Readonly<{
           description: 'This is a simple Buntal application.',
         }}
       />
-       <link href="/dist/globals.css" rel="stylesheet"></link>
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="stylesheet" href="/globals.css" />
     </head>
     <body>
       {children}

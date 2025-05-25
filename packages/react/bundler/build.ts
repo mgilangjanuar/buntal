@@ -1,3 +1,4 @@
+import { $ } from 'bun'
 import type { RouteBuilderResult } from '../server/router'
 
 export async function bundler(routes: RouteBuilderResult[]) {
@@ -59,4 +60,7 @@ root.render(<StrictMode>
       whitespace: true,
     }
   })
+  if (await Bun.file('app/favicon.ico').exists()) {
+    await $`cp app/favicon.ico .buntal/dist/favicon.ico`
+  }
 }

@@ -1,12 +1,18 @@
-import { Meta } from 'buntal-react'
+import { Meta, type MetaProps } from 'buntal-react'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children, data }: Readonly<{
+  children: React.ReactNode,
+  data?: {
+    _meta: MetaProps
+  }
+}>) {
   return <html>
     <head>
       <Meta
-        title="Buntal App"
-        viewport="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"
-        description="This is a simple Buntal application."
+        {...data?._meta || {
+          title: 'Buntal App',
+          description: 'This is a simple Buntal application.',
+        }}
       />
     </head>
     <body>

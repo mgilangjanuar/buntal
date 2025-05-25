@@ -1,4 +1,4 @@
-type MetaProps = {
+export type MetaProps = {
   title: string,
   viewport: string,
   description: string,
@@ -26,21 +26,13 @@ export function Meta(props: Partial<MetaProps>) {
     {props.keywords && <meta name="keywords" content={props.keywords} />}
     {props.author && <meta name="author" content={props.author} />}
 
-    {props.og && (
-      <>
-        <meta property="og:title" content={props.og.title || props.title || 'Buntal App'} />
-        {props.og.description || props.description && <meta property="og:description" content={props.og.description || props.description} />}
-        {props.og.image && <meta property="og:image" content={props.og.image} />}
-      </>
-    )}
+    <meta property="og:title" content={props.og?.title || props.title || 'Buntal App'} />
+    {props.og?.description || props.description && <meta property="og:description" content={props.og?.description || props.description} />}
+    {props.og?.image && <meta property="og:image" content={props.og?.image} />}
 
-    {props.twitter && (
-      <>
-        <meta name="twitter:title" content={props.twitter.title || props.title || 'Buntal App'} />
-        {props.twitter.description || props.description && <meta name="twitter:description" content={props.twitter.description || props.description} />}
-        {props.twitter.image && <meta name="twitter:image" content={props.twitter.image} />}
-        {props.twitter.card && <meta name="twitter:card" content={props.twitter.card} />}
-      </>
-    )}
+    <meta name="twitter:title" content={props.twitter?.title || props.title || 'Buntal App'} />
+    {props.twitter?.description || props.description && <meta name="twitter:description" content={props.twitter?.description || props.description} />}
+    {props.twitter?.image && <meta name="twitter:image" content={props.twitter?.image} />}
+    {props.twitter?.card && <meta name="twitter:card" content={props.twitter?.card} />}
   </>
 }

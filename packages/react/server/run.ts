@@ -6,24 +6,37 @@ import { injectHandler } from './inject'
 import { builder } from './router'
 import { staticHandler } from './static'
 
-export async function runServer(appDir: string = './app') {
+type Config = {
+  env?: 'development' | 'production',
+  appDir?: string,
+  outDir?: string,
+  staticDir?: string,
+}
+
+export async function runServer({
+  env = process.env.NODE_ENV as 'development' | 'production' || 'development',
+  appDir = './app',
+  outDir = '.buntal',
+  staticDir = './public',
+}: Config = {}) {
   const routes = await builder(appDir)
   await bundler(routes)
 
   const app = new Http({
     port: Number(process.env.PORT) || 3000,
     appDir: appDir,
-    websocket: {
+    websocket: env === 'development' ? {
       message() {},
-    },
+    } : undefined,
     injectHandler: injectHandler(routes),
   })
 
   app.onNotFound(async (req, res) => {
-    const resp = await staticHandler(req)
+    const resp = await staticHandler(req, outDir, staticDir)
     if (resp instanceof Response) {
       return resp
     }
+
     return res.status(404).json({
       error: 'Not found'
     })

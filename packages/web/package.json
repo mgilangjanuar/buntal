@@ -1,5 +1,5 @@
 {
-  "name": "buntal-server",
+  "name": "buntal-react",
   "version": "0.0.1",
   "module": "index.ts",
   "type": "module",

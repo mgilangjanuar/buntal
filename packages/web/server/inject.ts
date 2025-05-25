@@ -33,7 +33,7 @@ export const injectHandler = (routes: Awaited<ReturnType<typeof builder>>) => as
       await renderToReadableStream(
         await createComponent(route.layouts),
         {
-          bootstrapModules: ['/_entrypoint.js']
+          bootstrapModules: ['/root.js']
         }
       ), {
         headers: {

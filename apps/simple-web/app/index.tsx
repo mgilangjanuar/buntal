@@ -1,4 +1,4 @@
-import { Link } from '@buntal/web/navigation'
+import { Link } from 'buntal-react/components'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -14,6 +14,9 @@ export default function HomePage() {
         </button>
       </div>
       <p>
+        <Link href="/about">About</Link>
+        <Link href="/nested">Nested</Link>
+        <Link href="/rsc">rsc</Link>
         <Link href="/hello/gilang">Gilang</Link>
       </p>
     </div>

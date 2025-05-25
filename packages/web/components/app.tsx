@@ -1,4 +1,4 @@
-import { createElement, ReactNode, useCallback, useEffect, useState } from 'react'
+import { createElement, type ReactNode, useCallback, useEffect, useState } from 'react'
 
 export function App({ routes }: Readonly<{
   routes: {
@@ -8,7 +8,7 @@ export function App({ routes }: Readonly<{
     layouts: ((data: any) => ReactNode)[]
   }[]
 }>) {
-  const [activeRoute, setActiveRoute] = useState<string>(window.location.pathname)
+  const [activeRoute, setActiveRoute] = useState<string>(window?.location.pathname)
   const [router, setRouter] = useState<typeof routes[number] | null>(null)
 
   useEffect(() => {
@@ -26,14 +26,15 @@ export function App({ routes }: Readonly<{
      setRouter(routes.find(r => new RegExp(r.regex).test(activeRoute)) || null)
   }, [activeRoute])
 
-  const buildPage = useCallback((layouts: ((data: any) => ReactNode)[]) => {
-    if (!router) return null
-    if (!layouts?.[0]) {
-      return createElement(router.element, {})
+  const buildPage = useCallback((layouts: ((data: any) => ReactNode)[]): ReactNode => {
+    if (router) {
+      if (!layouts?.[0]) {
+        return createElement(router.element, {})
+      }
+      return createElement(layouts[0], {
+        children: buildPage(layouts.slice(1))
+      })
     }
-    return createElement(layouts[0], {
-      children: buildPage(layouts.slice(1))
-    })
   }, [router])
 
   return buildPage(router?.layouts || [])

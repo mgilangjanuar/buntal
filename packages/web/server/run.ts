@@ -8,9 +8,9 @@ import { staticHandler } from './static'
 
 export async function runServer(appDir: string = './app') {
   const routes = await builder(appDir)
-  await Bun.write('.buntal/routes.manifest.json',
+  await Bun.write('.buntal/routes.json',
     JSON.stringify(routes, null, 2))
-  await bundler()
+  await bundler(routes)
 
   const app = new Http({
     port: 3000,

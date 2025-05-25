@@ -1,16 +1,18 @@
 import { buildRouter } from 'buntal-server'
 
-export const builder = async (appDir: string = 'app') => {
+export type RouteBuilderResult = {
+  route: string,
+  path: string,
+  safeImport: string,
+  regex: string,
+  ssr?: boolean,
+  layouts: string[],
+  layoutsSafeImport: string[]
+}
+
+export const builder = async (appDir: string = './app') => {
   const { routes } = buildRouter(appDir)
-  const results: {
-    route: string,
-    path: string,
-    safeImport: string,
-    regex: string,
-    ssr?: boolean,
-    layouts: string[],
-    layoutsSafeImport: string[]
-  }[] = []
+  const results: RouteBuilderResult[] = []
 
   for (const [route, filePath] of Object.entries(routes)) {
     if (!filePath.endsWith('layout.tsx')) {
@@ -27,12 +29,12 @@ export const builder = async (appDir: string = 'app') => {
         results.push({
           route,
           path: filePath,
-          safeImport: filePath.replace(process.cwd(), '').replace('/app', './app').replace(/\.tsx$/gi, ''),
+          safeImport: filePath.replace(process.cwd(), '.').replace(/\.tsx$/gi, ''),
           regex: `^${route.replace(/\//g, '\\/')
             .replace(/\[([^\]]+)\]/g, '(?<$1>[\\w\\+\\-]+)')}$`,
           ssr: '$' in handler,
           layouts,
-          layoutsSafeImport: layouts.map(layout => layout.replace(process.cwd(), '').replace('/app', './app').replace(/\.tsx$/gi, ''))
+          layoutsSafeImport: layouts.map(layout => layout.replace(process.cwd(), '.').replace(/\.tsx$/gi, ''))
         })
       }
     }

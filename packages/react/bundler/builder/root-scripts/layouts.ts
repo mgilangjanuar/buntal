@@ -15,6 +15,7 @@ export function buildLayouts(routes: RouteBuilderResult[], appDir: string = './a
     rootLayout: rootIdx === -1 ? null : `Layout${rootIdx}`,
     imports: layouts.map(
       (layout, i) => `import Layout${i} from '${layout}'`
-    ).join('\n')
+    ).join('\n'),
+    renderRootLayout: rootIdx === -1 ? '' : `rootLayout={Layout${rootIdx}}`,
   }
 }

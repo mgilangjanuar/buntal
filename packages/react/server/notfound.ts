@@ -17,7 +17,10 @@ export const notfoundHandler = async (appDir: string = './app'): Promise<Respons
             },
             children: createElement(NotFound)
           }
-        ) : createElement(NotFound)
+        ) : createElement(NotFound),
+        {
+          bootstrapModules: ['/root.js']
+        }
       ),
       {
         headers: {
@@ -43,7 +46,10 @@ export const notfoundHandler = async (appDir: string = './app'): Promise<Respons
         }
       ) : createElement('div', {
         children: 'Not found'
-      })
+      }),
+      {
+        bootstrapModules: ['/root.js']
+      }
     ),
     {
       headers: {

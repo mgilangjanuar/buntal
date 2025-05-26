@@ -6,6 +6,7 @@ export function Notfound() {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100svh',
+      padding: '0.5rem 1rem',
     }}>
       <h1 style={{
         fontSize: '1.25rem',

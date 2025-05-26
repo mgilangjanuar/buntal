@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from 'react'
@@ -52,12 +53,13 @@ export function RouterProvider({
   ...props
 }: RouterProviderProps) {
   const [activeRoute, setActiveRoute] = useState<string>(window?.location.pathname)
-  const [router, setRouter] = useState<typeof routes[number] | null>(null)
-  const [args, setArgs] = useState<{
+  const [router, setRouter] = useState<typeof routes[number] | null>()
+  const args = useRef<{
     query: Record<string, string>,
     params: Record<string, string>,
-    data?: unknown
-  }>()
+    data: any
+  }>(null)
+  const [page, setPage] = useState<ReactNode>(null)
 
   useEffect(() => {
     const handler = () => {
@@ -74,8 +76,10 @@ export function RouterProvider({
     setRouter(route)
   }, [activeRoute])
 
-  useEffect(() => {
-    if (router) {
+  const buildPage = useCallback(async (layouts: ((data: any) => ReactNode)[] = router?.layouts || []): Promise<ReactNode> => {
+    if (!router) return
+
+    if (!args.current) {
       const populateArgs = async () => {
         const match = new RegExp(router.regex).exec(window.location.pathname)
         const params: Record<string, string> = Object.entries(
@@ -99,32 +103,28 @@ export function RouterProvider({
           }
         }
         const data = router.ssr ? await fetchData() : {}
-
-        setArgs({
-          query,
-          params,
-          data
-        })
+        return { query, params, data }
       }
-      populateArgs()
+      args.current = await populateArgs()
     }
+
+    if (!layouts?.[0]) {
+      return createElement(router.element, args.current)
+    }
+
+    return createElement(layouts[0], {
+      ...args.current,
+      children: buildPage(layouts.slice(1))
+    })
   }, [router])
 
-  const buildPage = useCallback((layouts?: ((data: any) => ReactNode)[]): ReactNode => {
-    if (router === null) {
-      return notFound
-    } else {
-      if (router && args) {
-        if (!layouts?.[0]) {
-          return createElement(router.element, args)
-        }
-        return createElement(layouts[0], {
-          ...args,
-          children: buildPage(layouts.slice(1))
-        })
-      }
+  useEffect(() => {
+    if (router) {
+      buildPage(router.layouts).then(setPage)
+    } else if (router === null) {
+      setPage(notFound)
     }
-  }, [router, args])
+  }, [buildPage, router])
 
   return (
     <RouterContext.Provider {...props} value={{
@@ -151,7 +151,7 @@ export function RouterProvider({
         window.dispatchEvent(new PopStateEvent('popstate'))
       }
     }}>
-      {buildPage(router?.layouts || [])}
+      {page}
     </RouterContext.Provider>
   )
 }

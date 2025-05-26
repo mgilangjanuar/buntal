@@ -1,2 +1,1 @@
 @import "tailwindcss";
-@source inline("{w-full, h-full, w-screen, h-screen, min-h-screen, flex, items-center, justify-center}");

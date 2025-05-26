@@ -1,4 +1,5 @@
 import { Link } from 'buntal-react'
+import { cn } from 'lib/utils'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -13,7 +14,7 @@ export default function HomePage() {
         <Link href="/hello/gilang">Gilang</Link>
         <Link href="/notfound">Not found</Link>
       </p>
-      <h1 className="font-bold text-3xl mb-4">Welcome to the Buntal App!</h1>
+      <h1 className={cn('font-bold text-3xl', 'mb-4')}>Welcome to the Buntal App!</h1>
       <p>This is a simple example of a Buntal application.</p>
       <div>
         <button onClick={() => setCount(count + 1)}>

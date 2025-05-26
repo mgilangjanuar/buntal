@@ -1,7 +1,5 @@
 import type { RouteBuilderResult } from '../server/router'
-import { buildFavicon } from './builder/favicon'
-import { buildHotReloadScript } from './builder/hot-reload'
-import { buildRoot } from './builder/root'
+import { buildFavicon, buildHotReloadScript, buildRoot } from './builder'
 
 type BundlerConfig = {
   env?: 'development' | 'production',

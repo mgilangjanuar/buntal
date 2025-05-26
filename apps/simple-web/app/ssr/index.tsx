@@ -1,4 +1,4 @@
-import type { Req } from 'buntal-react'
+import type { MetaProps, Req } from 'buntal-react'
 
 export const $ = async (req: Req) => {
   return {
@@ -9,7 +9,7 @@ export const $ = async (req: Req) => {
     _meta: {
       title: 'SSR Page',
       description: 'This is a simple React Server Component (SSR) page.',
-    }
+    } satisfies MetaProps
   }
 }
 

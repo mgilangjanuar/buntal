@@ -74,6 +74,10 @@ export function RouterProvider({
   useEffect(() => {
     const route = routes.find(r => new RegExp(r.regex).test(activeRoute)) || null
     setRouter(route)
+
+    return () => {
+      args.current = null
+    }
   }, [activeRoute])
 
   const buildPage = useCallback(async (layouts: ((data: any) => ReactNode)[] = router?.layouts || []): Promise<ReactNode> => {

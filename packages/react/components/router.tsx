@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { Notfound } from './notfound'
 
 export type ServerRouterType = {
   regex: string,
@@ -51,7 +52,7 @@ type RouterProviderProps = {
 export function RouterProvider({
   routes,
   rootLayout,
-  notFound = <div>Not found</div>,
+  notFound = <Notfound />,
   ...props
 }: RouterProviderProps) {
   const [activeRoute, setActiveRoute] = useState<string>(window?.location.pathname)

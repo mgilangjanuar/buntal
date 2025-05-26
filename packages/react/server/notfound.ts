@@ -1,5 +1,6 @@
 import { createElement } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
+import { Notfound } from '../components/notfound'
 
 export const notfoundHandler = async (appDir: string = './app'): Promise<Response | void> => {
   const layout = await Bun.file(`${appDir}/layout.tsx`).exists() && await import(`${process.cwd()}/${appDir}/layout.tsx`)
@@ -40,13 +41,9 @@ export const notfoundHandler = async (appDir: string = './app'): Promise<Respons
               title: 'Not found',
             }
           },
-          children: createElement('div', {
-            children: 'Not found'
-          })
+          children: createElement(Notfound)
         }
-      ) : createElement('div', {
-        children: 'Not found'
-      }),
+      ) : createElement(Notfound),
       {
         bootstrapModules: ['/root.js']
       }

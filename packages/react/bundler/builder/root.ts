@@ -8,6 +8,7 @@ export async function buildRoot(routes: RouteBuilderResult[], appDir: string = '
     return acc
   }, [])
   const notFoundPage = await Bun.file(appDir + '/404.tsx').exists()
+  const rootLayoutIdx = layouts.findIndex((l) => l.endsWith(appDir + '/layout'))
   const entrypointScript = `/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
@@ -42,7 +43,8 @@ root.render(<StrictMode>
         ).join(',')
       }
     ]}${
-      notFoundPage ? ` notFound={<NotFound />}` : ''
+      notFoundPage ? ` notFound={${rootLayoutIdx === -1 ? '<NotFound />'
+        : `<Layout${rootLayoutIdx} children={<NotFound />} data={{ _meta: { title: 'Not found' } }} />`}}` : ''
     }
   />
 </StrictMode>)

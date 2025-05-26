@@ -1,4 +1,4 @@
-export type MetaProps = {
+export type MetaProps = Partial<{
   title: string,
   viewport: string,
   description: string,
@@ -15,9 +15,9 @@ export type MetaProps = {
     image?: string,
     card?: string,
   },
-}
+}>
 
-export function Meta(props: Partial<MetaProps>) {
+export function Meta(props: MetaProps) {
   return <>
     <meta charSet="UTF-8" />
     <title>{props.title || 'Buntal App'}</title>

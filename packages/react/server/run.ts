@@ -5,6 +5,7 @@ import { bundler } from '../bundler'
 import { injectHandler } from './inject'
 import { builder } from './router'
 import { staticHandler } from './static'
+import { notfoundHandler } from './notfound'
 
 export type ServerConfig = {
   env?: 'development' | 'production',
@@ -37,9 +38,7 @@ export async function runServer({
       return resp
     }
 
-    return res.status(404).json({
-      error: 'Not found'
-    })
+    return await notfoundHandler(appDir)
   })
 
   app.use(logger())

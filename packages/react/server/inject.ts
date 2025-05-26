@@ -10,7 +10,7 @@ export const injectHandler = (routes: RouteBuilderResult[]) => async ({ req, mat
   handler: any
 }) => {
   const route = routes.find(r => r.route === match.name)
-  if (route && new RegExp(route.regex).test(match.pathname) && 'default' in handler) {
+  if (route && new RegExp(route.regex).test(new URL(req.url).pathname) && 'default' in handler) {
     // Handle SSR requests
     if (req.query?._$ === '1' && route.ssr && req.method === 'GET') {
       const resp = await ssrHandler(req, handler)

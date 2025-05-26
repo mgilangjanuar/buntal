@@ -4,7 +4,15 @@ export const ssrHandler = async (req: Req, handler: {
   $: (req: Req) => unknown
 }): Promise<Response | void> => {
   try {
-    const result = await handler.$(req)
+    const url = new URL(req.url)
+    url.searchParams.delete('_$')
+    delete req.query?._$
+
+    const result = await handler.$({
+      ...req,
+      url: url.href
+    })
+
     if (result instanceof Response) {
       return result
     }

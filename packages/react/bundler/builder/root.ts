@@ -17,6 +17,7 @@ import { App } from 'buntal-react/components'
 ${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
 
+global.process.env = {}
 const root = createRoot(document)
 root.render(<StrictMode>
   <App
@@ -33,6 +34,7 @@ root.render(<StrictMode>
     entrypoints: [outDir + '/root.tsx'],
     outdir: outDir + '/dist',
     target: 'browser',
+    env: 'BUNTAL_PUBLIC_*',
     splitting: true,
     minify: {
       identifiers: true,

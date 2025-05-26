@@ -17,7 +17,8 @@ import { App } from 'buntal-react/components'
 ${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
 
-global.process.env = {}
+window.process = {} as any
+window.process.env = {}
 const root = createRoot(document)
 root.render(<StrictMode>
   <App

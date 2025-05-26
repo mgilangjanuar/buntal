@@ -7,7 +7,7 @@
     "apps/simple-api": {
       "name": "api",
       "dependencies": {
-        "buntal-server": "workspace:^",
+        "buntal-core": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -51,25 +51,8 @@
         "typescript": "^5",
       },
     },
-    "packages/react": {
-      "name": "buntal-react",
-      "version": "0.0.1",
-      "dependencies": {
-        "buntal-server": "workspace:^",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
-      },
-      "devDependencies": {
-        "@types/bun": "latest",
-        "@types/react": "^19.1.5",
-        "@types/react-dom": "^19.1.5",
-      },
-      "peerDependencies": {
-        "typescript": "^5",
-      },
-    },
-    "packages/server": {
-      "name": "buntal-server",
+    "packages/core": {
+      "name": "buntal-core",
       "version": "0.0.1",
       "dependencies": {
         "bcryptjs": "^3.0.2",
@@ -77,6 +60,23 @@
       },
       "devDependencies": {
         "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "packages/react": {
+      "name": "buntal-react",
+      "version": "0.0.1",
+      "dependencies": {
+        "buntal-core": "workspace:^",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "@types/react": "^19.1.5",
+        "@types/react-dom": "^19.1.5",
       },
       "peerDependencies": {
         "typescript": "^5",
@@ -176,9 +176,9 @@
 
     "buntal-cli": ["buntal-cli@workspace:packages/cli"],
 
-    "buntal-react": ["buntal-react@workspace:packages/react"],
+    "buntal-core": ["buntal-core@workspace:packages/core"],
 
-    "buntal-server": ["buntal-server@workspace:packages/server"],
+    "buntal-react": ["buntal-react@workspace:packages/react"],
 
     "chownr": ["chownr@3.0.0", "", {}, "sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g=="],
 

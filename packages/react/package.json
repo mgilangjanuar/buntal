@@ -12,7 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "buntal-server": "workspace:^",
+    "buntal-core": "workspace:^",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

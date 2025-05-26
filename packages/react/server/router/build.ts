@@ -1,4 +1,4 @@
-import { buildRouter } from 'buntal-server'
+import { buildRouter } from 'buntal-core'
 
 export type RouteBuilderResult = {
   route: string,

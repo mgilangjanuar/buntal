@@ -1,2 +1,2 @@
-export { type Req } from 'buntal-server'
+export { type Req } from 'buntal-core'
 export * from './components'

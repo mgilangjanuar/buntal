@@ -1,4 +1,4 @@
-import type { Req } from 'buntal-server'
+import type { Req } from 'buntal-core'
 
 export const ssrHandler = async (req: Req, handler: {
   $: (req: Req) => unknown

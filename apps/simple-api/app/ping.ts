@@ -1,4 +1,4 @@
-import { h } from 'buntal-server'
+import { h } from 'buntal-core'
 
 /**
  * Handles GET requests for the ping endpoint.

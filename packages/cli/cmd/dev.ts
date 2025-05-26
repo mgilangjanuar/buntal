@@ -1,4 +1,4 @@
-import type { SpawnOptions } from 'bun'
+import { spawn, type SpawnOptions } from 'bun'
 import type { AppOptions } from '../types'
 
 export default async function() {
@@ -27,13 +27,13 @@ runServer(${confFileExist ? 'config' : ''})
 
   const runner = async () => {
     // run the development server
-    Bun.spawn(['bun', '--watch', params.outDir + '/index.ts'], opts)
+    spawn(['bun', '--watch', params.outDir + '/index.ts'], opts)
 
     // watch tailwindcss if it exists
     if (await Bun.file(params.appDir + '/globals.css').exists() && await Bun.file('package.json').exists()) {
       const packageJson = await Bun.file('package.json').json()
       if ('tailwindcss' in packageJson.dependencies) {
-        Bun.spawn([
+        spawn([
           'bunx', '@tailwindcss/cli',
           '-i', params.appDir + '/globals.css',
           '-o', params.outDir + '/dist/globals.css', '--watch'

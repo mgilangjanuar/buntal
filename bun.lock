@@ -37,6 +37,36 @@
         "typescript": "^5",
       },
     },
+    "packages/@buntal/cli": {
+      "name": "@buntal/cli",
+      "bin": {
+        "buntal": "./index.ts",
+      },
+      "dependencies": {
+        "commander": "^14.0.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "@types/commander": "^2.12.5",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "packages/@buntal/core": {
+      "name": "@buntal/core",
+      "version": "0.0.1",
+      "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "jose": "^6.0.11",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "packages/buntal": {
       "name": "buntal",
       "version": "0.0.1",
@@ -54,43 +84,13 @@
         "typescript": "^5",
       },
     },
-    "packages/cli": {
-      "name": "@buntal/cli",
-      "bin": {
-        "buntal": "./index.ts",
-      },
-      "dependencies": {
-        "commander": "^14.0.0",
-      },
-      "devDependencies": {
-        "@types/bun": "latest",
-        "@types/commander": "^2.12.5",
-      },
-      "peerDependencies": {
-        "typescript": "^5",
-      },
-    },
-    "packages/core": {
-      "name": "@buntal/core",
-      "version": "0.0.1",
-      "dependencies": {
-        "bcryptjs": "^3.0.2",
-        "jose": "^6.0.11",
-      },
-      "devDependencies": {
-        "@types/bun": "latest",
-      },
-      "peerDependencies": {
-        "typescript": "^5",
-      },
-    },
   },
   "packages": {
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
 
-    "@buntal/cli": ["@buntal/cli@workspace:packages/cli"],
+    "@buntal/cli": ["@buntal/cli@workspace:packages/@buntal/cli"],
 
-    "@buntal/core": ["@buntal/core@workspace:packages/core"],
+    "@buntal/core": ["@buntal/core@workspace:packages/@buntal/core"],
 
     "@isaacs/fs-minipass": ["@isaacs/fs-minipass@4.0.1", "", { "dependencies": { "minipass": "^7.0.4" } }, "sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w=="],
 

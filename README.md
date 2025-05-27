@@ -17,7 +17,7 @@
   </a>
   <span> &nbsp;&middot; &nbsp;</span>
   <a href="https://github.com/sponsors/mgilangjanuar" target="_blank">
-    Sponsor
+    Sponsor &hearts;
   </a>
 </section>
 <br/>

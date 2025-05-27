@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+:root {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
 @utility container {
   @apply mx-auto px-4;
 

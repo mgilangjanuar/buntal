@@ -14,6 +14,19 @@ export async function bundler(routes: RouteBuilderResult[], {
 }: BundlerConfig = {}) {
 
   await buildRoot(routes, appDir, outDir)
+  await Bun.build({
+    entrypoints: [outDir + '/root.tsx'],
+    outdir: outDir + '/dist',
+    target: 'browser',
+    env: 'BUNTAL_PUBLIC_*',
+    splitting: true,
+    minify: {
+      identifiers: true,
+      syntax: true,
+      whitespace: true,
+    }
+  })
+
   await buildFavicon(appDir, outDir)
   await buildHotReloadScript(env, outDir)
 }

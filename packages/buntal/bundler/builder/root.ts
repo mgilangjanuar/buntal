@@ -29,18 +29,4 @@ root.render(<StrictMode>
 </StrictMode>)
 `
   await Bun.write(outDir + '/root.tsx', entrypointScript)
-
-  // Build!
-  await Bun.build({
-    entrypoints: [outDir + '/root.tsx'],
-    outdir: outDir + '/dist',
-    target: 'browser',
-    env: 'BUNTAL_PUBLIC_*',
-    splitting: true,
-    minify: {
-      identifiers: true,
-      syntax: true,
-      whitespace: true,
-    }
-  })
 }

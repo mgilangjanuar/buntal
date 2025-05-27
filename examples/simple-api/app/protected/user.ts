@@ -4,7 +4,7 @@ import { hash, jwt } from '@buntal/core/security'
 
 type User = {
   id: string
-  name: string,
+  name: string
   password: string
 }
 
@@ -45,7 +45,7 @@ export const GET = h<{}, User>(
     onVerified: async (req, res, decoded) => {
       if (decoded.id !== '123') {
         return res.status(401).json({
-          error: 'Unauthorized',
+          error: 'Unauthorized'
         })
       }
       req.context = decoded
@@ -68,23 +68,21 @@ export const GET = h<{}, User>(
  * @param res - The HTTP response object used to send the result.
  * @returns A JSON object containing the generated JWT.
  */
-export const POST = h(
-  async (_, res) => {
-    const user: User = {
-      id: '123',
-      name: 'John Doe',
-      password: hash('password')
-    }
-    const token = await jwt(DONT_TRY_THIS_AT_HOME).sign(user, {
-      expiresIn: '2h'
-    })
-    cookie.set(res, 'access_token', token, {
-      maxAge: 60 * 60 * 2,
-      httpOnly: true,
-      path: '/'
-    })
-    return res.json({
-      token,
-    })
+export const POST = h(async (_, res) => {
+  const user: User = {
+    id: '123',
+    name: 'John Doe',
+    password: hash('password')
   }
-)
+  const token = await jwt(DONT_TRY_THIS_AT_HOME).sign(user, {
+    expiresIn: '2h'
+  })
+  cookie.set(res, 'access_token', token, {
+    maxAge: 60 * 60 * 2,
+    httpOnly: true,
+    path: '/'
+  })
+  return res.json({
+    token
+  })
+})

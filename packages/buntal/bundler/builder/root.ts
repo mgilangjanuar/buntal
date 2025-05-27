@@ -1,9 +1,18 @@
 import type { RouteBuilderResult } from '../../server/router'
 import { buildLayouts, buildNotfound, buildPages } from './root-scripts'
 
-export async function buildRoot(routes: RouteBuilderResult[], appDir: string = './app', outDir: string = '.buntal') {
+export async function buildRoot(
+  routes: RouteBuilderResult[],
+  appDir: string = './app',
+  outDir: string = '.buntal'
+) {
   // Build all layouts and pages
-  const { layouts, rootLayout, renderRootLayout, imports: layoutsImports } = buildLayouts(routes, appDir)
+  const {
+    layouts,
+    rootLayout,
+    renderRootLayout,
+    imports: layoutsImports
+  } = buildLayouts(routes, appDir)
   const createPages = buildPages(routes, layouts)
   const createNotFound = await buildNotfound(appDir, rootLayout)
 

@@ -4,7 +4,7 @@ import { cors, logger } from '@buntal/core/middlewares'
 // Initialize the HTTP server
 const app = new Http({
   port: 4001,
-  appDir: './app'   // Enable file-based routing!
+  appDir: './app' // Enable file-based routing!
 })
 
 // Add middlewares
@@ -19,6 +19,6 @@ app.get('/hello/:name', (req, res) => {
 })
 
 // Start the server!
-app.start(server => {
+app.start((server) => {
   console.log(`Server running at http://localhost:${server.port}`)
 })

@@ -7,27 +7,37 @@ import { buildRouter } from './router'
 
 type Config = {
   port: number
-  appDir?: string,
-  websocket?: WebSocketHandler,
-  injectHandler?: (payload: { req: Req, match: Bun.MatchedRoute, handler: any }) => Promise<Response | void>
+  appDir?: string
+  websocket?: WebSocketHandler
+  injectHandler?: (payload: {
+    req: Req
+    match: Bun.MatchedRoute
+    handler: any
+  }) => Promise<Response | void>
 }
 
 type ExtractRouteParams<Path extends string> =
-  Path extends `${string}/:${infer Param}/${infer Rest}` ?
-    { [K in Param | keyof ExtractRouteParams<`/${Rest}`>]: string }
-  : Path extends `${string}/:${infer Param}` ?
-    { [K in Param]: string }
-  : Path extends `/:${infer Param}` ?
-    { [K in Param]: string }
-  : {}
+  Path extends `${string}/:${infer Param}/${infer Rest}`
+    ? { [K in Param | keyof ExtractRouteParams<`/${Rest}`>]: string }
+    : Path extends `${string}/:${infer Param}`
+      ? { [K in Param]: string }
+      : Path extends `/:${infer Param}`
+        ? { [K in Param]: string }
+        : {}
 
 export class Http {
   private middlewares: AtomicHandler[] = []
-  private routes: Record<string, { [K in typeof ALLOWED_METHODS[number] | string]?: AtomicHandler }> = {}
-  private errorHandler: ((error: Error) => Response | Promise<Response>) | null = null
-  private notFoundHandler: AtomicHandler = (_, res) => res.status(404).json({
-    error: 'Not found'
-  })
+  private routes: Record<
+    string,
+    { [K in (typeof ALLOWED_METHODS)[number] | string]?: AtomicHandler }
+  > = {}
+  private errorHandler:
+    | ((error: Error) => Response | Promise<Response>)
+    | null = null
+  private notFoundHandler: AtomicHandler = (_, res) =>
+    res.status(404).json({
+      error: 'Not found'
+    })
 
   constructor(private config: Config) {}
 
@@ -40,49 +50,51 @@ export class Http {
       reusePort: true,
       routes: this.routes,
       websocket: this.config.websocket,
-      fetch: this.config.appDir ? async (raw: Request, server): Promise<Response | any> => {
-        if (this.config.websocket && server.upgrade(raw)) return
+      fetch: this.config.appDir
+        ? async (raw: Request, server): Promise<Response | any> => {
+            if (this.config.websocket && server.upgrade(raw)) return
 
-        if (raw.method === 'OPTIONS') {
-          return res.send('departed')
-        }
+            if (raw.method === 'OPTIONS') {
+              return res.send('departed')
+            }
 
-        const req = raw as Req
+            const req = raw as Req
 
-        const router = buildRouter(this.config.appDir!)
-        const match = router.match(req)
+            const router = buildRouter(this.config.appDir!)
+            const match = router.match(req)
 
-        if (match) {
-          req.params = match.params || {}
-          req.query = match.query || {}
+            if (match) {
+              req.params = match.params || {}
+              req.query = match.query || {}
 
-          const handler = await import(match.filePath)
-          const injected = await this.config.injectHandler?.({
-            req,
-            match,
-            handler
-          })
-          if (injected instanceof Response) {
-            return injected
+              const handler = await import(match.filePath)
+              const injected = await this.config.injectHandler?.({
+                req,
+                match,
+                handler
+              })
+              if (injected instanceof Response) {
+                return injected
+              }
+
+              if (req.method in handler) {
+                return h(...middlewares, handler[req.method])(req, res)
+              }
+            }
+
+            return h(...middlewares, this.notFoundHandler)(req, res)
           }
+        : async (raw: Request, server) => {
+            if (this.config.websocket && server.upgrade(raw)) return
 
-          if (req.method in handler) {
-            return h(...middlewares, handler[req.method])(req, res)
-          }
-        }
+            if (raw.method === 'OPTIONS') {
+              return res.send('departed')
+            }
 
-        return h(...middlewares, this.notFoundHandler)(req, res)
-      } : async (raw: Request, server) => {
-        if (this.config.websocket && server.upgrade(raw)) return
-
-        if (raw.method === 'OPTIONS') {
-          return res.send('departed')
-        }
-
-        return res.status(404).json({
-          error: 'Not found'
-        })
-      },
+            return res.status(404).json({
+              error: 'Not found'
+            })
+          },
       error: async (error: Error) => {
         if (this.errorHandler) {
           return await this.errorHandler(error)
@@ -110,33 +122,68 @@ export class Http {
     this.middlewares.push(handler)
   }
 
-  get<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {
+  get<R extends string, P = ExtractRouteParams<R>>(
+    route: R,
+    ...handlers: AtomicHandler<P>[]
+  ) {
     this.routes[route] = {
-      'GET': req => h<P>(...this.middlewares as AtomicHandler<P>[], ...handlers)(req as Req<P>, new Res()),
+      GET: (req) =>
+        h<P>(...(this.middlewares as AtomicHandler<P>[]), ...handlers)(
+          req as Req<P>,
+          new Res()
+        )
     }
   }
 
-  post<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {
+  post<R extends string, P = ExtractRouteParams<R>>(
+    route: R,
+    ...handlers: AtomicHandler<P>[]
+  ) {
     this.routes[route] = {
-      'POST': req => h<P>(...this.middlewares as AtomicHandler<P>[], ...handlers)(req as Req<P>, new Res()),
+      POST: (req) =>
+        h<P>(...(this.middlewares as AtomicHandler<P>[]), ...handlers)(
+          req as Req<P>,
+          new Res()
+        )
     }
   }
 
-  put<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {
+  put<R extends string, P = ExtractRouteParams<R>>(
+    route: R,
+    ...handlers: AtomicHandler<P>[]
+  ) {
     this.routes[route] = {
-      'PUT': req => h<P>(...this.middlewares as AtomicHandler<P>[], ...handlers)(req as Req<P>, new Res()),
+      PUT: (req) =>
+        h<P>(...(this.middlewares as AtomicHandler<P>[]), ...handlers)(
+          req as Req<P>,
+          new Res()
+        )
     }
   }
 
-  delete<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {
+  delete<R extends string, P = ExtractRouteParams<R>>(
+    route: R,
+    ...handlers: AtomicHandler<P>[]
+  ) {
     this.routes[route] = {
-      'DELETE': req => h<P>(...this.middlewares as AtomicHandler<P>[], ...handlers)(req as Req<P>, new Res()),
+      DELETE: (req) =>
+        h<P>(...(this.middlewares as AtomicHandler<P>[]), ...handlers)(
+          req as Req<P>,
+          new Res()
+        )
     }
   }
 
-  patch<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]) {
+  patch<R extends string, P = ExtractRouteParams<R>>(
+    route: R,
+    ...handlers: AtomicHandler<P>[]
+  ) {
     this.routes[route] = {
-      'PATCH': req => h<P>(...this.middlewares as AtomicHandler<P>[], ...handlers)(req as Req<P>, new Res()),
+      PATCH: (req) =>
+        h<P>(...(this.middlewares as AtomicHandler<P>[]), ...handlers)(
+          req as Req<P>,
+          new Res()
+        )
     }
   }
 }

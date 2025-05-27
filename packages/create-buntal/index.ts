@@ -8,9 +8,6 @@ program
   .description('Create a new Buntal project')
   .version('0.0.1')
 
-program
-  .argument('<project-name>', 'Name of the project')
-  .action(createProject)
+program.argument('<project-name>', 'Name of the project').action(createProject)
 
 program.parse()
-

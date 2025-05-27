@@ -1,3 +1,8 @@
 export const ALLOWED_METHODS = [
-  'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+  'OPTIONS'
 ] as const

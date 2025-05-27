@@ -4,20 +4,26 @@ import { jwt } from '../security'
 type Strategy = 'cookie' | 'header' | 'both'
 
 type Options<T = unknown> = {
-  secret: string,
-  strategy?: Strategy,
+  secret: string
+  strategy?: Strategy
   cookie?: {
     key: string
-  },
+  }
   header?: {
     key: string
-  },
-  onVerified?: (req: Req<Record<string, string>, T>, res: Res, decoded: T) => void | Response | Promise<void | Response>
+  }
+  onVerified?: (
+    req: Req<Record<string, string>, T>,
+    res: Res,
+    decoded: T
+  ) => void | Response | Promise<void | Response>
 }
 
 const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
   const cookieValue = cookie.get(req, opts?.cookie?.key || 'access_token')
-  const headerValue = req.headers.get(opts?.header?.key || 'Authorization')?.replace(/^Bearer\ /, '')
+  const headerValue = req.headers
+    .get(opts?.header?.key || 'Authorization')
+    ?.replace(/^Bearer\ /, '')
   switch (strategy) {
     case 'cookie':
       return cookieValue
@@ -30,19 +36,21 @@ const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
   }
 }
 
-export const auth = <T = unknown>({
-  secret,
-  strategy = 'header',
-  cookie = {
-    key: 'access_token'
-  },
-  header = {
-    key: 'Authorization'
-  },
-  onVerified
-}: Options<T> = {
-  secret: process.env.JWT_SECRET || process.env.SECRET || '',
-}): AtomicHandler<Record<string, string>, T> => {
+export const auth = <T = unknown>(
+  {
+    secret,
+    strategy = 'header',
+    cookie = {
+      key: 'access_token'
+    },
+    header = {
+      key: 'Authorization'
+    },
+    onVerified
+  }: Options<T> = {
+    secret: process.env.JWT_SECRET || process.env.SECRET || ''
+  }
+): AtomicHandler<Record<string, string>, T> => {
   return async (req, res: Res) => {
     let token: string | null | undefined
 
@@ -50,14 +58,14 @@ export const auth = <T = unknown>({
       for (const strat of strategy) {
         token = getToken(req, strat, {
           cookie,
-          header,
+          header
         })
         if (token) break
       }
     } else {
       token = getToken(req, strategy, {
         cookie,
-        header,
+        header
       })
     }
 

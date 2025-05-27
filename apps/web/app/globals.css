@@ -1,12 +1,12 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
   themes: bumblebee --default;
 }
 
 :root {
-  --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-serif: "Source Serif 4", serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Source Serif 4', serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 @utility container {

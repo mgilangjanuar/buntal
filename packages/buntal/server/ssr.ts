@@ -1,8 +1,11 @@
 import type { Req } from '@buntal/core'
 
-export const ssrHandler = async (req: Req, handler: {
-  $: (req: Req) => unknown
-}): Promise<Response | void> => {
+export const ssrHandler = async (
+  req: Req,
+  handler: {
+    $: (req: Req) => unknown
+  }
+): Promise<Response | void> => {
   try {
     const url = new URL(req.url)
     url.searchParams.delete('_$')
@@ -17,23 +20,17 @@ export const ssrHandler = async (req: Req, handler: {
       return result
     }
     if (typeof result === 'object') {
-      return new Response(
-        JSON.stringify(result),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
-      )
-    }
-    return new Response(
-      String(result),
-      {
+      return new Response(JSON.stringify(result), {
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json'
         }
+      })
+    }
+    return new Response(String(result), {
+      headers: {
+        'Content-Type': 'text/plain'
       }
-    )
+    })
   } catch (error) {
     return new Response(
       JSON.stringify({
@@ -44,7 +41,7 @@ export const ssrHandler = async (req: Req, handler: {
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         }
       }
     )

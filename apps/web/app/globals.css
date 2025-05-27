@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: bumblebee --default;
+}
 
 :root {
   --font-sans: "Plus Jakarta Sans", sans-serif;

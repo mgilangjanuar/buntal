@@ -10,8 +10,8 @@ export default function RootLayout({ children, data }: Readonly<{
     <head>
       <Meta
         {...data?._meta || {
-          title: 'Buntal App',
-          description: 'This is a simple Buntal application.',
+          title: 'Buntal JS',
+          description: 'Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.',
         }}
       />
       <link rel="icon" href="/favicon.svg" />

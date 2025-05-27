@@ -16,7 +16,7 @@
     Website
   </a>
   <span> &nbsp;&middot; &nbsp;</span>
-  <a href="https://docs.buntaljs.org" target="_blank">
+  <a href="https://buntaljs.org/docs" target="_blank">
     Docs
   </a>
   <span> &nbsp;&middot; &nbsp;</span>

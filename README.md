@@ -43,7 +43,15 @@ Ultra-lightweight type-safe modern full-stack web framework with TypeScript, Rea
 
 ## Examples
 
-- Basic HTTP Server
+- **Basic HTTP Server**
+
+  Install [Bun](https://bun.sh/) globally, and install `@buntal/core`:
+
+  ```bash
+  bun add @buntal/core
+  ```
+
+  Here's a simple example of a server app:
 
   ```ts
   import { Http } from '@buntal/core'
@@ -72,9 +80,9 @@ Ultra-lightweight type-safe modern full-stack web framework with TypeScript, Rea
   })
   ```
 
-- Create a web app
+- **React-based Web App**
 
-  Install [Bun](https://bun.sh/) globally, and run:
+  Install [Bun](https://bun.sh/) globally, and create a Buntal project:
 
   ```bash
   bun create buntal my-app

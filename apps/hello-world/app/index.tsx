@@ -4,9 +4,15 @@ import { Svg } from 'buntal'
 export default function HomePage() {
   return <div className="min-h-svh flex flex-col items-center justify-center container mx-auto">
     <div className="space-y-4">
-      <Svg src={Logo} className="[&>svg]:size-28" />
+      <Svg src={Logo} className="[&>*]:size-28" />
       <h1 className="text-4xl font-bold">Next.js who?</h1>
-      <p className="text-lg">This is a simple Bun app using Buntal.</p>
+      <p className="text-lg leading-7">
+        Run{' '}
+        <code className="relative rounded bg-gray-100 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+          rm -rf ./
+        </code>{' '}
+        if you accidentally created a Buntal app.
+      </p>
     </div>
   </div>
 }

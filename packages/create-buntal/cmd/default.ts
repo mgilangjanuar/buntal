@@ -12,7 +12,13 @@ export async function createProject(name: string) {
   }
 
   await $`cp -r ${__dirname}/templates ${name}`
-  const pkg = await Bun.file(`${name}/package.json`).text()
-  await Bun.write(`${name}/package.json`, pkg.replace(/"name": ".*"/, `"name": "${name}"`))
-  await $`cd ${name} && bun install && bun dev`
+  process.chdir(name)
+
+  const pkg = await Bun.file('package.json').text()
+  await Bun.write('package.json', pkg.replace(/"name": ".*"/, `"name": "${name}"`))
+
+  await $`bun install`
+
+  console.log('\nDone! 🔥')
+  console.log(`To get started, run: \`cd ${name} && bun dev\``)
 }

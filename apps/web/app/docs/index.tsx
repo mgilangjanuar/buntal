@@ -1,3 +1,4 @@
+import Header from '@/components/header'
 import type { MetaProps } from 'buntal'
 
 export const $ = () => ({
@@ -7,7 +8,10 @@ export const $ = () => ({
 })
 
 export default function DocsPage() {
-  return <div>
-    Index
-  </div>
+  return (
+    <div>
+      <Header title="Documentation" />
+      <main></main>
+    </div>
+  )
 }

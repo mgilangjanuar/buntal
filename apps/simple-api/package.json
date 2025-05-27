@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun . --watch",
+    "start": "bun ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@buntal/core": "workspace:^"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

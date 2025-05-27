@@ -1,12 +1,9 @@
 {
   "name": "buntal",
-  "version": "0.0.1",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "workspaces": [
+    "packages/*",
+    "packages/@buntal/*",
+    "apps/*"
+  ],
+  "version": "0.0.1"
 }

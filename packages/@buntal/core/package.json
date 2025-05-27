@@ -1,0 +1,16 @@
+{
+  "name": "@buntal/core",
+  "description": "HTTP client framework for Bun",
+  "version": "0.0.1",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "jose": "^6.0.11"
+  }
+}

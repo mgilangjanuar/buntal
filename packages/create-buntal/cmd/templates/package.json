@@ -1,0 +1,27 @@
+{
+  "name": "{{name}}",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "buntal dev"
+  },
+  "devDependencies": {
+    "@buntal/cli": "^0.0.1",
+    "@types/bun": "latest",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "buntal": "^0.0.1",
+    "clsx": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.7"
+  }
+}

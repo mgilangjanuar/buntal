@@ -1,9 +1,0 @@
-@import "tailwindcss";
-
-@utility container {
-  @apply mx-auto px-4;
-
-  @variant 2xl {
-    @apply max-w-[1400px];
-  }
-}

@@ -29,7 +29,7 @@ export async function runServer({
     websocket: env === 'development' ? {
       message() {},
     } : undefined,
-    injectHandler: injectHandler(routes),
+    injectHandler: injectHandler(env, routes),
   })
 
   app.onNotFound(async (req, res) => {
@@ -38,7 +38,7 @@ export async function runServer({
       return resp
     }
 
-    return await notfoundHandler(appDir)
+    return await notfoundHandler(env, appDir)
   })
 
   app.use(logger())

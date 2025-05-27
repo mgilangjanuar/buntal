@@ -4,7 +4,7 @@ import { renderToReadableStream } from 'react-dom/server'
 import { type RouteBuilderResult } from './router'
 import { ssrHandler } from './ssr'
 
-export const injectHandler = (routes: RouteBuilderResult[]) => async ({ req, match, handler }: {
+export const injectHandler = (env: 'development' | 'production' = 'development', routes: RouteBuilderResult[]) => async ({ req, match, handler }: {
   req: Req,
   match: Bun.MatchedRoute,
   handler: any
@@ -42,7 +42,12 @@ export const injectHandler = (routes: RouteBuilderResult[]) => async ({ req, mat
       await renderToReadableStream(
         await createComponent(route.layouts),
         {
-          bootstrapModules: ['/root.js']
+          bootstrapModules: [
+            '/root.js',
+            ...env === 'development' ? [
+              '/🔥.js',
+            ] : [],
+          ]
         }
       ), {
         headers: {

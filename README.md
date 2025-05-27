@@ -32,6 +32,10 @@ Ultra-lightweight type-safe modern full-stack web framework with TypeScript, Rea
 
 <br/>
 
+```bash
+bun create buntal my-app
+```
+
 ## Features
 
 - **Blazing Fast**: Built on Bun, the fastest JavaScript runtime.
@@ -40,59 +44,6 @@ Ultra-lightweight type-safe modern full-stack web framework with TypeScript, Rea
 - **SSR**: Server-side rendering for dynamic content.
 - **SPA**: Single Page Application support with Bun's bundler.
 - More to come!
-
-## Examples
-
-- **Basic HTTP Server**
-
-  Install [Bun](https://bun.sh/) globally, and install `@buntal/core`:
-
-  ```bash
-  bun add @buntal/core
-  ```
-
-  Here's a simple example of a server app:
-
-  ```ts
-  import { Http } from '@buntal/core'
-  import { cors, logger } from '@buntal/core/middlewares'
-
-  // Initialize the HTTP server
-  const app = new Http({
-    port: 4000,
-    appDir: './app'   // Enable file-based routing!
-  })
-
-  // Add middlewares
-  app.use(cors())
-  app.use(logger())
-
-  // Define a simple GET endpoint with a type-safe params!
-  app.get('/hello/:name', (req, res) => {
-    return res.json({
-      hello: `Hello, ${req.params.name}!`
-    })
-  })
-
-  // Start the server!
-  app.start(server => {
-    console.log(`Server running at http://localhost:${server.port}`)
-  })
-  ```
-
-- **React-based Web App**
-
-  Create a Buntal project from the template:
-
-  ```bash
-  bun create buntal my-app
-  ```
-
-  Then, navigate to the `my-app` directory and run:
-
-  ```bash
-  bun dev
-  ```
 
 View more examples [here](/examples).
 

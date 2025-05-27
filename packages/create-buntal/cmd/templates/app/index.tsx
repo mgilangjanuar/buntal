@@ -10,8 +10,10 @@ export default function HomePage() {
         Run{' '}
         <code className="relative rounded bg-gray-100 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
           rm -rf ./
-        </code>{' '}
-        if you accidentally created a Buntal app.
+        </code> if you accidentally created a{' '}
+        <a href="https://buntaljs.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:cursor-pointer">
+          Buntal
+        </a> app.
       </p>
     </div>
   </div>

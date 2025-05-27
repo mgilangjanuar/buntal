@@ -15,6 +15,10 @@
   <a href="https://docs.buntaljs.org" target="_blank">
     Docs
   </a>
+  <span> &nbsp;&middot; &nbsp;</span>
+  <a href="https://github.com/sponsors/mgilangjanuar" target="_blank">
+    Sponsor
+  </a>
 </section>
 <br/>
 <section align="left" markdown="1">

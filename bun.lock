@@ -4,8 +4,9 @@
     "": {
       "name": "buntal",
     },
-    "apps/hello-world": {
+    "examples/hello-world": {
       "name": "hello-world",
+      "version": "0.0.1",
       "dependencies": {
         "@tailwindcss/cli": "^4.1.7",
         "buntal": "workspace:^",
@@ -25,7 +26,7 @@
         "typescript": "^5",
       },
     },
-    "apps/simple-api": {
+    "examples/simple-api": {
       "name": "api",
       "dependencies": {
         "@buntal/core": "workspace:^",
@@ -39,6 +40,7 @@
     },
     "packages/@buntal/cli": {
       "name": "@buntal/cli",
+      "version": "0.0.1",
       "bin": {
         "buntal": "./index.ts",
       },
@@ -188,7 +190,7 @@
 
     "@types/react-dom": ["@types/react-dom@19.1.5", "", { "peerDependencies": { "@types/react": "^19.0.0" } }, "sha512-CMCjrWucUBZvohgZxkjd6S9h0nZxXjzus6yDfUb+xLxYM7VvjKNH1tQrE9GWLql1XoOP4/Ds3bwFqShHUYraGg=="],
 
-    "api": ["api@workspace:apps/simple-api"],
+    "api": ["api@workspace:examples/simple-api"],
 
     "bcryptjs": ["bcryptjs@3.0.2", "", { "bin": { "bcrypt": "bin/bcrypt" } }, "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog=="],
 
@@ -216,7 +218,7 @@
 
     "graceful-fs": ["graceful-fs@4.2.11", "", {}, "sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ=="],
 
-    "hello-world": ["hello-world@workspace:apps/hello-world"],
+    "hello-world": ["hello-world@workspace:examples/hello-world"],
 
     "is-extglob": ["is-extglob@2.1.1", "", {}, "sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ=="],
 

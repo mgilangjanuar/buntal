@@ -4,6 +4,11 @@
   "version": "0.0.1",
   "module": "index.ts",
   "type": "module",
+  "homepage": "https://buntaljs.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
   "bin": {
     "buntal": "./index.ts"
   },

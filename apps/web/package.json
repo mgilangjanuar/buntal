@@ -10,7 +10,8 @@
     "@buntal/cli": "^0.0.1",
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5"
+    "@types/react-dom": "^19.1.5",
+    "daisyui": "^5.0.38"
   },
   "peerDependencies": {
     "typescript": "^5"

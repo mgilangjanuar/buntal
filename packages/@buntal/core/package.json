@@ -3,6 +3,11 @@
   "description": "HTTP client framework for Bun",
   "version": "0.0.1",
   "type": "module",
+  "homepage": "https://buntaljs.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

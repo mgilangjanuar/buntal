@@ -71,7 +71,6 @@ export const auth = <T = unknown>({
     try {
       decoded = await jwt(secret).verify<T>(token)
     } catch (error) {
-      console.error('JWT error:', error)
       return res.status(401).json({
         error: 'Unauthorized'
       })

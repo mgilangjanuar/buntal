@@ -1,10 +1,26 @@
 {
-  "name": "buntal",
+  "name": "buntaljs",
+  "version": "0.0.3",
+  "description": "A JavaScript library for building modern web applications with a focus on simplicity and performance.",
+  "keywords": [
+    "javascript",
+    "web",
+    "library",
+    "framework",
+    "modern",
+    "performance"
+  ],
+  "author": "mgilangjanuar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
+  "homepage": "https://buntaljs.org",
   "workspaces": [
     "apps/*",
     "examples/*",
     "packages/*",
     "packages/@buntal/*"
-  ],
-  "version": "0.0.1"
+  ]
 }

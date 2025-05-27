@@ -10,7 +10,7 @@ export const $ = () => ({
 export default function DocsPage() {
   return (
     <div>
-      <Header title="Documentation" />
+      <Header title="Get Started" />
       <main></main>
     </div>
   )

@@ -1,0 +1,20 @@
+{
+  "name": "create-buntal",
+  "description": "Template for creating Buntal projects",
+  "version": "0.0.1",
+  "module": "index.ts",
+  "type": "module",
+  "main": "index.ts",
+  "bin": {
+    "create-buntal": "./index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "commander": "^14.0.0"
+  }
+}

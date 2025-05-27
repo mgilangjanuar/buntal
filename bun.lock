@@ -4,6 +4,28 @@
     "": {
       "name": "buntal",
     },
+    "apps/web": {
+      "name": "web",
+      "version": "0.0.1",
+      "dependencies": {
+        "@tailwindcss/cli": "^4.1.7",
+        "buntal": "^0.0.2",
+        "clsx": "^2.1.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "tailwind-merge": "^3.3.0",
+        "tailwindcss": "^4.1.7",
+      },
+      "devDependencies": {
+        "@buntal/cli": "^0.0.1",
+        "@types/bun": "latest",
+        "@types/react": "^19.1.4",
+        "@types/react-dom": "^19.1.5",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "examples/hello-world": {
       "name": "hello-world",
       "version": "0.0.1",
@@ -71,7 +93,7 @@
     },
     "packages/buntal": {
       "name": "buntal",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "dependencies": {
         "@buntal/core": "workspace:^",
         "react": "^19.1.0",
@@ -291,6 +313,8 @@
     "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
     "undici-types": ["undici-types@6.21.0", "", {}, "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="],
+
+    "web": ["web@workspace:apps/web"],
 
     "yallist": ["yallist@5.0.0", "", {}, "sha512-YgvUTfwqyc7UXVMrB+SImsVYSmTS8X/tSrtdNZMImM+n7+QTriRXyXim0mBrTXNeqzVF0KWGgHPeiyViFFrNDw=="],
 

@@ -7,7 +7,7 @@
     "apps/simple-api": {
       "name": "api",
       "dependencies": {
-        "buntal-core": "workspace:^",
+        "@buntal/core": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -20,7 +20,7 @@
       "name": "web-simple",
       "dependencies": {
         "@tailwindcss/cli": "^4.1.7",
-        "buntal-react": "workspace:^",
+        "buntal": "workspace:^",
         "clsx": "^2.1.1",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -28,17 +28,34 @@
         "tailwindcss": "^4.1.7",
       },
       "devDependencies": {
+        "@buntal/cli": "workspace:^",
         "@types/bun": "latest",
         "@types/react": "^19.1.4",
         "@types/react-dom": "^19.1.5",
-        "buntal-cli": "workspace:^",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "packages/buntal": {
+      "name": "buntal",
+      "version": "0.0.1",
+      "dependencies": {
+        "@buntal/core": "workspace:^",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "@types/react": "^19.1.5",
+        "@types/react-dom": "^19.1.5",
       },
       "peerDependencies": {
         "typescript": "^5",
       },
     },
     "packages/cli": {
-      "name": "buntal-cli",
+      "name": "@buntal/cli",
       "bin": {
         "buntal": "./index.ts",
       },
@@ -54,7 +71,7 @@
       },
     },
     "packages/core": {
-      "name": "buntal-core",
+      "name": "@buntal/core",
       "version": "0.0.1",
       "dependencies": {
         "bcryptjs": "^3.0.2",
@@ -67,26 +84,13 @@
         "typescript": "^5",
       },
     },
-    "packages/react": {
-      "name": "buntal-react",
-      "version": "0.0.1",
-      "dependencies": {
-        "buntal-core": "workspace:^",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
-      },
-      "devDependencies": {
-        "@types/bun": "latest",
-        "@types/react": "^19.1.5",
-        "@types/react-dom": "^19.1.5",
-      },
-      "peerDependencies": {
-        "typescript": "^5",
-      },
-    },
   },
   "packages": {
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
+
+    "@buntal/cli": ["@buntal/cli@workspace:packages/cli"],
+
+    "@buntal/core": ["@buntal/core@workspace:packages/core"],
 
     "@isaacs/fs-minipass": ["@isaacs/fs-minipass@4.0.1", "", { "dependencies": { "minipass": "^7.0.4" } }, "sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w=="],
 
@@ -164,7 +168,7 @@
 
     "@types/node": ["@types/node@22.15.21", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-EV/37Td6c+MgKAbkcLG6vqZ2zEYHD7bvSrzqqs2RIhbA6w3x+Dqz8MZM3sP6kGTeLrdoOgKZe+Xja7tUB2DNkQ=="],
 
-    "@types/react": ["@types/react@19.1.5", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-piErsCVVbpMMT2r7wbawdZsq4xMvIAhQuac2gedQHysu1TZYEigE6pnFfgZT+/jQnrRuF5r+SHzuehFjfRjr4g=="],
+    "@types/react": ["@types/react@19.1.6", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-JeG0rEWak0N6Itr6QUx+X60uQmN+5t3j9r/OVDtWzFXKaj6kD1BwJzOksD0FF6iWxZlbE1kB0q9vtnU2ekqa1Q=="],
 
     "@types/react-dom": ["@types/react-dom@19.1.5", "", { "peerDependencies": { "@types/react": "^19.0.0" } }, "sha512-CMCjrWucUBZvohgZxkjd6S9h0nZxXjzus6yDfUb+xLxYM7VvjKNH1tQrE9GWLql1XoOP4/Ds3bwFqShHUYraGg=="],
 
@@ -176,11 +180,7 @@
 
     "bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
 
-    "buntal-cli": ["buntal-cli@workspace:packages/cli"],
-
-    "buntal-core": ["buntal-core@workspace:packages/core"],
-
-    "buntal-react": ["buntal-react@workspace:packages/react"],
+    "buntal": ["buntal@workspace:packages/buntal"],
 
     "chownr": ["chownr@3.0.0", "", {}, "sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g=="],
 

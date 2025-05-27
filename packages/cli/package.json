@@ -1,5 +1,6 @@
 {
-  "name": "buntal-cli",
+  "name": "@buntal/cli",
+  "description": "Command line interface for Buntal",
   "module": "index.ts",
   "type": "module",
   "bin": {

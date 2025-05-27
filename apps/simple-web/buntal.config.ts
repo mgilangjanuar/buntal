@@ -1,4 +1,4 @@
-import type { ServerConfig } from 'buntal-react/server'
+import type { ServerConfig } from 'buntal/server'
 
 const config = {
   env: 'development',

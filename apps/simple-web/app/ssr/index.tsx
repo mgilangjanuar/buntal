@@ -1,4 +1,4 @@
-import type { MetaProps, Req } from 'buntal-react'
+import type { MetaProps, Req } from 'buntal'
 
 export const $ = async (req: Req) => {
   return {

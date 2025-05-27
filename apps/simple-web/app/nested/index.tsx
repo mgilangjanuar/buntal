@@ -1,4 +1,4 @@
-import { Link } from 'buntal-react'
+import { Link } from 'buntal'
 
 export default function NestedIndex() {
   return <div>

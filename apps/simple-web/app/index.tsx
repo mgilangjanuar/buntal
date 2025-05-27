@@ -1,4 +1,4 @@
-import { Link } from 'buntal-react'
+import { Link } from 'buntal'
 import { cn } from 'lib/utils'
 import { useState } from 'react'
 

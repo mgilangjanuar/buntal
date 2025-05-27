@@ -1,4 +1,4 @@
-import { Meta, type MetaProps } from 'buntal-react'
+import { Meta, type MetaProps } from 'buntal'
 
 export default function RootLayout({ children, data }: Readonly<{
   children: React.ReactNode,

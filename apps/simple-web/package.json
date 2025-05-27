@@ -9,14 +9,14 @@
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
-    "buntal-cli": "workspace:^"
+    "@buntal/cli": "workspace:^"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.7",
-    "buntal-react": "workspace:^",
+    "buntal": "workspace:^",
     "clsx": "^2.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

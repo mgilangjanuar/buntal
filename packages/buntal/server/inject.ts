@@ -1,4 +1,4 @@
-import type { Req } from 'buntal-core'
+import type { Req } from '@buntal/core'
 import { createElement, type ReactNode } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 import { type RouteBuilderResult } from './router'

@@ -1,11 +1,11 @@
-import { Http } from 'buntal-core'
-import { logger } from 'buntal-core/middlewares'
+import { Http } from '@buntal/core'
+import { logger } from '@buntal/core/middlewares'
 import { networkInterfaces } from 'os'
 import { bundler } from '../bundler'
 import { injectHandler } from './inject'
+import { notfoundHandler } from './notfound'
 import { builder } from './router'
 import { staticHandler } from './static'
-import { notfoundHandler } from './notfound'
 
 export type ServerConfig = {
   env?: 'development' | 'production',

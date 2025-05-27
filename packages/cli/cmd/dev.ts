@@ -14,7 +14,7 @@ export default async function() {
   }
 
   // init the entrypoint
-  await Bun.write(params.outDir + '/index.ts', `import { runServer } from 'buntal-react/server'
+  await Bun.write(params.outDir + '/index.ts', `import { runServer } from 'buntal/server'
 ${confFileExist ? `import config from '../buntal.config'\n` : ''}
 runServer(${confFileExist ? 'config' : ''})
 `)

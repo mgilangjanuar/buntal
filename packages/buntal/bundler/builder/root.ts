@@ -11,9 +11,9 @@ export async function buildRoot(routes: RouteBuilderResult[], appDir: string = '
   const entrypointScript = `/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
+import { App } from 'buntal'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { App } from 'buntal-react/components'
 ${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
 

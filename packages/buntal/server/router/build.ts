@@ -2,10 +2,9 @@ import { buildRouter } from '@buntal/core'
 
 export type RouteBuilderResult = {
   route: string,
-  path: string,
   safeImport: string,
   regex: string,
-  ssr?: boolean,
+  ssr: boolean,
   layouts: string[],
   layoutsSafeImport: string[]
 }
@@ -28,7 +27,6 @@ export const builder = async (appDir: string = './app', source: string = '..') =
         }
         results.push({
           route,
-          path: filePath,
           safeImport: filePath.replace(process.cwd(), source).replace(/\.tsx$/gi, ''),
           regex: `^${route.replace(/\//g, '\\/')
             .replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')}$`,

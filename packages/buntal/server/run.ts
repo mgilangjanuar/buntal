@@ -7,7 +7,7 @@ import { notfoundHandler } from './notfound'
 import { builder } from './router'
 import { staticHandler } from './static'
 
-export type ServerConfig = {
+export type BuntalConfig = {
   env?: 'development' | 'production',
   appDir?: string,
   outDir?: string,
@@ -19,7 +19,7 @@ export async function runServer({
   appDir = './app',
   outDir = '.buntal',
   staticDir = './public',
-}: ServerConfig = {}) {
+}: BuntalConfig = {}) {
   const routes = await builder(appDir)
   await bundler(routes, { env, appDir, outDir })
 

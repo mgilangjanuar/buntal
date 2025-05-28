@@ -12,7 +12,7 @@ const MENUS = [
     href: '/docs/install'
   },
   {
-    title: 'Packages',
+    title: 'Variants',
     items: [
       {
         title: 'HTTP Server',

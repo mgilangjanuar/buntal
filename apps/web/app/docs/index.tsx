@@ -82,9 +82,9 @@ export default function DocsPage() {
               Is it production-ready? When will it be stable?
             </h4>
             <p>
-              Buntal JS is not stable, <em>like all of us.</em> It is in the
-              super early stages of development, and we are working hard to make
-              it stable. Please keep an eye on the v1 release for the stable
+              Buntal JS is unstable, <em>like all of us.</em> It is in the super
+              early stages of development, and we are working hard to make it
+              stable. Please keep an eye on the v1 release for the stable
               version.
             </p>
             <h4 id="how-to-pronounce-buntal">How to pronounce "Buntal"?</h4>

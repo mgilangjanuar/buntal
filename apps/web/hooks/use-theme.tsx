@@ -2,28 +2,41 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 type Theme = {
   theme: 'light' | 'dark'
-  themesMap?: { [key in 'light' | 'dark']: string }
   setTheme: (theme: 'light' | 'dark') => void
+  themesMap: { [key in 'light' | 'dark']: string }
+  userPrefersDark: boolean
 }
 
 const ThemeContext = createContext<Theme>({
   theme: 'light',
-  setTheme: () => {}
+  themesMap: {
+    light: 'light',
+    dark: 'dark'
+  },
+  setTheme: () => {},
+  userPrefersDark: false
 })
 
 type ThemeProviderProps = {
   defaultTheme?: 'light' | 'dark'
-  themesMap?: { [key in 'light' | 'dark']: string }
+  themesMap: { [key in 'light' | 'dark']: string }
   children?: React.ReactNode
 }
 
 export function ThemeProvider({
   defaultTheme = 'light',
-  themesMap = undefined,
+  themesMap,
   children,
   ...props
 }: ThemeProviderProps) {
+  const [userPrefersDark, setUserPrefersDark] = useState<boolean>(false)
   const [theme, setTheme] = useState<'light' | 'dark'>()
+
+  useEffect(() => {
+    setUserPrefersDark(
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    )
+  }, [])
 
   useEffect(() => {
     setTheme(
@@ -43,7 +56,9 @@ export function ThemeProvider({
     <ThemeContext.Provider
       value={{
         theme: theme || defaultTheme,
-        setTheme
+        themesMap,
+        setTheme,
+        userPrefersDark
       }}
       {...props}
     >

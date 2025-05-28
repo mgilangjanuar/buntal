@@ -1,22 +1,14 @@
 import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
 
 export default function ThemeSwitcher({
   className
 }: Readonly<{ className?: string }>) {
-  const { theme, setTheme, themesMap } = useTheme()
-  const [userPrefersDark, setUserPrefersDark] = useState<boolean>(false)
-
-  useEffect(() => {
-    setUserPrefersDark(window.matchMedia('(prefers-color-scheme: dark)').matches)
-  }, [])
+  const { theme, setTheme, userPrefersDark, themesMap } = useTheme()
 
   return (
     <>
-      <label
-        className={cn('swap swap-rotate', className)}
-      >
+      <label className={cn('swap swap-rotate', className)}>
         <input
           type="checkbox"
           className="theme-controller"

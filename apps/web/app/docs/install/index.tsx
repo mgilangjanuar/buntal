@@ -1,5 +1,5 @@
 import Header from '@/components/header'
-import type { MetaProps } from 'buntal'
+import { type MetaProps } from 'buntal'
 
 export const $ = () => ({
   _meta: {
@@ -9,26 +9,26 @@ export const $ = () => ({
 
 export default function InstallPage() {
   return (
-    <div>
+    <div id="prerequisite">
       <Header title="Installation" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container prose ml-0">
-          <section id="introduction"></section>
-          <section id="features"></section>
-          <section id="roadmap"></section>
+        <div className="container ml-0 prose pb-6">
+          <section></section>
+          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-8">
+            Last modified: 2025-05-28
+          </p>
         </div>
         <div className="xl:block hidden">
           <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-3">
             <p className="font-semibold">On this page</p>
-            <ul className="pl-4 space-y-2 [&>li]:hover:text-base-content [&>li]:hover:underline [&>li]:underline-offset-4">
+            <ul className="pl-4 space-y-2">
               <li>
-                <a href="/docs#introduction">Introduction</a>
-              </li>
-              <li>
-                <a href="/docs#features">Features</a>
-              </li>
-              <li>
-                <a href="/docs#roadmap">Roadmap</a>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#prerequisite"
+                >
+                  Prerequisite
+                </a>
               </li>
             </ul>
           </aside>

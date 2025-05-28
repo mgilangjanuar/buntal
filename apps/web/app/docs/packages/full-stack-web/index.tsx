@@ -3,14 +3,14 @@ import { type MetaProps } from 'buntal'
 
 export const $ = () => ({
   _meta: {
-    title: 'HTTP Server - Buntal JS'
+    title: 'Full-stack Web - Buntal JS'
   } satisfies MetaProps
 })
 
 export default function HTTPPkgPage() {
   return (
     <div id="prerequisite">
-      <Header title="HTTP Server" />
+      <Header title="Full-stack Web" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6">
           <section></section>

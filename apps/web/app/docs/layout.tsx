@@ -19,8 +19,8 @@ const MENUS = [
         href: '/docs/packages/http-server'
       },
       {
-        title: 'Web Framework',
-        href: '/docs/packages/web-framework'
+        title: 'Full-stack Web',
+        href: '/docs/packages/full-stack-web'
       }
     ]
   }

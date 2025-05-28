@@ -12,13 +12,16 @@ export function Link({
       href={href === '-1' ? '#' : href}
       onClick={(e) => {
         if (!href.startsWith('http')) {
-          e.preventDefault()
+          const realHref = href.split('?')[0]?.split('#')[0] || href
           if (href === '-1') {
+            e.preventDefault()
             window.history.back()
-          } else {
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          } else if (window.location.pathname !== realHref) {
+            e.preventDefault()
             window.history.pushState({}, '', href)
+            window.dispatchEvent(new PopStateEvent('popstate'))
           }
-          window.dispatchEvent(new PopStateEvent('popstate'))
         }
       }}
       {...props}

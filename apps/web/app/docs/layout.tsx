@@ -20,7 +20,7 @@ export default function DocsLayout({ children }: Readonly<{
       <div className="drawer-content min-h-svh">
         {children}
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-20">
         <label htmlFor="docs-layout-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 gap-0.5">
           <Link href="/" className="flex items-center gap-4 px-3 !h-10 group mb-3.5">

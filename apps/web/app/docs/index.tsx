@@ -12,7 +12,7 @@ export default function DocsPage() {
     <div id="introduction">
       <Header title="Get Started" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose">
+        <div className="container ml-0 prose pb-6">
           <div role="alert" className="alert alert-warning items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,6 +87,21 @@ export default function DocsPage() {
               it stable. Please keep an eye on the v1 release for the stable
               version.
             </p>
+            <h4 id="how-to-pronounce-buntal">How to pronounce "Buntal"?</h4>
+            <p>
+              Buntal <span className="font-serif">/bʌnˈtɑːl/</span>
+            </p>
+            <ul>
+              <li>
+                <strong className="font-serif">ˈbʌn-</strong>: The 'u' sound as
+                in "cut" or "strut." The stress mark (ˈ) indicates the primary
+                stress on this syllable.
+              </li>
+              <li>
+                <strong className="font-serif">-tɑːl</strong>: The 'a' sound as
+                in "palm" or "father."
+              </li>
+            </ul>
           </section>
           <section id="features">
             <h2>Features</h2>
@@ -113,7 +128,40 @@ export default function DocsPage() {
               <li>More to come!</li>
             </ul>
           </section>
-          <section id="roadmap"></section>
+          <section id="how-to-contribute">
+            <h2>How to Contribute</h2>
+            <p>
+              We welcome contributions! Since we're in the early stages of
+              development, you can learn how to build a web framework from
+              scratch and help us build a better framework.
+            </p>
+            <p>To contribute, please follow these steps:</p>
+            <ul>
+              <li>
+                Give us a star on the{' '}
+                <a
+                  href="https://github.com/mgilangjanuar/buntal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline-offset-4"
+                >
+                  repository
+                </a>
+                .
+              </li>
+              <li>
+                Create an issue for any bugs, feature requests, ideas, or
+                improvements you have.
+              </li>
+              <li>
+                If you want to contribute code, fork the repository and create a
+                pull request with your changes.
+              </li>
+            </ul>
+          </section>
+          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-8">
+            Last modified: 2025-05-28
+          </p>
         </div>
         <div className="xl:block hidden">
           <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-3">
@@ -151,6 +199,14 @@ export default function DocsPage() {
                       Is it production-ready? When will it be stable?
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#how-to-pronounce-buntal"
+                    >
+                      How to pronounce "Buntal"?
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -164,9 +220,9 @@ export default function DocsPage() {
               <li>
                 <a
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#roadmap"
+                  href="#how-to-contribute"
                 >
-                  Roadmap
+                  How to Contribute
                 </a>
               </li>
             </ul>

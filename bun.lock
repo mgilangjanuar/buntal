@@ -68,7 +68,7 @@
     },
     "packages/@buntal/cli": {
       "name": "@buntal/cli",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "bin": {
         "buntal": "./index.ts",
       },
@@ -85,7 +85,7 @@
     },
     "packages/@buntal/core": {
       "name": "@buntal/core",
-      "version": "0.0.1",
+      "version": "0.0.3",
       "dependencies": {
         "bcryptjs": "^3.0.2",
         "jose": "^6.0.11",
@@ -99,9 +99,9 @@
     },
     "packages/buntal": {
       "name": "buntal",
-      "version": "0.0.3",
+      "version": "0.0.4",
       "dependencies": {
-        "@buntal/core": "workspace:^",
+        "@buntal/core": "latest",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
@@ -116,7 +116,7 @@
     },
     "packages/create-buntal": {
       "name": "create-buntal",
-      "version": "0.0.2",
+      "version": "0.0.4",
       "bin": {
         "create-buntal": "./index.ts",
       },
@@ -357,6 +357,8 @@
     "@tailwindcss/oxide-wasm32-wasi/@tybys/wasm-util": ["@tybys/wasm-util@0.9.0", "", { "dependencies": { "tslib": "^2.4.0" }, "bundled": true }, "sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw=="],
 
     "@tailwindcss/oxide-wasm32-wasi/tslib": ["tslib@2.8.1", "", { "bundled": true }, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
+
+    "buntal/@buntal/core": ["@buntal/core@0.0.3", "", { "dependencies": { "bcryptjs": "^3.0.2", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-lVhWcWvHsFrAsHcRfETrj+LuYbbebX1GfAgbHSk+Ma9lfzQZ+beGLu7MU9iTJUU/pySDpfgk/3FMuzF/VRAvkw=="],
 
     "lightningcss/detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
   }

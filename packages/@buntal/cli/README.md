@@ -6,7 +6,7 @@
 <br/>
 
 <section>
-  <img src="./banner.png" alt="Buntal JS"/>
+  <img src="https://github.com/mgilangjanuar/buntal/raw/main/banner.png" alt="Buntal JS"/>
 </section>
 
 <br/>

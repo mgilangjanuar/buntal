@@ -17,7 +17,7 @@ export default function DocsLayout({ children }: Readonly<{
             <Svg src={Logo} className="[&>*]:size-10" />
             <div className="flex flex-col -space-y-1">
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2">Buntal JS</h3>
-              <span className="text-xs text-base-content/50">v0.0</span>
+              <span className="text-xs text-base-content/60">v0.0.3</span>
             </div>
           </Link>
           <li>

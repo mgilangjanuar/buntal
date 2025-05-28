@@ -1,4 +1,4 @@
-import Logo from '@/app/logo.svg' with { type: 'text' }
+import Logo from "@/app/logo.svg" with { type: 'text' }
 import { Link, Svg } from 'buntal'
 
 export default function DocsLayout({ children }: Readonly<{
@@ -21,7 +21,7 @@ export default function DocsLayout({ children }: Readonly<{
             </div>
           </Link>
           <li>
-            <span className='grid grid-cols-1'>
+            <span className="grid grid-cols-1">
               <Link href="/docs" className="truncate">
                 Get Started
               </Link>

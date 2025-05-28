@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@/hooks/use-theme'
-import { Meta, Script, type MetaProps } from 'buntal'
+import { Meta, type MetaProps } from 'buntal'
 
 export default function RootLayout({
   children,
@@ -40,10 +40,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        {/* <Script
-          crossOrigin="anonymous"
-          src="//unpkg.com/react-scan/dist/auto.global.js"
-        ></Script> */}
       </body>
     </html>
   )

@@ -32,17 +32,22 @@ export default function DocsPage() {
               changes and missing features.
             </span>
           </div>
+          <img
+            src="/banner.png"
+            alt="Buntal JS banner"
+            className="rounded-md w-full"
+          />
           <section>
             <p>
               <strong>Buntal JS</strong> is a lightweight, modern JavaScript
-              framework designed to simplify web development. Next.js-like file
-              system routing, type-safe APIs, and focus on performance. Leverage
-              the{' '}
+              framework designed to simplify web development; with Next.js-like
+              file system routing, type-safe APIs, and focus on performance by
+              leveraging the{' '}
               <a
                 href="https://bun.sh"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-4"
+                className="underline-offset-4"
               >
                 Bun
               </a>{' '}
@@ -58,6 +63,30 @@ export default function DocsPage() {
               <li>HTTP servers</li>
               <li>Web applications</li>
             </ul>
+            <h4 id="why-separate-http-server-and-full-stack-web-framework">
+              Why separate the HTTP server and full-stack web framework?
+            </h4>
+            <p>
+              Our principle is to keep things simple and modular. By separating
+              the HTTP server from the full-stack web framework, you can build
+              API gateways, microservices, or server-side applications without
+              installing React and other unnecessary dependencies.
+            </p>
+            <p>
+              On the other hand, if you want to build a full-stack web
+              application, you don't need to worry about the HTTP server setup.
+              Buntal JS will handle it for you, allowing you to focus on
+              building your application.
+            </p>
+            <h4 id="does-it-production-ready">
+              Is it production-ready? When will it be stable?
+            </h4>
+            <p>
+              Buntal JS is not stable, <em>like all of us.</em> It is in the
+              super early stages of development, and we are working hard to make
+              it stable. Please keep an eye on the v1 release for the stable
+              version.
+            </p>
           </section>
           <section id="features">
             <h2>Features</h2>
@@ -97,13 +126,29 @@ export default function DocsPage() {
                 >
                   Introduction
                 </a>
-                <ul className="pl-4 pt-2">
+                <ul className="pl-4 pt-2 space-y-2">
                   <li>
                     <a
                       className="hover:text-base-content hover:underline underline-offset-4"
                       href="#what-can-i-build"
                     >
                       What can I build with Buntal JS?
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#why-separate-http-server-and-full-stack-web-framework"
+                    >
+                      Why separate the HTTP server and full-stack web framework?
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#does-it-production-ready"
+                    >
+                      Is it production-ready? When will it be stable?
                     </a>
                   </li>
                 </ul>

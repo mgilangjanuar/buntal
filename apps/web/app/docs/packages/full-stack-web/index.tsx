@@ -15,7 +15,7 @@ export default function HTTPPkgPage() {
         <div className="container ml-0 prose pb-6">
           <section></section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-28
+            Last modified: 2025-05-29
           </p>
         </div>
         <div className="xl:block hidden">

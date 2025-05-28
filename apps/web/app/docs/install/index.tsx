@@ -62,8 +62,8 @@ export default function InstallPage() {
                   <code>bun create buntal@latest my-app</code>
                 </pre>
                 <p>
-                  Change <code>my-app</code> to your desired project name. And,
-                  it will initialize your project and install all the necessary
+                  Change <code>my-app</code> to your desired project name. It
+                  will initialize your project and install all the necessary
                   dependencies. The output will look something like this:
                 </p>
                 <pre className="whitespace-pre-line">
@@ -106,7 +106,7 @@ export default function InstallPage() {
             </ul>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-28
+            Last modified: 2025-05-29
           </p>
         </div>
         <div className="xl:block hidden">

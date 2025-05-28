@@ -11,7 +11,7 @@ export default function DocsPage() {
   return (
     <div>
       <Header title="Get Started" />
-      <main className="grid gap-4 xl:grid-cols-[1fr_300px] py-4">
+      <main className="grid gap-16 xl:grid-cols-[1fr_322px] py-4">
         <div className="container prose ml-0">
           <p>
             Welcome to Buntal JS! This is a lightweight alternative to Next.js
@@ -26,9 +26,9 @@ export default function DocsPage() {
           <pre><code>import {`{ Buntal }`} from 'buntal'</code></pre>
         </div>
         <div className="xl:block hidden">
-          <aside className="sticky top-18 container ml-0 pl-8 border-l border-base-300/50">
-            <h2 className="text-lg font-semibold">Documentation</h2>
-            <ul className="list-disc pl-5">
+          <aside className="sticky top-14 container ml-0 text-base-content/60 space-y-4">
+            <p className="font-semibold">On this page</p>
+            <ul className="pl-5 space-y-2 text-sm [&>li]:hover:text-base-content">
               <li><a href="/docs/getting-started">Getting Started</a></li>
               <li><a href="/docs/api-reference">API Reference</a></li>
               <li><a href="/docs/examples">Examples</a></li>

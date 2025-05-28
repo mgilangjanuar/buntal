@@ -12,7 +12,7 @@ export default function HomePage() {
             <div className="status status-primary animate-ping"></div>
             <div className="status status-primary"></div>
           </div>{' '}
-          Unstable version
+          Early Development
         </div>
         <h1 className="text-4xl font-bold">Buntal JS</h1>
         <p className="text-lg leading-7">

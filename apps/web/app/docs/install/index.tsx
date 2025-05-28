@@ -31,7 +31,7 @@ export default function InstallPage() {
               </li>
             </ul>
           </section>
-          <section>
+          <section id="installation">
             <h2>Installation</h2>
             <ul>
               <li>
@@ -43,20 +43,67 @@ export default function InstallPage() {
                   <code>bun add @buntal/core</code>
                 </pre>
                 <p>
-                  Then, you can continue to{' '}
+                  Then, you can continue{' '}
                   <Link
                     href="/docs/packages/http-server"
                     className="underline-offset-4"
                   >
-                    create an HTTP server
+                    here
+                  </Link>
+                  .
+                </p>
+              </li>
+              <li>
+                <p>
+                  If you want to build a full-stack web application, you can
+                  create it from a template:
+                </p>
+                <pre>
+                  <code>bun create buntal@latest my-app</code>
+                </pre>
+                <p>
+                  Change <code>my-app</code> to your desired project name. And,
+                  it will initialize your project and install all the necessary
+                  dependencies. Your terminal will look something like this:
+                </p>
+                <pre className="whitespace-pre-line">
+                  <code>{`bun install v1.2.14 (6a363a38)
+                  Resolving dependencies
+                  Resolved, downloaded and extracted [103]
+                  Saved lockfile
+
+                  + typescript@5.8.3
+                  + @buntal/cli@0.0.2
+                  + @types/bun@1.2.14
+                  + @types/react@19.1.6
+                  + @types/react-dom@19.1.5
+                  + @tailwindcss/cli@4.1.8
+                  + buntal@0.0.4
+                  + clsx@2.1.1
+                  + react@19.1.0
+                  + react-dom@19.1.0
+                  + tailwind-merge@3.3.0
+                  + tailwindcss@4.1.8
+
+                  63 packages installed [2.88s]
+
+                  Blocked 2 postinstalls. Run \`bun pm untrusted\` for details.
+
+                  Done! 🔥
+                  To get started, run: \`cd my-app && bun dev\``}</code>
+                </pre>
+                <p>
+                  Then, you can read more about it{' '}
+                  <Link
+                    href="/docs/packages/full-stack-web"
+                    className="underline-offset-4"
+                  >
+                    here
                   </Link>
                   .
                 </p>
               </li>
             </ul>
-            <p>
-              This will install the latest version of Buntal JS in your project.
-            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-28
@@ -72,6 +119,14 @@ export default function InstallPage() {
                   href="#prerequisite"
                 >
                   Prerequisite
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#installation"
+                >
+                  Installation
                 </a>
               </li>
             </ul>

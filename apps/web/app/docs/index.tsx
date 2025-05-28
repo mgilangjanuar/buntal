@@ -9,30 +9,30 @@ export const $ = () => ({
 
 export default function DocsPage() {
   return (
-    <div>
+    <div id="introduction">
       <Header title="Get Started" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0">
-          <section id="introduction" className="prose">
-            <div role="alert" className="alert alert-warning items-start">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-6 shrink-0 stroke-current"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-              <span>
-                Warning: This is an early development stage, expect breaking
-                changes and missing features.
-              </span>
-            </div>
+        <div className="container ml-0 prose">
+          <div role="alert" className="alert alert-warning items-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>
+              Warning: This is an early development stage, expect breaking
+              changes and missing features.
+            </span>
+          </div>
+          <section>
             <p>
               <strong>Buntal JS</strong> is a lightweight, modern JavaScript
               framework designed to simplify web development. Next.js-like file
@@ -48,22 +48,81 @@ export default function DocsPage() {
               </a>{' '}
               ecosystem, the fastest runtime ever.
             </p>
+            <h4 id="what-can-i-build">What can I build with Buntal JS?</h4>
+            <p>
+              Our goal is to be a simple web ecosystem, allowing you to build
+              everything from simple static sites to complex web applications.
+              Currently, you can create:
+            </p>
+            <ul>
+              <li>HTTP servers</li>
+              <li>Web applications</li>
+            </ul>
           </section>
-          <section id="features"></section>
+          <section id="features">
+            <h2>Features</h2>
+            <ul>
+              <li>
+                <strong>Blazing Fast:</strong> Built on Bun, the fastest
+                JavaScript runtime.
+              </li>
+              <li>
+                <strong>HTTP Server:</strong> Create type-safe HTTP servers with
+                Bun's native HTTP server.
+              </li>
+              <li>
+                <strong>File-based Routing:</strong> Define routes using file
+                structure, similar to Next.js.
+              </li>
+              <li>
+                <strong>SPA:</strong> Single Page Application support with React
+                and Bun's bundler.
+              </li>
+              <li>
+                <strong>SSR:</strong> Server-side rendering for dynamic content.
+              </li>
+              <li>More to come!</li>
+            </ul>
+          </section>
           <section id="roadmap"></section>
         </div>
         <div className="xl:block hidden">
           <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-3">
             <p className="font-semibold">On this page</p>
-            <ul className="pl-4 space-y-2 [&>li]:hover:text-base-content [&>li]:hover:underline [&>li]:underline-offset-4">
+            <ul className="pl-4 space-y-2">
               <li>
-                <a href="#introduction">Introduction</a>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#introduction"
+                >
+                  Introduction
+                </a>
+                <ul className="pl-4 pt-2">
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#what-can-i-build"
+                    >
+                      What can I build with Buntal JS?
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li>
-                <a href="#features">Features</a>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#features"
+                >
+                  Features
+                </a>
               </li>
               <li>
-                <a href="#roadmap">Roadmap</a>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#roadmap"
+                >
+                  Roadmap
+                </a>
               </li>
             </ul>
           </aside>

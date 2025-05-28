@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@buntal/cli": "workspace:^",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",

@@ -4,6 +4,7 @@
     bumblebee --default,
     halloween --prefersdark;
 }
+@plugin '@tailwindcss/typography';
 
 :root {
   --font-sans: 'Plus Jakarta Sans', sans-serif;

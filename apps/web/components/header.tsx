@@ -6,7 +6,7 @@ export default function Header({
   title: string
 }>) {
   return (
-    <header className="flex items-center !h-14 px-4 gap-4 shadow-sm shadow-base-300/50 sticky top-0">
+    <header className="flex items-center !h-14 px-4 gap-4 shadow-sm shadow-base-300/50 sticky top-0 bg-base-100 z-10">
       <label
         htmlFor="docs-layout-drawer"
         className="btn btn-square btn-sm btn-ghost drawer-button lg:hidden"
@@ -30,7 +30,7 @@ export default function Header({
       </label>
       <div className="divider divider-horizontal mx-0 !w-1 py-3.5 lg:hidden"></div>
       <span className="text-sm truncate flex-1">{title}</span>
-      <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-75" />
+      <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-70" />
     </header>
   )
 }

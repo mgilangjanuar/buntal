@@ -17,7 +17,7 @@ export default function DocsLayout({ children }: Readonly<{
   return (
     <div className="drawer lg:drawer-open">
       <input id="docs-layout-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content min-h-svh">
         {children}
       </div>
       <div className="drawer-side">

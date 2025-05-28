@@ -11,7 +11,7 @@ export default function DocsPage() {
   return (
     <div>
       <Header title="Get Started" />
-      <main className="grid gap-16 xl:grid-cols-[1fr_322px] py-4">
+      <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0">
           <section id="introduction" className="prose">
             <div role="alert" className="alert alert-warning items-start">

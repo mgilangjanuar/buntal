@@ -11,7 +11,7 @@ export default function InstallPage() {
   return (
     <div>
       <Header title="Installation" />
-      <main className="grid gap-16 xl:grid-cols-[1fr_322px] py-4">
+      <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container prose ml-0">
           <section id="introduction"></section>
           <section id="features"></section>

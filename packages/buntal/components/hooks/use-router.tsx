@@ -181,8 +181,13 @@ export function RouterProvider({
           window.dispatchEvent(new PopStateEvent('popstate'))
         },
         reload: () => {
-          window.history.replaceState({}, '', window.location.href)
+          const url = window.location.href
+          window.history.replaceState({}, '', `/empty-${new Date().getTime()}`)
           window.dispatchEvent(new PopStateEvent('popstate'))
+          setTimeout(() => {
+            window.history.replaceState({}, '', url)
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }, 1)
         }
       }}
     >

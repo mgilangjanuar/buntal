@@ -4,6 +4,7 @@
     bumblebee --default,
     halloween --prefersdark;
 }
+@custom-variant dark (&:where([data-theme=halloween], [data-theme=halloween] *));
 @plugin '@tailwindcss/typography';
 
 :root {

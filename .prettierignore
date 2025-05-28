@@ -12,5 +12,4 @@ playwright-report
 .nyc_output
 test-results
 junit.xml
-docs
 .buntal

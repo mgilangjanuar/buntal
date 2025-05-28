@@ -21,7 +21,6 @@ export async function buildRoot(
 /// <reference lib="dom.iterable" />
 
 import { App } from 'buntal'
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 ${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
@@ -29,13 +28,11 @@ ${layoutsImports}
 window.process = {} as any
 window.process.env = {}
 const root = createRoot(document)
-root.render(<StrictMode>
-  <App ${renderRootLayout}
-    routes={[
-      ${createPages.render}
-    ]}${createNotFound.render}
-  />
-</StrictMode>)
+root.render(<App ${renderRootLayout}
+  routes={[
+    ${createPages.render}
+  ]}${createNotFound.render}
+/>)
 `
   await Bun.write(outDir + '/root.tsx', entrypointScript)
 }

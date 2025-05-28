@@ -1,5 +1,6 @@
 export * from './app'
+export * from './hooks'
 export * from './link'
 export * from './meta'
-export * from './hooks'
+export * from './script'
 export * from './svg'

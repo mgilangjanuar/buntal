@@ -15,14 +15,6 @@ export async function buildHotReloadScript(
 
           r.addEventListener("open", () => {
             if (!isInitialLoad) {
-              // for (const script of document.querySelectorAll("script[src^='/root.js']")) {
-              //   document.body.removeChild(script);
-              // }
-              // document.body.prepend(Object.assign(document.createElement("script"), {
-              //   src: "/root.js?t=" + Date.now(),
-              //   type: "module",
-              //   async: true,
-              // }));
               location.reload();
             }
             isInitialLoad = false;

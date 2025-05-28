@@ -1,5 +1,5 @@
 import Header from '@/components/header'
-import { type MetaProps } from 'buntal'
+import { Link, type MetaProps } from 'buntal'
 
 export const $ = () => ({
   _meta: {
@@ -30,6 +30,33 @@ export default function InstallPage() {
                 .
               </li>
             </ul>
+          </section>
+          <section>
+            <h2>Installation</h2>
+            <ul>
+              <li>
+                <p>
+                  If you want to build an HTTP server, you only need to install
+                  the <code>@buntal/core</code> package:
+                </p>
+                <pre>
+                  <code>bun add @buntal/core</code>
+                </pre>
+                <p>
+                  Then, you can continue to{' '}
+                  <Link
+                    href="/docs/packages/http-server"
+                    className="underline-offset-4"
+                  >
+                    create an HTTP server
+                  </Link>
+                  .
+                </p>
+              </li>
+            </ul>
+            <p>
+              This will install the latest version of Buntal JS in your project.
+            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-28

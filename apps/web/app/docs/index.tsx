@@ -26,9 +26,9 @@ export default function DocsPage() {
           <pre><code>import {`{ Buntal }`} from 'buntal'</code></pre>
         </div>
         <div className="xl:block hidden">
-          <aside className="sticky top-14 container ml-0 text-base-content/60 space-y-4">
+          <aside className="sticky top-14 container ml-0 text-base-content/60 text-sm space-y-3">
             <p className="font-semibold">On this page</p>
-            <ul className="pl-5 space-y-2 text-sm [&>li]:hover:text-base-content">
+            <ul className="pl-4 space-y-2 [&>li]:hover:text-base-content [&>li]:hover:underline [&>li]:underline-offset-4">
               <li><a href="/docs/getting-started">Getting Started</a></li>
               <li><a href="/docs/api-reference">API Reference</a></li>
               <li><a href="/docs/examples">Examples</a></li>

@@ -64,7 +64,7 @@ export default function InstallPage() {
                 <p>
                   Change <code>my-app</code> to your desired project name. And,
                   it will initialize your project and install all the necessary
-                  dependencies. Your terminal will look something like this:
+                  dependencies. The output will look something like this:
                 </p>
                 <pre className="whitespace-pre-line">
                   <code>{`bun install v1.2.14 (6a363a38)

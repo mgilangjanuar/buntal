@@ -19,10 +19,18 @@ export const cors = ({
 }: Options = {}): AtomicHandler => {
   return async (_: Req, res: Res) => {
     res.headers({
-      'Access-Control-Allow-Origin': Array.isArray(origin) ? origin.join(', ') : origin,
-      'Access-Control-Allow-Methods': Array.isArray(methods) ? methods.join(', ') : methods,
-      'Access-Control-Allow-Headers': Array.isArray(allowedHeaders) ? allowedHeaders.join(', ') : allowedHeaders,
-      'Access-Control-Expose-Headers': Array.isArray(exposedHeaders) ? exposedHeaders.join(', ') : exposedHeaders,
+      'Access-Control-Allow-Origin': Array.isArray(origin)
+        ? origin.join(', ')
+        : origin,
+      'Access-Control-Allow-Methods': Array.isArray(methods)
+        ? methods.join(', ')
+        : methods,
+      'Access-Control-Allow-Headers': Array.isArray(allowedHeaders)
+        ? allowedHeaders.join(', ')
+        : allowedHeaders,
+      'Access-Control-Expose-Headers': Array.isArray(exposedHeaders)
+        ? exposedHeaders.join(', ')
+        : exposedHeaders,
       'Access-Control-Max-Age': String(maxAge),
       'Access-Control-Allow-Credentials': String(credentials)
     })

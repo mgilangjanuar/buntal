@@ -2,17 +2,20 @@ import type { RouteBuilderResult } from '../server/router'
 import { buildFavicon, buildHotReloadScript, buildRoot } from './builder'
 
 type BundlerConfig = {
-  env?: 'development' | 'production',
-  appDir?: string,
-  outDir?: string,
+  env?: 'development' | 'production'
+  appDir?: string
+  outDir?: string
 }
 
-export async function bundler(routes: RouteBuilderResult[], {
-  env = process.env.NODE_ENV as 'development' | 'production' || 'development',
-  appDir = './app',
-  outDir = '.buntal',
-}: BundlerConfig = {}) {
-
+export async function bundler(
+  routes: RouteBuilderResult[],
+  {
+    env = (process.env.NODE_ENV as 'development' | 'production') ||
+      'development',
+    appDir = './app',
+    outDir = '.buntal'
+  }: BundlerConfig = {}
+) {
   await buildRoot(routes, appDir, outDir)
   await Bun.build({
     entrypoints: [outDir + '/root.tsx'],
@@ -23,7 +26,7 @@ export async function bundler(routes: RouteBuilderResult[], {
     minify: {
       identifiers: true,
       syntax: true,
-      whitespace: true,
+      whitespace: true
     }
   })
 

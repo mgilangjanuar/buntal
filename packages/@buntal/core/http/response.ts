@@ -7,7 +7,7 @@ export class Res {
   } = {
     status: 200,
     headers: {
-      'X-Powered-By': 'Buntal v0.0.1',
+      'X-Powered-By': 'Buntal v0.0.1'
     }
   }
 
@@ -20,7 +20,7 @@ export class Res {
 
   headers(headers: Record<string, string>) {
     this.options.headers = {
-      ...this.options.headers || {},
+      ...(this.options.headers || {}),
       ...headers
     }
     return this
@@ -33,9 +33,7 @@ export class Res {
   json(data: unknown) {
     return this.headers({
       'content-type': 'application/json'
-    }).send(
-      JSON.stringify(data)
-    )
+    }).send(JSON.stringify(data))
   }
 
   html(data: string | ReadableStream<Uint8Array>) {

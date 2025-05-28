@@ -11,7 +11,7 @@ type CookieOptions = {
   sameSite?: 'Strict' | 'Lax' | 'None'
 }
 
-export const cookie = ({
+export const cookie = {
   get: (req: Req, name: string) => {
     const cookies = req.headers.get('cookie')
     if (!cookies) return null
@@ -24,15 +24,20 @@ export const cookie = ({
     }
     return null
   },
-  set: (res: Res, name: string, value: string, {
-    maxAge,
-    expires,
-    path,
-    domain,
-    secure,
-    httpOnly,
-    sameSite
-  }: CookieOptions = {}) => {
+  set: (
+    res: Res,
+    name: string,
+    value: string,
+    {
+      maxAge,
+      expires,
+      path,
+      domain,
+      secure,
+      httpOnly,
+      sameSite
+    }: CookieOptions = {}
+  ) => {
     let cookieString = `${name}=${encodeURIComponent(value)}`
     if (maxAge) {
       cookieString += `; Max-Age=${maxAge}`
@@ -67,4 +72,4 @@ export const cookie = ({
     })
     return cookieString
   }
-})
+}

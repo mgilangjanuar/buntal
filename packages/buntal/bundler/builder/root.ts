@@ -1,9 +1,18 @@
 import type { RouteBuilderResult } from '../../server/router'
 import { buildLayouts, buildNotfound, buildPages } from './root-scripts'
 
-export async function buildRoot(routes: RouteBuilderResult[], appDir: string = './app', outDir: string = '.buntal') {
+export async function buildRoot(
+  routes: RouteBuilderResult[],
+  appDir: string = './app',
+  outDir: string = '.buntal'
+) {
   // Build all layouts and pages
-  const { layouts, rootLayout, renderRootLayout, imports: layoutsImports } = buildLayouts(routes, appDir)
+  const {
+    layouts,
+    rootLayout,
+    renderRootLayout,
+    imports: layoutsImports
+  } = buildLayouts(routes, appDir)
   const createPages = buildPages(routes, layouts)
   const createNotFound = await buildNotfound(appDir, rootLayout)
 
@@ -12,7 +21,6 @@ export async function buildRoot(routes: RouteBuilderResult[], appDir: string = '
 /// <reference lib="dom.iterable" />
 
 import { App } from 'buntal'
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 ${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
@@ -20,13 +28,11 @@ ${layoutsImports}
 window.process = {} as any
 window.process.env = {}
 const root = createRoot(document)
-root.render(<StrictMode>
-  <App ${renderRootLayout}
-    routes={[
-      ${createPages.render}
-    ]}${createNotFound.render}
-  />
-</StrictMode>)
+root.render(<App ${renderRootLayout}
+  routes={[
+    ${createPages.render}
+  ]}${createNotFound.render}
+/>)
 `
   await Bun.write(outDir + '/root.tsx', entrypointScript)
 }

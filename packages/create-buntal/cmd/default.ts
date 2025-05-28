@@ -2,12 +2,16 @@ import { $ } from 'bun'
 
 export async function createProject(name: string) {
   if (!/^[a-zA-Z_\-][a-zA-Z0-9\-]*$/.test(name)) {
-    console.log('error: Project name must be a valid identifier (letters, numbers, underscores, and hyphens only).')
+    console.log(
+      'error: Project name must be a valid identifier (letters, numbers, underscores, and hyphens only).'
+    )
     process.exit(1)
   }
 
   if (await Bun.file(name).exists()) {
-    console.log(`error: Project directory "${name}" already exists. Please choose a different name.`)
+    console.log(
+      `error: Project directory "${name}" already exists. Please choose a different name.`
+    )
     process.exit(1)
   }
 
@@ -15,7 +19,10 @@ export async function createProject(name: string) {
   process.chdir(name)
 
   const pkg = await Bun.file('package.json').text()
-  await Bun.write('package.json', pkg.replace(/"name": ".*"/, `"name": "${name}"`))
+  await Bun.write(
+    'package.json',
+    pkg.replace(/"name": ".*"/, `"name": "${name}"`)
+  )
 
   await $`bun install`
 

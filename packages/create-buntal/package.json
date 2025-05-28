@@ -1,10 +1,15 @@
 {
   "name": "create-buntal",
   "description": "Template for creating Buntal projects",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "module": "index.ts",
   "type": "module",
   "main": "index.ts",
+  "homepage": "https://buntaljs.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
   "bin": {
     "create-buntal": "./index.ts"
   },

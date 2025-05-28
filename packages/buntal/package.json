@@ -1,9 +1,14 @@
 {
   "name": "buntal",
   "description": "React framework for Bun",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "module": "index.ts",
   "type": "module",
+  "homepage": "https://buntaljs.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^19.1.5",
@@ -13,7 +18,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@buntal/core": "workspace:^",
+    "@buntal/core": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

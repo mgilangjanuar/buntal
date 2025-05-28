@@ -12,8 +12,6 @@ export default function DocsPage() {
     <div>
       <Header title="Get Started" />
       <main>
-
-
       </main>
     </div>
   )

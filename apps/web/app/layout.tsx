@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/hooks/use-theme'
 import { Meta, type MetaProps } from 'buntal'
 
 export default function RootLayout({
@@ -32,7 +33,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          defaultTheme="light"
+          themesMap={{ light: 'bumblebee', dark: 'halloween' }}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

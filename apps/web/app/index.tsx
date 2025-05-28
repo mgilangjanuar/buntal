@@ -3,7 +3,8 @@ import { Link, Svg } from 'buntal'
 
 export default function HomePage() {
   return (
-    <div className="min-h-svh flex flex-col justify-center container mx-auto max-w-prose">
+    <div className="min-h-svh flex flex-col justify-center container mx-auto max-w-prose relative">
+      {/* <ThemeSwitcher className="absolute top-4 right-4 [&_svg]:!size-5" /> */}
       <div className="space-y-2">
         <Svg src={Logo} className="[&>*]:size-28" />
         <div className="flex items-center gap-2 text-sm badge badge-soft badge-primary">
@@ -21,7 +22,7 @@ export default function HomePage() {
         <div className="pt-4 flex items-center gap-2">
           <a
             href="https://github.com/mgilangjanuar/buntal"
-            className="btn btn-soft btn-neutral"
+            className="btn btn-ghost btn-neutral"
             target="_blank"
             rel="noopener noreferrer"
           >

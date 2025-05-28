@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode
 } from 'react'
-import { Notfound } from './notfound'
+import { Notfound } from '../notfound'
 
 export type ServerRouterType = {
   regex: string

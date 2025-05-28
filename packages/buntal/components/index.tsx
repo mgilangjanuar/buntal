@@ -1,5 +1,5 @@
 export * from './app'
 export * from './link'
 export * from './meta'
-export * from './router'
+export * from './hooks'
 export * from './svg'

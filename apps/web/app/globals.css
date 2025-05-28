@@ -1,6 +1,8 @@
 @import 'tailwindcss';
-@plugin "daisyui" {
-  themes: bumblebee --default;
+@plugin 'daisyui' {
+  themes:
+    bumblebee --default,
+    halloween --prefersdark;
 }
 
 :root {

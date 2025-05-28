@@ -6,6 +6,23 @@ const MENUS = [
   {
     title: 'Get Started',
     href: '/docs'
+  },
+  {
+    title: 'Installation',
+    href: '/docs/install'
+  },
+  {
+    title: 'Packages',
+    items: [
+      {
+        title: 'HTTP Server',
+        href: '/docs/packages/http-server'
+      },
+      {
+        title: 'Web Framework',
+        href: '/docs/packages/web-framework'
+      }
+    ]
   }
 ]
 
@@ -45,16 +62,38 @@ export default function DocsLayout({
           </Link>
           {MENUS.map((menu, i) => (
             <li key={i}>
-              <span
-                className={cn(
-                  'grid grid-cols-1',
-                  pathname === menu.href && 'menu-active'
-                )}
-              >
-                <Link href={menu.href} className="truncate">
+              {menu.href ? (
+                <Link
+                  href={menu.href}
+                  className={cn(
+                    'truncate',
+                    pathname === menu.href && 'menu-active'
+                  )}
+                >
                   {menu.title}
                 </Link>
-              </span>
+              ) : (
+                <>
+                  <h2 className="menu-title">{menu.title}</h2>
+                  {menu.items && (
+                    <ul className="space-y-0.5">
+                      {menu.items.map((item, j) => (
+                        <li key={j}>
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              'truncate',
+                              pathname === item.href && 'menu-active'
+                            )}
+                          >
+                            {item.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              )}
             </li>
           ))}
         </ul>

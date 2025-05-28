@@ -1,16 +1,16 @@
 import Header from '@/components/header'
-import { type MetaProps } from 'buntal'
+import type { MetaProps } from 'buntal'
 
 export const $ = () => ({
   _meta: {
-    title: 'Docs - Buntal JS'
+    title: 'Web Framework - Buntal JS'
   } satisfies MetaProps
 })
 
-export default function DocsPage() {
+export default function WebPkgPage() {
   return (
     <div>
-      <Header title="Get Started" />
+      <Header title="Web Framework" />
       <main className="grid gap-16 xl:grid-cols-[1fr_322px] py-4">
         <div className="container prose ml-0">
           <section id="introduction"></section>

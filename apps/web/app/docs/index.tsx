@@ -36,8 +36,17 @@ export default function DocsPage() {
             <p>
               <strong>Buntal JS</strong> is a lightweight, modern JavaScript
               framework designed to simplify web development. Next.js-like file
-              system routing, type-safe APIs, and a focus on performance built
-              on top of the Bun runtime.
+              system routing, type-safe APIs, and focus on performance. Leverage
+              the{' '}
+              <a
+                href="https://bun.sh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4"
+              >
+                Bun
+              </a>{' '}
+              ecosystem, the fastest runtime ever.
             </p>
           </section>
           <section id="features"></section>

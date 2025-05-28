@@ -111,8 +111,8 @@ export default function DocsPage() {
                 JavaScript runtime.
               </li>
               <li>
-                <strong>HTTP Server:</strong> Create type-safe HTTP servers with
-                Bun's native HTTP server.
+                <strong>HTTP Server:</strong> Create type-safe API endpoints
+                with Bun's native HTTP server.
               </li>
               <li>
                 <strong>File-based Routing:</strong> Define routes using file
@@ -159,7 +159,7 @@ export default function DocsPage() {
               </li>
             </ul>
           </section>
-          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-8">
+          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-28
           </p>
         </div>

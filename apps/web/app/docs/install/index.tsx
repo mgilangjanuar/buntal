@@ -13,8 +13,25 @@ export default function InstallPage() {
       <Header title="Installation" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6">
-          <section></section>
-          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-8">
+          <section>
+            <h2 className="mt-0">Prerequisite</h2>
+            <p>
+              Before you start using Buntal JS, ensure you have the following
+              prerequisites installed on your system:
+            </p>
+            <ul>
+              <li>
+                <strong>Bun</strong> ^1.2.14 - Buntal JS is built on top of the
+                Bun runtime and API, so you need to have it installed. You can
+                download it from the{' '}
+                <a href="https://bun.sh" className="underline-offset-4">
+                  Bun website
+                </a>
+                .
+              </li>
+            </ul>
+          </section>
+          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-28
           </p>
         </div>

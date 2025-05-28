@@ -23,29 +23,31 @@ export function ThemeProvider({
   children,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<'light' | 'dark'>(defaultTheme)
+  const [theme, setTheme] = useState<'light' | 'dark'>()
 
-  // useEffect(() => {
-  //   setTheme(
-  //     (window.localStorage.getItem('theme') as
-  //       | typeof defaultTheme
-  //       | undefined) || defaultTheme
-  //   )
-  // }, [defaultTheme])
+  useEffect(() => {
+    setTheme(
+      (window.localStorage.getItem('theme') as
+        | typeof defaultTheme
+        | undefined) || defaultTheme
+    )
+  }, [defaultTheme])
 
-  // useEffect(() => {
-  //   window.localStorage.setItem('theme', theme)
-  // }, [theme])
+  useEffect(() => {
+    if (theme && window.localStorage.getItem('theme') !== theme) {
+      window.localStorage.setItem('theme', theme)
+    }
+  }, [theme])
 
   return (
     <ThemeContext.Provider
       value={{
-        theme,
+        theme: theme || defaultTheme,
         setTheme
       }}
       {...props}
     >
-      <div data-theme={themesMap?.[theme]}>{children}</div>
+      <div data-theme={theme && themesMap?.[theme]}>{children}</div>
     </ThemeContext.Provider>
   )
 }

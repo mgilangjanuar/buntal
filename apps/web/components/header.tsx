@@ -30,7 +30,7 @@ export default function Header({
       </label>
       <div className="divider divider-horizontal mx-0 !w-1 py-3.5 lg:hidden"></div>
       <span className="text-sm truncate flex-1">{title}</span>
-      <ThemeSwitcher className="[&_svg]:size-5" />
+      <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-75" />
     </header>
   )
 }

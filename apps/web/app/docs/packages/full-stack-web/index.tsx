@@ -7,7 +7,7 @@ import {
   atomOneLight
 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
-export const $ = () => ({
+export const $ = async () => ({
   _meta: {
     title: 'Full-stack Web - Buntal JS'
   } satisfies MetaProps
@@ -186,6 +186,40 @@ Done in 12ms`}
           </section>
           <section id="$">
             <h2>$</h2>
+            <p>
+              The <code>$</code> function is used to fetch data from the server.
+              It is a special function that is executed on the server side and
+              can be used to fetch data from a database or an API. Here is an
+              example of a simple <code>$</code> function in the{' '}
+              <code>index.tsx</code>:
+            </p>
+            <SyntaxHighlighter
+              language="ts"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`import type { Req } from 'buntal'
+
+export const $ = async (req: Req) => {
+  const resp = await fetch('https://api.example.com/data')
+  return await resp.json() as { name: string }
+}
+
+export default function HomePage({ data }: {
+  data: Awaited<ReturnType<typeof $>>
+}) {
+  return (
+    <div>
+      Hello, {data.name || 'there'}!
+    </div>
+  )
+}`}
+            </SyntaxHighlighter>
+            <p>
+              This function has a similar pattern to{' '}
+              <code>getServerSideProps</code> from Next.js or{' '}
+              <code>loader</code> from Remix.
+            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29

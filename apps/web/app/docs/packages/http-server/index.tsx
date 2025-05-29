@@ -94,14 +94,48 @@ export const GET = h(
             <h2>h</h2>
             <p>
               The <code>h</code> function is everything you need to create a
-              type-safe HTTP handler.
+              type-safe HTTP handler. It receives a chain of{' '}
+              <code>AtomicHandler</code> functions and returns a function that
+              can be used as an HTTP handler.
+            </p>
+            <p>
+              It's a basic{' '}
+              <a
+                href="https://en.wikipedia.org/wiki/Higher-order_function"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4"
+              >
+                higher-order function
+              </a>{' '}
+              pattern, and here is the <code>AtomicHandler</code> type
+              definition:
             </p>
           </section>
+          <section id="atomic-handler">
+            <h3>AtomicHandler</h3>
+            <p>
+              This is a function that takes a <code>Req</code> and a{' '}
+              <code>Res</code> object, and returns a response. As you can see in
+              the example above:
+            </p>
+            <blockquote>
+              <SyntaxHighlighter
+                language="typescript"
+                style={theme === 'dark' ? atomOneDark : atomOneLight}
+                customStyle={{ padding: '12px 16px' }}
+              >
+                {`(_, res) => res.json({
+  pong: 1
+})`}
+              </SyntaxHighlighter>
+            </blockquote>
+          </section>
           <section id="req">
-            <h2>Req</h2>
+            <h3>Req</h3>
           </section>
           <section id="res">
-            <h2>Res</h2>
+            <h3>Res</h3>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29
@@ -126,22 +160,32 @@ export const GET = h(
                 >
                   h
                 </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#req"
-                >
-                  Req
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#res"
-                >
-                  Res
-                </a>
+                <ul className="pl-4 pt-2 space-y-2">
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#atomic-handler"
+                    >
+                      AtomicHandler
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#req"
+                    >
+                      Req
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#res"
+                    >
+                      Res
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </aside>

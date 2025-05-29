@@ -90,6 +90,33 @@ export const GET = h(
               .
             </p>
           </section>
+          <section id="http">
+            <h2>Http</h2>
+            <p>
+              The <code>Http</code> class is the main entry point for creating
+              an HTTP server in Buntal JS. It provides a simple and intuitive
+              API for defining routes, adding middleware, and starting the
+              server.
+            </p>
+            <h4>
+              <code>{`Options: { port: number, appDir?: string }`}</code>
+            </h4>
+            <p>
+              The <code>Http</code> constructor takes an options object with the
+              following properties:
+            </p>
+            <ul>
+              <li>
+                <code>port</code>: The port number on which the server will
+                listen. This is a required property.
+              </li>
+              <li>
+                <code>appDir</code>: An optional property that specifies the
+                directory where the app files are located. If provided, the
+                server will automatically load routes from this directory.
+              </li>
+            </ul>
+          </section>
           <section id="h">
             <h2>h</h2>
             <p>
@@ -165,9 +192,128 @@ export const GET = h(
               request with extended properties, including <code>params</code>,{' '}
               <code>query</code>, and <code>context</code>.
             </p>
+            <h4>
+              <code>{`Req.params: Record<string, string>`}</code>
+            </h4>
+            <p>Get the request parameters from the URL path.</p>
+            <p>
+              For example, if the URL is <code>/hello/:name</code>, you can
+              access the <code>req.params.name</code> to get the value of the{' '}
+              <code>:name</code> parameter. If you have app routing enabled, you
+              can access the parameters from the file name in either of the
+              following locations: <code>./app/hello/[name].ts</code> or{' '}
+              <code>./app/hello/[name]/index.ts</code>.
+            </p>
+            <h4>
+              <code>{`Req.query: Record<string, string>`}</code>
+            </h4>
+            <p>Get the query parameters from the URL.</p>
+            <p>
+              For example, if the URL is <code>/hello?name=John</code>, you can
+              access the <code>req.query.name</code> to get the value of the
+              <code>name</code> query parameter.
+            </p>
+            <h4>
+              <code>{`Req.context: T = unknown`}</code>
+            </h4>
+            <p>
+              Context is a generic type that can be used to pass data between
+              middleware and handlers.
+            </p>
           </section>
           <section id="res">
             <h3>Res</h3>
+            <p>
+              Helper object for creating responses. This object has several
+              methods for sending different types of responses.
+            </p>
+            <h4>
+              <code>{`Res.send(data: BodyInit): Response`}</code>
+            </h4>
+            <p>
+              Send a response with the given data. It can be a string, a
+              <code>ReadableStream</code>, or any other type that can be used as
+              a response body.
+            </p>
+            <h4>
+              <code>{`Res.json(data: any): Response`}</code>
+            </h4>
+            <p>
+              Send a JSON response with the given data. It automatically sets
+              the
+              <code>Content-Type</code> header to <code>application/json</code>.
+            </p>
+            <h4>
+              <code>{`Res.text(data: string): Response`}</code>
+            </h4>
+            <p>
+              Send a plain text response with the given data. It automatically
+              sets the
+              <code>Content-Type</code> header to <code>text/plain</code>.
+            </p>
+            <h4>
+              <code>{`Res.status(status: number): Res`}</code>
+            </h4>
+            <p>
+              Set the HTTP status code for the response. This method is
+              chainable, allowing you to set headers and then send the response.
+            </p>
+            <h4>
+              <code>{`Res.headers(headers: Record<string, string>): Res`}</code>
+            </h4>
+            <p>
+              Set custom headers for the response. This method is also
+              chainable, allowing you to set the status code and then send the
+              response.
+            </p>
+          </section>
+          <section id="cookie">
+            <h3>Cookie</h3>
+            <p>
+              This is a helper function for getting cookies from the request and
+              setting cookies in the response.
+            </p>
+            <h4>
+              <code>{`cookie.get(req: Req, name: string): string | null`}</code>
+            </h4>
+            <p>
+              Get a cookie by name from the request. If the cookie is not found,
+              it returns <code>null</code>.
+            </p>
+            <h4>
+              <code>
+                {`cookie.set(res: Res, name: string, value: string, options?: CookieOptions): void`}
+              </code>
+            </h4>
+            <p>
+              Set a cookie in the response with the given name and value. The
+              <code>options</code> parameter is optional and can be used to set
+              additional cookie attributes such as <code>maxAge</code>,{' '}
+              <code>expires</code>, <code>path</code>, <code>domain</code>,
+              <code>secure</code>, <code>httpOnly</code>, and{' '}
+              <code>sameSite</code>.
+            </p>
+            <p>Here is an example of how to set a cookie in the response:</p>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`import { cookie } from '@buntal/core'
+
+cookie.set(res, 'access_token', token, {
+  maxAge: 60 * 60 * 2,  // 2 hours
+  httpOnly: true,
+  path: '/'
+})`}
+            </SyntaxHighlighter>
+            <h4>
+              <code>{`cookie.delete(res: Res, name: string): void`}</code>
+            </h4>
+            <p>
+              Delete a cookie by name from the response. It sets the cookie with
+              an empty value and a <code>Max-Age</code> of 0.
+            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29
@@ -183,6 +329,14 @@ export const GET = h(
                   href="#quick-start"
                 >
                   Quick Start
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#http"
+                >
+                  Http
                 </a>
               </li>
               <li>
@@ -215,6 +369,14 @@ export const GET = h(
                       href="#res"
                     >
                       Res
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#cookie"
+                    >
+                      Cookie
                     </a>
                   </li>
                 </ul>

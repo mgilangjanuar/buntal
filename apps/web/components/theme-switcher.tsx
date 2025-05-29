@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 export default function ThemeSwitcher({
   className
 }: Readonly<{ className?: string }>) {
-  const { theme, setTheme, themesMap } = useTheme()
+  const { defaultTheme, theme, setTheme, themesMap } = useTheme()
 
   return (
     <label className={cn('swap swap-rotate', className)}>

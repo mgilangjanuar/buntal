@@ -7,7 +7,7 @@ export default function HomePage() {
       {/* <ThemeSwitcher className="absolute top-4 right-4 [&_svg]:!size-5" /> */}
       <div className="space-y-2">
         <Svg src={Logo} className="[&>*]:size-28" />
-        <div className="flex items-center gap-2 text-sm badge badge-soft badge-primary">
+        <div className="flex items-center gap-2 text-sm badge badge-primary badge-ghost">
           <div className="inline-grid *:[grid-area:1/1]">
             <div className="status status-primary animate-ping"></div>
             <div className="status status-primary"></div>

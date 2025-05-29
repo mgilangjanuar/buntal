@@ -50,51 +50,45 @@ export class Http {
       reusePort: true,
       routes: this.routes,
       websocket: this.config.websocket,
-      fetch: this.config.appDir
-        ? async (raw: Request, server): Promise<Response | any> => {
-            if (this.config.websocket && server.upgrade(raw)) return
+      fetch: async (raw: Request, server): Promise<Response | any> => {
+        if (this.config.websocket && server.upgrade(raw)) return
 
-            if (raw.method === 'OPTIONS') {
-              return res.send('departed')
-            }
+        if (raw.method === 'OPTIONS') {
+          return res.send('departed')
+        }
 
-            const req = raw as Req
+        if (!this.config.appDir) {
+          return res.status(404).json({
+            error: 'Not found'
+          })
+        }
 
-            const router = buildRouter(this.config.appDir!)
-            const match = router.match(req)
+        const req = raw as Req
 
-            if (match) {
-              req.params = match.params || {}
-              req.query = match.query || {}
+        const router = buildRouter(this.config.appDir!)
+        const match = router.match(req)
 
-              const handler = await import(match.filePath)
-              const injected = await this.config.injectHandler?.({
-                req,
-                match,
-                handler
-              })
-              if (injected instanceof Response) {
-                return injected
-              }
+        if (match) {
+          req.params = match.params || {}
+          req.query = match.query || {}
 
-              if (req.method in handler) {
-                return h(...middlewares, handler[req.method])(req, res)
-              }
-            }
-
-            return h(...middlewares, this.notFoundHandler)(req, res)
+          const handler = await import(match.filePath)
+          const injected = await this.config.injectHandler?.({
+            req,
+            match,
+            handler
+          })
+          if (injected instanceof Response) {
+            return injected
           }
-        : async (raw: Request, server) => {
-            if (this.config.websocket && server.upgrade(raw)) return
 
-            if (raw.method === 'OPTIONS') {
-              return res.send('departed')
-            }
+          if (req.method in handler) {
+            return h(...middlewares, handler[req.method])(req, res)
+          }
+        }
 
-            return res.status(404).json({
-              error: 'Not found'
-            })
-          },
+        return h(...middlewares, this.notFoundHandler)(req, res)
+      },
       error: async (error: Error) => {
         if (this.errorHandler) {
           return await this.errorHandler(error)

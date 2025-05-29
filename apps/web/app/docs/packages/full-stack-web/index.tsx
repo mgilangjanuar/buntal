@@ -13,7 +13,9 @@ export default function HTTPPkgPage() {
       <Header title="Full-stack Web" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
-          <section></section>
+          <section>
+            <h2 className="mt-0">Quick Start</h2>
+          </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29
           </p>

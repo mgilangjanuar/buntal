@@ -12,7 +12,7 @@ export default function HTTPPkgPage() {
     <div id="prerequisite">
       <Header title="Full-stack Web" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6">
+        <div className="container ml-0 prose pb-6 grid grid-cols-1">
           <section></section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29

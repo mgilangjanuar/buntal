@@ -12,7 +12,7 @@ export default function HTTPPkgPage() {
     <div id="quick-start">
       <Header title="HTTP Server" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6">
+        <div className="container ml-0 prose pb-6 grid grid-cols-1">
           <section>
             <h2 className="mt-0">Quick Start</h2>
             <p>

@@ -12,7 +12,7 @@ export default function DocsPage() {
     <div id="introduction">
       <Header title="Get Started" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6">
+        <div className="container ml-0 prose pb-6 grid grid-cols-1">
           <div role="alert" className="alert alert-warning items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"

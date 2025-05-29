@@ -220,6 +220,14 @@ export const GET = h(
               Context is a generic type that can be used to pass data between
               middleware and handlers.
             </p>
+            <h4>
+              <code>{`Req.cookie(name: string): string | null`}</code>
+            </h4>
+            <p>
+              Get a cookie by name from the request. If the cookie is not found,
+              it returns <code>null</code>. This method is a shorthand for using
+              the <code>cookie</code> helper function.
+            </p>
           </section>
           <section id="res">
             <h3>Res</h3>
@@ -265,6 +273,18 @@ export const GET = h(
               Set custom headers for the response. This method is also
               chainable, allowing you to set the status code and then send the
               response.
+            </p>
+            <h4>
+              <code>
+                {`Res.cookie(name: string, value: string | null, options?: CookieOptions): Res`}
+              </code>
+            </h4>
+            <p>
+              Set a cookie in the response. If the <code>value</code> is
+              <code>null</code>, it deletes the cookie by calling the{' '}
+              <code>cookie.delete</code> helper function. Otherwise, it sets the
+              cookie with the given name and value using the{' '}
+              <code>cookie.set</code> helper function.
             </p>
           </section>
           <section id="cookie">

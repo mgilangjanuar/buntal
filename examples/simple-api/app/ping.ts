@@ -16,9 +16,8 @@ export const GET = h(
   () => {
     console.log('middleware')
   },
-  (_, res) => {
-    return res.json({
+  (_, res) =>
+    res.json({
       pong: 1
     })
-  }
 )

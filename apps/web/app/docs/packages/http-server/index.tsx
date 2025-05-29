@@ -72,25 +72,36 @@ app.start((server) => {
               {`import { h } from '@buntal/core'
 
 export const GET = h(
-  (_, res) => {
-    return res.json({
-      pong: 1
-    })
-  }
+  (_, res) => res.json({
+    pong: 1
+  })
 )`}
             </SyntaxHighlighter>
             <p>
-              Explore the full example{' '}
+              Explore the full example on{' '}
               <a
                 href="https://github.com/mgilangjanuar/buntal/tree/main/examples/simple-api"
                 className="underline-offset-4"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                here
+                GitHub
               </a>
               .
             </p>
+          </section>
+          <section id="h">
+            <h2>h</h2>
+            <p>
+              The <code>h</code> function is everything you need to create a
+              type-safe HTTP handler.
+            </p>
+          </section>
+          <section id="req">
+            <h2>Req</h2>
+          </section>
+          <section id="res">
+            <h2>Res</h2>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29
@@ -106,6 +117,30 @@ export const GET = h(
                   href="#quick-start"
                 >
                   Quick Start
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#h"
+                >
+                  h
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#req"
+                >
+                  Req
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#res"
+                >
+                  Res
                 </a>
               </li>
             </ul>

@@ -24,7 +24,13 @@ export default function HTTPPkgPage() {
           <section>
             <h2 className="mt-0">Quick Start</h2>
             <p>
-              After initializing a project from a template using this command:
+              Buntal uses <code>@buntal/core</code> under the hood to handle all
+              requests and render the selected page based on the pathname. So,
+              your web will always be hydrated by returning an exact same HTML
+              page from the server, which is great for SEO and performance.
+            </p>
+            <p>
+              After initializing a project with a template using this command:
             </p>
             <SyntaxHighlighter
               language="sh"
@@ -33,7 +39,10 @@ export default function HTTPPkgPage() {
             >
               {`bun create buntal@latest my-app`}
             </SyntaxHighlighter>
-            <p>You will have this project structure:</p>
+            <p>
+              You will have Tailwind CSS and minimal dependencies to build your
+              web project. Here is the project structure:
+            </p>
             <SyntaxHighlighter
               language="sh"
               style={theme === 'dark' ? atomOneDark : atomOneLight}
@@ -58,12 +67,10 @@ export default function HTTPPkgPage() {
               Seems familiar, right? The main modules are located in the{' '}
               <code>app</code> directory, which contains the main entry
               point/page at <code>index.tsx</code>, <code>globals.css</code>,
-              and a layout file at <code>layout.tsx</code>.
-            </p>
-            <p>
-              You can create a new page such as <code>about/index.tsx</code> in
-              the <code>app</code> directory, and it will be automatically
-              available at <code>/about</code>.
+              and a layout file at <code>layout.tsx</code>. You can create a new
+              page such as <code>about/index.tsx</code> in the <code>app</code>{' '}
+              directory, and it will be automatically available at{' '}
+              <code>/about</code>.
             </p>
             <p>
               Run the development server using <code>bun dev</code>, and the
@@ -93,6 +100,15 @@ Done in 12ms`}
               .
             </p>
           </section>
+          <section id="layout.tsx">
+            <h2>layout.tsx</h2>
+          </section>
+          <section id="index.tsx">
+            <h2>index.tsx</h2>
+          </section>
+          <section id="$">
+            <h2>$</h2>
+          </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29
           </p>
@@ -107,6 +123,30 @@ Done in 12ms`}
                   href="#quick-start"
                 >
                   Quick Start
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#layout.tsx"
+                >
+                  layout.tsx
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#index.tsx"
+                >
+                  index.tsx
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-base-content hover:underline underline-offset-4"
+                  href="#$"
+                >
+                  $
                 </a>
               </li>
             </ul>

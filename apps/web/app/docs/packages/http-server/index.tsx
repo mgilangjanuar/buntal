@@ -276,7 +276,7 @@ export const GET = h(
             </p>
             <h4>
               <code>
-                {`Res.cookie(name: string, value: string | null, options?: CookieOptions)`}
+                {`Res.cookie(name: string, value: string | null, options?: CookieOptions): Res`}
               </code>
             </h4>
             <p>
@@ -302,7 +302,7 @@ export const GET = h(
             </p>
             <h4>
               <code>
-                {`cookie.set(res: Res, name: string, value: string, options?: CookieOptions): void`}
+                {`cookie.set(res: Res, name: string, value: string, options?: CookieOptions)`}
               </code>
             </h4>
             <p>
@@ -328,7 +328,7 @@ cookie.set(res, 'access_token', token, {
 })`}
             </SyntaxHighlighter>
             <h4>
-              <code>{`cookie.delete(res: Res, name: string): void`}</code>
+              <code>{`cookie.delete(res: Res, name: string)`}</code>
             </h4>
             <p>
               Delete a cookie by name from the response. It sets the cookie with

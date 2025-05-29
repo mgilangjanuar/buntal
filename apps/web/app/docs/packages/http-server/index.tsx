@@ -1,5 +1,11 @@
 import Header from '@/components/header'
+import { useTheme } from '@/hooks/use-theme'
 import { type MetaProps } from 'buntal'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import {
+  atomOneDark,
+  atomOneLight
+} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 export const $ = () => ({
   _meta: {
@@ -8,6 +14,8 @@ export const $ = () => ({
 })
 
 export default function HTTPPkgPage() {
+  const { theme } = useTheme()
+
   return (
     <div id="quick-start">
       <Header title="HTTP Server" />
@@ -21,9 +29,12 @@ export default function HTTPPkgPage() {
               with file-based routing, middleware, a declarative router, and
               type-safe request parameters.
             </p>
-            <pre>
-              <code>
-                {`import { Http } from '@buntal/core'
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`import { Http } from '@buntal/core'
 import { cors, logger } from '@buntal/core/middlewares'
 
 // Initialize the HTTP server
@@ -47,8 +58,7 @@ app.get('/hello/:name', (req, res) => {
 app.start((server) => {
   console.log(\`Server running at http://localhost:\${server.port}\`)
 })`}
-              </code>
-            </pre>
+            </SyntaxHighlighter>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29

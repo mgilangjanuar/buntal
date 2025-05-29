@@ -50,9 +50,11 @@ export class Res {
   }
 
   cookie(name: string, value?: string | null, options?: CookieOptions) {
-    if (!value) {
-      return cookie.delete(this, name)
+    if (value) {
+      cookie.set(this, name, value, options)
+    } else {
+      cookie.delete(this, name)
     }
-    return cookie.set(this, name, value, options)
+    return this
   }
 }

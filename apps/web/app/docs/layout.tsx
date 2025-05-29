@@ -66,7 +66,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.0.4</span>
+              <span className="text-xs text-base-content/60">v0.0.5</span>
             </div>
           </Link>
           {MENUS.map((menu, i) => (

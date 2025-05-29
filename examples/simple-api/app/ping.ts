@@ -12,13 +12,12 @@ import { h } from '@buntal/core'
  * @param res - The response object used to send a JSON response.
  * @returns A JSON response with `{ pong: 1 }`.
  */
-export const GET = h<{}, { user: string }>(
+export const GET = h(
   () => {
     console.log('middleware')
   },
-  (_, res) => {
-    return res.json({
+  (_, res) =>
+    res.json({
       pong: 1
     })
-  }
 )

@@ -5,16 +5,18 @@ type Theme = {
   setTheme: (theme: 'light' | 'dark') => void
   themesMap: { [key in 'light' | 'dark']: string }
   userPrefersDark: boolean
+  defaultTheme: 'light' | 'dark'
 }
 
 const ThemeContext = createContext<Theme>({
   theme: 'light',
+  setTheme: () => {},
   themesMap: {
     light: 'light',
     dark: 'dark'
   },
-  setTheme: () => {},
-  userPrefersDark: false
+  userPrefersDark: false,
+  defaultTheme: 'light'
 })
 
 type ThemeProviderProps = {
@@ -58,11 +60,12 @@ export function ThemeProvider({
         theme: theme || defaultTheme,
         themesMap,
         setTheme,
-        userPrefersDark
+        userPrefersDark,
+        defaultTheme
       }}
       {...props}
     >
-      <div data-theme={theme && themesMap?.[theme]}>{children}</div>
+      {theme && children && <div data-theme={themesMap[theme]}>{children}</div>}
     </ThemeContext.Provider>
   )
 }

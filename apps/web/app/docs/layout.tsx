@@ -1,6 +1,7 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { cn } from '@/lib/utils'
 import { Link, Svg, useRouter } from 'buntal'
+import { useEffect } from 'react'
 
 const MENUS = [
   {
@@ -33,6 +34,14 @@ export default function DocsLayout({
 }>) {
   const { pathname } = useRouter()
 
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }, [pathname])
+
   return (
     <div className="drawer lg:drawer-open">
       <input
@@ -57,7 +66,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.0.4</span>
+              <span className="text-xs text-base-content/60">v0.0.5</span>
             </div>
           </Link>
           {MENUS.map((menu, i) => (

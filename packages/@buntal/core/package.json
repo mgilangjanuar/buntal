@@ -1,7 +1,7 @@
 {
   "name": "@buntal/core",
   "description": "HTTP client framework for Bun",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "module",
   "homepage": "https://buntaljs.org",
   "repository": {

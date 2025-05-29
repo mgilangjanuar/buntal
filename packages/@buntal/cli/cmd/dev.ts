@@ -8,7 +8,7 @@ export default async function () {
     ? await import(process.cwd() + '/buntal.config.ts')
     : { default: {} }
   const params = {
-    env: config.env || process.env.NODE_ENV || 'development',
+    env: process.env.NODE_ENV || config.env || 'development',
     appDir: config.appDir || './app',
     outDir: config.outDir || '.buntal',
     staticDir: config.staticDir || './public'

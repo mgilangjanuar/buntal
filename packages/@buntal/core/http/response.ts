@@ -1,4 +1,5 @@
 import type { BodyInit } from 'bun'
+import { cookie, type CookieOptions } from './cookie'
 
 export class Res {
   private options: {
@@ -46,5 +47,14 @@ export class Res {
     return this.headers({
       'content-type': 'text/plain'
     }).send(data)
+  }
+
+  cookie(name: string, value?: string | null, options?: CookieOptions) {
+    if (value) {
+      cookie.set(this, name, value, options)
+    } else {
+      cookie.delete(this, name)
+    }
+    return this
   }
 }

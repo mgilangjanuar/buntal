@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 export default function ThemeSwitcher({
   className
 }: Readonly<{ className?: string }>) {
-  const { theme, setTheme, userPrefersDark, themesMap } = useTheme()
+  const { defaultTheme, theme, setTheme, themesMap } = useTheme()
 
   return (
     <label className={cn('swap swap-rotate', className)}>
@@ -12,9 +12,9 @@ export default function ThemeSwitcher({
         type="checkbox"
         className="theme-controller"
         value={themesMap?.[theme]}
-        defaultChecked={userPrefersDark}
-        onChange={() => {
-          setTheme(theme === 'dark' ? 'light' : 'dark')
+        checked={theme === 'dark'}
+        onChange={({ target }) => {
+          setTheme(target.checked ? 'dark' : 'light')
         }}
       />
       <svg

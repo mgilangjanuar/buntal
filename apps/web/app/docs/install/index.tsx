@@ -1,5 +1,11 @@
 import Header from '@/components/header'
+import { useTheme } from '@/hooks/use-theme'
 import { Link, type MetaProps } from 'buntal'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import {
+  atomOneDark,
+  atomOneLight
+} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 export const $ = () => ({
   _meta: {
@@ -8,11 +14,13 @@ export const $ = () => ({
 })
 
 export default function InstallPage() {
+  const { theme } = useTheme()
+
   return (
     <div id="prerequisite">
       <Header title="Installation" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6">
+        <div className="container ml-0 prose pb-6 grid grid-cols-1">
           <section>
             <h2 className="mt-0">Prerequisite</h2>
             <p>
@@ -39,9 +47,13 @@ export default function InstallPage() {
                   If you want to build an HTTP server, you only need to install
                   the <code>@buntal/core</code> package:
                 </p>
-                <pre>
-                  <code>bun add @buntal/core</code>
-                </pre>
+                <SyntaxHighlighter
+                  language="sh"
+                  style={theme === 'dark' ? atomOneDark : atomOneLight}
+                  customStyle={{ padding: '12px 16px' }}
+                >
+                  {'bun add @buntal/core'}
+                </SyntaxHighlighter>
                 <p>
                   Then, you can continue{' '}
                   <Link
@@ -58,40 +70,48 @@ export default function InstallPage() {
                   If you want to build a full-stack web application, you can
                   create it from a template:
                 </p>
-                <pre>
-                  <code>bun create buntal@latest my-app</code>
-                </pre>
+                <SyntaxHighlighter
+                  language="sh"
+                  style={theme === 'dark' ? atomOneDark : atomOneLight}
+                  customStyle={{ padding: '12px 16px' }}
+                >
+                  {'bun create buntal@latest my-app'}
+                </SyntaxHighlighter>
                 <p>
-                  Change <code>my-app</code> to your desired project name. And,
-                  it will initialize your project and install all the necessary
+                  Change <code>my-app</code> to your desired project name. It
+                  will initialize your project and install all the necessary
                   dependencies. The output will look something like this:
                 </p>
-                <pre className="whitespace-pre-line">
-                  <code>{`bun install v1.2.14 (6a363a38)
-                  Resolving dependencies
-                  Resolved, downloaded and extracted [103]
-                  Saved lockfile
+                <SyntaxHighlighter
+                  language="sh"
+                  style={theme === 'dark' ? atomOneDark : atomOneLight}
+                  customStyle={{ padding: '12px 16px' }}
+                >
+                  {`bun install v1.2.14 (6a363a38)
+Resolving dependencies
+Resolved, downloaded and extracted [103]
+Saved lockfile
 
-                  + typescript@5.8.3
-                  + @buntal/cli@0.0.2
-                  + @types/bun@1.2.14
-                  + @types/react@19.1.6
-                  + @types/react-dom@19.1.5
-                  + @tailwindcss/cli@4.1.8
-                  + buntal@0.0.4
-                  + clsx@2.1.1
-                  + react@19.1.0
-                  + react-dom@19.1.0
-                  + tailwind-merge@3.3.0
-                  + tailwindcss@4.1.8
++ typescript@5.8.3
++ @buntal/cli@0.0.2
++ @types/bun@1.2.14
++ @types/react@19.1.6
++ @types/react-dom@19.1.5
++ @tailwindcss/cli@4.1.8
++ buntal@0.0.4
++ clsx@2.1.1
++ react@19.1.0
++ react-dom@19.1.0
++ tailwind-merge@3.3.0
++ tailwindcss@4.1.8
 
-                  63 packages installed [2.88s]
+63 packages installed [2.88s]
 
-                  Blocked 2 postinstalls. Run \`bun pm untrusted\` for details.
+Blocked 2 postinstalls. Run \`bun pm untrusted\` for details.
 
-                  Done! 🔥
-                  To get started, run: \`cd my-app && bun dev\``}</code>
-                </pre>
+Done! 🔥
+To get started, run: \`cd my-app && bun dev\``}
+                </SyntaxHighlighter>
                 <p>
                   Then, you can read more about it{' '}
                   <Link
@@ -106,7 +126,7 @@ export default function InstallPage() {
             </ul>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-28
+            Last modified: 2025-05-29
           </p>
         </div>
         <div className="xl:block hidden">

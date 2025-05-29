@@ -12,6 +12,7 @@
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "daisyui": "^5.0.38"
   },
   "peerDependencies": {
@@ -23,6 +24,7 @@
     "clsx": "^2.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-syntax-highlighter": "^15.6.1",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7"
   }

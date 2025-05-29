@@ -1,7 +1,7 @@
 import type { Req } from './request'
 import type { Res } from './response'
 
-type CookieOptions = {
+export type CookieOptions = {
   maxAge?: number
   expires?: Date
   path?: string

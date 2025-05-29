@@ -1,8 +1,5 @@
-import type { BuntalConfig } from 'buntal/server'
+import type { BuntalConfig } from 'buntal'
 
-const config = {
-  env: 'development',
-  outDir: '.buntal'
-} satisfies BuntalConfig
+const config = {} satisfies BuntalConfig
 
 export default config

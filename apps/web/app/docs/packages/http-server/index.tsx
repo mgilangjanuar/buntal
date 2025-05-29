@@ -130,9 +130,41 @@ export const GET = h(
 })`}
               </SyntaxHighlighter>
             </blockquote>
+            <p>
+              The first parameter is the <code>Req</code> object, which contains
+              the request parameters, query parameters, and other information.
+              The second parameter is the <code>Res</code> object, which is used
+              to send the response back to the client.
+            </p>
+            <p>
+              The pattern is similar to{' '}
+              <a
+                href="https://expressjs.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4"
+              >
+                Express.js
+              </a>{' '}
+              or other Node.js HTTP libraries, so the learning curve is minimal
+              if you are familiar with those libraries.
+            </p>
           </section>
           <section id="req">
             <h3>Req</h3>
+            <p>
+              The <code>Req</code> object is a native{' '}
+              <a
+                href="https://github.com/nodejs/undici"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4"
+              >
+                undici
+              </a>{' '}
+              request with extended properties, including <code>params</code>,{' '}
+              <code>query</code>, and <code>context</code>.
+            </p>
           </section>
           <section id="res">
             <h3>Res</h3>

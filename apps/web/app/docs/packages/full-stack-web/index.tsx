@@ -63,14 +63,14 @@ export default function HTTPPkgPage() {
 ├── public
 └── tsconfig.json`}
             </SyntaxHighlighter>
+            <p>Seems familiar, right?</p>
             <p>
-              Seems familiar, right? The main modules are located in the{' '}
-              <code>app</code> directory, which contains the main entry
-              point/page at <code>index.tsx</code>, <code>globals.css</code>,
-              and a layout file at <code>layout.tsx</code>. You can create a new
-              page such as <code>about/index.tsx</code> in the <code>app</code>{' '}
-              directory, and it will be automatically available at{' '}
-              <code>/about</code>.
+              The main modules are located in the <code>app</code> directory,
+              which contains the main entry point/page at <code>index.tsx</code>
+              , <code>globals.css</code>, and a layout file at{' '}
+              <code>layout.tsx</code>. You can create a new page such as{' '}
+              <code>about/index.tsx</code> in the <code>app</code> directory,
+              and it will be automatically available at <code>/about</code>.
             </p>
             <p>
               Run the development server using <code>bun dev</code>, and the
@@ -102,9 +102,87 @@ Done in 12ms`}
           </section>
           <section id="layout.tsx">
             <h2>layout.tsx</h2>
+            <p>
+              The <code>layout.tsx</code> file is the main layout for your web
+              app. It is used to wrap all pages and provide a consistent
+              structure, such as a header, footer, and other common elements.
+              Here is an example of a simple root layout:
+            </p>
+            <SyntaxHighlighter
+              language="tsx"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`export default function RootLayout({ children }: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html>
+      <head>
+        <meta charSet="UTF-8" />
+        <title>Buntal App</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
+        <link rel="icon" href="/favicon.svg" />
+        <link rel="stylesheet" href="/globals.css" />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}`}
+            </SyntaxHighlighter>
+            <p>
+              You can also have a <code>layout.tsx</code> in a folder, and it
+              will be a layout for all pages in that folder. But remember that
+              your layout will never be rendered if you haven't created an{' '}
+              <code>index.tsx</code> file in the same folder.
+            </p>
           </section>
           <section id="index.tsx">
             <h2>index.tsx</h2>
+            <p>
+              Basically, the <code>index.tsx</code> file is the main entry point
+              of your web page. Here is an example of a simple index page:
+            </p>
+            <SyntaxHighlighter
+              language="tsx"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`export default function HomePage({ query }: Readonly<{
+  query: Record<string, string>
+}>) {
+  return (
+    <div className="min-h-svh flex flex-col justify-center container mx-auto">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold">Next.js who? —{query.name || 'Buntal'}</h1>
+      </div>
+    </div>
+  )
+}`}
+            </SyntaxHighlighter>
+            <p>
+              The page component is exported as a default export, and it
+              receives props such as <code>params</code>, <code>query</code>,
+              and <code>data</code>.
+            </p>
+            <ul>
+              <li>
+                <code>params</code>: Contains the URL parameters, such as{' '}
+                <code>/about/[id]</code> will have <code>params.id</code>.
+              </li>
+              <li>
+                <code>query</code>: Contains the query parameters, such as{' '}
+                <code>/about?id=1</code> will have <code>query.id</code>.
+              </li>
+              <li>
+                <code>data</code>: Contains the data returned from the{' '}
+                <code>$</code> function, which is used to fetch data from the
+                server.
+              </li>
+            </ul>
           </section>
           <section id="$">
             <h2>$</h2>

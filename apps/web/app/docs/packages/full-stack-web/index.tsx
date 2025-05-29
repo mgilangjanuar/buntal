@@ -9,7 +9,7 @@ export const $ = () => ({
 
 export default function HTTPPkgPage() {
   return (
-    <div id="prerequisite">
+    <div id="quick-start">
       <Header title="Full-stack Web" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
@@ -25,9 +25,9 @@ export default function HTTPPkgPage() {
               <li>
                 <a
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#prerequisite"
+                  href="#quick-start"
                 >
-                  Prerequisite
+                  Quick Start
                 </a>
               </li>
             </ul>

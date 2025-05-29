@@ -59,6 +59,18 @@ app.start((server) => {
   console.log(\`Server running at http://localhost:\${server.port}\`)
 })`}
             </SyntaxHighlighter>
+            <p>
+              Explore the full example{' '}
+              <a
+                href="https://github.com/mgilangjanuar/buntal/tree/main/examples/simple-api"
+                className="underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                here
+              </a>
+              .
+            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-05-29

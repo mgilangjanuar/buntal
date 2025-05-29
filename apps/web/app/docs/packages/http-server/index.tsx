@@ -276,7 +276,7 @@ export const GET = h(
             </p>
             <h4>
               <code>
-                {`Res.cookie(name: string, value: string | null, options?: CookieOptions): Res`}
+                {`Res.cookie(name: string, value: string | null, opts?: CookieOptions): Res`}
               </code>
             </h4>
             <p>
@@ -302,7 +302,7 @@ export const GET = h(
             </p>
             <h4>
               <code>
-                {`cookie.set(res: Res, name: string, value: string, options?: CookieOptions)`}
+                {`cookie.set(res: Res, name: string, value: string, opts?: CookieOptions)`}
               </code>
             </h4>
             <p>

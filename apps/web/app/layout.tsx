@@ -11,7 +11,7 @@ export default function RootLayout({
   }
 }>) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <Meta
           {...(data?._meta || {

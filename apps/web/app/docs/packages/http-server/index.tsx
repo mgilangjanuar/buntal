@@ -190,7 +190,7 @@ export const GET = h(
                 undici
               </a>{' '}
               request with extended properties, including <code>params</code>,{' '}
-              <code>query</code>, and <code>context</code>.
+              <code>query</code>, <code>context</code>, and more.
             </p>
             <h4>
               <code>{`Req.params: Record<string, string>`}</code>
@@ -276,7 +276,7 @@ export const GET = h(
             </p>
             <h4>
               <code>
-                {`Res.cookie(name: string, value: string | null, options?: CookieOptions): Res`}
+                {`Res.cookie(name: string, value: string | null, options?: CookieOptions)`}
               </code>
             </h4>
             <p>

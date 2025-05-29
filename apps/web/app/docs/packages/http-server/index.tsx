@@ -60,6 +60,26 @@ app.start((server) => {
 })`}
             </SyntaxHighlighter>
             <p>
+              And here is a simple example of a ping endpoint in the{' '}
+              <code>./app/ping.ts</code> file that is automatically loaded into
+              the app.
+            </p>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`import { h } from '@buntal/core'
+
+export const GET = h(
+  (_, res) => {
+    return res.json({
+      pong: 1
+    })
+  }
+)`}
+            </SyntaxHighlighter>
+            <p>
               Explore the full example{' '}
               <a
                 href="https://github.com/mgilangjanuar/buntal/tree/main/examples/simple-api"

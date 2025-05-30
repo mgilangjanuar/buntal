@@ -1,4 +1,4 @@
-import Logo from '@/logo.svg' with { type: 'text' }
+import Logo from '@/app/logo.svg' with { type: 'text' }
 import { Svg } from 'buntal'
 
 export default function HomePage() {

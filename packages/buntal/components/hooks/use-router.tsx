@@ -143,8 +143,8 @@ export function RouterProvider({
     if (router) {
       buildPage(router.layouts).then((p) => {
         setPage(p)
-        if (window.location.hash) {
-          setTimeout(() => {
+        setTimeout(() => {
+          if (window.location.hash) {
             const [selector, top] = window.location.hash.split(':') as [
               string,
               string | undefined
@@ -159,8 +159,10 @@ export function RouterProvider({
                   (top ? Number(top) : 80)
               })
             }
-          }, 100)
-        }
+          } else {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+          }
+        }, 10)
       })
     } else if (router === null) {
       setPage(

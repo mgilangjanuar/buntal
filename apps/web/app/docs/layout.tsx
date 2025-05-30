@@ -1,7 +1,6 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { cn } from '@/lib/utils'
 import { Link, Svg, useRouter } from 'buntal'
-import { useEffect } from 'react'
 
 const MENUS = [
   {
@@ -33,14 +32,6 @@ export default function DocsLayout({
   children: React.ReactNode
 }>) {
   const { pathname } = useRouter()
-
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    })
-  }, [pathname])
 
   return (
     <div className="drawer lg:drawer-open">

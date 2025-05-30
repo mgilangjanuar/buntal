@@ -35,7 +35,7 @@ export async function runServer({
     injectHandler: injectHandler(env, routes)
   })
 
-  app.onNotFound(async (req, res) => {
+  app.onNotFound(async (req) => {
     const resp = await staticHandler(req, outDir, staticDir)
     if (resp instanceof Response) {
       return resp

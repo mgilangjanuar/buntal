@@ -20,6 +20,12 @@ export default function RootLayout({
               'Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.'
           })}
         />
+        <meta
+          http-equiv="cache-control"
+          content="no-cache, no-store, must-revalidate"
+        />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta httpplay-equiv="expires" content="0" />
         <link rel="icon" href="/favicon.svg" />
         <link rel="stylesheet" href="/globals.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

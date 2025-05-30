@@ -354,7 +354,7 @@ cookie.set(res, 'access_token', token, {
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#http:72"
+                  href="#http:24"
                 >
                   Http
                 </Link>
@@ -362,7 +362,7 @@ cookie.set(res, 'access_token', token, {
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#h:72"
+                  href="#h:24"
                 >
                   h
                 </Link>
@@ -370,7 +370,7 @@ cookie.set(res, 'access_token', token, {
                   <li>
                     <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#atomic-handler:72"
+                      href="#atomic-handler:40"
                     >
                       AtomicHandler
                     </Link>
@@ -378,7 +378,7 @@ cookie.set(res, 'access_token', token, {
                   <li>
                     <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#req:72"
+                      href="#req:40"
                     >
                       Req
                     </Link>
@@ -386,7 +386,7 @@ cookie.set(res, 'access_token', token, {
                   <li>
                     <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#res:72"
+                      href="#res:40"
                     >
                       Res
                     </Link>
@@ -394,7 +394,7 @@ cookie.set(res, 'access_token', token, {
                   <li>
                     <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#cookie:72"
+                      href="#cookie:40"
                     >
                       Cookie
                     </Link>

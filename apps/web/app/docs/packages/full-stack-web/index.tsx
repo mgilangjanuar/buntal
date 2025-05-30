@@ -240,7 +240,7 @@ export default function HomePage({ data }: {
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#layout-tsx:72"
+                  href="#layout-tsx:24"
                 >
                   layout.tsx
                 </Link>
@@ -248,7 +248,7 @@ export default function HomePage({ data }: {
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#index-tsx:72"
+                  href="#index-tsx:24"
                 >
                   index.tsx
                 </Link>
@@ -256,7 +256,7 @@ export default function HomePage({ data }: {
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#loader:72"
+                  href="#loader:24"
                 >
                   $
                 </Link>

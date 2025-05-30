@@ -141,7 +141,27 @@ export function RouterProvider({
 
   useEffect(() => {
     if (router) {
-      buildPage(router.layouts).then(setPage)
+      buildPage(router.layouts).then((p) => {
+        setPage(p)
+        if (window.location.hash) {
+          setTimeout(() => {
+            const [selector, top] = window.location.hash.split(':') as [
+              string,
+              string | undefined
+            ]
+            const target = document.querySelector(selector)
+            if (target) {
+              window.scrollTo({
+                behavior: 'smooth',
+                top:
+                  target.getBoundingClientRect().top +
+                  window.scrollY -
+                  (top ? Number(top) : 80)
+              })
+            }
+          }, 100)
+        }
+      })
     } else if (router === null) {
       setPage(
         rootLayout

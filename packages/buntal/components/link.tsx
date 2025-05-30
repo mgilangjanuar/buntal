@@ -24,7 +24,7 @@ export function Link({
             ]
             const target = document.querySelector(selector)
             if (target) {
-              location.hash = selector
+              location.hash = href
               window.scrollTo({
                 behavior: 'smooth',
                 top:

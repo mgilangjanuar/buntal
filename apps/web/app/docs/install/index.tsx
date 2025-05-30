@@ -144,7 +144,7 @@ To get started, run: \`cd my-app && bun dev\``}
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#installation:72"
+                  href="#installation:24"
                 >
                   Installation
                 </Link>

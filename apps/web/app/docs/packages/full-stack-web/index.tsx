@@ -7,11 +7,11 @@ import {
   atomOneLight
 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
-export const $ = async () => ({
+export const $ = {
   _meta: {
     title: 'Full-stack Web - Buntal JS'
   } satisfies MetaProps
-})
+}
 
 export default function HTTPPkgPage() {
   const { theme } = useTheme()

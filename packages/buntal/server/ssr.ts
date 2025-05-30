@@ -7,14 +7,7 @@ export const ssrHandler = async (
   }
 ): Promise<Response | void> => {
   try {
-    const url = new URL(req.url)
-    url.searchParams.delete('_$')
-    delete req.query?._$
-
-    const result = await handler.$({
-      ...req,
-      url: url.href
-    })
+    const result = await handler.$(req)
 
     if (result instanceof Response) {
       return result

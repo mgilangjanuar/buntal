@@ -5,6 +5,7 @@ export type RouteBuilderResult = {
   safeImport: string
   regex: string
   ssr: boolean
+  data?: unknown
   layouts: string[]
   layoutsSafeImport: string[]
 }
@@ -43,7 +44,11 @@ export const builder = async (
           regex: `^${route
             .replace(/\//g, '\\/')
             .replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')}$`,
-          ssr: '$' in handler,
+          ssr: '$' in handler && typeof handler.$ === 'function',
+          data:
+            '$' in handler && typeof handler.$ !== 'function'
+              ? handler.$
+              : undefined,
           layouts,
           layoutsSafeImport: layouts.map((layout) =>
             layout.replace(process.cwd(), source).replace(/\.tsx$/gi, '')

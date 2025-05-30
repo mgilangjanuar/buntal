@@ -1,6 +1,6 @@
 import Header from '@/components/header'
 import { useTheme } from '@/hooks/use-theme'
-import { type MetaProps } from 'buntal'
+import { Link, type MetaProps } from 'buntal'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import {
   atomOneDark,
@@ -17,11 +17,11 @@ export default function HTTPPkgPage() {
   const { theme } = useTheme()
 
   return (
-    <div id="quick-start">
+    <div>
       <Header title="Full-stack Web" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
-          <section>
+          <section id="quick-start">
             <h2 className="mt-0">Quick Start</h2>
             <p>
               Buntal uses <code>@buntal/core</code> under the hood to handle all
@@ -100,7 +100,7 @@ Done in 12ms`}
               .
             </p>
           </section>
-          <section id="layout.tsx">
+          <section id="layout-tsx">
             <h2>layout.tsx</h2>
             <p>
               The <code>layout.tsx</code> file is the main layout for your web
@@ -140,7 +140,7 @@ Done in 12ms`}
               <code>index.tsx</code> file in the same folder.
             </p>
           </section>
-          <section id="index.tsx">
+          <section id="index-tsx">
             <h2>index.tsx</h2>
             <p>
               Basically, the <code>index.tsx</code> file is the main entry point
@@ -184,7 +184,7 @@ Done in 12ms`}
               </li>
             </ul>
           </section>
-          <section id="$">
+          <section id="loader">
             <h2>$</h2>
             <p>
               The <code>$</code> function is used to fetch data from the server.
@@ -230,36 +230,36 @@ export default function HomePage({ data }: {
             <p className="font-semibold">On this page</p>
             <ul className="pl-4 space-y-2">
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#quick-start"
+                  href="#quick-start:72"
                 >
                   Quick Start
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#layout.tsx"
+                  href="#layout-tsx:24"
                 >
                   layout.tsx
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#index.tsx"
+                  href="#index-tsx:24"
                 >
                   index.tsx
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#$"
+                  href="#loader:24"
                 >
                   $
-                </a>
+                </Link>
               </li>
             </ul>
           </aside>

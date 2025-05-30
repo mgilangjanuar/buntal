@@ -141,7 +141,29 @@ export function RouterProvider({
 
   useEffect(() => {
     if (router) {
-      buildPage(router.layouts).then(setPage)
+      buildPage(router.layouts).then((p) => {
+        setPage(p)
+        setTimeout(() => {
+          if (window.location.hash) {
+            const [selector, top] = window.location.hash.split(':') as [
+              string,
+              string | undefined
+            ]
+            const target = document.querySelector(selector)
+            if (target) {
+              window.scrollTo({
+                behavior: 'smooth',
+                top:
+                  target.getBoundingClientRect().top +
+                  window.scrollY -
+                  (top ? Number(top) : 80)
+              })
+            }
+          } else {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+          }
+        }, 10)
+      })
     } else if (router === null) {
       setPage(
         rootLayout
@@ -181,13 +203,7 @@ export function RouterProvider({
           window.dispatchEvent(new PopStateEvent('popstate'))
         },
         reload: () => {
-          const url = window.location.href
-          window.history.replaceState({}, '', `/empty-${new Date().getTime()}`)
-          window.dispatchEvent(new PopStateEvent('popstate'))
-          setTimeout(() => {
-            window.history.replaceState({}, '', url)
-            window.dispatchEvent(new PopStateEvent('popstate'))
-          }, 1)
+          window.location.reload()
         }
       }}
     >

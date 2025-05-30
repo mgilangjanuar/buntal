@@ -1,5 +1,5 @@
 import Header from '@/components/header'
-import { type MetaProps } from 'buntal'
+import { Link, type MetaProps } from 'buntal'
 
 export const $ = () => ({
   _meta: {
@@ -9,7 +9,7 @@ export const $ = () => ({
 
 export default function DocsPage() {
   return (
-    <div id="introduction">
+    <div>
       <Header title="Get Started" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
@@ -37,7 +37,7 @@ export default function DocsPage() {
             alt="Buntal JS banner"
             className="rounded-md w-full"
           />
-          <section>
+          <section id="introduction">
             <p>
               <strong>Buntal JS</strong> is a lightweight, modern JavaScript
               framework designed to simplify web development; with Next.js-like
@@ -168,62 +168,62 @@ export default function DocsPage() {
             <p className="font-semibold">On this page</p>
             <ul className="pl-4 space-y-2">
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#introduction"
+                  href="#introduction:72"
                 >
                   Introduction
-                </a>
+                </Link>
                 <ul className="pl-4 pt-2 space-y-2">
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#what-can-i-build"
+                      href="#what-can-i-build:72"
                     >
                       What can I build with Buntal JS?
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#why-separate-http-server-and-full-stack-web-framework"
+                      href="#why-separate-http-server-and-full-stack-web-framework:72"
                     >
                       Why separate the HTTP server and full-stack web framework?
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#does-it-production-ready"
+                      href="#does-it-production-ready:72"
                     >
                       Is it production-ready? When will it be stable?
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#how-to-pronounce-buntal"
+                      href="#how-to-pronounce-buntal:72"
                     >
                       How to pronounce "Buntal"?
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#features"
+                  href="#features:72"
                 >
                   Features
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#how-to-contribute"
+                  href="#how-to-contribute:72"
                 >
                   How to Contribute
-                </a>
+                </Link>
               </li>
             </ul>
           </aside>

@@ -1,6 +1,6 @@
 import Header from '@/components/header'
 import { useTheme } from '@/hooks/use-theme'
-import { type MetaProps } from 'buntal'
+import { Link, type MetaProps } from 'buntal'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import {
   atomOneDark,
@@ -17,11 +17,11 @@ export default function HTTPPkgPage() {
   const { theme } = useTheme()
 
   return (
-    <div id="quick-start">
+    <div>
       <Header title="HTTP Server" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
-          <section>
+          <section id="quick-start">
             <h2 className="mt-0">Quick Start</h2>
             <p>
               Here is a simple example of how to create an HTTP server using
@@ -344,60 +344,60 @@ cookie.set(res, 'access_token', token, {
             <p className="font-semibold">On this page</p>
             <ul className="pl-4 space-y-2">
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#quick-start"
+                  href="#quick-start:72"
                 >
                   Quick Start
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#http"
+                  href="#http:24"
                 >
                   Http
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#h"
+                  href="#h:24"
                 >
                   h
-                </a>
+                </Link>
                 <ul className="pl-4 pt-2 space-y-2">
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#atomic-handler"
+                      href="#atomic-handler:40"
                     >
                       AtomicHandler
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#req"
+                      href="#req:40"
                     >
                       Req
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#res"
+                      href="#res:40"
                     >
                       Res
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#cookie"
+                      href="#cookie:40"
                     >
                       Cookie
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

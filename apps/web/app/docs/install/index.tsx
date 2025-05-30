@@ -17,11 +17,11 @@ export default function InstallPage() {
   const { theme } = useTheme()
 
   return (
-    <div id="prerequisite">
+    <div>
       <Header title="Installation" />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
-          <section>
+          <section id="prerequisite">
             <h2 className="mt-0">Prerequisite</h2>
             <p>
               Before you start using Buntal JS, ensure you have the following
@@ -134,20 +134,20 @@ To get started, run: \`cd my-app && bun dev\``}
             <p className="font-semibold">On this page</p>
             <ul className="pl-4 space-y-2">
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#prerequisite"
+                  href="#prerequisite:72"
                 >
                   Prerequisite
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#installation"
+                  href="#installation:72"
                 >
                   Installation
-                </a>
+                </Link>
               </li>
             </ul>
           </aside>

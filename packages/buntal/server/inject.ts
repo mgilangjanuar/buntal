@@ -51,10 +51,15 @@ export const injectHandler =
       }
 
       // Render the component to a readable stream
+      let version = '0.0.1'
+      try {
+        const pkg = await import(`${process.cwd()}/package.json`)
+        version = pkg.default.version || version
+      } catch {}
       return new Response(
         await renderToReadableStream(await createComponent(route.layouts), {
           bootstrapModules: [
-            '/root.js',
+            `/root.js?v=${version}`,
             ...(env === 'development' ? ['/🔥.js'] : [])
           ]
         }),

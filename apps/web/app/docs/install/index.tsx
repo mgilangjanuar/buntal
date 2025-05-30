@@ -7,11 +7,11 @@ import {
   atomOneLight
 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
-export const $ = () => ({
+export const $ = {
   _meta: {
     title: 'Installation - Buntal JS'
   } satisfies MetaProps
-})
+}
 
 export default function InstallPage() {
   const { theme } = useTheme()

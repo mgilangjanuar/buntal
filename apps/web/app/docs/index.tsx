@@ -1,11 +1,11 @@
 import Header from '@/components/header'
 import { Link, type MetaProps } from 'buntal'
 
-export const $ = () => ({
+export const $ = {
   _meta: {
     title: 'Get Started - Buntal JS'
   } satisfies MetaProps
-})
+}
 
 export default function DocsPage() {
   return (

@@ -35,7 +35,7 @@ export const injectHandler =
       const args = {
         query: req.query,
         params: req.params,
-        data: route.ssr ? await handler.$(req) : {}
+        data: route.ssr ? await handler.$(req) : route.data
       }
 
       // Recursively create the component with layouts

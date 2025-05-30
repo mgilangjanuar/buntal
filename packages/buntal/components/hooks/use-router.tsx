@@ -13,6 +13,7 @@ import { Notfound } from '../notfound'
 export type ServerRouterType = {
   regex: string
   ssr?: boolean
+  data?: unknown
   element: (data: any) => ReactNode
   layouts: ((data: any) => ReactNode)[]
 }
@@ -121,7 +122,7 @@ export function RouterProvider({
               return resp.text()
             }
           }
-          const data = router.ssr ? await fetchData() : {}
+          const data = router.ssr ? await fetchData() : router.data
           return { query, params, data }
         }
         args.current = await populateArgs()

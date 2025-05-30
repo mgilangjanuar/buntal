@@ -21,10 +21,10 @@ export default function RootLayout({
           })}
         />
         <meta
-          http-equiv="cache-control"
+          httpEquiv="cache-control"
           content="no-cache, no-store, must-revalidate"
         />
-        <meta http-equiv="pragma" content="no-cache" />
+        <meta httpEquiv="pragma" content="no-cache" />
         <meta httpplay-equiv="expires" content="0" />
         <link rel="icon" href="/favicon.svg" />
         <link rel="stylesheet" href="/globals.css" />

@@ -5,6 +5,7 @@
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mgilangjanuar/buntal.git"

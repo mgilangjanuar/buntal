@@ -4,6 +4,7 @@
   "version": "0.0.5",
   "type": "module",
   "homepage": "https://buntaljs.org",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mgilangjanuar/buntal.git"

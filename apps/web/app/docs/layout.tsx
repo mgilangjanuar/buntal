@@ -40,7 +40,7 @@ export default function DocsLayout({
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content min-h-svh">{children}</div>
+      <div className="drawer-content min-h-svh bg-base-100">{children}</div>
       <div className="drawer-side z-20">
         <label
           htmlFor="docs-layout-drawer"

@@ -201,7 +201,7 @@ Done in 12ms`}
               {`import type { Req } from 'buntal'
 
 export const $ = async (req: Req) => {
-  const resp = await fetch('https://api.example.com/data')
+  const resp = await fetch(\`https://api.example.com/data/\${req.params.id}\`)
   return await resp.json() as { name: string }
 }
 
@@ -216,13 +216,20 @@ export default function HomePage({ data }: {
 }`}
             </SyntaxHighlighter>
             <p>
-              This function has a similar pattern to{' '}
+              See the <code>Req</code> type definition{' '}
+              <Link
+                href="/docs/packages/http-server#req:40"
+                className="underline-offset-4"
+              >
+                here
+              </Link>
+              . This function has a similar pattern to{' '}
               <code>getServerSideProps</code> from Next.js or{' '}
               <code>loader</code> from Remix.
             </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-29
+            Last modified: 2025-05-30
           </p>
         </div>
         <div className="xl:block hidden">

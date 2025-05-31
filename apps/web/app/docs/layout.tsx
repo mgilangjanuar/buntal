@@ -45,7 +45,7 @@ export default function DocsLayout({
         <Suspense
           fallback={
             <div className="flex flex-col p-4 w-full md:max-w-prose">
-              <div className="h-14 flex flex-col items-start">
+              <div className="h-14 flex flex-col items-start py-2">
                 <div className="skeleton h-4 w-[20%]"></div>
               </div>
               <div className="skeleton h-6 w-[50%] mb-4"></div>

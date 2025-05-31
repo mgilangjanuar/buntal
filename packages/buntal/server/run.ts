@@ -21,7 +21,13 @@ export async function runServer({
   staticDir = './public'
 }: BuntalConfig = {}) {
   const routes = await builder(appDir)
-  await bundler(routes, { env, appDir, outDir })
+
+  if (process.argv[2] !== '--serve') {
+    await bundler(routes, { env, appDir, outDir })
+    if (process.argv[2] === '--build') {
+      process.exit(0)
+    }
+  }
 
   const app = new Http({
     port: Number(process.env.PORT) || 3000,

@@ -1,13 +1,16 @@
 {
   "name": "{{name}}",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "buntal dev"
+    "dev": "buntal dev",
+    "build": "buntal build",
+    "start": "buntal start"
   },
   "devDependencies": {
     "@buntal/cli": "latest",
+    "@tailwindcss/cli": "^4.1.7",
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5"
@@ -16,7 +19,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.7",
     "buntal": "latest",
     "clsx": "^2.1.1",
     "react": "^19.1.0",

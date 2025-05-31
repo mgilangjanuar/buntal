@@ -1,7 +1,7 @@
 {
   "name": "create-buntal",
   "description": "Template for creating Buntal projects",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "module": "index.ts",
   "type": "module",
   "main": "index.ts",

@@ -1,4 +1,5 @@
 import { $ } from 'bun'
+import { cpSync } from 'fs'
 
 export async function createProject(name: string) {
   if (!/^[a-zA-Z_\-][a-zA-Z0-9\-]*$/.test(name)) {
@@ -15,7 +16,7 @@ export async function createProject(name: string) {
     process.exit(1)
   }
 
-  await $`cp -r ${__dirname}/templates ${name}`
+  cpSync(`${__dirname}/templates`, name, { recursive: true })
   process.chdir(name)
 
   const pkg = await Bun.file('package.json').text()

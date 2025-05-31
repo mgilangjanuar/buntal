@@ -1,6 +1,7 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { cn } from '@/lib/utils'
 import { Link, Svg, useRouter } from 'buntal'
+import { Suspense } from 'react'
 
 const MENUS = [
   {
@@ -40,7 +41,21 @@ export default function DocsLayout({
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content min-h-svh bg-base-100">{children}</div>
+      <div className="drawer-content min-h-svh bg-base-100">
+        <Suspense
+          fallback={
+            <div className="flex flex-col p-4 w-full md:max-w-prose">
+              <div className="h-14 flex flex-col items-start">
+                <div className="skeleton h-4 w-[20%]"></div>
+              </div>
+              <div className="skeleton h-6 w-[50%] mb-4"></div>
+              <div className="skeleton h-32 w-full"></div>
+            </div>
+          }
+        >
+          {children}
+        </Suspense>
+      </div>
       <div className="drawer-side z-20">
         <label
           htmlFor="docs-layout-drawer"

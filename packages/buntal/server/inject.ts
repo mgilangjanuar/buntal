@@ -22,10 +22,11 @@ export const injectHandler =
     if (
       route &&
       new RegExp(route.regex).test(new URL(req.url).pathname) &&
-      'default' in handler
+      'default' in handler &&
+      req.method === 'GET'
     ) {
       // Handle SSR requests
-      if (req.query?._$ === '1' && route.ssr && req.method === 'GET') {
+      if (req.query?._$ === '1' && route.ssr) {
         const resp = await ssrHandler(req, handler)
         if (resp) {
           return resp

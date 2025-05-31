@@ -27,6 +27,14 @@ export class Res {
     return this
   }
 
+  redirect(url: string, status = 302) {
+    this.status(status)
+    this.headers({
+      location: url
+    })
+    return this.send()
+  }
+
   send(data?: BodyInit) {
     return new Response(data, this.options)
   }

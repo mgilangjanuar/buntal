@@ -11,13 +11,18 @@ export default async function () {
     outDir: config.outDir || '.buntal'
   }
 
-  if (!(await Bun.file(params.outDir + '/.buntal/index.ts').exists())) {
+  if (
+    !(await Bun.file(params.outDir + '/index.ts').exists()) &&
+    !(await Bun.file(params.outDir + '/.buntal/index.ts').exists())
+  ) {
     console.error(
       'Error: The output directory does not contain the entrypoint file. Please run `buntal build` first.'
     )
     process.exit(1)
   }
 
-  process.chdir(params.outDir)
+  if (await Bun.file(params.outDir + '/.buntal/index.ts').exists()) {
+    process.chdir(params.outDir)
+  }
   await $`NODE_ENV=production bun .buntal/index.ts --serve`
 }

@@ -3,7 +3,9 @@ import { cpSync, readdirSync, rmSync } from 'fs'
 import type { AppOptions } from '../types'
 
 export default async function () {
-  if (!(await Bun.file('node_modules').exists())) {
+  try {
+    await Bun.file('node_modules').stat()
+  } catch (error) {
     console.error(
       'Error: The node_modules directory does not exist. Please run `bun install` first.'
     )

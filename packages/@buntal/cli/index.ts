@@ -20,6 +20,12 @@ const _populateConfig = async () => {
   }
 }
 
+const spawnOpts = {
+  stdin: 'inherit',
+  stdout: 'inherit',
+  stderr: 'inherit'
+} as SpawnOptions.OptionsObject<'inherit', 'inherit', 'inherit'>
+
 program
   .name('buntal')
   .description('Buntal CLI - A modern, type-safe web framework for Bun')
@@ -40,15 +46,9 @@ runServer(${confFileExist ? 'config' : ''})
 `
     )
 
-    const opts = {
-      stdin: 'inherit',
-      stdout: 'inherit',
-      stderr: 'inherit'
-    } as SpawnOptions.OptionsObject<'inherit', 'inherit', 'inherit'>
-
     const runner = async () => {
       // run the development server
-      spawn(['bun', '--watch', params.outDir + '/index.ts'], opts)
+      spawn(['bun', '--watch', params.outDir + '/index.ts'], spawnOpts)
 
       // watch tailwindcss if it exists
       if (
@@ -65,9 +65,10 @@ runServer(${confFileExist ? 'config' : ''})
               params.appDir + '/globals.css',
               '-o',
               params.outDir + '/dist/globals.css',
+              '--minify',
               '--watch'
             ],
-            opts
+            spawnOpts
           )
         }
       }
@@ -104,7 +105,18 @@ runServer(${confFileExist ? 'config' : ''})
     ) {
       const packageJson = await Bun.file('package.json').json()
       if ('tailwindcss' in packageJson.dependencies) {
-        await $`bunx @tailwindcss/cli -i ${params.appDir}/globals.css -o ${params.outDir}/dist/globals.css`
+        spawn(
+          [
+            'bunx',
+            '@tailwindcss/cli',
+            '-i',
+            params.appDir + '/globals.css',
+            '-o',
+            params.outDir + '/dist/globals.css',
+            '--minify'
+          ],
+          spawnOpts
+        )
       }
     }
   })

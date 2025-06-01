@@ -9,7 +9,10 @@ import { builder } from './router'
 import { staticHandler } from './static'
 
 export async function runServer({
-  env = (process.env.NODE_ENV as 'development' | 'production') || 'development',
+  env = (process.env.NODE_ENV as 'development' | 'production') ||
+    (process.argv[2] === '--serve' || process.argv[2] === '--build'
+      ? 'production'
+      : 'development'),
   appDir = './app',
   outDir = '.buntal',
   staticDir = './public',

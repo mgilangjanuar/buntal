@@ -1,10 +1,9 @@
-import type { BuntalConfig } from 'buntal/server'
+import type { BuntalConfig } from 'buntal'
 
 const config = {
-  env:
-    (process.env.NODE_ENV as 'production' | 'development' | undefined) ||
-    'development',
-  outDir: '.buntal'
+  config: {
+    splitting: false
+  }
 } satisfies BuntalConfig
 
 export default config

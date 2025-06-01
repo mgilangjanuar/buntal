@@ -5,7 +5,7 @@ type BundlerConfig = {
   env?: 'development' | 'production'
   appDir?: string
   outDir?: string
-  config?: Bun.BuildConfig
+  config?: Partial<Bun.BuildConfig>
 }
 
 export async function bundler(

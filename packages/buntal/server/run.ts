@@ -12,6 +12,7 @@ export type BuntalConfig = {
   appDir?: string
   outDir?: string
   staticDir?: string
+  config?: Bun.BuildConfig
 }
 
 export async function runServer({

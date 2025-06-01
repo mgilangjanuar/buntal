@@ -38,6 +38,7 @@ program
     const { confFileExist, params } = await _populateConfig()
 
     // init the entrypoint
+    rmSync(params.outDir, { recursive: true, force: true })
     await Bun.write(
       params.outDir + '/index.ts',
       `import { runServer } from 'buntal/server'
@@ -140,7 +141,7 @@ program
     if (await Bun.file(params.outDir + '/.buntal/index.ts').exists()) {
       process.chdir(params.outDir)
     }
-    await $`NODE_ENV=production bun .buntal/index.ts --serve`
+    await $`bun .buntal/index.ts --serve`
   })
 
 program.parse()

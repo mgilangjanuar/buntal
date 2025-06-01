@@ -1,7 +1,7 @@
 {
   "name": "@buntal/cli",
   "description": "Command line interface for Buntal",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",

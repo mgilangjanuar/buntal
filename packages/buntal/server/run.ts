@@ -1,29 +1,24 @@
 import { Http } from '@buntal/core'
 import { logger } from '@buntal/core/middlewares'
 import { networkInterfaces } from 'os'
+import type { BuntalConfig } from '..'
 import { bundler } from '../bundler'
 import { injectHandler } from './inject'
 import { notfoundHandler } from './notfound'
 import { builder } from './router'
 import { staticHandler } from './static'
 
-export type BuntalConfig = {
-  env?: 'development' | 'production'
-  appDir?: string
-  outDir?: string
-  staticDir?: string
-}
-
 export async function runServer({
   env = (process.env.NODE_ENV as 'development' | 'production') || 'development',
   appDir = './app',
   outDir = '.buntal',
-  staticDir = './public'
+  staticDir = './public',
+  config = {}
 }: BuntalConfig = {}) {
   const routes = await builder(appDir)
 
   if (process.argv[2] !== '--serve') {
-    await bundler(routes, { env, appDir, outDir })
+    await bundler(routes, { env, appDir, outDir, config })
     if (process.argv[2] === '--build') {
       process.exit(0)
     }

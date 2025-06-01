@@ -5,6 +5,7 @@ type BundlerConfig = {
   env?: 'development' | 'production'
   appDir?: string
   outDir?: string
+  config?: Partial<Bun.BuildConfig>
 }
 
 export async function bundler(
@@ -13,7 +14,8 @@ export async function bundler(
     env = (process.env.NODE_ENV as 'development' | 'production') ||
       'development',
     appDir = './app',
-    outDir = '.buntal'
+    outDir = '.buntal',
+    config
   }: BundlerConfig = {}
 ) {
   await buildRoot(routes, appDir, outDir)
@@ -27,7 +29,8 @@ export async function bundler(
       identifiers: true,
       syntax: true,
       whitespace: true
-    }
+    },
+    ...(config || {})
   })
 
   await buildFavicon(appDir, outDir)

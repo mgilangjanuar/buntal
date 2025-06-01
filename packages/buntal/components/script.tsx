@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from 'preact/hooks'
 
 export function Script({
   src,
@@ -6,8 +6,8 @@ export function Script({
   ...props
 }: {
   src: string
-  ref?: React.Ref<HTMLScriptElement>
-} & React.ScriptHTMLAttributes<HTMLScriptElement>) {
+  ref?: any
+} & any) {
   useEffect(() => {
     document.querySelectorAll('script[src="' + src + '"]').forEach((el) => {
       el.remove()
@@ -17,7 +17,7 @@ export function Script({
     script.src = src
     for (const [key, value] of Object.entries(props)) {
       if (value !== undefined) {
-        script.setAttribute(key, value)
+        script.setAttribute(key, value as any)
       }
     }
 

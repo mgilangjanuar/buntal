@@ -1,27 +1,9 @@
-import type { RouteBuilderResult } from '../../server/router'
-import { buildLayouts, buildNotfound, buildPages } from './root-scripts'
-
-export async function buildRoot(
-  routes: RouteBuilderResult[],
-  appDir: string = './app',
-  outDir: string = '.buntal'
-) {
-  // Build all layouts and pages
-  const {
-    layouts,
-    rootLayout,
-    renderRootLayout,
-    imports: layoutsImports
-  } = buildLayouts(routes, appDir)
-  const createPages = buildPages(routes, layouts)
-  const createNotFound = await buildNotfound(appDir, rootLayout)
-
-  // Create the entrypoint script
-  const entrypointScript = `import { App } from 'buntal'
+import { App } from 'buntal'
 import { h, render } from 'preact'
 import Home from '../app'
-${createPages.imports}${createNotFound.imports}
-${layoutsImports}
+import Page0 from '../app/about/index'
+import Page1 from '../app/index'
+import Layout0 from '../app/layout'
 import { createContext, createElement, type VNode } from 'preact'
 import { useCallback, useContext, useEffect, useRef, useState } from 'preact/hooks'
 
@@ -123,10 +105,10 @@ function RouterProvider({
 
           const fetchData = async () => {
             const resp = await fetch(
-              \`\${window.location.pathname}?\${new URLSearchParams({
+              `${window.location.pathname}?${new URLSearchParams({
                 ...query,
                 _$: '1'
-              }).toString()}\`
+              }).toString()}`
             )
             if (resp.ok) {
               if (
@@ -232,11 +214,8 @@ function RouterProvider({
 
 window.process = {} as any
 window.process.env = {}
-render(<RouterProvider ${renderRootLayout}
+render(<RouterProvider rootLayout={Layout0}
   routes={[
-    ${createPages.render}
-  ]}${createNotFound.render}
+    { regex: "^\\/about$", element: Page0, ssr: false, layouts: [Layout0] },{ regex: "^\\/$", element: Page1, ssr: false, layouts: [Layout0] }
+  ]}
 />, document)
-`
-  await Bun.write(outDir + '/root.tsx', entrypointScript)
-}

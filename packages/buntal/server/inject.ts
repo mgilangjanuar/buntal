@@ -1,6 +1,7 @@
 import type { Req } from '@buntal/core'
-import { createElement, type ReactNode } from 'react'
-import { renderToReadableStream } from 'react-dom/server'
+import { createElement, type VNode } from 'preact'
+import { renderToReadableStream } from 'preact-render-to-string/stream'
+// import { renderToReadableStream } from 'react-dom/server'
 import { type RouteBuilderResult } from './router'
 import { ssrHandler } from './ssr'
 
@@ -40,7 +41,9 @@ export const injectHandler =
       }
 
       // Recursively create the component with layouts
-      const createComponent = async (layouts: string[]): Promise<ReactNode> => {
+      const createComponent = async (
+        layouts: string[]
+      ): Promise<VNode<any>> => {
         if (!layouts?.[0]) {
           return createElement(handler.default, args)
         }

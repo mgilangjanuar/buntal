@@ -11,16 +11,14 @@
     "url": "https://github.com/mgilangjanuar/buntal.git"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/react": "^19.1.5",
-    "@types/react-dom": "^19.1.5"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@buntal/core": "latest",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "preact": "^10.26.8",
+    "preact-render-to-string": "^6.5.13"
   }
 }

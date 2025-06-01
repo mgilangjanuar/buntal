@@ -1,21 +1,18 @@
+import { createContext, createElement, type VNode } from 'preact'
 import {
-  createContext,
-  createElement,
   useCallback,
   useContext,
   useEffect,
   useRef,
-  useState,
-  type ReactNode
-} from 'react'
-import { Notfound } from '../notfound'
+  useState
+} from 'preact/hooks'
 
 export type ServerRouterType = {
   regex: string
   ssr?: boolean
   data?: unknown
-  element: (data: any) => ReactNode
-  layouts: ((data: any) => ReactNode)[]
+  element: (data: any) => any
+  layouts: ((data: any) => any)[]
 }
 
 type RouterType = {
@@ -46,17 +43,18 @@ export const RouterContext = createContext<RouterType>({
 
 type RouterProviderProps = {
   routes: ServerRouterType[]
-  rootLayout?: (props: any) => ReactNode
-  notFound?: ReactNode
+  rootLayout?: (props: any) => any
+  notFound?: any
 }
 
 export function RouterProvider({
   routes,
   rootLayout,
-  notFound = <Notfound />,
+  notFound = <div>Not found!</div>,
   ...props
 }: RouterProviderProps) {
-  const [activeRoute, setActiveRoute] = useState<string>(
+  console.log('RouterProvider', routes, rootLayout, notFound)
+  const [activeRoute, setActiveRoute] = useState<string | undefined>(
     window?.location.pathname
   )
   const [router, setRouter] = useState<(typeof routes)[number] | null>()
@@ -65,7 +63,7 @@ export function RouterProvider({
     params: Record<string, string>
     data: any
   }>(null)
-  const [page, setPage] = useState<ReactNode>(null)
+  const [page, setPage] = useState<VNode<any>>(<div>Loading...</div>)
 
   useEffect(() => {
     const handler = () => {
@@ -79,7 +77,8 @@ export function RouterProvider({
 
   useEffect(() => {
     const route =
-      routes.find((r) => new RegExp(r.regex).test(activeRoute)) || null
+      routes.find((r) => new RegExp(r.regex).test(activeRoute as string)) ||
+      null
     setRouter(route)
 
     return () => {
@@ -89,8 +88,8 @@ export function RouterProvider({
 
   const buildPage = useCallback(
     async (
-      layouts: ((data: any) => ReactNode)[] = router?.layouts || []
-    ): Promise<ReactNode> => {
+      layouts: ((data: any) => any)[] = router?.layouts || []
+    ): Promise<any> => {
       if (!router) return
 
       if (!args.current) {
@@ -208,7 +207,7 @@ export function RouterProvider({
         }
       }}
     >
-      {page}
+      asoidhsai
     </RouterContext.Provider>
   )
 }

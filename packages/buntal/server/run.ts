@@ -47,7 +47,7 @@ export async function runServer({
       return resp
     }
 
-    return await notfoundHandler(env, appDir)
+    // return await notfoundHandler(env, appDir)
   })
 
   app.use(logger())

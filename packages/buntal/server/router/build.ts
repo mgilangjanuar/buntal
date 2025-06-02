@@ -6,8 +6,12 @@ export type RouteBuilderResult = {
   regex: string
   ssr: boolean
   data?: unknown
-  layouts: string[]
-  layoutsSafeImport: string[]
+  layouts: {
+    filePath: string
+    ssr?: boolean
+    data?: unknown
+  }[]
+  layoutsSafeImport: RouteBuilderResult['layouts']
 }
 
 export const builder = async (
@@ -25,7 +29,7 @@ export const builder = async (
     ) {
       const handler = await import(filePath)
       if ('default' in handler) {
-        const layouts: string[] = []
+        const layouts: RouteBuilderResult['layouts'] = []
         const parsedPaths = filePath.replace(process.cwd(), '').split('/')
         for (const [i, path] of Object.entries(parsedPaths)) {
           const layoutPath = `${process.cwd()}${parsedPaths.slice(0, Number(i)).join('/')}/${path}/layout.tsx`
@@ -33,7 +37,27 @@ export const builder = async (
             (await Bun.file(layoutPath).exists()) &&
             'default' in (await import(layoutPath))
           ) {
-            layouts.push(layoutPath)
+            const prev = results
+              .find(
+                (r) =>
+                  r.route === route &&
+                  r.layouts.some((l) => l.filePath === layoutPath)
+              )
+              ?.layouts.find((l) => l.filePath === layoutPath)
+            if (prev) {
+              layouts.push(prev)
+            } else {
+              const layoutHandler = await import(layoutPath)
+              layouts.push({
+                filePath: layoutPath,
+                ssr:
+                  '$' in layoutHandler && typeof layoutHandler.$ === 'function',
+                data:
+                  '$' in layoutHandler && typeof layoutHandler.$ !== 'function'
+                    ? layoutHandler.$
+                    : undefined
+              })
+            }
           }
         }
         results.push({
@@ -50,9 +74,12 @@ export const builder = async (
               ? handler.$
               : undefined,
           layouts,
-          layoutsSafeImport: layouts.map((layout) =>
-            layout.replace(process.cwd(), source).replace(/\.tsx$/gi, '')
-          )
+          layoutsSafeImport: layouts.map((layout) => ({
+            ...layout,
+            filePath: layout.filePath
+              .replace(process.cwd(), source)
+              .replace(/\.tsx$/gi, '')
+          }))
         })
       }
     }

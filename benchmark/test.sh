@@ -70,6 +70,7 @@ check_all_services() {
   check_service "py-fastapi" "http://localhost:3103/json" || all_services_ok=false
   check_service "node-express" "http://localhost:3100/json" || all_services_ok=false
   check_service "go-gin" "http://localhost:3102/json" || all_services_ok=false
+  check_service "elysia" "http://localhost:3104/json" || all_services_ok=false
   check_service "buntal" "http://localhost:3101/json" || all_services_ok=false
 
   echo ""
@@ -152,6 +153,7 @@ echo ""
 benchmark_service "py-fastapi" "http://localhost:3103/json"
 benchmark_service "node-express" "http://localhost:3100/json"
 benchmark_service "go-gin" "http://localhost:3102/json"
+benchmark_service "elysia" "http://localhost:3104/json"
 benchmark_service "buntal" "http://localhost:3101/json"
 
 print_table

@@ -2,11 +2,57 @@
 
 # Configuration
 NUM_REQUESTS=100
+NUM_RUNS=3  # Number of benchmark runs (default)
 
-# Arrays to store benchmark results
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --runs)
+      NUM_RUNS="$2"
+      shift 2
+      ;;
+    --requests)
+      NUM_REQUESTS="$2"
+      shift 2
+      ;;
+    --help|-h)
+      echo "Usage: $0 [options]"
+      echo "Options:"
+      echo "  --runs N        Number of benchmark runs (default: 3)"
+      echo "  --requests N    Number of requests per service per run (default: 100)"
+      echo "  --help, -h      Show this help message"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Use --help for usage information"
+      exit 1
+      ;;
+  esac
+done
+
+# Validate inputs
+if ! [[ "$NUM_RUNS" =~ ^[1-9][0-9]*$ ]]; then
+  echo "Error: --runs must be a positive integer"
+  exit 1
+fi
+
+if ! [[ "$NUM_REQUESTS" =~ ^[1-9][0-9]*$ ]]; then
+  echo "Error: --requests must be a positive integer"
+  exit 1
+fi
+
+# Arrays to store benchmark results for current run
 declare -a services=()
 declare -a avg_latencies=()
 declare -a rps_values=()
+
+# Arrays to store results across multiple runs - using simple arrays instead of associative
+declare -a all_runs_services=()
+declare -a all_runs_latencies=()
+declare -a all_runs_rps=()
+declare -a all_runs_numbers=()
+declare -a all_services_list=("py-fastapi" "node-express" "go-gin" "elysia" "buntal")
 
 benchmark_service() {
   local service_name=$1
@@ -212,17 +258,201 @@ print_ascii_chart() {
   echo ""
 }
 
-# First check if all services are running
-check_all_services
+# Function to reset arrays for a new run
+reset_run_data() {
+  services=()
+  avg_latencies=()
+  rps_values=()
+}
 
-echo "Starting benchmark with $NUM_REQUESTS requests per service..."
+# Function to run a complete benchmark round
+run_benchmark_round() {
+  local run_number=$1
+
+  echo "╔════════════════════════════════════════════════════════════════════════════╗"
+  echo "║                            BENCHMARK RUN #$run_number                                ║"
+  echo "╚════════════════════════════════════════════════════════════════════════════╝"
+  echo ""
+
+  # Reset data for new run
+  reset_run_data
+
+  echo "Starting benchmark with $NUM_REQUESTS requests per service..."
+  echo ""
+
+  benchmark_service "py-fastapi" "http://localhost:3103/json"
+  benchmark_service "node-express" "http://localhost:3100/json"
+  benchmark_service "go-gin" "http://localhost:3102/json"
+  benchmark_service "elysia" "http://localhost:3104/json"
+  benchmark_service "buntal" "http://localhost:3101/json"
+
+  # Store results for this run
+  for i in "${!services[@]}"; do
+    local service="${services[i]}"
+    local avg_latency="${avg_latencies[i]}"
+    local rps="${rps_values[i]}"
+
+    # Store in parallel arrays
+    all_runs_services+=("$service")
+    all_runs_latencies+=("$avg_latency")
+    all_runs_rps+=("$rps")
+    all_runs_numbers+=("$run_number")
+  done
+
+  print_table
+  print_ascii_chart
+
+  echo ""
+  echo "════════════════════════════════════════════════════════════════════════════"
+  echo ""
+}
+
+# Function to calculate statistics across all runs
+calculate_statistics() {
+  local service=$1
+  local metric=$2  # "latency" or "rps"
+
+  local values=()
+  local sum=0
+
+  # Collect values for this service across all runs
+  for i in "${!all_runs_services[@]}"; do
+    if [[ "${all_runs_services[i]}" == "$service" ]]; then
+      local value
+      if [[ "$metric" == "latency" ]]; then
+        value="${all_runs_latencies[i]}"
+      else
+        value="${all_runs_rps[i]}"
+      fi
+
+      # Validate that value is a number
+      if [[ "$value" =~ ^[0-9]+\.?[0-9]*$ ]] && [[ "$value" != "0" ]]; then
+        values+=("$value")
+        sum=$(awk "BEGIN {print $sum + $value}")
+      fi
+    fi
+  done
+
+  if [[ ${#values[@]} -eq 0 ]]; then
+    echo "0:0:0"  # avg:min:max
+    return
+  fi
+
+  local avg=$(awk "BEGIN {print $sum / ${#values[@]}}")
+
+  # Find min and max
+  local min=${values[0]}
+  local max=${values[0]}
+
+  for value in "${values[@]}"; do
+    if (( $(awk "BEGIN {print ($value < $min)}") )); then
+      min=$value
+    fi
+    if (( $(awk "BEGIN {print ($value > $max)}") )); then
+      max=$value
+    fi
+  done
+
+  echo "$avg:$min:$max"
+}
+
+# Function to print comprehensive recap
+print_recap() {
+  local machine_info=$(get_machine_info)
+
+  echo ""
+  echo "╔════════════════════════════════════════════════════════════════════════════╗"
+  echo "║                         COMPREHENSIVE RECAP                                ║"
+  echo "║                        ($NUM_RUNS Runs Summary)                                    ║"
+  echo "╠════════════════════════════════════════════════════════════════════════════╣"
+  printf "║ Machine: %-65s ║\n" "$machine_info"
+  printf "║ Date: %-68s ║\n" "$(date '+%Y-%m-%d %H:%M:%S %Z')"
+  printf "║ Requests per service per run: %-44s ║\n" "$NUM_REQUESTS"
+  printf "║ Number of runs: %-58s ║\n" "$NUM_RUNS"
+  echo "╚════════════════════════════════════════════════════════════════════════════╝"
+  echo ""
+
+  echo "╔═══════════════╦════════════════════════════════╦═══════════════════════════════════════╗"
+  echo "║   Service     ║      Avg Latency (sec)         ║           RPS (req/sec)               ║"
+  echo "║               ║   Avg   │  Min   │   Max       ║    Avg    │   Min    │     Max        ║"
+  echo "╠═══════════════╬═════════╪════════╪═════════════╬═══════════╪══════════╪════════════════╣"
+
+  for service in "${all_services_list[@]}"; do
+    local latency_stats=$(calculate_statistics "$service" "latency")
+    local rps_stats=$(calculate_statistics "$service" "rps")
+
+    local lat_avg=$(echo "$latency_stats" | cut -d: -f1)
+    local lat_min=$(echo "$latency_stats" | cut -d: -f2)
+    local lat_max=$(echo "$latency_stats" | cut -d: -f3)
+
+    local rps_avg=$(echo "$rps_stats" | cut -d: -f1)
+    local rps_min=$(echo "$rps_stats" | cut -d: -f2)
+    local rps_max=$(echo "$rps_stats" | cut -d: -f3)
+
+    printf "║ %-13s ║ %7.4f │ %6.4f │ %7.4f ║ %9.2f │ %8.2f │ %10.2f ║\n" \
+      "$service" "$lat_avg" "$lat_min" "$lat_max" "$rps_avg" "$rps_min" "$rps_max"
+  done
+
+  echo "╚═══════════════╩═════════╪════════╪═════════════╩═══════════╪══════════╪════════════════╝"
+  echo ""
+
+  # Print ranking based on average RPS
+  echo "╔════════════════════════════════════════════════════════════════════════════╗"
+  echo "║                         RANKING (by Average RPS)                           ║"
+  echo "╚════════════════════════════════════════════════════════════════════════════╝"
+  echo ""
+
+  # Create array for ranking
+  local ranking_data=()
+  for service in "${all_services_list[@]}"; do
+    local rps_stats=$(calculate_statistics "$service" "rps")
+    local rps_avg=$(echo "$rps_stats" | cut -d: -f1)
+    ranking_data+=("$rps_avg:$service")
+  done
+
+  # Sort by RPS (descending)
+  IFS=$'\n' sorted_ranking=($(sort -t: -k1 -nr <<<"${ranking_data[*]}"))
+  unset IFS
+
+  local rank=1
+  for item in "${sorted_ranking[@]}"; do
+    local rps=$(echo "$item" | cut -d: -f1)
+    local service=$(echo "$item" | cut -d: -f2)
+    printf "%d. %-15s - %.2f RPS (average)\n" "$rank" "$service" "$rps"
+    ((rank++))
+  done
+
+  echo ""
+}
+
+# Main execution
+echo "╔════════════════════════════════════════════════════════════════════════════╗"
+echo "║                         MULTI-RUN BENCHMARK SUITE                          ║"
+echo "╚════════════════════════════════════════════════════════════════════════════╝"
+echo ""
+echo "Configuration:"
+echo "  • Number of runs: $NUM_RUNS"
+echo "  • Requests per service per run: $NUM_REQUESTS"
+echo "  • Services: py-fastapi, node-express, go-gin, elysia, buntal"
 echo ""
 
-benchmark_service "py-fastapi" "http://localhost:3103/json"
-benchmark_service "node-express" "http://localhost:3100/json"
-benchmark_service "go-gin" "http://localhost:3102/json"
-benchmark_service "elysia" "http://localhost:3104/json"
-benchmark_service "buntal" "http://localhost:3101/json"
+# Check services once before starting all runs
+check_all_services
 
-print_table
-print_ascii_chart
+# Run multiple benchmark rounds
+for ((run=1; run<=NUM_RUNS; run++)); do
+  run_benchmark_round $run
+
+  # Add a delay between runs to allow services to recover
+  if [[ $run -lt $NUM_RUNS ]]; then
+    sleep 1
+    echo ""
+  fi
+done
+
+# Print comprehensive recap
+print_recap
+
+echo "╔════════════════════════════════════════════════════════════════════════════╗"
+echo "║                          BENCHMARK COMPLETED                               ║"
+echo "╚════════════════════════════════════════════════════════════════════════════╝"

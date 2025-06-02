@@ -44,6 +44,48 @@ benchmark_service() {
   rps_values+=("$RPS")
 }
 
+check_service() {
+  local service_name=$1
+  local url=$2
+
+  echo -n "Checking $service_name at $url... "
+
+  # Use curl with timeout and silent mode to check if service is responsive
+  if curl -s --connect-timeout 5 --max-time 10 "$url" > /dev/null 2>&1; then
+    echo "✅ OK"
+    return 0
+  else
+    echo "❌ FAILED"
+    return 1
+  fi
+}
+
+check_all_services() {
+  echo "Checking if all services are running..."
+  echo ""
+
+  local all_services_ok=true
+
+  # Check each service
+  check_service "py-fastapi" "http://localhost:3103/json" || all_services_ok=false
+  check_service "node-express" "http://localhost:3100/json" || all_services_ok=false
+  check_service "go-gin" "http://localhost:3102/json" || all_services_ok=false
+  check_service "buntal" "http://localhost:3101/json" || all_services_ok=false
+
+  echo ""
+
+  if [ "$all_services_ok" = false ]; then
+    echo "❌ Some services are not running or not responding!"
+    echo "Please make sure all services are started before running the benchmark."
+    echo "You can use: ./run-services.sh to start all services."
+    echo ""
+    exit 1
+  else
+    echo "✅ All services are running and responding!"
+    echo ""
+  fi
+}
+
 get_machine_info() {
   local os_info=$(uname -s)
   local arch=$(uname -m)
@@ -100,6 +142,9 @@ print_table() {
   echo "🏆 Best Performance: $best_service with ${best_rps} RPS"
   echo ""
 }
+
+# First check if all services are running
+check_all_services
 
 echo "Starting benchmark with $NUM_REQUESTS requests per service..."
 echo ""

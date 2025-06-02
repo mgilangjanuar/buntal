@@ -26,7 +26,7 @@ export const injectHandler =
       req.method === 'GET'
     ) {
       // Handle SSR requests
-      if (req.query?._$ && route.ssr) {
+      if (req.query?._$ && (route.ssr || route.layouts?.some((l) => l.ssr))) {
         let _handler: any = handler
         if (req.query._$ !== '-1') {
           _handler = route.layouts[Number(req.query._$)]
@@ -41,7 +41,8 @@ export const injectHandler =
 
       const args = {
         query: req.query,
-        params: req.params
+        params: req.params,
+        data: route.ssr ? await handler.$(req) : route.data
       }
 
       // Recursively create the component with layouts
@@ -49,15 +50,21 @@ export const injectHandler =
         layouts: RouteBuilderResult['layouts']
       ): Promise<ReactNode> => {
         if (!layouts?.[0]) {
-          return createElement(handler.default, {
-            ...args,
-            data: route.ssr ? await handler.$(req) : route.data
-          })
+          return createElement(handler.default, args)
         }
         const layout = await import(layouts[0].filePath)
+        const dataLayout = layouts[0].ssr
+          ? await layout.$(req)
+          : layouts[0].data
         return createElement(layout.default, {
           ...args,
-          data: layouts[0].ssr ? await layout.$(req) : layouts[0].data,
+          data: {
+            ...dataLayout,
+            _meta: {
+              ...dataLayout?._meta,
+              ...args.data?._meta
+            }
+          },
           children: await createComponent(layouts.slice(1))
         })
       }

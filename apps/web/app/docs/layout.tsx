@@ -27,18 +27,18 @@ const MENUS = [
   }
 ]
 
-export const $ = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  return {
-    data: 'test'
-  }
-}
+// export const $ = async () => {
+//   await new Promise((resolve) => setTimeout(resolve, 1000))
+//   return {
+//     data: 'test'
+//   }
+// }
 
 export default function DocsLayout({
-  data,
+  // data,
   children
 }: Readonly<{
-  data: Awaited<ReturnType<typeof $>>
+  // data: Awaited<ReturnType<typeof $>>
   children: React.ReactNode
 }>) {
   const { pathname } = useRouter()
@@ -51,6 +51,7 @@ export default function DocsLayout({
         className="drawer-toggle"
       />
       <div className="drawer-content min-h-svh bg-base-100">
+        {/* {data.data} */}
         <Suspense
           fallback={
             <div className="flex flex-col p-4 w-full md:max-w-prose">

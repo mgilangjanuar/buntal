@@ -14,9 +14,9 @@ export default function RootLayout({
       <head>
         <Meta
           {...{
-            ...(data?._meta || {}),
             title: 'Buntal App',
-            description: 'This is a simple Buntal application.'
+            description: 'This is a simple Buntal application.',
+            ...(data?._meta || {})
           }}
         />
         <link rel="icon" href="/favicon.svg" />

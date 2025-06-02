@@ -52,7 +52,7 @@ View more examples [here](/examples).
 
 It runs `benchmark/test.sh` script, which is a simple bash script to simulate multiple requests to various services and measure their performance.
 
-Note. The result may vary depending on your machine.
+Note. The result may vary depending on your machine and the version of each service.
 
 ```
 ╔════════════════════════════════════════════════════════════════════════════╗

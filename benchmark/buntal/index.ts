@@ -5,7 +5,6 @@ const app = new Http({
 })
 
 app.get('/json', (_, res) => {
-  console.log('Received a request for /json')
   return res.json({
     message: 'Hello, World!'
   })

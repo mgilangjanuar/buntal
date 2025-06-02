@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Configuration
+NUM_REQUESTS=100
+
 # Arrays to store benchmark results
 declare -a services=()
 declare -a avg_latencies=()
@@ -9,7 +12,7 @@ benchmark_service() {
   local service_name=$1
   local url=$2
   local total_time=0
-  local num_requests=100
+  local num_requests=$NUM_REQUESTS
 
   echo -n "Benchmarking $service_name..."
 
@@ -72,7 +75,7 @@ print_table() {
   echo "╠════════════════════════════════════════════════════════════════════════════╣"
   printf "║ Machine: %-65s ║\n" "$machine_info"
   printf "║ Date: %-68s ║\n" "$(date '+%Y-%m-%d %H:%M:%S %Z')"
-  printf "║ Requests per service: %-52s ║\n" "100"
+  printf "║ Requests per service: %-52s ║\n" "$NUM_REQUESTS"
   echo "╠═══════════════╦════════════════════════╦═══════════════════════════════════╣"
   echo "║   Service     ║   Avg Latency (sec)    ║      RPS (req/sec)                ║"
   echo "╠═══════════════╬════════════════════════╬═══════════════════════════════════╣"
@@ -98,7 +101,7 @@ print_table() {
   echo ""
 }
 
-echo "Starting benchmark with 100 requests per service..."
+echo "Starting benchmark with $NUM_REQUESTS requests per service..."
 echo ""
 
 benchmark_service "node-express" "http://localhost:3100/json"

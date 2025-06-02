@@ -27,4 +27,5 @@ benchmark_service() {
 }
 
 benchmark_service "node-express" "http://localhost:3100/json"
+benchmark_service "go-gin" "http://localhost:3102/json"
 benchmark_service "buntal" "http://localhost:3101/json"

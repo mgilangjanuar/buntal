@@ -8,9 +8,18 @@
         "prettier": "3.5.3",
       },
     },
+    "apps/benchmark": {
+      "name": "benchmark",
+      "devDependencies": {
+        "@types/bun": "latest",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
     "apps/web": {
       "name": "web",
-      "version": "0.0.10",
+      "version": "0.0.15",
       "dependencies": {
         "@tailwindcss/cli": "^4.1.7",
         "buntal": "workspace:^",
@@ -36,9 +45,9 @@
     },
     "examples/hello-world": {
       "name": "hello-world",
-      "version": "0.0.2",
+      "version": "0.0.1",
       "dependencies": {
-        "@tailwindcss/cli": "^4.1.7",
+        "@buntal/core": "latest",
         "buntal": "latest",
         "clsx": "^2.1.1",
         "react": "^19.1.0",
@@ -48,6 +57,7 @@
       },
       "devDependencies": {
         "@buntal/cli": "latest",
+        "@tailwindcss/cli": "^4.1.7",
         "@types/bun": "latest",
         "@types/react": "^19.1.4",
         "@types/react-dom": "^19.1.5",
@@ -70,7 +80,7 @@
     },
     "packages/@buntal/cli": {
       "name": "@buntal/cli",
-      "version": "0.0.7",
+      "version": "0.0.10",
       "bin": {
         "buntal": "./index.ts",
       },
@@ -101,7 +111,7 @@
     },
     "packages/buntal": {
       "name": "buntal",
-      "version": "0.0.12",
+      "version": "0.0.17",
       "dependencies": {
         "@buntal/core": "latest",
         "react": "^19.1.0",
@@ -118,7 +128,7 @@
     },
     "packages/create-buntal": {
       "name": "create-buntal",
-      "version": "0.0.9",
+      "version": "0.0.12",
       "bin": {
         "create-buntal": "./index.ts",
       },
@@ -231,6 +241,8 @@
     "@types/unist": ["@types/unist@2.0.11", "", {}, "sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA=="],
 
     "bcryptjs": ["bcryptjs@3.0.2", "", { "bin": { "bcrypt": "bin/bcrypt" } }, "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog=="],
+
+    "benchmark": ["benchmark@workspace:apps/benchmark"],
 
     "braces": ["braces@3.0.3", "", { "dependencies": { "fill-range": "^7.1.1" } }, "sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA=="],
 
@@ -418,9 +430,11 @@
 
     "create-buntal/@types/bun": ["@types/bun@1.2.14", "", { "dependencies": { "bun-types": "1.2.14" } }, "sha512-VsFZKs8oKHzI7zwvECiAJ5oSorWndIWEVhfbYqZd4HI/45kzW7PN2Rr5biAzvGvRuNmYLSANY+H59ubHq8xw7Q=="],
 
-    "hello-world/@buntal/cli": ["@buntal/cli@0.0.3", "", { "dependencies": { "commander": "^14.0.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "buntal": "index.ts" } }, "sha512-Z2tj8s5KQqJAvF1SW0l2DetFJisRwKPkW/bVADm9w/v453Pk+3vSF3gvFil5AJFzGqZ3MZJn77oq1XJ3/vGTAA=="],
+    "hello-world/@buntal/cli": ["@buntal/cli@0.0.10", "", { "dependencies": { "commander": "^14.0.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "buntal": "index.ts" } }, "sha512-+0z6suBqZm8zmRdNO33Mh4U4bcWvFcAukfp54030bpFtai0Kd0/wGoovueqs1YgcPSmwjfb/cA6gR3JbBXYkQQ=="],
 
-    "hello-world/buntal": ["buntal@0.0.12", "", { "dependencies": { "@buntal/core": "latest", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-P6At+UuArYVZSeukNL9VJJ5311RzzJenFkXjzMTGqS9mcwOAKAk8hM+9aJnVlb4rvxOHd1wG3a1Lz/OKVXPsWQ=="],
+    "hello-world/@buntal/core": ["@buntal/core@0.0.6", "", { "dependencies": { "bcryptjs": "^3.0.2", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-PcqdSi4MSPULJhoBilVzYs6gUTX/af04wC6xIKC7ohVS46LciLkoVR1lsIVaDeVPagcQPvJ6zvjNuZKq95KrAA=="],
+
+    "hello-world/buntal": ["buntal@0.0.17", "", { "dependencies": { "@buntal/core": "latest", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-JuWJSQSYsVqFyMoGsu/iVwy0Y7s2vqRgVN/p+D3BS0gI7jMer0Q8o7S7beGt00ovKQRSmkg0MvfZyGNfMNlOMA=="],
 
     "lightningcss/detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
 
@@ -431,8 +445,6 @@
     "@buntal/core/@types/bun/bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
 
     "create-buntal/@types/bun/bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
-
-    "hello-world/buntal/@buntal/core": ["@buntal/core@0.0.6", "", { "dependencies": { "bcryptjs": "^3.0.2", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-PcqdSi4MSPULJhoBilVzYs6gUTX/af04wC6xIKC7ohVS46LciLkoVR1lsIVaDeVPagcQPvJ6zvjNuZKq95KrAA=="],
 
     "simple-api/@types/bun/bun-types": ["bun-types@1.2.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-Kuh4Ub28ucMRWeiUUWMHsT9Wcbr4H3kLIO72RZZElSDxSu7vpetRvxIUDUaW6QtaIeixIpm7OXtNnZPf82EzwA=="],
   }

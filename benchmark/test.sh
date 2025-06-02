@@ -41,10 +41,38 @@ benchmark_service() {
   rps_values+=("$RPS")
 }
 
+get_machine_info() {
+  local os_info=$(uname -s)
+  local arch=$(uname -m)
+  local cpu_info=""
+  local memory_info=""
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    cpu_info=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo "Unknown CPU")
+    memory_info=$(sysctl -n hw.memsize 2>/dev/null | awk '{printf "%.1f GB", $1/1024/1024/1024}' || echo "Unknown Memory")
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Linux
+    cpu_info=$(grep "model name" /proc/cpuinfo | head -1 | cut -d: -f2 | sed 's/^ *//' || echo "Unknown CPU")
+    memory_info=$(grep MemTotal /proc/meminfo | awk '{printf "%.1f GB", $2/1024/1024}' || echo "Unknown Memory")
+  else
+    cpu_info="Unknown CPU"
+    memory_info="Unknown Memory"
+  fi
+
+  echo "$os_info $arch | $cpu_info | $memory_info"
+}
+
 print_table() {
+  local machine_info=$(get_machine_info)
+
   echo ""
   echo "╔════════════════════════════════════════════════════════════════════════════╗"
   echo "║                           BENCHMARK RESULTS                                ║"
+  echo "╠════════════════════════════════════════════════════════════════════════════╣"
+  printf "║ Machine: %-65s ║\n" "$machine_info"
+  printf "║ Date: %-68s ║\n" "$(date '+%Y-%m-%d %H:%M:%S %Z')"
+  printf "║ Requests per service: %-52s ║\n" "100"
   echo "╠═══════════════╦════════════════════════╦═══════════════════════════════════╣"
   echo "║   Service     ║   Avg Latency (sec)    ║      RPS (req/sec)                ║"
   echo "╠═══════════════╬════════════════════════╬═══════════════════════════════════╣"

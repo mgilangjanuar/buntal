@@ -183,11 +183,17 @@ print_ascii_chart() {
     local rps=${sorted_rps[i]}
 
     # Calculate bar length (proportional to max RPS) using bc for safer arithmetic
-    local bar_length=$(echo "scale=0; ($rps / $max_rps) * $chart_width" | bc -l 2>/dev/null || echo "1")
+    # Use scale=2 for better precision, then round to integer
+    local bar_length_precise=$(echo "scale=2; ($rps / $max_rps) * $chart_width" | bc -l 2>/dev/null || echo "1.0")
+    local bar_length=$(printf "%.0f" "$bar_length_precise" 2>/dev/null || echo "1")
 
-    # Ensure bar_length is a valid number and at least 1
-    if ! [[ "$bar_length" =~ ^[0-9]+$ ]] || [ "$bar_length" -lt 1 ]; then
+    # Ensure minimum bar length of 1 for visibility, but allow proper scaling
+    if ! [[ "$bar_length" =~ ^[0-9]+$ ]]; then
       bar_length=1
+    elif [ "$bar_length" -lt 1 ]; then
+      bar_length=1
+    elif [ "$bar_length" -gt "$chart_width" ]; then
+      bar_length=$chart_width
     fi
 
     # Create the bar

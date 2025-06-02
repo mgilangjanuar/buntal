@@ -122,16 +122,16 @@ else
     deactivate
 fi
 
-# Start Node.js Elysia service
-print_status "Starting Node.js Elysia service on port 3104..."
+# Start Elysia service
+print_status "Starting Elysia service on port 3104..."
 cd "$SCRIPT_DIR/elysia"
 if [ ! -d "node_modules" ]; then
-    print_status "Installing Node.js Elysia dependencies..."
+    print_status "Installing Elysia dependencies..."
     bun install
 fi
 bun start > ../logs/elysia.log 2>&1 &
 ELYSIA_PID=$!
-print_success "Node.js Elysia service started (PID: $ELYSIA_PID)"
+print_success "Elysia service started (PID: $ELYSIA_PID)"
 
 echo
 print_success "All services have been started!"
@@ -140,7 +140,7 @@ echo "  - Node.js Express: http://localhost:3100"
 echo "  - Buntal:          http://localhost:3101"
 echo "  - Go Gin:          http://localhost:3102"
 echo "  - Python FastAPI:  http://localhost:3103"
-echo "  - Node.js Elysia:  http://localhost:3104"
+echo "  - Elysia:          http://localhost:3104"
 echo
 print_status "Logs are being written to the logs/ directory"
 print_status "Press Ctrl+C to stop all services"

@@ -47,7 +47,7 @@ View more examples [here](/examples).
 
 ## Benchmark Test
 
-It runs benchmark/test.sh script, which is a simple bash script to simulate multiple requests to various services and measure their performance.
+It runs `benchmark/test.sh` script, which is a simple bash script to simulate multiple requests to various services and measure their performance.
 
 Note. The result may vary depending on your machine.
 

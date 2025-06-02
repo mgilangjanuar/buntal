@@ -4,7 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "buntal dev"
+    "dev": "buntal dev",
+    "build": "buntal build",
+    "start": "buntal start"
   },
   "devDependencies": {
     "@buntal/cli": "workspace:^",

@@ -129,30 +129,89 @@ print_table() {
 
   echo "╚═══════════════╩════════════════════════╩═══════════════════════════════════╝"
   echo ""
+}
 
-  # Find the best performing service
-  local best_rps=0
-  local best_service=""
+print_ascii_chart() {
+  # Create arrays for sorted data
+  local sorted_services=()
+  local sorted_rps=()
+
+  # Create combined array for sorting
+  local combined=()
   for i in "${!services[@]}"; do
-    if (( $(echo "${rps_values[i]} > $best_rps" | bc -l) )); then
-      best_rps=${rps_values[i]}
-      best_service=${services[i]}
+    # Validate RPS value before adding
+    if [[ "${rps_values[i]}" =~ ^[0-9]+\.?[0-9]*$ ]]; then
+      combined+=("${rps_values[i]}:${services[i]}")
     fi
   done
 
-  local second_best_rps=-1
-  local second_best_service=""
-  for i in "${!services[@]}"; do
-    if [[ "${services[i]}" != "$best_service" ]]; then
-      if [[ "$second_best_rps" == "-1" || $(echo "${rps_values[i]} > $second_best_rps" | bc -l) == 1 ]]; then
-        second_best_rps=${rps_values[i]}
-        second_best_service=${services[i]}
-      fi
-    fi
+  # Check if we have any valid data
+  if [ ${#combined[@]} -eq 0 ]; then
+    echo "❌ No valid RPS data to display chart"
+    return
+  fi
+
+  # Sort by RPS (descending order)
+  IFS=$'\n' sorted=($(sort -t: -k1 -nr <<<"${combined[*]}"))
+  unset IFS
+
+  # Extract sorted data
+  for item in "${sorted[@]}"; do
+    local rps=$(echo "$item" | cut -d: -f1)
+    local service=$(echo "$item" | cut -d: -f2)
+    sorted_services+=("$service")
+    sorted_rps+=("$rps")
   done
 
-  echo "🏆 Best Performance: $best_service with ${best_rps} RPS"
-  echo "🥈 2nd: $second_best_service with ${second_best_rps} RPS"
+  # Find max RPS for scaling
+  local max_rps=${sorted_rps[0]}
+  local chart_width=50
+
+  # Check for division by zero
+  if [[ "$max_rps" == "0" || "$max_rps" == "0.0" ]]; then
+    echo "❌ Cannot create chart: all RPS values are zero"
+    return
+  fi
+
+  echo "╔════════════════════════════════════════════════════════════════════════════╗"
+  echo "║                        PERFORMANCE CHART (RPS)                             ║"
+  echo "╚════════════════════════════════════════════════════════════════════════════╝"
+  echo ""
+
+  for i in "${!sorted_services[@]}"; do
+    local service=${sorted_services[i]}
+    local rps=${sorted_rps[i]}
+
+    # Calculate bar length (proportional to max RPS) using bc for safer arithmetic
+    local bar_length=$(echo "scale=0; ($rps / $max_rps) * $chart_width" | bc -l 2>/dev/null || echo "1")
+
+    # Ensure bar_length is a valid number and at least 1
+    if ! [[ "$bar_length" =~ ^[0-9]+$ ]] || [ "$bar_length" -lt 1 ]; then
+      bar_length=1
+    fi
+
+    # Create the bar
+    local bar=""
+    for ((j=1; j<=bar_length; j++)); do
+      bar+="█"
+    done
+
+    # Add ranking number and format output
+    local rank=$((i + 1))
+    case $rank in
+      1) rank_symbol="🥇" ;;
+      2) rank_symbol="🥈" ;;
+      3) rank_symbol="🥉" ;;
+      *) rank_symbol="$rank." ;;
+    esac
+
+    printf "%s %-13s │%s│ %.2f RPS\n" "$rank_symbol" "$service" "$bar" "$rps"
+  done
+
+  echo ""
+  # Use bc for the legend calculation too
+  local legend_value=$(echo "scale=1; $max_rps / $chart_width" | bc -l 2>/dev/null || echo "N/A")
+  echo "Chart Legend: Each █ represents ~${legend_value} RPS"
   echo ""
 }
 
@@ -169,3 +228,4 @@ benchmark_service "elysia" "http://localhost:3104/json"
 benchmark_service "buntal" "http://localhost:3101/json"
 
 print_table
+print_ascii_chart

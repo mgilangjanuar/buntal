@@ -71,6 +71,7 @@ export function RouterProvider({
   const args = useRef<{
     query: Record<string, string>
     params: Record<string, string>
+    data?: any
   }>(null)
   const [page, setPage] = useState<ReactNode>(null)
 
@@ -101,20 +102,6 @@ export function RouterProvider({
     ): Promise<ReactNode> => {
       if (!router) return
 
-      if (!args.current) {
-        const match = new RegExp(router.regex).exec(window.location.pathname)
-        const params: Record<string, string> = Object.entries(
-          match?.groups || {}
-        ).reduce((acc, [key, value]) => {
-          return { ...acc, [key]: decodeURIComponent(value) }
-        }, {})
-
-        const query: Record<string, string> =
-          Object.fromEntries(new URLSearchParams(window.location.search)) || {}
-
-        args.current = { query, params }
-      }
-
       const fetchData = async (idx: number) => {
         const resp = await fetch(
           `${window.location.pathname}?${new URLSearchParams({
@@ -130,16 +117,38 @@ export function RouterProvider({
         }
       }
 
-      if (!layouts?.[0]) {
-        return createElement(router.element, {
-          ...args.current,
+      if (!args.current) {
+        const match = new RegExp(router.regex).exec(window.location.pathname)
+        const params: Record<string, string> = Object.entries(
+          match?.groups || {}
+        ).reduce((acc, [key, value]) => {
+          return { ...acc, [key]: decodeURIComponent(value) }
+        }, {})
+
+        const query: Record<string, string> =
+          Object.fromEntries(new URLSearchParams(window.location.search)) || {}
+
+        args.current = {
+          query,
+          params,
           data: router.ssr ? await fetchData(-1) : router.data
-        })
+        }
       }
 
+      if (!layouts?.[0]) {
+        return createElement(router.element, args.current)
+      }
+
+      const layoutData = layouts[0].ssr ? await fetchData(idx) : layouts[0].data
       return createElement(layouts[0].element, {
         ...args.current,
-        data: layouts[0].ssr ? await fetchData(idx) : layouts[0].data,
+        data: {
+          ...layoutData,
+          _meta: {
+            ...layoutData?._meta,
+            ...(args.current.data?._meta || {})
+          }
+        },
         children: buildPage(layouts.slice(1), idx + 1)
       })
     },

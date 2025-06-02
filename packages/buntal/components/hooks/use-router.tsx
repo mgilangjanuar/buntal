@@ -15,7 +15,11 @@ export type ServerRouterType = {
   ssr?: boolean
   data?: unknown
   element: (data: any) => ReactNode
-  layouts: ((data: any) => ReactNode)[]
+  layouts: {
+    element: (data: any) => ReactNode
+    ssr?: boolean
+    data?: unknown
+  }[]
 }
 
 type RouterType = {
@@ -46,7 +50,11 @@ export const RouterContext = createContext<RouterType>({
 
 type RouterProviderProps = {
   routes: ServerRouterType[]
-  rootLayout?: (props: any) => ReactNode
+  rootLayout?: {
+    element: (data: any) => ReactNode
+    ssr?: boolean
+    data?: unknown
+  }
   notFound?: ReactNode
 }
 
@@ -63,7 +71,7 @@ export function RouterProvider({
   const args = useRef<{
     query: Record<string, string>
     params: Record<string, string>
-    data: any
+    data?: any
   }>(null)
   const [page, setPage] = useState<ReactNode>(null)
 
@@ -89,52 +97,59 @@ export function RouterProvider({
 
   const buildPage = useCallback(
     async (
-      layouts: ((data: any) => ReactNode)[] = router?.layouts || []
+      layouts: ServerRouterType['layouts'] = router?.layouts || [],
+      idx: number = 0
     ): Promise<ReactNode> => {
       if (!router) return
 
-      if (!args.current) {
-        const populateArgs = async () => {
-          const match = new RegExp(router.regex).exec(window.location.pathname)
-          const params: Record<string, string> = Object.entries(
-            match?.groups || {}
-          ).reduce((acc, [key, value]) => {
-            return { ...acc, [key]: decodeURIComponent(value) }
-          }, {})
-
-          const query: Record<string, string> =
-            Object.fromEntries(new URLSearchParams(window.location.search)) ||
-            {}
-
-          const fetchData = async () => {
-            const resp = await fetch(
-              `${window.location.pathname}?${new URLSearchParams({
-                ...query,
-                _$: '1'
-              }).toString()}`
-            )
-            if (resp.ok) {
-              if (
-                resp.headers.get('Content-Type')?.includes('application/json')
-              ) {
-                return resp.json()
-              }
-              return resp.text()
-            }
+      const fetchData = async (idx: number) => {
+        const resp = await fetch(
+          `${window.location.pathname}?${new URLSearchParams({
+            ...(args.current?.query || {}),
+            _$: idx.toString()
+          }).toString()}`
+        )
+        if (resp.ok) {
+          if (resp.headers.get('Content-Type')?.includes('application/json')) {
+            return await resp.json()
           }
-          const data = router.ssr ? await fetchData() : router.data
-          return { query, params, data }
+          return await resp.text()
         }
-        args.current = await populateArgs()
+      }
+
+      if (!args.current) {
+        const match = new RegExp(router.regex).exec(window.location.pathname)
+        const params: Record<string, string> = Object.entries(
+          match?.groups || {}
+        ).reduce((acc, [key, value]) => {
+          return { ...acc, [key]: decodeURIComponent(value) }
+        }, {})
+
+        const query: Record<string, string> =
+          Object.fromEntries(new URLSearchParams(window.location.search)) || {}
+
+        args.current = {
+          query,
+          params,
+          data: router.ssr ? await fetchData(-1) : router.data
+        }
       }
 
       if (!layouts?.[0]) {
         return createElement(router.element, args.current)
       }
 
-      return createElement(layouts[0], {
+      const layoutData = layouts[0].ssr ? await fetchData(idx) : layouts[0].data
+      return createElement(layouts[0].element, {
         ...args.current,
-        children: buildPage(layouts.slice(1))
+        data: {
+          ...layoutData,
+          _meta: {
+            ...layoutData?._meta,
+            ...(args.current.data?._meta || {})
+          }
+        },
+        children: buildPage(layouts.slice(1), idx + 1)
       })
     },
     [router]
@@ -168,7 +183,7 @@ export function RouterProvider({
     } else if (router === null) {
       setPage(
         rootLayout
-          ? createElement(rootLayout, {
+          ? createElement(rootLayout.element, {
               data: {
                 _meta: {
                   title: 'Not found'

@@ -7,7 +7,11 @@ export function App({
   notFound
 }: Readonly<{
   routes: ServerRouterType[]
-  rootLayout?: (props: any) => ReactNode
+  rootLayout?: {
+    element: (data: any) => ReactNode
+    ssr?: boolean
+    data?: unknown
+  }
   notFound?: ReactNode
 }>) {
   return (

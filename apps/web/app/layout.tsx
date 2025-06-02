@@ -15,10 +15,10 @@ export default function RootLayout({
       <head>
         <Meta
           {...{
-            ...(data?._meta || {}),
             title: 'Buntal JS',
             description:
-              'Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.'
+              'Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.',
+            ...(data?._meta || {})
           }}
         />
         <link rel="icon" href="/favicon.svg" />

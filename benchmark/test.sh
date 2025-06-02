@@ -372,10 +372,10 @@ print_recap() {
   echo "╚════════════════════════════════════════════════════════════════════════════╝"
   echo ""
 
-  echo "╔═══════════════╦════════════════════════════════╦═══════════════════════════════════════╗"
-  echo "║   Service     ║      Avg Latency (sec)         ║           RPS (req/sec)               ║"
-  echo "║               ║   Avg   │  Min   │   Max       ║    Avg    │   Min    │     Max        ║"
-  echo "╠═══════════════╬═════════╪════════╪═════════════╬═══════════╪══════════╪════════════════╣"
+  echo "╔═══════════════╦═══════════════════════════════════╦═══════════════════════════════════════╗"
+  echo "║   Service     ║        Avg Latency (sec)          ║           RPS (req/sec)               ║"
+  echo "║               ║   Avg   │   Min   │    Max        ║    Avg    │    Min    │     Max       ║"
+  echo "╠═══════════════╬═════════╪═════════╪═══════════════╬═══════════╪═══════════╪═══════════════╣"
 
   for service in "${all_services_list[@]}"; do
     local latency_stats=$(calculate_statistics "$service" "latency")
@@ -389,11 +389,11 @@ print_recap() {
     local rps_min=$(echo "$rps_stats" | cut -d: -f2)
     local rps_max=$(echo "$rps_stats" | cut -d: -f3)
 
-    printf "║ %-13s ║ %7.4f │ %6.4f │ %7.4f ║ %9.2f │ %8.2f │ %10.2f ║\n" \
+    printf "║ %-13s ║ %7.4f │ %7.4f │ %8.4f      ║ %9.2f │ %9.2f │ %9.2f     ║\n" \
       "$service" "$lat_avg" "$lat_min" "$lat_max" "$rps_avg" "$rps_min" "$rps_max"
   done
 
-  echo "╚═══════════════╩═════════╪════════╪═════════════╩═══════════╪══════════╪════════════════╝"
+  echo "╚═══════════════╩═════════╩═════════╩═══════════════╩═══════════╩═══════════╩═══════════════╝"
   echo ""
 
   # Print ranking based on average RPS

@@ -178,7 +178,7 @@ export function RouterProvider({
           } else {
             window.scrollTo({ top: 0, behavior: 'instant' })
           }
-        }, 10)
+        }, 500)
       })
     } else if (router === null) {
       setPage(

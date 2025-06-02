@@ -19,6 +19,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@buntal/core": "latest",
     "buntal": "latest",
     "clsx": "^2.1.1",
     "react": "^19.1.0",

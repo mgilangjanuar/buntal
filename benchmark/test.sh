@@ -140,12 +140,14 @@ print_table() {
     fi
   done
 
-  local second_best_rps=0
+  local second_best_rps=-1
   local second_best_service=""
   for i in "${!services[@]}"; do
-    if [[ "${services[i]}" != "$best_service" && $(echo "${rps_values[i]} > $second_best_rps" | bc -l) ]]; then
-      second_best_rps=${rps_values[i]}
-      second_best_service=${services[i]}
+    if [[ "${services[i]}" != "$best_service" ]]; then
+      if [[ "$second_best_rps" == "-1" || $(echo "${rps_values[i]} > $second_best_rps" | bc -l) == 1 ]]; then
+        second_best_rps=${rps_values[i]}
+        second_best_service=${services[i]}
+      fi
     fi
   done
 

@@ -124,12 +124,12 @@ fi
 
 # Start Node.js Elysia service
 print_status "Starting Node.js Elysia service on port 3104..."
-cd "$SCRIPT_DIR/node-elysia"
+cd "$SCRIPT_DIR/elysia"
 if [ ! -d "node_modules" ]; then
     print_status "Installing Node.js Elysia dependencies..."
     bun install
 fi
-bun start > ../logs/node-elysia.log 2>&1 &
+bun start > ../logs/elysia.log 2>&1 &
 ELYSIA_PID=$!
 print_success "Node.js Elysia service started (PID: $ELYSIA_PID)"
 

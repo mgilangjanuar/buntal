@@ -28,10 +28,14 @@
 <br/>
 
 <section align="left" markdown="1">
+
+> [!WARNING]
+> NEVER use Buntal JS in production! Unless you are a pufferfish 🐡
+
 <p>Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.</p>
 
 ```bash
-bun create buntal my-app
+bun create buntal@latest my-app
 ```
 
 ## Features
@@ -219,8 +223,5 @@ Chart Legend: Each █ represents ~44.4 RPS
 ║                          BENCHMARK COMPLETED                               ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 ```
-
-> [!WARNING]
-> NEVER use Buntal JS in production! Unless you are a pufferfish 🐡
 
 </section>

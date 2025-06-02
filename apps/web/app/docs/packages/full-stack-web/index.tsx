@@ -198,7 +198,7 @@ Done in 12ms`}
               style={theme === 'dark' ? atomOneDark : atomOneLight}
               customStyle={{ padding: '12px 16px' }}
             >
-              {`import type { Req } from 'buntal'
+              {`import type { Req } from '@buntal/core'
 
 export const $ = async (req: Req) => {
   const resp = await fetch(\`https://api.example.com/data/\${req.params.id}\`)

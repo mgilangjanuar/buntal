@@ -1,4 +1,3 @@
-export type { Req, Res } from '@buntal/core'
 export * from './components'
 
 export type BuntalConfig = {

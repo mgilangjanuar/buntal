@@ -442,12 +442,6 @@ check_all_services
 # Run multiple benchmark rounds
 for ((run=1; run<=NUM_RUNS; run++)); do
   run_benchmark_round $run
-
-  # Add a delay between runs to allow services to recover
-  if [[ $run -lt $NUM_RUNS ]]; then
-    sleep 1
-    echo ""
-  fi
 done
 
 # Print comprehensive recap

@@ -104,6 +104,7 @@ print_table() {
 echo "Starting benchmark with $NUM_REQUESTS requests per service..."
 echo ""
 
+benchmark_service "py-fastapi" "http://localhost:3103/json"
 benchmark_service "node-express" "http://localhost:3100/json"
 benchmark_service "go-gin" "http://localhost:3102/json"
 benchmark_service "buntal" "http://localhost:3101/json"

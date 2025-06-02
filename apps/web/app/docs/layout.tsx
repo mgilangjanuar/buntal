@@ -27,9 +27,18 @@ const MENUS = [
   }
 ]
 
+export const $ = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  return {
+    data: 'test'
+  }
+}
+
 export default function DocsLayout({
+  data,
   children
 }: Readonly<{
+  data: Awaited<ReturnType<typeof $>>
   children: React.ReactNode
 }>) {
   const { pathname } = useRouter()

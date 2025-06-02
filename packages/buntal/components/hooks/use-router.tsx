@@ -50,7 +50,11 @@ export const RouterContext = createContext<RouterType>({
 
 type RouterProviderProps = {
   routes: ServerRouterType[]
-  rootLayout?: (props: any) => ReactNode
+  rootLayout?: {
+    element: (data: any) => ReactNode
+    ssr?: boolean
+    data?: unknown
+  }
   notFound?: ReactNode
 }
 
@@ -170,7 +174,7 @@ export function RouterProvider({
     } else if (router === null) {
       setPage(
         rootLayout
-          ? createElement(rootLayout, {
+          ? createElement(rootLayout.element, {
               data: {
                 _meta: {
                   title: 'Not found'

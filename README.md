@@ -28,15 +28,14 @@
 <br/>
 
 <section align="left" markdown="1">
-
-> [!WARNING]
-> NEVER use Buntal JS in production! Unless you are a pufferfish 🐡
-
 <p>Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.</p>
 
 ```bash
 bun create buntal@latest my-app
 ```
+
+> [!WARNING]
+> NEVER use Buntal JS in production! Unless you are a pufferfish 🐡
 
 ## Features
 

@@ -45,6 +45,8 @@ bun create buntal my-app
 
 View more examples [here](/examples).
 
+## Benchmark Test
+
 ```
 ╔════════════════════════════════════════════════════════════════════════════╗
 ║                           BENCHMARK RESULTS                                ║

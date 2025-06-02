@@ -202,16 +202,7 @@ print_ascii_chart() {
       bar+="█"
     done
 
-    # Add ranking number and format output
-    local rank=$((i + 1))
-    case $rank in
-      1) rank_symbol="🥇" ;;
-      2) rank_symbol="🥈" ;;
-      3) rank_symbol="🥉" ;;
-      *) rank_symbol="$rank." ;;
-    esac
-
-    printf "%s %-13s │%s│ %.2f RPS\n" "$rank_symbol" "$service" "$bar" "$rps"
+    printf "%-13s │%s│ %.2f RPS\n" "$service" "$bar" "$rps"
   done
 
   echo ""

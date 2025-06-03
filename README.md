@@ -52,8 +52,6 @@ View more examples [here](/examples).
 
 It runs `benchmark/test.sh` script, which is a simple bash script to simulate multiple requests to various services and measure their performance.
 
-Note. The result may vary depending on your machine and the version of each service.
-
 ```
 ╔════════════════════════════════════════════════════════════════════════════╗
 ║                         MULTI-RUN BENCHMARK SUITE                          ║
@@ -241,5 +239,7 @@ Chart Legend: Each █ represents ~44.4 RPS
 ║                          BENCHMARK COMPLETED                               ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 ```
+
+Note. The result may vary depending on your machine and the version of each service. But, the top 3 services are consistent across multiple runs.
 
 </section>

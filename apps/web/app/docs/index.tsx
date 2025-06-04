@@ -164,7 +164,7 @@ export default function DocsPage() {
           </p>
         </div>
         <div className="xl:block hidden">
-          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-3">
+          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-2">
             <p className="font-semibold">On this page</p>
             <ul className="pl-4 space-y-2">
               <li>

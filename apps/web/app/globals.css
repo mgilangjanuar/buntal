@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
   themes:
-    bumblebee --default,
-    halloween --prefersdark;
+    fantasy --default,
+    dracula --prefersdark;
 }
-@custom-variant dark (&:where([data-theme=halloween], [data-theme=halloween] *));
+@custom-variant dark (&:where([data-theme=dracula], [data-theme=dracula] *));
 @plugin '@tailwindcss/typography';
 
 :root {

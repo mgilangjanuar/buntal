@@ -1,10 +1,5 @@
 @import 'tailwindcss';
-@plugin 'daisyui' {
-  themes:
-    fantasy --default,
-    dracula --prefersdark;
-}
-@custom-variant dark (&:where([data-theme=dracula], [data-theme=dracula] *));
+@plugin 'daisyui';
 @plugin '@tailwindcss/typography';
 
 :root {

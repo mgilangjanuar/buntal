@@ -4,7 +4,14 @@ import { useEffect, useMemo, useState } from 'react'
 export default function HomePage() {
   const [titleNumber, setTitleNumber] = useState(0)
   const titles = useMemo(
-    () => ['amazing', 'new', 'wonderful', 'beautiful', 'smart'],
+    () => [
+      'simple',
+      'without bloatware',
+      'blazing fast',
+      'type-safe',
+      'lightweight',
+      'efficient'
+    ],
     []
   )
 
@@ -30,9 +37,11 @@ export default function HomePage() {
               </button>
             </div>
             <div className="flex gap-4 flex-col">
-              <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
-                <span className="text-spektr-cyan-50">This is something</span>
-                <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+              <h1 className="text-4xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+                <span className="text-balance inline-block">
+                  Web framework must be
+                </span>
+                <span className="relative flex w-full justify-center overflow-hidden text-center pb-4 pt-1">
                   &nbsp;
                   {titles.map((title, index) => (
                     <motion.span

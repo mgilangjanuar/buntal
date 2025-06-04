@@ -35,9 +35,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider themesMap={{ light: 'fantasy', dark: 'dracula' }}>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

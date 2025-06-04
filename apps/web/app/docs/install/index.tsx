@@ -107,9 +107,8 @@ To get started, run: \`cd my-app && bun dev\``}
           </p>
         </div>
         <div className="xl:block hidden">
-          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-2">
-            <p className="font-semibold">On this page</p>
-            <ul className="pl-4 space-y-2">
+          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-2 border-l border-base-content/5">
+            <ul className="pl-4 py-4 space-y-2">
               <li>
                 <Link
                   className="hover:text-base-content hover:underline underline-offset-4"

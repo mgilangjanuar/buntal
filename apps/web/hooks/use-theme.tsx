@@ -17,13 +17,13 @@ const ThemeContext = createContext<Theme>({
 
 type ThemeProviderProps = {
   defaultTheme?: 'light' | 'dark'
-  themesMap: { [key in 'light' | 'dark']: string }
+  themesMap?: { [key in 'light' | 'dark']: string }
   children?: React.ReactNode
 }
 
 export function ThemeProvider({
   defaultTheme,
-  themesMap,
+  themesMap = { light: 'light', dark: 'dark' },
   children
 }: ThemeProviderProps) {
   if (typeof window === 'undefined') {

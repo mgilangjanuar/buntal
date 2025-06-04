@@ -48,6 +48,12 @@ bun create buntal@latest my-app
 
 View more examples [here](/examples).
 
+## Sponsors ❤️
+
+Help up maintain this project by becoming a [sponsor](https://github.com/sponsors/mgilangjanuar)!
+
+<!-- sponsors -->
+
 ## Benchmark Test
 
 It runs `benchmark/test.sh` script, which is a simple bash script to simulate multiple requests to various services and measure their performance.

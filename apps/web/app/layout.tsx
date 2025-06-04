@@ -35,10 +35,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider
-          defaultTheme="light"
-          themesMap={{ light: 'bumblebee', dark: 'halloween' }}
-        >
+        <ThemeProvider themesMap={{ light: 'bumblebee', dark: 'halloween' }}>
           {children}
         </ThemeProvider>
       </body>

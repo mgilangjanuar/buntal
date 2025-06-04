@@ -35,7 +35,7 @@ export default function DocsPage() {
           <img
             src="/banner.png"
             alt="Buntal JS banner"
-            className="rounded-md w-full"
+            className="rounded-md w-full mb-0 mt-4"
           />
           <section id="introduction">
             <p>

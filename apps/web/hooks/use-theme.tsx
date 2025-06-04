@@ -4,8 +4,6 @@ type Theme = {
   theme: 'light' | 'dark'
   setTheme: (theme: 'light' | 'dark') => void
   themesMap: { [key in 'light' | 'dark']: string }
-  userPrefersDark: boolean
-  defaultTheme: 'light' | 'dark'
 }
 
 const ThemeContext = createContext<Theme>({
@@ -14,9 +12,7 @@ const ThemeContext = createContext<Theme>({
   themesMap: {
     light: 'light',
     dark: 'dark'
-  },
-  userPrefersDark: false,
-  defaultTheme: 'light'
+  }
 })
 
 type ThemeProviderProps = {
@@ -26,27 +22,21 @@ type ThemeProviderProps = {
 }
 
 export function ThemeProvider({
-  defaultTheme = 'light',
+  defaultTheme,
   themesMap,
-  children,
-  ...props
+  children
 }: ThemeProviderProps) {
-  const [userPrefersDark, setUserPrefersDark] = useState<boolean>(false)
-  const [theme, setTheme] = useState<'light' | 'dark'>()
+  if (typeof window === 'undefined') {
+    return children
+  }
 
-  useEffect(() => {
-    setUserPrefersDark(
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    )
-  }, [])
-
-  useEffect(() => {
-    setTheme(
-      (window.localStorage.getItem('theme') as
-        | typeof defaultTheme
-        | undefined) || defaultTheme
-    )
-  }, [defaultTheme])
+  const [theme, setTheme] = useState<'light' | 'dark'>(
+    (window.localStorage.getItem('theme') as typeof defaultTheme) ||
+      defaultTheme ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light')
+  )
 
   useEffect(() => {
     if (theme && window.localStorage.getItem('theme') !== theme) {
@@ -54,18 +44,21 @@ export function ThemeProvider({
     }
   }, [theme])
 
+  useEffect(() => {
+    if (theme) {
+      document.body.setAttribute('data-theme', themesMap[theme])
+    }
+  }, [theme])
+
   return (
     <ThemeContext.Provider
       value={{
-        theme: theme || defaultTheme,
-        themesMap,
+        theme,
         setTheme,
-        userPrefersDark,
-        defaultTheme
+        themesMap
       }}
-      {...props}
     >
-      {theme && children && <div data-theme={themesMap[theme]}>{children}</div>}
+      {children}
     </ThemeContext.Provider>
   )
 }

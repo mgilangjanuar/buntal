@@ -1,11 +1,6 @@
+import Code from '@/components/code'
 import Header from '@/components/header'
-import { useTheme } from '@/hooks/use-theme'
 import { Link, type MetaProps } from 'buntal'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import {
-  atomOneDark,
-  atomOneLight
-} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 export const $ = {
   _meta: {
@@ -14,8 +9,6 @@ export const $ = {
 }
 
 export default function HTTPPkgPage() {
-  const { theme } = useTheme()
-
   return (
     <div>
       <Header title="Full-stack Web" />
@@ -32,22 +25,12 @@ export default function HTTPPkgPage() {
             <p>
               After initializing a project with a template using this command:
             </p>
-            <SyntaxHighlighter
-              language="sh"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
-              {`bun create buntal@latest my-app`}
-            </SyntaxHighlighter>
+            <Code language="sh">{`bun create buntal@latest my-app`}</Code>
             <p>
               You will have Tailwind CSS and minimal dependencies to build your
               web project. Here is the project structure:
             </p>
-            <SyntaxHighlighter
-              language="sh"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="sh">
               {`.
 ├── app
 │   ├── favicon.svg
@@ -62,7 +45,7 @@ export default function HTTPPkgPage() {
 ├── package.json
 ├── public
 └── tsconfig.json`}
-            </SyntaxHighlighter>
+            </Code>
             <p>Seems familiar, right?</p>
             <p>
               The main modules are located in the <code>app</code> directory,
@@ -76,17 +59,13 @@ export default function HTTPPkgPage() {
               Run the development server using <code>bun dev</code>, and the
               output will look like this:
             </p>
-            <SyntaxHighlighter
-              language="sh"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="sh">
               {`  -... ..- -. - .- .-..
   Local:        http://localhost:3000
   Network:      http://192.168.18.121:3000
 
 Done in 12ms`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               Explore the full example on{' '}
               <a
@@ -108,11 +87,7 @@ Done in 12ms`}
               structure, such as a header, footer, and other common elements.
               Here is an example of a simple root layout:
             </p>
-            <SyntaxHighlighter
-              language="tsx"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="tsx">
               {`export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode
 }>) {
@@ -132,7 +107,7 @@ Done in 12ms`}
     </html>
   )
 }`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               You can also have a <code>layout.tsx</code> in a folder, and it
               will be a layout for all pages in that folder. But remember that
@@ -146,11 +121,7 @@ Done in 12ms`}
               Basically, the <code>index.tsx</code> file is the main entry point
               of your web page. Here is an example of a simple index page:
             </p>
-            <SyntaxHighlighter
-              language="tsx"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="tsx">
               {`export default function HomePage({ query }: Readonly<{
   query: Record<string, string>
 }>) {
@@ -162,7 +133,7 @@ Done in 12ms`}
     </div>
   )
 }`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               The page component is exported as a default export, and it
               receives props such as <code>params</code>, <code>query</code>,
@@ -193,11 +164,7 @@ Done in 12ms`}
               example of a simple <code>$</code> function in the{' '}
               <code>index.tsx</code>:
             </p>
-            <SyntaxHighlighter
-              language="ts"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="ts">
               {`import type { Req } from '@buntal/core'
 
 export const $ = async (req: Req) => {
@@ -214,7 +181,7 @@ export default function HomePage({ data }: {
     </div>
   )
 }`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               See the <code>Req</code> type definition{' '}
               <Link

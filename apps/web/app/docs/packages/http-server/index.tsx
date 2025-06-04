@@ -1,11 +1,6 @@
+import Code from '@/components/code'
 import Header from '@/components/header'
-import { useTheme } from '@/hooks/use-theme'
 import { Link, type MetaProps } from 'buntal'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import {
-  atomOneDark,
-  atomOneLight
-} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 export const $ = {
   _meta: {
@@ -14,8 +9,6 @@ export const $ = {
 }
 
 export default function HTTPPkgPage() {
-  const { theme } = useTheme()
-
   return (
     <div>
       <Header title="HTTP Server" />
@@ -29,11 +22,7 @@ export default function HTTPPkgPage() {
               with file-based routing, middleware, a declarative router, and
               type-safe request parameters.
             </p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`import { Http } from '@buntal/core'
 import { cors, logger } from '@buntal/core/middlewares'
 
@@ -58,17 +47,13 @@ app.get('/hello/:name', (req, res) => {
 app.start((server) => {
   console.log(\`Server running at http://localhost:\${server.port}\`)
 })`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               And here is a simple example of a ping endpoint in the{' '}
               <code>./app/ping.ts</code> file that is automatically loaded into
               the app.
             </p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`import { h } from '@buntal/core'
 
 export const GET = h(
@@ -76,7 +61,7 @@ export const GET = h(
     pong: 1
   })
 )`}
-            </SyntaxHighlighter>
+            </Code>
             <p>
               Explore the full example on{' '}
               <a
@@ -147,15 +132,11 @@ export const GET = h(
               the example above:
             </p>
             <blockquote>
-              <SyntaxHighlighter
-                language="typescript"
-                style={theme === 'dark' ? atomOneDark : atomOneLight}
-                customStyle={{ padding: '12px 16px' }}
-              >
+              <Code language="typescript">
                 {`(req, res) => res.json({
   pong: 1
 })`}
-              </SyntaxHighlighter>
+              </Code>
             </blockquote>
             <p>
               The first parameter is the <code>Req</code> object, which contains
@@ -187,17 +168,12 @@ export const GET = h(
               to apply to all/some requests.
             </p>
             <p>Here is an example of how to build your own middleware:</p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`export const GET = h(
   (req, res) => {
     console.log('Hi, this is a middleware!')
 
-    if (req.query.name === 'John') {
-      // return a response before reaching the next handler
+    if (req.query.name !== 'John') {
       return res.status(403).json({
         error: 'Forbidden'
       })
@@ -207,7 +183,7 @@ export const GET = h(
     pong: 1
   })
 )`}
-            </SyntaxHighlighter>
+            </Code>
           </section>
           <section id="req">
             <h3>Req</h3>
@@ -254,11 +230,7 @@ export const GET = h(
               middleware and handlers.
             </p>
             <p>Here is an example of how to use context in a handler:</p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`type User = {
   id: string
   name: string
@@ -272,7 +244,7 @@ export const GET = h<{}, User>(
       })
     }
 
-    req.context = { // simulate fetching user data & setting context
+    req.context = {   // simulate fetching user data & setting context
       id: '123',
       name: 'John Doe'
     }
@@ -281,7 +253,7 @@ export const GET = h<{}, User>(
     name: req.context?.user.name  // access a type-safe context
   })
 )`}
-            </SyntaxHighlighter>
+            </Code>
             <h4>cookies</h4>
             <p>
               Get a cookie by name from the request with{' '}
@@ -321,16 +293,12 @@ export const GET = h<{}, User>(
               Here is an example of how to set the status code and send a
               response:
             </p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`export const GET = h((req, res) => res
   .status(400)
   .json({ error: 'Bad Request' })
 )`}
-            </SyntaxHighlighter>
+            </Code>
             <h4>headers {'→'} Res</h4>
             <p>
               Set custom headers for the response. This method is also
@@ -340,11 +308,7 @@ export const GET = h<{}, User>(
             <p>
               Here is an example of how to set a custom header in the response:
             </p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`export const GET = h((req, res) => res
   .headers({
     'Cache-Control': 'no-cache',
@@ -352,7 +316,7 @@ export const GET = h<{}, User>(
   })
   .json({ message: 'Hello, World!' })
 )`}
-            </SyntaxHighlighter>
+            </Code>
             <h4>cookie {'→'} Res</h4>
             <p>
               Set a cookie in the response. If the <code>value</code> is{' '}
@@ -360,11 +324,7 @@ export const GET = h<{}, User>(
               cookie with the given name and value.
             </p>
             <p>Here is an example of how to set a cookie in the response:</p>
-            <SyntaxHighlighter
-              language="typescript"
-              style={theme === 'dark' ? atomOneDark : atomOneLight}
-              customStyle={{ padding: '12px 16px' }}
-            >
+            <Code language="typescript">
               {`import { cookie } from '@buntal/core'
 
 cookie.set(res, 'access_token', token, {
@@ -372,7 +332,7 @@ cookie.set(res, 'access_token', token, {
   httpOnly: true,
   path: '/'
 })`}
-            </SyntaxHighlighter>
+            </Code>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified: 2025-06-04

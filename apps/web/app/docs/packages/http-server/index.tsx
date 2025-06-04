@@ -1,5 +1,5 @@
 import Code from '@/components/code'
-import Header from '@/components/header'
+import Header from '@/components/docs/header'
 import { Link, type MetaProps } from 'buntal'
 
 export const $ = {

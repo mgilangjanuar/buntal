@@ -51,7 +51,7 @@ export const auth = <T = unknown>(
     secret: process.env.JWT_SECRET || process.env.SECRET || ''
   }
 ): AtomicHandler<Record<string, string>, T> => {
-  return async (req, res: Res) => {
+  return async (req, res) => {
     let token: string | null | undefined
 
     if (Array.isArray(strategy)) {

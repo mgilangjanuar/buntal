@@ -37,24 +37,24 @@ export default function HTTPPkgPage() {
               {`import { Http } from '@buntal/core'
 import { cors, logger } from '@buntal/core/middlewares'
 
-// Initialize the HTTP server
+// initialize the HTTP server
 const app = new Http({
   port: 4001,
   appDir: './app' // Enable file-based routing!
 })
 
-// Add middlewares
+// add middlewares
 app.use(cors())
 app.use(logger())
 
-// Define a simple GET endpoint with a type-safe params
+// define a simple GET endpoint with a type-safe params
 app.get('/hello/:name', (req, res) => {
   return res.json({
     hello: \`Hello \${req.params.name}\`
   })
 })
 
-// Start the server!
+// start the server!
 app.start((server) => {
   console.log(\`Server running at http://localhost:\${server.port}\`)
 })`}
@@ -72,7 +72,7 @@ app.start((server) => {
               {`import { h } from '@buntal/core'
 
 export const GET = h(
-  (_, res) => res.json({
+  (req, res) => res.json({
     pong: 1
   })
 )`}
@@ -152,7 +152,7 @@ export const GET = h(
                 style={theme === 'dark' ? atomOneDark : atomOneLight}
                 customStyle={{ padding: '12px 16px' }}
               >
-                {`(_, res) => res.json({
+                {`(req, res) => res.json({
   pong: 1
 })`}
               </SyntaxHighlighter>
@@ -176,6 +176,38 @@ export const GET = h(
               or other Node.js HTTP libraries, so the learning curve is minimal
               if you are familiar with those libraries.
             </p>
+          </section>
+          <section id="middleware">
+            <h3>Middleware</h3>
+            <p>
+              Middleware actually is same as the <code>AtomicHandler</code>{' '}
+              function, but it is used to modify the request or response before
+              it reaches the final handler. You can use middleware to add
+              authorization, logging, or any other functionality that you want
+              to apply to all/some requests.
+            </p>
+            <p>Here is an example of how to build your own middleware:</p>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`export const GET = h(
+  (req, res) => {
+    console.log('Hi, this is a middleware!')
+
+    if (req.query.name === 'John') {
+      // return a response before reaching the next handler
+      return res.status(403).json({
+        error: 'Forbidden'
+      })
+    }
+  },
+  (req, res) => res.json({
+    pong: 1
+  })
+)`}
+            </SyntaxHighlighter>
           </section>
           <section id="req">
             <h3>Req</h3>
@@ -219,9 +251,37 @@ export const GET = h(
             <h4>context</h4>
             <p>
               Context is a generic type that can be used to pass data between
-              middleware and handlers. Get the context with{' '}
-              <code>req.context</code>.
+              middleware and handlers.
             </p>
+            <p>Here is an example of how to use context in a handler:</p>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`type User = {
+  id: string
+  name: string
+}
+
+export const GET = h<{}, User>(
+  (req, res) => {
+    if (!req.headers.get('Authorization')) {  // simulate authorization check
+      return res.status(401).json({
+        error: 'Unauthorized'
+      })
+    }
+
+    req.context = { // simulate fetching user data & setting context
+      id: '123',
+      name: 'John Doe'
+    }
+  },
+  (req, res) => res.json({
+    name: req.context?.user.name  // access a type-safe context
+  })
+)`}
+            </SyntaxHighlighter>
             <h4>cookies</h4>
             <p>
               Get a cookie by name from the request with{' '}
@@ -266,7 +326,7 @@ export const GET = h(
               style={theme === 'dark' ? atomOneDark : atomOneLight}
               customStyle={{ padding: '12px 16px' }}
             >
-              {`export const GET = h((_, res) => res
+              {`export const GET = h((req, res) => res
   .status(400)
   .json({ error: 'Bad Request' })
 )`}
@@ -285,7 +345,7 @@ export const GET = h(
               style={theme === 'dark' ? atomOneDark : atomOneLight}
               customStyle={{ padding: '12px 16px' }}
             >
-              {`export const GET = h((_, res) => res
+              {`export const GET = h((req, res) => res
   .headers({
     'Cache-Control': 'no-cache',
     'X-Custom-Header': 'MyValue',
@@ -352,6 +412,14 @@ cookie.set(res, 'access_token', token, {
                       href="#atomic-handler:40"
                     >
                       AtomicHandler
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="hover:text-base-content hover:underline underline-offset-4"
+                      href="#middleware:40"
+                    >
+                      Middleware
                     </Link>
                   </li>
                   <li>

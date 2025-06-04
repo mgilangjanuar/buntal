@@ -5,7 +5,7 @@ export class Req<P = Record<string, string>, T = unknown> extends Request {
   public query?: Record<string, string>
   public context?: T
 
-  public cookie(name: string) {
-    return cookie.get(this, name)
+  get cookies() {
+    return cookie.getAll(this)
   }
 }

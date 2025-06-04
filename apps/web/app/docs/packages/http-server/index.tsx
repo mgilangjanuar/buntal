@@ -192,9 +192,7 @@ export const GET = h(
               request with extended properties, including <code>params</code>,{' '}
               <code>query</code>, <code>context</code>, and more.
             </p>
-            <h4>
-              <code>{`Req.params: Record<string, string>`}</code>
-            </h4>
+            <h4>params</h4>
             <p>Get the request parameters from the URL path.</p>
             <p>
               For example, if the URL is <code>/hello/:name</code>, you can
@@ -204,29 +202,30 @@ export const GET = h(
               following locations: <code>./app/hello/[name].ts</code> or{' '}
               <code>./app/hello/[name]/index.ts</code>.
             </p>
-            <h4>
-              <code>{`Req.query: Record<string, string>`}</code>
-            </h4>
+            <h4>query</h4>
             <p>Get the query parameters from the URL.</p>
             <p>
               For example, if the URL is <code>/hello?name=John</code>, you can
               access the <code>req.query.name</code> to get the value of the
               <code>name</code> query parameter.
             </p>
-            <h4>
-              <code>{`Req.context: T = unknown`}</code>
-            </h4>
+            <h4>headers</h4>
+            <p>
+              Get the request headers by using the <code>get</code> method to
+              retrieve a specific header by name. For example, you can access
+              the <code>req.headers.get('Authorization')</code> to get the value
+              of the <code>Authorization</code> header.
+            </p>
+            <h4>context</h4>
             <p>
               Context is a generic type that can be used to pass data between
-              middleware and handlers.
+              middleware and handlers. Get the context with{' '}
+              <code>req.context</code>.
             </p>
-            <h4>
-              <code>{`Req.cookie(name: string): string | null`}</code>
-            </h4>
+            <h4>cookies</h4>
             <p>
-              Get a cookie by name from the request. If the cookie is not found,
-              it returns <code>null</code>. This method is a shorthand for using
-              the <code>cookie</code> helper function.
+              Get a cookie by name from the request with{' '}
+              <code>req.cookies</code>.
             </p>
           </section>
           <section id="res">
@@ -235,83 +234,70 @@ export const GET = h(
               Helper object for creating responses. This object has several
               methods for sending different types of responses.
             </p>
-            <h4>
-              <code>{`Res.send(data: BodyInit): Response`}</code>
-            </h4>
+            <h4>send {'→'} Http.Response</h4>
             <p>
               Send a response with the given data. It can be a string, a
               <code>ReadableStream</code>, or any other type that can be used as
               a response body.
             </p>
-            <h4>
-              <code>{`Res.json(data: any): Response`}</code>
-            </h4>
+            <h4>json {'→'} Http.Response</h4>
             <p>
               Send a JSON response with the given data. It automatically sets
               the
               <code>Content-Type</code> header to <code>application/json</code>.
             </p>
-            <h4>
-              <code>{`Res.text(data: string): Response`}</code>
-            </h4>
+            <h4>text {'→'} Http.Response</h4>
             <p>
               Send a plain text response with the given data. It automatically
               sets the
               <code>Content-Type</code> header to <code>text/plain</code>.
             </p>
-            <h4>
-              <code>{`Res.status(status: number): Res`}</code>
-            </h4>
+            <h4>status {'→'} Res</h4>
             <p>
               Set the HTTP status code for the response. This method is
               chainable, allowing you to set headers and then send the response.
             </p>
-            <h4>
-              <code>{`Res.headers(headers: Record<string, string>): Res`}</code>
-            </h4>
+            <p>
+              Here is an example of how to set the status code and send a
+              response:
+            </p>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`export const GET = h((_, res) => res
+  .status(400)
+  .json({ error: 'Bad Request' })
+)`}
+            </SyntaxHighlighter>
+            <h4>headers {'→'} Res</h4>
             <p>
               Set custom headers for the response. This method is also
-              chainable, allowing you to set the status code and then send the
+              chainable, allowing you to set multiple headers before sending the
               response.
             </p>
-            <h4>
-              <code>
-                {`Res.cookie(name: string, value: string | null, opts?: CookieOptions): Res`}
-              </code>
-            </h4>
             <p>
-              Set a cookie in the response. If the <code>value</code> is
-              <code>null</code>, it deletes the cookie by calling the{' '}
-              <code>cookie.delete</code> helper function. Otherwise, it sets the
-              cookie with the given name and value using the{' '}
-              <code>cookie.set</code> helper function.
+              Here is an example of how to set a custom header in the response:
             </p>
-          </section>
-          <section id="cookie">
-            <h3>Cookie</h3>
+            <SyntaxHighlighter
+              language="typescript"
+              style={theme === 'dark' ? atomOneDark : atomOneLight}
+              customStyle={{ padding: '12px 16px' }}
+            >
+              {`export const GET = h((_, res) => res
+  .headers({
+    'Cache-Control': 'no-cache',
+    'X-Custom-Header': 'MyValue',
+  })
+  .json({ message: 'Hello, World!' })
+)`}
+            </SyntaxHighlighter>
+            <h4>cookie {'→'} Res</h4>
             <p>
-              This is a helper function for getting cookies from the request and
-              setting cookies in the response.
-            </p>
-            <h4>
-              <code>{`cookie.get(req: Req, name: string): string | null`}</code>
-            </h4>
-            <p>
-              Get a cookie by name from the request. If the cookie is not found,
-              it returns <code>null</code>.
-            </p>
-            <h4>
-              <code>
-                {`cookie.set(res: Res, name: string, value: string, opts?: CookieOptions)`}
-              </code>
-            </h4>
-            <p>
-              Set a cookie in the response with the given name and value. The
-              <code>options</code> parameter is optional and can be used to set
-              additional cookie attributes such as <code>maxAge</code>,{' '}
-              <code>expires</code>, <code>path</code>, <code>domain</code>,
-              <code>secure</code>, <code>httpOnly</code>, and{' '}
-              <code>sameSite</code>.
+              Set a cookie in the response. If the <code>value</code> is{' '}
+              <code>null</code>, it deletes the cookie. Otherwise, it sets the
+              cookie with the given name and value.
             </p>
             <p>Here is an example of how to set a cookie in the response:</p>
             <SyntaxHighlighter
@@ -327,16 +313,9 @@ cookie.set(res, 'access_token', token, {
   path: '/'
 })`}
             </SyntaxHighlighter>
-            <h4>
-              <code>{`cookie.delete(res: Res, name: string)`}</code>
-            </h4>
-            <p>
-              Delete a cookie by name from the response. It sets the cookie with
-              an empty value and a <code>Max-Age</code> of 0.
-            </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-29
+            Last modified: 2025-06-04
           </p>
         </div>
         <div className="xl:block hidden">
@@ -389,14 +368,6 @@ cookie.set(res, 'access_token', token, {
                       href="#res:40"
                     >
                       Res
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#cookie:40"
-                    >
-                      Cookie
                     </Link>
                   </li>
                 </ul>

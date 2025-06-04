@@ -24,6 +24,15 @@ export const cookie = {
     }
     return null
   },
+  getAll: (req: Req) => {
+    const cookies = req.headers.get('cookie')
+    if (!cookies) return {}
+    const cookieArray = cookies.split('; ')
+    return cookieArray.reduce((acc, cookie) => {
+      const [key, value] = cookie.split('=') as [string, string?]
+      return { ...acc, [key]: decodeURIComponent(value || '') }
+    }, {})
+  },
   set: (
     res: Res,
     name: string,

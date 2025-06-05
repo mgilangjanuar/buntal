@@ -12,8 +12,7 @@ export default function HomePage() {
       'blazing fast',
       'type-safe',
       'lightweight',
-      'developer-friendly',
-      'works'
+      'developer-friendly'
     ],
     []
   )
@@ -33,15 +32,15 @@ export default function HomePage() {
     <main className="min-h-screen">
       <div className="w-full relative">
         <AnimatedGridPattern
-          width={120}
-          height={120}
-          numSquares={10}
+          width={100}
+          height={100}
+          numSquares={15}
           maxOpacity={0.1}
           duration={3}
           repeatDelay={1}
           className={cn(
-            '[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]',
-            'inset-x-0 inset-y-0 h-[100%] -skew-y-6',
+            '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
+            'inset-x-0 inset-y-0 h-[100%] -skew-y-12',
             'opacity-30'
           )}
         />
@@ -57,13 +56,7 @@ export default function HomePage() {
             <div className="flex gap-4 flex-col">
               <h1 className="text-4xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
                 <span className="text-balance inline-block">
-                  Framework that{' '}
-                  <motion.span
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: titleNumber === 6 ? 0 : 1 }}
-                  >
-                    is
-                  </motion.span>
+                  Framework that is
                 </span>
                 <span className="relative flex w-full justify-center overflow-hidden text-center pb-4 pt-1">
                   &nbsp;

@@ -61,7 +61,9 @@ export default function HomePage() {
           >
             <Svg src={Logo} className="[&>*]:size-8 flex justify-center" />
           </motion.div>
-          <h2 className="text-lg font-semibold tracking-tight">Buntal JS</h2>
+          <h2 className="text-lg font-semibold tracking-tight font-serif">
+            Buntal JS
+          </h2>
           <div className="ml-auto flex gap-1 items-center">
             <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-70 btn btn-ghost btn-square btn-sm" />
           </div>
@@ -144,9 +146,9 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg md:text-xl leading-relaxed tracking-tight text-base-content/80 max-w-2xl text-center">
-                <strong className="font-semibold">Buntal JS</strong> is a
-                wrapper of Bun and React. With Next.js-like file system routing,
-                without the forever-loading app router.
+                <strong className="font-semibold font-serif">Buntal JS</strong>{' '}
+                is a wrapper of Bun and React. With Next.js-like file system
+                routing, without the forever-loading app router.
               </p>
             </div>
             <div className="flex flex-row gap-3 mt-4">

@@ -39,10 +39,10 @@ export default function DocsPage() {
           />
           <section id="introduction">
             <p>
-              <strong>Buntal JS</strong> is a lightweight, modern JavaScript
-              framework designed to simplify web development; with Next.js-like
-              file system routing, type-safe APIs, and focus on performance by
-              leveraging the{' '}
+              <strong className="font-serif">Buntal JS</strong> is a
+              lightweight, modern JavaScript framework designed to simplify web
+              development; with Next.js-like file system routing, type-safe
+              APIs, and focus on performance by leveraging the{' '}
               <a
                 href="https://bun.sh"
                 target="_blank"

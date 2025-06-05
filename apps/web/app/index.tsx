@@ -53,7 +53,7 @@ export default function HomePage() {
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <div className="container mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
+        <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center gap-3">
           <motion.div
             className="flex items-center"
             initial={false}
@@ -95,8 +95,8 @@ export default function HomePage() {
               animate={{
                 scale: scrollY > 50 ? 0.17 : 1,
                 opacity: scrollY > 50 ? 0 : 1,
-                y: scrollY > 50 ? -160 : 0,
-                x: scrollY > 50 ? -544 : 0
+                y: scrollY > 50 ? -140 : 0,
+                x: scrollY > 50 ? -480 : 0
               }}
               transition={{ duration: 0.2, ease: 'easeInOut' }}
             >

@@ -14,7 +14,6 @@ export default function HomePage() {
   const { theme } = useTheme()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
-  const [loadingStep, setLoadingStep] = useState(0)
   const titles = useMemo(
     () => [
       'simple',
@@ -200,81 +199,28 @@ export default function HomePage() {
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
                 </svg>
-                v0.0.19
+                v0.0.20
               </a>
-              <button
-                className="btn btn-primary btn-soft"
-                onClick={async () => {
-                  if (
-                    localStorage.getItem('buntal:hasSeenWelcome') === 'true'
-                  ) {
-                    r.push('/docs')
-                    return
-                  }
-
-                  if (loadingStep > 0) return
-                  setLoadingStep(1)
-                  await new Promise((resolve) => setTimeout(resolve, 2000))
-                  setLoadingStep(2)
-                  await new Promise((resolve) => setTimeout(resolve, 1500))
-                  setLoadingStep(3)
-                  await new Promise((resolve) => setTimeout(resolve, 2000))
-                  r.push('/docs')
-                  window.localStorage.setItem('buntal:hasSeenWelcome', 'true')
-                }}
-                disabled={loadingStep === 1}
-              >
-                {loadingStep ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="!size-5 animate-spin"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
-                    <path d="M20 4v5h-5" />
-                  </svg>
-                ) : (
-                  <></>
-                )}
-                {loadingStep === 0
-                  ? 'Get Started'
-                  : loadingStep === 1
-                    ? 'Loading...'
-                    : loadingStep === 2
-                      ? '*jk LOL'
-                      : loadingStep === 3
-                        ? '⸜(｡˃ ᵕ ˂ )⸝♡ SPA ftw!'
-                        : ''}
-                {loadingStep ? (
-                  <></>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="!size-5"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M5 12l14 0" />
-                    <path d="M13 18l6 -6" />
-                    <path d="M13 6l6 6" />
-                  </svg>
-                )}
-              </button>
+              <Link href="/docs" className="btn btn-primary btn-soft">
+                Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="!size-5"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M5 12l14 0" />
+                  <path d="M13 18l6 -6" />
+                  <path d="M13 6l6 6" />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>
@@ -312,7 +258,7 @@ export default function HomePage() {
                   alt="User avatar: Frianto Moerdowo"
                 />
               </a>
-              <div className="tooltip" data-tip="Could be you!">
+              <div className="tooltip tooltip-bottom" data-tip="Could be you!">
                 <a
                   href="https://github.com/sponsors/mgilangjanuar"
                   target="_blank"

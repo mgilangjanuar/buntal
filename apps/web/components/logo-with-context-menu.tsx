@@ -41,7 +41,7 @@ export default function LogoWithContextMenu({
     setIsCopied(true)
     setTimeout(() => {
       setIsCopied(false)
-    }, 2000)
+    }, 500)
   }
 
   const menuItems = [

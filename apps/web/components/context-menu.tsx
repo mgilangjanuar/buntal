@@ -29,7 +29,9 @@ export default function ContextMenu({ children, menuItems }: ContextMenuProps) {
 
   const handleMenuItemClick = (onClick: () => void) => {
     onClick()
-    setIsVisible(false)
+    setTimeout(() => {
+      setIsVisible(false)
+    }, 400)
   }
 
   useEffect(() => {

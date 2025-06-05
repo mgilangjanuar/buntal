@@ -3,6 +3,7 @@ import { AnimatedGridPattern } from '@/components/animated-grid'
 import Code from '@/components/code'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
+import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
 import { Link, useRouter } from 'buntal'
 import { motion } from 'motion/react'
@@ -10,6 +11,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 export default function HomePage() {
   const r = useRouter()
+  const { theme } = useTheme()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
   const [loadingStep, setLoadingStep] = useState(0)
@@ -277,7 +279,68 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="py-[100svh]"></div>
+      <div className="w-full relative">
+        <div className="container mx-auto">
+          <div className="flex gap-8 pb-20 lg:pb-40 items-center justify-center flex-col">
+            <p className="text-base-content/50 text-sm">sponsored by </p>
+            <div>
+              <a
+                href="https://m.do.co/c/4aad6c899906"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={
+                    theme === 'dark'
+                      ? '/DO_Logo_horizontal_white.svg'
+                      : '/DO_Logo_horizontal_blue.svg'
+                  }
+                  alt="DigitalOcean Referral Badge"
+                  className="max-w-48 w-full h-auto"
+                />
+              </a>
+            </div>
+            <div className="flex gap-1.5 items-center flex-wrap">
+              <a
+                href="https://github.com/moerdowo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://avatars.githubusercontent.com/u/320952?v=4"
+                  className="size-10 rounded-md"
+                  alt="User avatar: Frianto Moerdowo"
+                />
+              </a>
+              <div className="tooltip" data-tip="Could be you!">
+                <a
+                  href="https://github.com/sponsors/mgilangjanuar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="!size-10 rounded-md flex items-center justify-center flex-col border border-dashed opacity-50 hover:opacity-100"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="size-5 block"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M5 12l14 0" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }

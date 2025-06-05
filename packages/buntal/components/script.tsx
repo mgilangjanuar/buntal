@@ -27,7 +27,5 @@ export function Script({
     }
   }, [])
 
-  if (typeof window === 'undefined') {
-    return <script ref={ref} src={src} {...props} />
-  }
+  return <></>
 }

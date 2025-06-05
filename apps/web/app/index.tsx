@@ -296,11 +296,11 @@ export default function HomePage() {
                       : '/DO_Logo_horizontal_blue.svg'
                   }
                   alt="DigitalOcean Referral Badge"
-                  className="max-w-48 w-full h-auto"
+                  className="max-w-56 w-full h-auto"
                 />
               </a>
             </div>
-            <div className="flex gap-1.5 items-center flex-wrap">
+            <div className="flex gap-3 items-center flex-wrap">
               <a
                 href="https://github.com/moerdowo"
                 target="_blank"
@@ -308,7 +308,7 @@ export default function HomePage() {
               >
                 <img
                   src="https://avatars.githubusercontent.com/u/320952?v=4"
-                  className="size-10 rounded-md"
+                  className="size-12 rounded-md"
                   alt="User avatar: Frianto Moerdowo"
                 />
               </a>
@@ -317,7 +317,7 @@ export default function HomePage() {
                   href="https://github.com/sponsors/mgilangjanuar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="!size-10 rounded-md flex items-center justify-center flex-col border border-dashed opacity-50 hover:opacity-100"
+                  className="!size-12 rounded-md flex items-center justify-center flex-col border border-dashed opacity-50 hover:opacity-100"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

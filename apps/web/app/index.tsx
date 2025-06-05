@@ -1,9 +1,10 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
 import Code from '@/components/code'
+import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { cn } from '@/lib/utils'
-import { Link, Svg } from 'buntal'
+import { Link } from 'buntal'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -61,7 +62,11 @@ export default function HomePage() {
               initial={false}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <Svg src={Logo} className="[&>*]:size-8 flex justify-center" />
+              <LogoWithContextMenu
+                src={Logo}
+                className="[&>*]:size-8 flex justify-center"
+                filename="buntal-logo.svg"
+              />
             </motion.div>
             <h2 className="text-lg font-semibold tracking-tight font-serif">
               Buntal JS
@@ -102,7 +107,7 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="flex gap-4 py-20 lg:py-40 items-center justify-center flex-col [&>div]:z-10">
             <motion.div
-              className="flex justify-center"
+              className="flex justify-center !z-20"
               animate={{
                 scale: scrollY > 50 ? 0.17 : 1,
                 opacity: scrollY > 50 ? 0 : 1,
@@ -111,9 +116,10 @@ export default function HomePage() {
               }}
               transition={{ duration: 0.2, ease: 'easeInOut' }}
             >
-              <Svg
+              <LogoWithContextMenu
                 src={Logo}
                 className="[&>*]:size-28 md:[&>*]:size-44 flex justify-center"
+                filename="buntal-logo.svg"
               />
             </motion.div>
             <div className="flex items-center gap-2 text-sm badge badge-ghost">

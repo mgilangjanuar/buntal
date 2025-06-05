@@ -1,6 +1,7 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
+import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import { cn } from '@/lib/utils'
-import { Link, Svg, useRouter } from 'buntal'
+import { Link, useRouter } from 'buntal'
 
 const MENUS = [
   {
@@ -66,7 +67,11 @@ export default function DocsLayout({
             href="/"
             className="flex items-center gap-4 px-3 !h-10 group mb-3.5"
           >
-            <Svg src={Logo} className="[&>*]:size-10" />
+            <LogoWithContextMenu
+              src={Logo}
+              className="[&>*]:size-10"
+              filename="buntal-logo.svg"
+            />
             <div className="flex flex-col -space-y-1">
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS

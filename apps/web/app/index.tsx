@@ -10,7 +10,42 @@ import { Link } from 'buntal'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 
-export default function HomePage() {
+export const $ = async () => {
+  const resp = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.GH_PERSONAL_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `query {
+        user(login:"mgilangjanuar") {
+          ... on Sponsorable {
+            sponsors(first: 100) {
+              totalCount
+              nodes {
+                ... on User { login, avatarUrl, name }
+              }
+            }
+          }
+        }
+      }`,
+      variables: {}
+    })
+  })
+  const json = await resp.json()
+  return {
+    sponsors: json.data.user.sponsors.nodes as {
+      login: string
+      avatarUrl: string
+      name: string
+    }[]
+  }
+}
+
+export default function HomePage({
+  data
+}: Readonly<{ data?: {} | Awaited<ReturnType<typeof $>> }>) {
   const { theme } = useTheme()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
@@ -247,17 +282,22 @@ export default function HomePage() {
               </a>
             </div>
             <div className="flex gap-3 items-center flex-wrap">
-              <a
-                href="https://github.com/moerdowo"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://avatars.githubusercontent.com/u/320952?v=4"
-                  className="size-12 rounded-md"
-                  alt="User avatar: Frianto Moerdowo"
-                />
-              </a>
+              {data &&
+                'sponsors' in data &&
+                data.sponsors.map((sponsor) => (
+                  <a
+                    key={sponsor.login}
+                    href={`https://github.com/${sponsor.login}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={sponsor.avatarUrl}
+                      className="size-12 rounded-md"
+                      alt={sponsor.name}
+                    />
+                  </a>
+                ))}
               <div className="tooltip tooltip-bottom" data-tip="Could be you!">
                 <a
                   href="https://github.com/sponsors/mgilangjanuar"
@@ -295,12 +335,13 @@ export default function HomePage() {
               className=""
             >
               <div className="max-w-xs">
-                <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                  Blazing fast & type-safe by default
+                <h2 className="text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                  Ultra-lightweight framework without bloatware
                 </h2>
                 <p className="mt-4 text-left  text-base/6 text-neutral-200">
-                  Built with TypeScript & Bun's native HTTP server, which is
-                  known for its speed.
+                  Buntal JS has only{' '}
+                  <span className="font-semibold">~30 kB</span> unpacked size;
+                  ditch all unnecessary dependencies.
                 </p>
               </div>
               <img
@@ -312,17 +353,16 @@ export default function HomePage() {
               />
             </WobbleCard>
             <WobbleCard containerClassName="col-span-1 min-h-[300px]">
-              <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                No shirt, no shoes, no weapons.
+              <h2 className="max-w-80  text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                SSR, SPA, and file-based routing
               </h2>
               <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-                If someone yells “stop!”, goes limp, or taps out, the fight is
-                over.
+                Everything out of the box. Building web apps without headaches.
               </p>
             </WobbleCard>
             <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
               <div className="max-w-sm">
-                <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                <h2 className="max-w-sm md:max-w-lg text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                   Blazing fast & type-safe by default
                 </h2>
                 <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">

@@ -1,5 +1,7 @@
+import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
 import { cn } from '@/lib/utils'
+import { Svg } from 'buntal'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -45,7 +47,8 @@ export default function HomePage() {
           )}
         />
         <div className="container mx-auto">
-          <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
+          <div className="flex gap-4 py-20 lg:py-40 items-center justify-center flex-col">
+            <Svg src={Logo} className="[&>*]:size-32 flex justify-center" />
             <div className="flex items-center gap-2 text-sm badge badge-warning badge-soft">
               <div className="inline-grid *:[grid-area:1/1]">
                 <div className="status status-warning animate-ping"></div>
@@ -53,8 +56,8 @@ export default function HomePage() {
               </div>{' '}
               Early Development
             </div>
-            <div className="flex gap-4 flex-col">
-              <h1 className="text-4xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+            <div className="flex gap-4 flex-col max-w-2xl w-full">
+              <h1 className="text-4xl md:text-7xl tracking-tighter text-center font-regular">
                 <span className="text-balance inline-block">
                   Framework that is
                 </span>
@@ -64,7 +67,7 @@ export default function HomePage() {
                     <motion.span
                       key={index}
                       className="absolute font-semibold"
-                      initial={{ opacity: 0, y: '-100' }}
+                      initial={{ opacity: 0, y: 0 }}
                       transition={{ type: 'keyframe', stiffness: 50 }}
                       animate={
                         titleNumber === index
@@ -84,14 +87,13 @@ export default function HomePage() {
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-                Managing a small business today is already tough. Avoid further
-                complications by ditching outdated, tedious trade methods. Our
-                goal is to streamline SMB trade, making it easier and faster
-                than ever.
+              <p className="text-lg md:text-xl leading-relaxed tracking-tight text-base-content/80 max-w-2xl text-center">
+                <strong className="font-semibold">Buntal JS</strong> is a
+                wrapper of Bun and React. With Next.js-like file system routing,
+                without the forever-loading app router.
               </p>
             </div>
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row gap-3 mt-4">
               <button className="btn btn-outline">Jump on a call</button>
               <button className="btn btn-primary">Sign up here</button>
             </div>

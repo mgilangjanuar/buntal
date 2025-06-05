@@ -54,17 +54,19 @@ export default function HomePage() {
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center gap-3">
-          <motion.div
-            className="flex items-center"
-            initial={false}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          >
-            <Svg src={Logo} className="[&>*]:size-8 flex justify-center" />
-          </motion.div>
-          <h2 className="text-lg font-semibold tracking-tight font-serif">
-            Buntal JS
-          </h2>
+        <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center gap-4">
+          <Link className="flex gap-3 items-center" href="/">
+            <motion.div
+              className="flex items-center"
+              initial={false}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <Svg src={Logo} className="[&>*]:size-8 flex justify-center" />
+            </motion.div>
+            <h2 className="text-lg font-semibold tracking-tight font-serif">
+              Buntal JS
+            </h2>
+          </Link>
           <div className="ml-auto flex gap-1 items-center">
             <Link
               href="/docs"

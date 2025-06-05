@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 export default function HomePage() {
   const [titleNumber, setTitleNumber] = useState(0)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
   const titles = useMemo(
     () => [
       'simple',
@@ -34,7 +34,7 @@ export default function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
-      setIsScrolled(scrollY > 30)
+      setScrollY(scrollY)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -47,8 +47,8 @@ export default function HomePage() {
         className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-sm border-b border-base-200"
         initial={{ y: -100, opacity: 0 }}
         animate={{
-          y: isScrolled ? 0 : -100,
-          opacity: isScrolled ? 1 : 0
+          y: scrollY > 30 ? 0 : -100,
+          opacity: scrollY > 30 ? 1 : 0
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
@@ -65,28 +65,34 @@ export default function HomePage() {
       </motion.header>
 
       <div className="w-full relative">
-        <AnimatedGridPattern
-          width={100}
-          height={100}
-          numSquares={15}
-          maxOpacity={0.1}
-          duration={3}
-          repeatDelay={1}
-          className={cn(
-            '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-            'inset-x-0 inset-y-0 h-[100%] -skew-y-12',
-            'opacity-50'
-          )}
-        />
+        <motion.div
+          style={{
+            transform: `translateY(${scrollY * 0.5}px)`
+          }}
+          className="absolute inset-0"
+        >
+          <AnimatedGridPattern
+            width={100}
+            height={100}
+            numSquares={15}
+            maxOpacity={0.1}
+            duration={3}
+            repeatDelay={1}
+            className={cn(
+              '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
+              'inset-x-0 inset-y-0 h-[100%] opacity-50'
+            )}
+          />
+        </motion.div>
         <div className="container mx-auto">
           <div className="flex gap-4 py-20 lg:py-40 items-center justify-center flex-col">
             <motion.div
               className="flex justify-center"
               animate={{
-                scale: isScrolled ? 0.1 : 1,
-                opacity: isScrolled ? 0 : 1,
-                y: isScrolled ? -140 : 0,
-                x: isScrolled ? -340 : 0
+                scale: scrollY > 30 ? 0.1 : 1,
+                opacity: scrollY > 30 ? 0 : 1,
+                y: scrollY > 30 ? -140 : 0,
+                x: scrollY > 30 ? -340 : 0
               }}
               transition={{ duration: 0.2, ease: 'easeInOut' }}
             >

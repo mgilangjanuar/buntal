@@ -116,7 +116,7 @@ export default function HomePage() {
                 y: scrollY > 50 ? -140 : 0,
                 x: scrollY > 50 ? -480 : 0
               }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
               <LogoWithContextMenu
                 src={Logo}
@@ -249,7 +249,7 @@ export default function HomePage() {
                     : loadingStep === 2
                       ? '*jk LOL'
                       : loadingStep === 3
-                        ? 'SPA ftw!'
+                        ? '⸜(｡˃ ᵕ ˂ )⸝♡ SPA ftw!'
                         : ''}
                 {loadingStep ? (
                   <></>

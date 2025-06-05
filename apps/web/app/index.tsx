@@ -1,5 +1,6 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
+import Code from '@/components/code'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { cn } from '@/lib/utils'
 import { Link, Svg } from 'buntal'
@@ -65,6 +66,12 @@ export default function HomePage() {
             Buntal JS
           </h2>
           <div className="ml-auto flex gap-1 items-center">
+            <Link
+              href="/docs"
+              className="btn btn-link text-sm text-base-content/70 hover:text-base-content underline-offset-4 btn-sm"
+            >
+              Docs
+            </Link>
             <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-70 btn btn-ghost btn-square btn-sm" />
           </div>
         </div>
@@ -146,12 +153,20 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg md:text-xl leading-relaxed tracking-tight text-base-content/80 max-w-2xl text-center">
-                <strong className="font-semibold font-serif">Buntal JS</strong>{' '}
-                is a wrapper of Bun and React. With Next.js-like file system
-                routing, without the forever-loading app router.
+                <strong className="font-bold font-serif">Buntal JS</strong> is a
+                wrapper of Bun and React. With Next.js-like file system routing,
+                without the forever-loading app router.
               </p>
             </div>
-            <div className="flex flex-row gap-3 mt-4">
+            <div className="grid grid-col-1 mt-4">
+              <Code
+                language="sh"
+                className="[&>pre]:!pr-12 overflow-x-auto text-sm md:text-base"
+              >
+                {'bun create buntal@latest my-app'}
+              </Code>
+            </div>
+            <div className="flex flex-row gap-3 mt-2">
               <a
                 href="https://github.com/mgilangjanuar/buntal"
                 className="btn btn-ghost btn-neutral"

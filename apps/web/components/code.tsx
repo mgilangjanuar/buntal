@@ -1,4 +1,6 @@
 import { useTheme } from '@/hooks/use-theme'
+import { cn } from '@/lib/utils'
+import type { ClassValue } from 'clsx'
 import { useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import {
@@ -8,16 +10,18 @@ import {
 
 export default function Code({
   language,
+  className,
   children
 }: {
   language?: string
+  className?: ClassValue
   children: string
 }) {
   const { theme } = useTheme()
   const [copiedText, setCopiedText] = useState<string | null>(null)
 
   return (
-    <div className="relative">
+    <div className={cn('relative', className)}>
       <label className="swap border-none ring-0 btn btn-sm btn-square btn-ghost absolute top-2 right-2 opacity-70 hover:opacity-100">
         <input
           type="checkbox"
@@ -65,7 +69,7 @@ export default function Code({
       <SyntaxHighlighter
         language={language}
         style={theme === 'dark' ? atomOneDark : atomOneLight}
-        customStyle={{ padding: '12px 16px' }}
+        customStyle={{ padding: '12px 16px', borderRadius: '6px' }}
       >
         {children.trim()}
       </SyntaxHighlighter>

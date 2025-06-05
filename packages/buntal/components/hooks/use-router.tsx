@@ -1,9 +1,11 @@
 import {
   createContext,
   createElement,
+  memo,
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode
 } from 'react'
@@ -60,80 +62,82 @@ type PageArgs =
     }
   | undefined
 
-const Page = ({
-  router,
-  args,
-  onDataChange,
-  rootLayout,
-  layoutIdx
-}: Readonly<{
-  router: ServerRouterType
-  args: PageArgs
-  onDataChange: (args: PageDataProps) => void
-  rootLayout: RouterProviderProps['rootLayout']
-  layoutIdx: number
-}>) => {
-  const fetchData = useCallback(
-    async (idx: number) => {
-      if (!args?.query) {
-        return undefined
-      }
-      const resp = await fetch(
-        `${window.location.pathname}?${new URLSearchParams({
-          ...args.query,
-          _$: idx.toString()
-        }).toString()}`
-      )
-      if (resp.ok) {
-        if (resp.headers.get('Content-Type')?.includes('application/json')) {
-          return await resp.json()
+const Page = memo(
+  ({
+    router,
+    args,
+    onDataChange,
+    rootLayout,
+    layoutIdx
+  }: Readonly<{
+    router: ServerRouterType
+    args: PageArgs
+    onDataChange: (args: PageDataProps) => void
+    rootLayout: RouterProviderProps['rootLayout']
+    layoutIdx: number
+  }>) => {
+    const fetchData = useCallback(
+      async (idx: number) => {
+        if (!args?.query) {
+          return undefined
         }
-        return await resp.text()
-      }
-    },
-    [args?.query]
-  )
+        const resp = await fetch(
+          `${window.location.pathname}?${new URLSearchParams({
+            ...args.query,
+            _$: idx.toString()
+          }).toString()}`
+        )
+        if (resp.ok) {
+          if (resp.headers.get('Content-Type')?.includes('application/json')) {
+            return await resp.json()
+          }
+          return await resp.text()
+        }
+      },
+      [args?.query]
+    )
 
-  useEffect(() => {
-    if (router) {
-      if (router.layouts[layoutIdx]) {
-        const layout = router.layouts[layoutIdx]
-        if (layout.ssr) {
-          fetchData(layoutIdx + 1).then((data) => {
-            onDataChange(data)
-          })
+    useEffect(() => {
+      if (router) {
+        if (router.layouts[layoutIdx]) {
+          const layout = router.layouts[layoutIdx]
+          if (layout.ssr) {
+            fetchData(layoutIdx + 1).then((data) => {
+              onDataChange(data)
+            })
+          } else {
+            onDataChange(layout.data || {})
+          }
         } else {
-          onDataChange(layout.data || {})
-        }
-      } else {
-        if (router.ssr) {
-          fetchData(-1).then((data) => {
-            onDataChange(data)
-          })
-        } else {
-          onDataChange(router.data || {})
+          if (router.ssr) {
+            fetchData(-1).then((data) => {
+              onDataChange(data)
+            })
+          } else {
+            onDataChange(router.data || {})
+          }
         }
       }
-    }
-  }, [router, fetchData])
+    }, [router, fetchData, layoutIdx, onDataChange])
 
-  return router.layouts[layoutIdx] ? (
-    createElement(router.layouts[layoutIdx].element, {
-      ...args,
-      children: (
-        <Page
-          router={router}
-          args={args}
-          onDataChange={onDataChange}
-          rootLayout={rootLayout}
-          layoutIdx={layoutIdx + 1}
-        />
-      )
-    })
-  ) : (
-    <router.element {...args} />
-  )
-}
+    return router.layouts[layoutIdx] ? (
+      createElement(router.layouts[layoutIdx].element, {
+        ...args,
+        children: (
+          <Page
+            router={router}
+            args={args}
+            onDataChange={onDataChange}
+            rootLayout={rootLayout}
+            layoutIdx={layoutIdx + 1}
+          />
+        )
+      })
+    ) : (
+      <router.element {...args} />
+    )
+  }
+)
 
 export function RouterProvider({
   routes,
@@ -147,6 +151,72 @@ export function RouterProvider({
   const [router, setRouter] = useState<(typeof routes)[number] | null>()
   const [args, setArgs] = useState<PageArgs>()
 
+  // Memoize compiled route regexes to avoid recreating them
+  const compiledRoutes = useMemo(
+    () =>
+      routes.map((route) => ({
+        ...route,
+        compiledRegex: new RegExp(route.regex)
+      })),
+    [routes]
+  )
+
+  // Memoize router navigation functions to prevent context value recreation
+  const routerMethods = useMemo(
+    () => ({
+      push: (url: string) => {
+        window.history.pushState({}, '', url)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      },
+      replace: (url: string) => {
+        window.history.replaceState({}, '', url)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      },
+      back: () => {
+        window.history.back()
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      },
+      reload: () => {
+        window.location.reload()
+      }
+    }),
+    []
+  )
+
+  // Memoize location properties to prevent unnecessary context updates
+  const locationProps = useMemo(
+    () => ({
+      pathname: window.location.pathname,
+      search: window.location.search,
+      href: window.location.href,
+      protocol: window.location.protocol,
+      hostname: window.location.hostname,
+      hash: window.location.hash
+    }),
+    [activeRoute]
+  )
+
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      ...locationProps,
+      ...routerMethods
+    }),
+    [locationProps, routerMethods]
+  )
+
+  // Memoize onDataChange callback to prevent child re-renders
+  const handleDataChange = useCallback((data: PageDataProps) => {
+    setArgs((args) => ({
+      query: args?.query || {},
+      params: args?.params || {},
+      data: {
+        ...(data || {}),
+        ...(args?.data || {})
+      }
+    }))
+  }, [])
+
   useEffect(() => {
     const handler = () => {
       setActiveRoute(window.location.pathname)
@@ -158,10 +228,21 @@ export function RouterProvider({
   }, [])
 
   useEffect(() => {
-    const route =
-      routes.find((r) => new RegExp(r.regex).test(activeRoute)) || null
+    const foundRoute = compiledRoutes.find((r) =>
+      r.compiledRegex.test(activeRoute)
+    )
+    // Extract only the original route properties without compiledRegex
+    const route = foundRoute
+      ? {
+          regex: foundRoute.regex,
+          ssr: foundRoute.ssr,
+          data: foundRoute.data,
+          element: foundRoute.element,
+          layouts: foundRoute.layouts
+        }
+      : null
     setRouter(route)
-  }, [activeRoute])
+  }, [activeRoute, compiledRoutes])
 
   useEffect(() => {
     if (router) {
@@ -187,48 +268,39 @@ export function RouterProvider({
     }
   }, [router])
 
+  useEffect(() => {
+    if (router) {
+      if (window.location.hash) {
+        setTimeout(() => {
+          const [selector, top] = window.location.hash.split(':') as [
+            string,
+            string | undefined
+          ]
+          const target = document.querySelector(selector)
+          if (target) {
+            window.scrollTo({
+              behavior: 'smooth',
+              top:
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                (top ? Number(top) : 80)
+            })
+          }
+        }, 500)
+      } else {
+        window.scrollTo({ top: 0, behavior: 'instant' })
+      }
+    }
+  }, [router])
+
   return (
-    <RouterContext.Provider
-      {...props}
-      value={{
-        pathname: window.location.pathname,
-        search: window.location.search,
-        href: window.location.href,
-        protocol: window.location.protocol,
-        hostname: window.location.hostname,
-        hash: window.location.hash,
-        push: (url: string) => {
-          window.history.pushState({}, '', url)
-          window.dispatchEvent(new PopStateEvent('popstate'))
-        },
-        replace: (url: string) => {
-          window.history.replaceState({}, '', url)
-          window.dispatchEvent(new PopStateEvent('popstate'))
-        },
-        back: () => {
-          window.history.back()
-          window.dispatchEvent(new PopStateEvent('popstate'))
-        },
-        reload: () => {
-          window.location.reload()
-        }
-      }}
-    >
+    <RouterContext.Provider {...props} value={contextValue}>
       <rootLayout.element {...args}>
         {router ? (
           <Page
             router={router}
             args={args}
-            onDataChange={(data) => {
-              setArgs((args) => ({
-                query: args?.query || {},
-                params: args?.params || {},
-                data: {
-                  ...(data || {}),
-                  ...(args?.data || {})
-                }
-              }))
-            }}
+            onDataChange={handleDataChange}
             rootLayout={rootLayout}
             layoutIdx={0}
           />

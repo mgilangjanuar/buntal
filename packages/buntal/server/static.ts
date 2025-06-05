@@ -4,8 +4,8 @@ export const staticHandler = async (
   dir: string = './public'
 ): Promise<Response | void> => {
   const { pathname } = new URL(req.url)
-  if (await Bun.file(`${dir}${pathname}`).exists()) {
-    const file = Bun.file(`${dir}${pathname}`)
+  if (await Bun.file(`${dir}${decodeURIComponent(pathname)}`).exists()) {
+    const file = Bun.file(`${dir}${decodeURIComponent(pathname)}`)
     return new Response(file, {
       headers: {
         'content-type': file.type
@@ -13,8 +13,10 @@ export const staticHandler = async (
     })
   }
 
-  if (await Bun.file(`${outDir}/dist${pathname}`).exists()) {
-    const file = Bun.file(`${outDir}/dist${pathname}`)
+  if (
+    await Bun.file(`${outDir}/dist${decodeURIComponent(pathname)}`).exists()
+  ) {
+    const file = Bun.file(`${outDir}/dist${decodeURIComponent(pathname)}`)
     return new Response(file, {
       headers: {
         'content-type': file.type

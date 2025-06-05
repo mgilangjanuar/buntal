@@ -3,14 +3,14 @@ import { AnimatedGridPattern } from '@/components/animated-grid'
 import Code from '@/components/code'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
+import { WobbleCard } from '@/components/wobble-card'
 import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
-import { Link, useRouter } from 'buntal'
+import { Link } from 'buntal'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 
 export default function HomePage() {
-  const r = useRouter()
   const { theme } = useTheme()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
@@ -199,7 +199,7 @@ export default function HomePage() {
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
                 </svg>
-                v0.0.20
+                v0.0.22
               </a>
               <Link href="/docs" className="btn btn-primary btn-soft">
                 Get Started
@@ -228,7 +228,7 @@ export default function HomePage() {
       <div className="w-full relative">
         <div className="container mx-auto">
           <div className="flex gap-8 pb-20 lg:pb-40 items-center justify-center flex-col">
-            <p className="text-base-content/50 text-sm">sponsored by </p>
+            <p className="text-base-content/50 text-sm">sponsored by</p>
             <div>
               <a
                 href="https://m.do.co/c/4aad6c899906"
@@ -284,6 +284,61 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full relative">
+        <div className="container mx-auto">
+          <div className="pb-20 lg:pb-40 grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
+            <WobbleCard
+              containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+              className=""
+            >
+              <div className="max-w-xs">
+                <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                  Blazing fast & type-safe by default
+                </h2>
+                <p className="mt-4 text-left  text-base/6 text-neutral-200">
+                  Built with TypeScript & Bun's native HTTP server, which is
+                  known for its speed.
+                </p>
+              </div>
+              <img
+                src="/CleanShot 2025-05-29 at 11.02.16@2x.png"
+                width={500}
+                height={500}
+                alt="type-safe params"
+                className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl bg-right bg-cover"
+              />
+            </WobbleCard>
+            <WobbleCard containerClassName="col-span-1 min-h-[300px]">
+              <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                No shirt, no shoes, no weapons.
+              </h2>
+              <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+                If someone yells “stop!”, goes limp, or taps out, the fight is
+                over.
+              </p>
+            </WobbleCard>
+            <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+              <div className="max-w-sm">
+                <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                  Blazing fast & type-safe by default
+                </h2>
+                <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+                  Built on Bun's native HTTP server, known for its speed and
+                  reaching{' '}
+                  <strong className="font-semibold">&gt; 2k RPS.</strong> Also
+                  written in TypeScript with strictly typed parameters, ensuring
+                  robust and reliable code.
+                </p>
+              </div>
+              <img
+                src="/2025-05-29@2x.png"
+                alt="type-safe params"
+                className="absolute -right-2 filter -bottom-6 object-contain rounded-2xl bg-center bg-cover max-w-xs md:max-w-md"
+              />
+            </WobbleCard>
           </div>
         </div>
       </div>

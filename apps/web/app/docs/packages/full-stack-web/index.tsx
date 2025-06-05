@@ -168,16 +168,16 @@ Done in 12ms`}
               {`import type { Req } from '@buntal/core'
 
 export const $ = async (req: Req) => {
-  const resp = await fetch(\`https://api.example.com/data/\${req.params.id}\`)
+  const resp = await fetch(\`https://api.example/data/\${req.params.id}\`)
   return await resp.json() as { name: string }
 }
 
 export default function HomePage({ data }: {
-  data: Awaited<ReturnType<typeof $>>
+  data?: Awaited<ReturnType<typeof $>>
 }) {
   return (
     <div>
-      Hello, {data.name || 'there'}!
+      Hello, {data?.name || 'there'}!
     </div>
   )
 }`}
@@ -196,7 +196,7 @@ export default function HomePage({ data }: {
             </p>
           </section>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-05-30
+            Last modified: 2025-06-05
           </p>
         </div>
         <div className="xl:block hidden">

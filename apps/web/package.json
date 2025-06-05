@@ -27,6 +27,7 @@
     "motion": "^12.16.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-scan": "^0.3.4",
     "react-syntax-highlighter": "^15.6.1",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7"

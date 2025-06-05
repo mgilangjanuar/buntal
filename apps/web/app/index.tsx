@@ -4,13 +4,15 @@ import Code from '@/components/code'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { cn } from '@/lib/utils'
-import { Link } from 'buntal'
+import { Link, useRouter } from 'buntal'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 
 export default function HomePage() {
+  const r = useRouter()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
+  const [loadingStep, setLoadingStep] = useState(0)
   const titles = useMemo(
     () => [
       'simple',
@@ -198,26 +200,79 @@ export default function HomePage() {
                 </svg>
                 v0.0.19
               </a>
-              <Link href="/docs" className="btn btn-primary btn-soft">
-                Get Started
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="!size-5"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M5 12l14 0" />
-                  <path d="M13 18l6 -6" />
-                  <path d="M13 6l6 6" />
-                </svg>
-              </Link>
+              <button
+                className="btn btn-primary btn-soft"
+                onClick={async () => {
+                  if (
+                    localStorage.getItem('buntal:hasSeenWelcome') === 'true'
+                  ) {
+                    r.push('/docs')
+                    return
+                  }
+
+                  if (loadingStep > 0) return
+                  setLoadingStep(1)
+                  await new Promise((resolve) => setTimeout(resolve, 2000))
+                  setLoadingStep(2)
+                  await new Promise((resolve) => setTimeout(resolve, 1500))
+                  setLoadingStep(3)
+                  await new Promise((resolve) => setTimeout(resolve, 2000))
+                  r.push('/docs')
+                  window.localStorage.setItem('buntal:hasSeenWelcome', 'true')
+                }}
+                disabled={loadingStep === 1}
+              >
+                {loadingStep ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="!size-5 animate-spin"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                    <path d="M20 4v5h-5" />
+                  </svg>
+                ) : (
+                  <></>
+                )}
+                {loadingStep === 0
+                  ? 'Get Started'
+                  : loadingStep === 1
+                    ? 'Loading...'
+                    : loadingStep === 2
+                      ? '*jk LOL'
+                      : loadingStep === 3
+                        ? 'SPA ftw!'
+                        : ''}
+                {loadingStep ? (
+                  <></>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="!size-5"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 12l14 0" />
+                    <path d="M13 18l6 -6" />
+                    <path d="M13 6l6 6" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
         </div>

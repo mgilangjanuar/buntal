@@ -3,8 +3,8 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Source Serif 4', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Plus Jakarta Sans', serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 

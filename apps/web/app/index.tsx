@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 export default function HomePage() {
   const [titleNumber, setTitleNumber] = useState(0)
+  const [isScrolled, setIsScrolled] = useState(false)
   const titles = useMemo(
     () => [
       'simple',
@@ -30,8 +31,39 @@ export default function HomePage() {
     return () => clearTimeout(timeoutId)
   }, [titleNumber, titles])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setIsScrolled(scrollY > 30)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <main className="min-h-screen">
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-sm border-b border-base-200"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{
+          y: isScrolled ? 0 : -100,
+          opacity: isScrolled ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
+        <div className="container mx-auto max-w-3xl px-4 py-3 flex items-center gap-3">
+          <motion.div
+            className="flex items-center"
+            initial={false}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <Svg src={Logo} className="[&>*]:size-10 flex justify-center" />
+          </motion.div>
+          <h2 className="text-xl font-semibold tracking-tight">Buntal JS</h2>
+        </div>
+      </motion.header>
+
       <div className="w-full relative">
         <AnimatedGridPattern
           width={100}
@@ -43,13 +75,27 @@ export default function HomePage() {
           className={cn(
             '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
             'inset-x-0 inset-y-0 h-[100%] -skew-y-12',
-            'opacity-30'
+            'opacity-50'
           )}
         />
         <div className="container mx-auto">
           <div className="flex gap-4 py-20 lg:py-40 items-center justify-center flex-col">
-            <Svg src={Logo} className="[&>*]:size-32 flex justify-center" />
-            <div className="flex items-center gap-2 text-sm badge badge-warning badge-soft">
+            <motion.div
+              className="flex justify-center"
+              animate={{
+                scale: isScrolled ? 0.1 : 1,
+                opacity: isScrolled ? 0 : 1,
+                y: isScrolled ? -140 : 0,
+                x: isScrolled ? -340 : 0
+              }}
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+            >
+              <Svg
+                src={Logo}
+                className="[&>*]:size-28 md:[&>*]:size-44 flex justify-center"
+              />
+            </motion.div>
+            <div className="flex items-center gap-2 text-sm badge badge-ghost">
               <div className="inline-grid *:[grid-area:1/1]">
                 <div className="status status-warning animate-ping"></div>
                 <div className="status status-warning"></div>
@@ -57,8 +103,8 @@ export default function HomePage() {
               Early Development
             </div>
             <div className="flex gap-4 flex-col max-w-2xl w-full">
-              <h1 className="text-4xl md:text-7xl tracking-tighter text-center font-regular">
-                <span className="text-balance inline-block">
+              <h1 className="text-4xl md:text-7xl tracking-tight text-center font-regular">
+                <span className="text-balance inline-block font-serif">
                   Framework that is
                 </span>
                 <span className="relative flex w-full justify-center overflow-hidden text-center pb-4 pt-1">
@@ -66,7 +112,7 @@ export default function HomePage() {
                   {titles.map((title, index) => (
                     <motion.span
                       key={index}
-                      className="absolute font-semibold"
+                      className="absolute font-semibold font-serif"
                       initial={{ opacity: 0, y: 0 }}
                       transition={{ type: 'keyframe', stiffness: 50 }}
                       animate={
@@ -100,7 +146,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="py-20"></div>
+      <div className="py-[100svh]"></div>
     </main>
   )
 }

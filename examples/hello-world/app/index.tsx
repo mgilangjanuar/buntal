@@ -1,15 +1,11 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
-import LogoWithContextMenu from '@/components/logo-with-context-menu'
+import { Svg } from 'buntal'
 
 export default function HomePage() {
   return (
     <div className="min-h-svh flex flex-col items-center justify-center container mx-auto">
       <div className="space-y-4">
-        <LogoWithContextMenu
-          src={Logo}
-          className="[&>*]:size-28"
-          filename="buntal-logo.svg"
-        />
+        <Svg src={Logo} className="[&>*]:size-28" />
         <h1 className="text-4xl font-bold">Next.js who?</h1>
         <p className="text-base leading-7">
           Run{' '}

@@ -52,10 +52,12 @@
       },
       "devDependencies": {
         "@buntal/cli": "latest",
+        "@eslint-react/eslint-plugin": "^1.51.0",
         "@tailwindcss/cli": "^4.1.7",
         "@types/bun": "latest",
         "@types/react": "^19.1.4",
         "@types/react-dom": "^19.1.5",
+        "typescript-eslint": "^8.33.1",
       },
       "peerDependencies": {
         "typescript": "^5",
@@ -849,9 +851,9 @@
 
     "hello-world/@buntal/cli": ["@buntal/cli@0.0.10", "", { "dependencies": { "commander": "^14.0.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "buntal": "index.ts" } }, "sha512-+0z6suBqZm8zmRdNO33Mh4U4bcWvFcAukfp54030bpFtai0Kd0/wGoovueqs1YgcPSmwjfb/cA6gR3JbBXYkQQ=="],
 
-    "hello-world/@buntal/core": ["@buntal/core@0.0.6", "", { "dependencies": { "bcryptjs": "^3.0.2", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-PcqdSi4MSPULJhoBilVzYs6gUTX/af04wC6xIKC7ohVS46LciLkoVR1lsIVaDeVPagcQPvJ6zvjNuZKq95KrAA=="],
+    "hello-world/@buntal/core": ["@buntal/core@0.0.7", "", { "dependencies": { "bcryptjs": "^3.0.2", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-3G89sGowR5lXBWRs5ALSVYo5FYH2wmO2YV+QbS68HoLybt7o0e2AJxPYWO07tmI08eOF3wKhwdVKUJgtZEZsEg=="],
 
-    "hello-world/buntal": ["buntal@0.0.17", "", { "dependencies": { "@buntal/core": "latest", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-JuWJSQSYsVqFyMoGsu/iVwy0Y7s2vqRgVN/p+D3BS0gI7jMer0Q8o7S7beGt00ovKQRSmkg0MvfZyGNfMNlOMA=="],
+    "hello-world/buntal": ["buntal@0.0.22", "", { "dependencies": { "@buntal/core": "latest", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-3wR3U1xDm1QCs78QD2EM9b5RGBad416lSPwqOuy5p7SpfpesI6eOQzyKO/8/W/sBhOy6eDNvebB32i3pJnUtAQ=="],
 
     "lightningcss/detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
 

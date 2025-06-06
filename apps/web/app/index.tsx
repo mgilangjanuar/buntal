@@ -34,6 +34,7 @@ export const $ = async () => {
     })
   })
   const json = await resp.json()
+  console.log('sponsors', json)
   return {
     sponsors: json.data.user.sponsors.nodes as {
       login: string
@@ -163,8 +164,8 @@ export default function HomePage({
             )}
           />
         </motion.div>
-        <div className="container mx-auto">
-          <div className="flex gap-4 py-20 lg:py-40 items-center justify-center flex-col [&>div]:z-10">
+        <div className="container mx-auto py-20 lg:py-40">
+          <div className="flex gap-4 items-center justify-center flex-col [&>div]:z-10">
             <motion.div
               className="flex justify-center !z-20"
               animate={{
@@ -282,8 +283,8 @@ export default function HomePage({
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto">
-          <div className="flex gap-8 pb-20 lg:pb-40 items-center justify-center flex-col">
+        <div className="container mx-auto pb-20 lg:pb-40">
+          <div className="flex gap-8 items-center justify-center flex-col">
             <p className="text-base-content/50 text-sm">sponsored by</p>
             <div>
               <a
@@ -349,8 +350,8 @@ export default function HomePage({
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto">
-          <div className="pb-20 lg:pb-40 grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
+        <div className="container mx-auto pb-20 lg:pb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
             <WobbleCard
               containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[560px] lg:min-h-[300px]"
               className=""
@@ -403,8 +404,8 @@ export default function HomePage({
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto">
-          <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
+        <div className="container mx-auto pb-20 lg:pb-40">
+          <div className="mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="col-start-2">
                 <p className="font-mono text-sm leading-normal text-base-content/50">

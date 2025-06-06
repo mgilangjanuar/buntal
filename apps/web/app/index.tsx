@@ -407,17 +407,17 @@ export default function HomePage({
           <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="col-start-2">
-                <p className="text-right font-mono text-sm leading-normal text-base-content/50">
-                  rps
+                <p className="font-mono text-sm leading-normal text-base-content/50">
+                  reqs/sec
                 </p>
               </div>
             </div>
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="text-right leading-tight">
-                <p className="text-right">@buntal/core</p>
+                <p className="font-medium text-right">@buntal/core</p>
                 <p className="text-base-content/50 text-sm">bun</p>
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight mt-[1px] space-y-[1px]">
                 <progress
                   className="progress h-3 progress-secondary w-40 md:w-60"
                   value="100"
@@ -430,10 +430,10 @@ export default function HomePage({
             </div>
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="text-right leading-tight">
-                <p className="text-right">Elysia</p>
+                <p className="font-medium text-right">Elysia</p>
                 <p className="text-base-content/50 text-sm">bun</p>
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight mt-[1px] space-y-[1px]">
                 <progress
                   className="progress h-3 w-40 md:w-60"
                   value={(2096.58 / 2099.56) * 100}
@@ -446,48 +446,48 @@ export default function HomePage({
             </div>
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="text-right leading-tight">
-                <p className="text-right">Gin</p>
+                <p className="font-medium text-right">Gin</p>
                 <p className="text-base-content/50 text-sm">go</p>
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight mt-[1px] space-y-[1px]">
                 <progress
                   className="progress h-3 w-40 md:w-60"
                   value={(1987.36 / 2099.56) * 100}
                   max="100"
                 ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50">
+                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-4 pr-2.5">
                   1987.36
                 </p>
               </div>
             </div>
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="text-right leading-tight">
-                <p className="text-right">Express.js</p>
+                <p className="font-medium text-right">Express.js</p>
                 <p className="text-base-content/50 text-sm">node</p>
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight mt-[1px] space-y-[1px]">
                 <progress
                   className="progress h-3 w-40 md:w-60"
                   value={(1376.42 / 2099.56) * 100}
                   max="100"
                 ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50">
+                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-[84px] pr-14">
                   1376.42
                 </p>
               </div>
             </div>
             <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
               <div className="text-right leading-tight">
-                <p className="text-right">FastAPI</p>
+                <p className="font-medium text-right">FastAPI</p>
                 <p className="text-base-content/50 text-sm">uvicorn</p>
               </div>
-              <div className="leading-tight">
+              <div className="leading-tight mt-[1px] space-y-[1px]">
                 <progress
                   className="progress h-3 w-40 md:w-60"
                   value={(835.9 / 2099.56) * 100}
                   max="100"
                 ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50">
+                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-36 pr-[98px]">
                   835.90
                 </p>
               </div>

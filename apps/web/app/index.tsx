@@ -159,7 +159,7 @@ export default function HomePage({
             duration={3}
             className={cn(
               '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-              'inset-x-0 inset-y-0 h-[100%] opacity-75 dark:opacity-50'
+              'inset-x-0 inset-y-0 h-[100%] opacity-75 dark:opacity-35'
             )}
           />
         </motion.div>
@@ -404,54 +404,98 @@ export default function HomePage({
       </div>
       <div className="w-full relative">
         <div className="container mx-auto">
-          <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80">
-            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
-              <p className="text-right leading-7">@buntal/core</p>
+          <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight"></div>
+              <div></div>
+              <div>
+                <p className="text-left font-mono text-sm leading-normal text-base-content/50 pl-2 md:pl-0.5">
+                  rps
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight">
+                <p className="text-right">@buntal/core</p>
+                <p className="text-base-content/50 text-xs">bun</p>
+              </div>
               <progress
-                className="self-center progress h-3 progress-secondary w-28 md:w-56"
+                className="progress h-3 progress-secondary w-28 md:w-60 mt-1"
                 value="100"
                 max="100"
               ></progress>
-              <p className="text-right font-mono text-sm leading-7">2099.56</p>
+              <div>
+                <p className="text-right font-mono text-sm leading-normal">
+                  2099.56
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
-              <p className="text-right leading-7">Elysia</p>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight">
+                <p className="text-right">Elysia</p>
+                <p className="text-base-content/50 text-xs">bun</p>
+              </div>
               <progress
-                className="self-center progress h-3 w-28 md:w-56"
+                className="progress h-3 w-28 md:w-60 mt-1"
                 value={(2096.58 / 2099.56) * 100}
                 max="100"
               ></progress>
-              <p className="text-right font-mono text-sm leading-7">2096.58</p>
+              <div>
+                <p className="text-right font-mono text-sm leading-normal">
+                  2096.58
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
-              <p className="text-right leading-7">Gin</p>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight">
+                <p className="text-right">Gin</p>
+                <p className="text-base-content/50 text-xs">go</p>
+              </div>
               <progress
-                className="self-center progress h-3 w-28 md:w-56"
+                className="progress h-3 w-28 md:w-60 mt-1"
                 value={(1987.36 / 2099.56) * 100}
                 max="100"
               ></progress>
-              <p className="text-right font-mono text-sm leading-7">1987.36</p>
+              <div>
+                <p className="text-right font-mono text-sm leading-normal">
+                  1987.36
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
-              <p className="text-right leading-7">Express.js</p>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight">
+                <p className="text-right">Express.js</p>
+                <p className="text-base-content/50 text-xs">node</p>
+              </div>
               <progress
-                className="self-center progress h-3 w-28 md:w-56"
+                className="progress h-3 w-28 md:w-60 mt-1"
                 value={(1376.42 / 2099.56) * 100}
                 max="100"
               ></progress>
-              <p className="text-right font-mono text-sm leading-7">1376.42</p>
+              <div>
+                <p className="text-right font-mono text-sm leading-normal">
+                  1376.42
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
-              <p className="text-right leading-7">FastAPI</p>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
+              <div className="text-right leading-tight">
+                <p className="text-right">FastAPI</p>
+                <p className="text-base-content/50 text-xs">uvicorn</p>
+              </div>
               <progress
-                className="self-center progress h-3 w-28 md:w-56"
+                className="progress h-3 w-28 md:w-60 mt-1"
                 value={(835.9 / 2099.56) * 100}
                 max="100"
               ></progress>
-              <p className="text-right font-mono text-sm leading-7">835.90</p>
+              <div>
+                <p className="text-right font-mono text-sm leading-normal">
+                  835.90
+                </p>
+              </div>
             </div>
-            <div className="mt-6 text-center text-xs [&>p]:leading-normal text-base-content/50">
-              <p>Tested on MacBook M1 Pro in June 2025.</p>
+            <div className="text-right mt-8 text-xs text-base-content/50">
+              <p>*) Tested on MacBook M1 Pro in June 2025.</p>
               <p>
                 Run the benchmark script{' '}
                 <a

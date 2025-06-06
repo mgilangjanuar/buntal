@@ -22,7 +22,7 @@ export default function Code({
 
   return (
     <div className={cn('relative', className)}>
-      <label className="swap border-none ring-0 btn btn-sm btn-square btn-ghost absolute top-2 right-2 opacity-70 hover:opacity-100">
+      <label className="swap border-none ring-0 btn btn-sm btn-square btn-ghost absolute top-2 right-2 opacity-70 hover:opacity-100 hover:bg-transparent">
         <input
           type="checkbox"
           checked={copiedText === children.trim()}
@@ -69,7 +69,7 @@ export default function Code({
       <SyntaxHighlighter
         language={language}
         style={theme === 'dark' ? atomOneDark : atomOneLight}
-        customStyle={{ padding: '12px 16px', borderRadius: '6px' }}
+        customStyle={{ padding: '12px 48px 12px 16px', borderRadius: '6px' }}
       >
         {children.trim()}
       </SyntaxHighlighter>

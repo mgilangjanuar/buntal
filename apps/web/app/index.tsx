@@ -159,7 +159,7 @@ export default function HomePage({
             duration={3}
             className={cn(
               '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-              'inset-x-0 inset-y-0 h-[100%] opacity-75 dark:opacity-35'
+              'inset-x-0 inset-y-0 h-[100%] opacity-85 dark:opacity-35'
             )}
           />
         </motion.div>
@@ -228,7 +228,7 @@ export default function HomePage({
             <div className="grid grid-col-1 mt-4">
               <Code
                 language="sh"
-                className="[&>pre]:!pr-12 overflow-x-auto text-sm md:text-base"
+                className="overflow-x-auto text-sm md:text-base"
               >
                 {'bun create buntal@latest my-app'}
               </Code>
@@ -406,9 +406,7 @@ export default function HomePage({
         <div className="container mx-auto">
           <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
             <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_240px_62px] content-center gap-4">
-              <div className="text-right leading-tight"></div>
-              <div></div>
-              <div>
+              <div className="col-start-3">
                 <p className="text-left font-mono text-sm leading-normal text-base-content/50 pl-2 md:pl-0.5">
                   rps
                 </p>

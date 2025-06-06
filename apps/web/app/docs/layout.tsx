@@ -36,26 +36,14 @@ export default function DocsLayout({
   const { pathname } = useRouter()
 
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open max-w-[1360px] mx-auto">
       <input
         id="docs-layout-drawer"
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content min-h-svh bg-base-100 relative">
+      <div className="drawer-content min-h-svh relative">
         <Spotlight />
-        {/* <Suspense
-          fallback={
-            <div className="flex flex-col p-4 w-full md:max-w-prose">
-              <div className="h-14 flex flex-col items-start py-2">
-                <div className="skeleton h-4 w-[20%]"></div>
-              </div>
-              <div className="skeleton h-6 w-[50%] mb-4"></div>
-              <div className="skeleton h-32 w-full"></div>
-            </div>
-          }
-        >
-        </Suspense> */}
         {children}
       </div>
       <div className="drawer-side z-20">
@@ -64,7 +52,7 @@ export default function DocsLayout({
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu text-base-content min-h-full w-80 p-4 gap-0.5 backdrop-blur-sm bg-base-100/80">
+        <ul className="menu text-base-content min-h-full w-80 p-4 gap-0.5 backdrop-blur-sm bg-base-200 md:bg-base-100/0">
           <Link
             href="/"
             className="flex items-center gap-4 px-3 !h-10 group mb-3.5"

@@ -1,5 +1,6 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
+import { Spotlight } from '@/components/spotlight-new'
 import { cn } from '@/lib/utils'
 import { Link, useRouter } from 'buntal'
 
@@ -41,7 +42,8 @@ export default function DocsLayout({
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content min-h-svh bg-base-100">
+      <div className="drawer-content min-h-svh bg-base-100 relative">
+        <Spotlight />
         {/* <Suspense
           fallback={
             <div className="flex flex-col p-4 w-full md:max-w-prose">
@@ -62,7 +64,7 @@ export default function DocsLayout({
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 gap-0.5">
+        <ul className="menu text-base-content min-h-full w-80 p-4 gap-0.5 backdrop-blur-sm bg-base-100/80">
           <Link
             href="/"
             className="flex items-center gap-4 px-3 !h-10 group mb-3.5"

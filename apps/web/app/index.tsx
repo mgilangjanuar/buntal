@@ -159,7 +159,7 @@ export default function HomePage({
             duration={3}
             className={cn(
               '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-              'inset-x-0 inset-y-0 h-[100%] opacity-50'
+              'inset-x-0 inset-y-0 h-[100%] opacity-75 dark:opacity-50'
             )}
           />
         </motion.div>
@@ -399,6 +399,72 @@ export default function HomePage({
                 className="absolute -right-2 filter -bottom-6 object-contain rounded-2xl bg-center bg-cover max-w-xs md:max-w-md"
               />
             </WobbleCard>
+          </div>
+        </div>
+      </div>
+      <div className="w-full relative">
+        <div className="container mx-auto">
+          <div className="pb-20 lg:pb-40 mx-auto max-w-lg w-fit text-base-content/80">
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
+              <p className="text-right leading-7">@buntal/core</p>
+              <progress
+                className="self-center progress h-3 progress-accent w-28 md:w-56"
+                value="100"
+                max="100"
+              ></progress>
+              <p className="text-right font-mono text-sm leading-7">2099.56</p>
+            </div>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
+              <p className="text-right leading-7">Elysia</p>
+              <progress
+                className="self-center progress h-3 w-28 md:w-56"
+                value={(2096.58 / 2099.56) * 100}
+                max="100"
+              ></progress>
+              <p className="text-right font-mono text-sm leading-7">2096.58</p>
+            </div>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
+              <p className="text-right leading-7">Gin</p>
+              <progress
+                className="self-center progress h-3 w-28 md:w-56"
+                value={(1987.36 / 2099.56) * 100}
+                max="100"
+              ></progress>
+              <p className="text-right font-mono text-sm leading-7">1987.36</p>
+            </div>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
+              <p className="text-right leading-7">Express.js</p>
+              <progress
+                className="self-center progress h-3 w-28 md:w-56"
+                value={(1376.42 / 2099.56) * 100}
+                max="100"
+              ></progress>
+              <p className="text-right font-mono text-sm leading-7">1376.42</p>
+            </div>
+            <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
+              <p className="text-right leading-7">FastAPI</p>
+              <progress
+                className="self-center progress h-3 w-28 md:w-56"
+                value={(835.9 / 2099.56) * 100}
+                max="100"
+              ></progress>
+              <p className="text-right font-mono text-sm leading-7">835.90</p>
+            </div>
+            <div className="mt-6 text-center text-xs [&>p]:leading-normal text-base-content/50">
+              <p>Tested on MacBook M1 Pro in June 2025.</p>
+              <p>
+                Run the benchmark script{' '}
+                <a
+                  href="https://github.com/mgilangjanuar/buntal/tree/main/benchmark"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 font-medium"
+                >
+                  here
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -408,7 +408,7 @@ export default function HomePage({
             <div className="grid grid-cols-[104px_112px_68px] md:grid-cols-[104px_224px_62px] content-center gap-4">
               <p className="text-right leading-7">@buntal/core</p>
               <progress
-                className="self-center progress h-3 progress-accent w-28 md:w-56"
+                className="self-center progress h-3 progress-secondary w-28 md:w-56"
                 value="100"
                 max="100"
               ></progress>

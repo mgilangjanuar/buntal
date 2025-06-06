@@ -25,7 +25,12 @@ export default function InstallPage() {
                 <strong>Bun</strong> ^1.2.14 - Buntal JS is built on top of the
                 Bun runtime and API, so you need to have it installed. You can
                 download it from the{' '}
-                <a href="https://bun.sh" className="underline-offset-4">
+                <a
+                  href="https://bun.sh"
+                  className="underline-offset-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Bun website
                 </a>
                 .

@@ -34,7 +34,6 @@ export const $ = async () => {
     })
   })
   const json = await resp.json()
-  console.log('sponsors', json)
   return {
     sponsors: json.data.user.sponsors.nodes as {
       login: string

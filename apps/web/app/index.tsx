@@ -85,7 +85,7 @@ export default function HomePage({
   return (
     <main className="min-h-screen">
       <motion.header
-        className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-sm border-b border-base-200"
+        className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-sm"
         initial={{ y: -100, opacity: 0 }}
         animate={{
           y: scrollY > 50 ? 0 : -100,

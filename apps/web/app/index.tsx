@@ -348,7 +348,7 @@ export default function HomePage({
           </div>
         </div>
       </div>
-      <div className="w-full relative">
+      <div className="w-full relative bg-gradient-to-b from-base-200/0 to-blue-900/15">
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
             <WobbleCard
@@ -402,113 +402,119 @@ export default function HomePage({
           </div>
         </div>
       </div>
-      <div className="w-full relative">
+      <div className="w-full relative bg-gradient-to-b to-base-200/0 from-blue-900/15">
         <div className="container mx-auto pb-20 lg:pb-40">
-          <div className="mx-auto max-w-lg w-fit text-base-content/80 space-y-3">
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="col-start-2">
-                <p className="font-mono text-sm leading-normal text-base-content/50">
-                  reqs/sec
+          <div className="grid md:grid-cols-2 gap-10">
+            <div></div>
+            <div className="mx-auto md:mx-0 max-w-lg w-fit text-base-content/80 space-y-3">
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="col-start-2">
+                  <p className="font-mono text-sm leading-normal text-base-content/50">
+                    reqs/sec
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="text-right leading-tight">
+                  <p className="font-medium text-right">@buntal/core</p>
+                  <p className="text-base-content/50 text-sm">bun</p>
+                </div>
+                <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <progress
+                    className="progress h-3 progress-secondary w-40 md:w-60"
+                    value="100"
+                    max="100"
+                  ></progress>
+                  <p className="text-right font-mono text-xs leading-normal text-base-content/50">
+                    2099.56
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="text-right leading-tight">
+                  <p className="font-medium text-right">Elysia</p>
+                  <p className="text-base-content/50 text-sm">bun</p>
+                </div>
+                <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <progress
+                    className="progress h-3 w-40 md:w-60"
+                    value={(2096.58 / 2099.56) * 100}
+                    max="100"
+                  ></progress>
+                  <p className="text-right font-mono text-xs leading-normal text-base-content/50">
+                    2096.58
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="text-right leading-tight">
+                  <p className="font-medium text-right">Gin</p>
+                  <p className="text-base-content/50 text-sm">go</p>
+                </div>
+                <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <progress
+                    className="progress h-3 w-40 md:w-60"
+                    value={(1987.36 / 2099.56) * 100}
+                    max="100"
+                  ></progress>
+                  <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-4 pr-2.5">
+                    1987.36
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="text-right leading-tight">
+                  <p className="font-medium text-right">Express.js</p>
+                  <p className="text-base-content/50 text-sm">node</p>
+                </div>
+                <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <progress
+                    className="progress h-3 w-40 md:w-60"
+                    value={(1376.42 / 2099.56) * 100}
+                    max="100"
+                  ></progress>
+                  <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-[84px] pr-14">
+                    1376.42
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
+                <div className="text-right leading-tight">
+                  <p className="font-medium text-right">FastAPI</p>
+                  <p className="text-base-content/50 text-sm">uvicorn</p>
+                </div>
+                <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <progress
+                    className="progress h-3 w-40 md:w-60"
+                    value={(835.9 / 2099.56) * 100}
+                    max="100"
+                  ></progress>
+                  <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-36 pr-[98px]">
+                    835.90
+                  </p>
+                </div>
+              </div>
+              <div className="text-right mt-8 text-xs text-base-content/50">
+                <p>*) Tested on MacBook M1 Pro in June 2025.</p>
+                <p>
+                  Run the benchmark script{' '}
+                  <a
+                    href="https://github.com/mgilangjanuar/buntal/tree/main/benchmark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-4 font-medium"
+                  >
+                    here
+                  </a>
+                  .
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="text-right leading-tight">
-                <p className="font-medium text-right">@buntal/core</p>
-                <p className="text-base-content/50 text-sm">bun</p>
-              </div>
-              <div className="leading-tight mt-[1px] space-y-[1px]">
-                <progress
-                  className="progress h-3 progress-secondary w-40 md:w-60"
-                  value="100"
-                  max="100"
-                ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50">
-                  2099.56
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="text-right leading-tight">
-                <p className="font-medium text-right">Elysia</p>
-                <p className="text-base-content/50 text-sm">bun</p>
-              </div>
-              <div className="leading-tight mt-[1px] space-y-[1px]">
-                <progress
-                  className="progress h-3 w-40 md:w-60"
-                  value={(2096.58 / 2099.56) * 100}
-                  max="100"
-                ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50">
-                  2096.58
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="text-right leading-tight">
-                <p className="font-medium text-right">Gin</p>
-                <p className="text-base-content/50 text-sm">go</p>
-              </div>
-              <div className="leading-tight mt-[1px] space-y-[1px]">
-                <progress
-                  className="progress h-3 w-40 md:w-60"
-                  value={(1987.36 / 2099.56) * 100}
-                  max="100"
-                ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-4 pr-2.5">
-                  1987.36
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="text-right leading-tight">
-                <p className="font-medium text-right">Express.js</p>
-                <p className="text-base-content/50 text-sm">node</p>
-              </div>
-              <div className="leading-tight mt-[1px] space-y-[1px]">
-                <progress
-                  className="progress h-3 w-40 md:w-60"
-                  value={(1376.42 / 2099.56) * 100}
-                  max="100"
-                ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-[84px] pr-14">
-                  1376.42
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
-              <div className="text-right leading-tight">
-                <p className="font-medium text-right">FastAPI</p>
-                <p className="text-base-content/50 text-sm">uvicorn</p>
-              </div>
-              <div className="leading-tight mt-[1px] space-y-[1px]">
-                <progress
-                  className="progress h-3 w-40 md:w-60"
-                  value={(835.9 / 2099.56) * 100}
-                  max="100"
-                ></progress>
-                <p className="text-right font-mono text-xs leading-normal text-base-content/50 md:pr-36 pr-[98px]">
-                  835.90
-                </p>
-              </div>
-            </div>
-            <div className="text-right mt-8 text-xs text-base-content/50">
-              <p>*) Tested on MacBook M1 Pro in June 2025.</p>
-              <p>
-                Run the benchmark script{' '}
-                <a
-                  href="https://github.com/mgilangjanuar/buntal/tree/main/benchmark"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline underline-offset-4 font-medium"
-                >
-                  here
-                </a>
-                .
-              </p>
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full relative">
+        <div className="container mx-auto pb-20 lg:pb-40"></div>
       </div>
     </main>
   )

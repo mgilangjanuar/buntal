@@ -117,6 +117,28 @@ export default function HomePage({
             >
               Docs
             </Link>
+            <a
+              href="https://github.com/mgilangjanuar/buntal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-square btn-sm btn-ghost"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="!size-4 opacity-70"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+              </svg>
+            </a>
             <ThemeSwitcher className="[&_svg]:size-4 [&_svg]:opacity-70 btn btn-ghost btn-square btn-sm" />
           </div>
         </div>
@@ -331,7 +353,7 @@ export default function HomePage({
         <div className="container mx-auto">
           <div className="pb-20 lg:pb-40 grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
             <WobbleCard
-              containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+              containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[560px] lg:min-h-[300px]"
               className=""
             >
               <div className="max-w-xs">
@@ -339,22 +361,21 @@ export default function HomePage({
                   Ultra-lightweight framework without bloatware
                 </h2>
                 <p className="mt-4 text-left  text-base/6 text-neutral-200">
-                  Buntal JS has only{' '}
-                  <span className="font-semibold">~30 kB</span> unpacked size;
-                  ditch all unnecessary dependencies.
+                  Buntal JS is a lightweight solution (
+                  <strong className="font-semibold">~30 kB</strong> unpacked)
+                  for building REST APIs and full-stack web apps, achieved by
+                  minimizing unnecessary dependencies.
                 </p>
               </div>
               <img
-                src="/CleanShot 2025-05-29 at 11.02.16@2x.png"
-                width={500}
-                height={500}
-                alt="type-safe params"
-                className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl bg-right bg-cover"
+                src="/08.46.20@2x.png?v=2"
+                alt="ultra-lightweight framework"
+                className="absolute -right-8 filter -bottom-2 object-contain rounded-2xl bg-center grayscale bg-cover max-w-[280px] md:max-w-xs"
               />
             </WobbleCard>
             <WobbleCard containerClassName="col-span-1 min-h-[300px]">
               <h2 className="max-w-80  text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                SSR, SPA, and file-based routing
+                SSR, SPA, file-based routing, and more
               </h2>
               <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
                 Everything out of the box. Building web apps without headaches.

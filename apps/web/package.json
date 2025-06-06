@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "buntal dev",
     "build": "buntal build",
-    "start": "buntal start"
+    "start": "buntal start",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@buntal/cli": "workspace:^",

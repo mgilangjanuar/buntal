@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, use, useEffect, useMemo, useState } from 'react'
 
 type Theme = {
   theme: 'light' | 'dark'
@@ -21,9 +21,11 @@ type ThemeProviderProps = {
   children?: React.ReactNode
 }
 
+const defaultThemesMap = { light: 'light', dark: 'dark' }
+
 export function ThemeProvider({
   defaultTheme,
-  themesMap = { light: 'light', dark: 'dark' },
+  themesMap = defaultThemesMap,
   children
 }: ThemeProviderProps) {
   if (typeof window === 'undefined') {
@@ -50,17 +52,16 @@ export function ThemeProvider({
     }
   }, [theme])
 
-  return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
-        themesMap
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      theme,
+      setTheme,
+      themesMap
+    }),
+    [theme, setTheme, themesMap]
   )
+
+  return <ThemeContext value={contextValue}>{children}</ThemeContext>
 }
 
-export const useTheme = () => useContext(ThemeContext)
+export const useTheme = () => use(ThemeContext)

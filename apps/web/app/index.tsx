@@ -157,7 +157,6 @@ export default function HomePage({
             numSquares={15}
             maxOpacity={0.1}
             duration={3}
-            repeatDelay={1}
             className={cn(
               '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
               'inset-x-0 inset-y-0 h-[100%] opacity-50'
@@ -198,7 +197,7 @@ export default function HomePage({
                   &nbsp;
                   {titles.map((title, index) => (
                     <motion.span
-                      key={index}
+                      key={title}
                       className="absolute font-semibold font-serif"
                       initial={{ opacity: 0, y: 0 }}
                       transition={{ type: 'keyframe', stiffness: 50 }}

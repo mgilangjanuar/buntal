@@ -79,8 +79,8 @@ export default function DocsLayout({
               <span className="text-xs text-base-content/60">v0.0.22</span>
             </div>
           </Link>
-          {MENUS.map((menu, i) => (
-            <li key={i}>
+          {MENUS.map((menu) => (
+            <li key={menu.title}>
               {menu.href ? (
                 <Link
                   href={menu.href}
@@ -96,8 +96,8 @@ export default function DocsLayout({
                   <h2 className="menu-title">{menu.title}</h2>
                   {menu.items && (
                     <ul className="space-y-0.5">
-                      {menu.items.map((item, j) => (
-                        <li key={j}>
+                      {menu.items.map((item) => (
+                        <li key={item.title}>
                           <Link
                             href={item.href}
                             className={cn(

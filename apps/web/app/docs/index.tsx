@@ -17,7 +17,7 @@ export default function DocsPage() {
   useEffect(() => {
     const handleScroll = () => {
       // Get all sections with IDs
-      const sections = document.querySelectorAll('section[id], h4[id]')
+      const sections = document.querySelectorAll('*[id]')
 
       let currentSection = ''
       let currentOffset = 0

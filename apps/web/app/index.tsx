@@ -13,47 +13,182 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 const FEATURES = [
   {
-    title: 'Organize chat history',
-    description: 'Manage your chats with folders. Declutter your workspace.',
-    icon: <></>
+    title: 'Type-safe APIs',
+    description: 'TypeScript-checked API routes for safer, faster development.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" />
+        <path d="M15 19l2 2l4 -4" />
+      </svg>
+    )
   },
   {
-    title: 'Pay as you go',
+    title: 'File-based Routing',
     description:
-      'Fair pricing for all. No subscription needed for individuals.',
-    icon: <></>
+      'Map file structure to application routes, similar to Next.js.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+        <path d="M15 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+        <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+        <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />
+        <path d="M12 9l0 3" />
+      </svg>
+    )
   },
   {
-    title: 'Unlimited members',
+    title: 'Developer Friendly',
+    description: 'Simple configuration and minimal learning curve.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+        <path d="M8 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M16 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+        <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
+        <path d="M3.5 9h2.5" />
+        <path d="M18 9h2.5" />
+        <path d="M10 9.5c1.333 -1.333 2.667 -1.333 4 0" />
+      </svg>
+    )
+  },
+  {
+    title: 'Built-in Dev Server',
+    description: 'Fast reload and optimized for developer productivity.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 10.941c2.333 -3.308 .167 -7.823 -1 -8.941c0 3.395 -2.235 5.299 -3.667 6.706c-1.43 1.408 -2.333 3.621 -2.333 5.588c0 3.704 3.134 6.706 7 6.706s7 -3.002 7 -6.706c0 -1.712 -1.232 -4.403 -2.333 -5.588c-2.084 3.353 -3.257 3.353 -4.667 2.235" />
+      </svg>
+    )
+  },
+  {
+    title: 'SSR & SPA Support',
+    description: 'Serve static pages or build complex web apps with ease.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v2a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+        <path d="M3 12m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v2a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+        <path d="M7 8l0 .01" />
+        <path d="M7 16l0 .01" />
+      </svg>
+    )
+  },
+  {
+    title: 'Middleware Support',
+    description: 'Extend HTTP server functionality with type-safe middleware.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M16 10l4 -2l-8 -4l-8 4l4 2" />
+        <path d="M12 12l-4 -2l-4 2l8 4l8 -4l-4 -2l-4 2z" fill="currentColor" />
+        <path d="M8 14l-4 2l8 4l8 -4l-4 -2" />
+      </svg>
+    )
+  },
+  {
+    title: 'Integrated CSS Utility',
     description:
-      'Invite as many members as you want into your workspace without limits.',
-    icon: <></>
+      'Out-of-the-box Tailwind CSS v4 integration with all needed plugins.',
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M11.667 6c-2.49 0 -4.044 1.222 -4.667 3.667c.933 -1.223 2.023 -1.68 3.267 -1.375c.71 .174 1.217 .68 1.778 1.24c.916 .912 2 1.968 4.288 1.968c2.49 0 4.044 -1.222 4.667 -3.667c-.933 1.223 -2.023 1.68 -3.267 1.375c-.71 -.174 -1.217 -.68 -1.778 -1.24c-.916 -.912 -1.975 -1.968 -4.288 -1.968zm-4 6.5c-2.49 0 -4.044 1.222 -4.667 3.667c.933 -1.223 2.023 -1.68 3.267 -1.375c.71 .174 1.217 .68 1.778 1.24c.916 .912 1.975 1.968 4.288 1.968c2.49 0 4.044 -1.222 4.667 -3.667c-.933 1.223 -2.023 1.68 -3.267 1.375c-.71 -.174 -1.217 -.68 -1.778 -1.24c-.916 -.912 -1.975 -1.968 -4.288 -1.968z" />
+      </svg>
+    )
   },
   {
-    title: 'No API keys needed',
-    description:
-      "You don't need to provide your LLMs' API keys. We take care of it.",
-    icon: <></>
-  },
-  {
-    title: 'Build MCP',
-    description: 'Configure your MCP to suit your needs and preferences.',
-    icon: <></>
-  },
-  {
-    title: 'Agentic RAG',
-    description: 'Upload and interact with your internal documents.',
-    icon: <></>
-  },
-  {
-    title: 'Auto model routing',
-    description: 'Classify & route your queries to the best model for the job.',
-    icon: <></>
-  },
-  {
-    title: 'And everything else',
-    description: 'We build everything you need to run your business.',
-    icon: <></>
+    title: 'Native Bun Performance',
+    description: "Leverage Bun's for maximum throughput and minimal latency.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" />
+      </svg>
+    )
   }
 ]
 
@@ -71,7 +206,7 @@ const Feature = ({
   return (
     <div
       className={cn(
-        'flex flex-col lg:border-r !min-h-[245px] py-10 relative group/feature',
+        'flex flex-col lg:border-r min-h-[197px] lg:min-h-[244px] xl:min-h-[197px] py-10 relative group/feature',
         (index === 0 || index === 4) && 'lg:border-l',
         index < 4 && 'lg:border-b',
         'dark:border-neutral-800 border-neutral-200'

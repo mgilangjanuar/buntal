@@ -1,5 +1,6 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
+import { HoverEffect } from '@/components/card-hover-effect'
 import Code from '@/components/code'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
@@ -8,44 +9,91 @@ import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
 import { Link } from 'buntal'
 import { motion } from 'motion/react'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export const $ = async () => {
-  const resp = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.GH_PERSONAL_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      query: `query {
-        user(login:"mgilangjanuar") {
-          ... on Sponsorable {
-            sponsors(first: 100) {
-              totalCount
-              nodes {
-                ... on User { login, avatarUrl, name }
-              }
-            }
-          }
-        }
-      }`,
-      variables: {}
-    })
-  })
-  const json = await resp.json()
-  return {
-    sponsors: json.data.user.sponsors.nodes as {
-      login: string
-      avatarUrl: string
-      name: string
-    }[]
+const FEATURES = [
+  {
+    title: 'Organize chat history',
+    description: 'Manage your chats with folders. Declutter your workspace.',
+    icon: <></>
+  },
+  {
+    title: 'Pay as you go',
+    description:
+      'Fair pricing for all. No subscription needed for individuals.',
+    icon: <></>
+  },
+  {
+    title: 'Unlimited members',
+    description:
+      'Invite as many members as you want into your workspace without limits.',
+    icon: <></>
+  },
+  {
+    title: 'No API keys needed',
+    description:
+      "You don't need to provide your LLMs' API keys. We take care of it.",
+    icon: <></>
+  },
+  {
+    title: 'Build MCP',
+    description: 'Configure your MCP to suit your needs and preferences.',
+    icon: <></>
+  },
+  {
+    title: 'Agentic RAG',
+    description: 'Upload and interact with your internal documents.',
+    icon: <></>
+  },
+  {
+    title: 'Auto model routing',
+    description: 'Classify & route your queries to the best model for the job.',
+    icon: <></>
+  },
+  {
+    title: 'And everything else',
+    description: 'We build everything you need to run your business.',
+    icon: <></>
   }
+]
+
+const Feature = ({
+  title,
+  description,
+  icon,
+  index
+}: {
+  title: string
+  description: string
+  icon: React.ReactNode
+  index: number
+}) => {
+  return (
+    <div
+      className={cn(
+        'flex flex-col lg:border-r !min-h-[245px] py-10 relative group/feature',
+        (index === 0 || index === 4) && 'lg:border-l',
+        index < 4 && 'lg:border-b',
+        'dark:border-neutral-800 border-neutral-200'
+      )}
+    >
+      <div className="mb-4 relative z-10 px-10 text-base-content/80">
+        {icon}
+      </div>
+      <div className="text-lg font-bold mb-2 relative z-10 px-10">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-base-content">
+          {title}
+        </span>
+      </div>
+      <p className="text-sm text-base-content/80 max-w-xs relative z-10 px-10">
+        {description}
+      </p>
+    </div>
+  )
 }
 
-export default function HomePage({
-  data
-}: Readonly<{ data?: {} | Awaited<ReturnType<typeof $>> }>) {
+export default function HomePage() {
   const { theme } = useTheme()
   const [titleNumber, setTitleNumber] = useState(0)
   const [scrollY, setScrollY] = useState(0)
@@ -60,6 +108,20 @@ export default function HomePage({
     ],
     []
   )
+  const [sponsors, setSponsors] = useState<
+    { login: string; avatarUrl: string; name: string }[]
+  >([])
+
+  const fetchSponsors = useCallback(async () => {
+    const resp = await fetch('/api/sponsors')
+    if (resp.ok) {
+      setSponsors(await resp.json())
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchSponsors()
+  }, [fetchSponsors])
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -303,22 +365,20 @@ export default function HomePage({
               </a>
             </div>
             <div className="flex gap-3 items-center flex-wrap">
-              {data &&
-                'sponsors' in data &&
-                data.sponsors.map((sponsor) => (
-                  <a
-                    key={sponsor.login}
-                    href={`https://github.com/${sponsor.login}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={sponsor.avatarUrl}
-                      className="size-12 rounded-md"
-                      alt={sponsor.name}
-                    />
-                  </a>
-                ))}
+              {sponsors.map((sponsor) => (
+                <a
+                  key={sponsor.login}
+                  href={`https://github.com/${sponsor.login}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={sponsor.avatarUrl}
+                    className="size-12 rounded-md"
+                    alt={sponsor.name}
+                  />
+                </a>
+              ))}
               <div className="tooltip tooltip-bottom" data-tip="Could be you!">
                 <a
                   href="https://github.com/sponsors/mgilangjanuar"
@@ -526,7 +586,17 @@ export default function HomePage({
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto pb-20 lg:pb-40">Features</div>
+        {/* <Glow
+          variant="top"
+          className="animate-appear-zoom opacity-0 delay-1000"
+        /> */}
+        <div className="container mx-auto pb-20 lg:pb-40">
+          <HoverEffect
+            items={FEATURES.map((feature, index) => (
+              <Feature key={feature.title} {...feature} index={index} />
+            ))}
+          />
+        </div>
       </div>
       <div className="w-full relative">
         <div className="container mx-auto pb-20 lg:pb-40">Powered by</div>

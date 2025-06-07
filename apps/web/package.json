@@ -24,8 +24,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@buntal/core": "workspace:^",
     "@tailwindcss/cli": "^4.1.7",
     "buntal": "workspace:^",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "motion": "^12.16.0",
     "react": "^19.1.0",

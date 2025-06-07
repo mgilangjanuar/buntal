@@ -14,6 +14,7 @@
       "dependencies": {
         "@tailwindcss/cli": "^4.1.7",
         "buntal": "workspace:^",
+        "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "motion": "^12.16.0",
         "react": "^19.1.0",
@@ -125,7 +126,7 @@
     },
     "packages/create-buntal": {
       "name": "create-buntal",
-      "version": "0.0.12",
+      "version": "0.0.13",
       "bin": {
         "create-buntal": "./index.ts",
       },
@@ -442,6 +443,8 @@
     "character-reference-invalid": ["character-reference-invalid@1.1.4", "", {}, "sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg=="],
 
     "chownr": ["chownr@3.0.0", "", {}, "sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g=="],
+
+    "class-variance-authority": ["class-variance-authority@0.7.1", "", { "dependencies": { "clsx": "^2.1.1" } }, "sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg=="],
 
     "clsx": ["clsx@2.1.1", "", {}, "sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA=="],
 

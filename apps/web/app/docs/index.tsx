@@ -1,5 +1,6 @@
 import Header from '@/components/docs/header'
 import { Link, type MetaProps } from 'buntal'
+import { useEffect, useRef, useState } from 'react'
 
 export const $ = {
   _meta: {
@@ -8,6 +9,95 @@ export const $ = {
 }
 
 export default function DocsPage() {
+  const [activeSection, setActiveSection] = useState<string>('')
+  const [borderHeight, setBorderHeight] = useState<number>(0)
+  const [borderTop, setBorderTop] = useState<number>(0)
+  const asideRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get all sections with IDs
+      const sections = document.querySelectorAll('section[id], h4[id]')
+
+      let currentSection = ''
+      let currentOffset = 0
+
+      // Find the current section in viewport
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        const sectionId = section.getAttribute('id')
+
+        if (sectionId && rect.top <= 150) {
+          // 150px threshold for active section
+          currentSection = sectionId
+          // Try to find a link in aside that matches this section
+          const matchingLink = asideRef.current?.querySelector(
+            `a[href*="${sectionId}"]`
+          )
+          if (matchingLink) {
+            const href = matchingLink.getAttribute('href')
+            // Extract offset from href (number after ':')
+            const offsetMatch = href ? href.match(/:(\d+)$/) : null
+            currentOffset =
+              offsetMatch && offsetMatch[1] ? parseInt(offsetMatch[1]) : 0
+          }
+        }
+      })
+
+      setActiveSection(currentSection)
+      updateBorderPosition(currentSection, currentOffset)
+    }
+
+    const updateBorderPosition = (sectionId: string, offset: number) => {
+      // Calculate border position and height
+      if (sectionId && asideRef.current) {
+        const activeLink = asideRef.current.querySelector(
+          `a[href*="${sectionId}"]`
+        ) as HTMLElement
+        if (activeLink) {
+          const linkRect = activeLink.getBoundingClientRect()
+          const asideRect = asideRef.current.getBoundingClientRect()
+
+          // Calculate position relative to aside
+          const linkTop = linkRect.top - asideRect.top - 72
+          const linkHeight = linkRect.height
+
+          setBorderTop(linkTop + offset)
+          setBorderHeight(linkHeight)
+        }
+      }
+    }
+
+    const handleResize = () => {
+      // Recalculate border position on resize
+      if (activeSection) {
+        const matchingLink = asideRef.current?.querySelector(
+          `a[href*="${activeSection}"]`
+        )
+        if (matchingLink) {
+          const href = matchingLink.getAttribute('href')
+          const offsetMatch = href ? href.match(/:(\d+)$/) : null
+          const currentOffset =
+            offsetMatch && offsetMatch[1] ? parseInt(offsetMatch[1]) : 0
+          updateBorderPosition(activeSection, currentOffset)
+        }
+      }
+    }
+
+    // Initial call
+    handleScroll()
+
+    // Add event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [activeSection])
+
   return (
     <div>
       <Header title="Get Started" />
@@ -164,68 +254,86 @@ export default function DocsPage() {
           </p>
         </div>
         <div className="xl:block hidden">
-          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-2 border-l border-base-content/5">
-            <ul className="pl-4 py-4 space-y-2">
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#introduction:72"
-                >
-                  Introduction
-                </Link>
-                <ul className="pl-4 pt-2 space-y-2">
-                  <li>
-                    <Link
-                      className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#what-can-i-build:72"
-                    >
-                      What can I build with Buntal JS?
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#why-separate-http-server-and-full-stack-web-framework:72"
-                    >
-                      Why separate the HTTP server and full-stack web framework?
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#does-it-production-ready:72"
-                    >
-                      Is it production-ready? When will it be stable?
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="hover:text-base-content hover:underline underline-offset-4"
-                      href="#how-to-pronounce-buntal:72"
-                    >
-                      How to pronounce "Buntal"?
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#features:72"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#how-to-contribute:72"
-                >
-                  How to Contribute
-                </Link>
-              </li>
-            </ul>
-          </aside>
+          <div className="sticky top-18">
+            <aside
+              ref={asideRef}
+              className="container ml-0 text-base-content/60 text-sm space-y-2 relative"
+              style={{
+                borderLeft: '1px solid rgb(0 0 0 / 0.02)'
+              }}
+            >
+              {/* Animated border indicator */}
+              <div
+                className="absolute left-0 w-[2px] bg-primary transition-all duration-300 ease-in-out"
+                style={{
+                  top: `${borderTop}px`,
+                  height: `${borderHeight}px`,
+                  opacity: activeSection ? 1 : 0
+                }}
+              />
+              <ul className="pl-4 py-4 space-y-2">
+                <li>
+                  <Link
+                    className="hover:text-base-content hover:underline underline-offset-4"
+                    href="#introduction:72"
+                  >
+                    Introduction
+                  </Link>
+                  <ul className="pl-4 pt-2 space-y-2">
+                    <li>
+                      <Link
+                        className="hover:text-base-content hover:underline underline-offset-4"
+                        href="#what-can-i-build:72"
+                      >
+                        What can I build with Buntal JS?
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="hover:text-base-content hover:underline underline-offset-4"
+                        href="#why-separate-http-server-and-full-stack-web-framework:72"
+                      >
+                        Why separate the HTTP server and full-stack web
+                        framework?
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="hover:text-base-content hover:underline underline-offset-4"
+                        href="#does-it-production-ready:72"
+                      >
+                        Is it production-ready? When will it be stable?
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="hover:text-base-content hover:underline underline-offset-4"
+                        href="#how-to-pronounce-buntal:72"
+                      >
+                        How to pronounce "Buntal"?
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link
+                    className="hover:text-base-content hover:underline underline-offset-4"
+                    href="#features:72"
+                  >
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="hover:text-base-content hover:underline underline-offset-4"
+                    href="#how-to-contribute:72"
+                  >
+                    How to Contribute
+                  </Link>
+                </li>
+              </ul>
+            </aside>
+          </div>
         </div>
       </main>
     </div>

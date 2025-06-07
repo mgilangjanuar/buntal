@@ -2,8 +2,8 @@ import {
   createContext,
   createElement,
   memo,
+  use,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -314,4 +314,4 @@ export function RouterProvider({
   )
 }
 
-export const useRouter = () => useContext(RouterContext)
+export const useRouter = () => use(RouterContext)

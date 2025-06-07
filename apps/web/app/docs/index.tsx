@@ -1,4 +1,5 @@
 import Header from '@/components/docs/header'
+import { cn } from '@/lib/utils'
 import { Link, type MetaProps } from 'buntal'
 import { useEffect, useRef, useState } from 'react'
 
@@ -271,7 +272,10 @@ export default function DocsPage() {
               <ul className="pl-4 py-4 space-y-2">
                 <li>
                   <Link
-                    className="hover:text-base-content hover:underline underline-offset-4"
+                    className={cn(
+                      'hover:text-base-content hover:underline underline-offset-4',
+                      activeSection === 'introduction' && '!text-primary'
+                    )}
                     href="#introduction:72"
                   >
                     Introduction
@@ -279,7 +283,11 @@ export default function DocsPage() {
                   <ul className="pl-4 pt-2 space-y-2">
                     <li>
                       <Link
-                        className="hover:text-base-content hover:underline underline-offset-4"
+                        className={cn(
+                          'hover:text-base-content hover:underline underline-offset-4',
+                          activeSection === 'what-can-i-build' &&
+                            '!text-primary'
+                        )}
                         href="#what-can-i-build:72"
                       >
                         What can I build with Buntal JS?
@@ -287,7 +295,12 @@ export default function DocsPage() {
                     </li>
                     <li>
                       <Link
-                        className="hover:text-base-content hover:underline underline-offset-4"
+                        className={cn(
+                          'hover:text-base-content hover:underline underline-offset-4',
+                          activeSection ===
+                            'why-separate-http-server-and-full-stack-web-framework' &&
+                            '!text-primary'
+                        )}
                         href="#why-separate-http-server-and-full-stack-web-framework:72"
                       >
                         Why separate the HTTP server and full-stack web
@@ -296,7 +309,11 @@ export default function DocsPage() {
                     </li>
                     <li>
                       <Link
-                        className="hover:text-base-content hover:underline underline-offset-4"
+                        className={cn(
+                          'hover:text-base-content hover:underline underline-offset-4',
+                          activeSection === 'does-it-production-ready' &&
+                            '!text-primary'
+                        )}
                         href="#does-it-production-ready:72"
                       >
                         Is it production-ready? When will it be stable?
@@ -304,7 +321,11 @@ export default function DocsPage() {
                     </li>
                     <li>
                       <Link
-                        className="hover:text-base-content hover:underline underline-offset-4"
+                        className={cn(
+                          'hover:text-base-content hover:underline underline-offset-4',
+                          activeSection === 'how-to-pronounce-buntal' &&
+                            '!text-primary'
+                        )}
                         href="#how-to-pronounce-buntal:72"
                       >
                         How to pronounce "Buntal"?
@@ -314,7 +335,10 @@ export default function DocsPage() {
                 </li>
                 <li>
                   <Link
-                    className="hover:text-base-content hover:underline underline-offset-4"
+                    className={cn(
+                      'hover:text-base-content hover:underline underline-offset-4',
+                      activeSection === 'features' && '!text-primary'
+                    )}
                     href="#features:72"
                   >
                     Features
@@ -322,7 +346,10 @@ export default function DocsPage() {
                 </li>
                 <li>
                   <Link
-                    className="hover:text-base-content hover:underline underline-offset-4"
+                    className={cn(
+                      'hover:text-base-content hover:underline underline-offset-4',
+                      activeSection === 'how-to-contribute' && '!text-primary'
+                    )}
                     href="#how-to-contribute:72"
                   >
                     How to Contribute

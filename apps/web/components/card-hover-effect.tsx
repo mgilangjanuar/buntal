@@ -29,7 +29,7 @@ export const HoverEffect = ({
             {hoveredIndex === idx && (
               <motion.span
                 className={cn(
-                  'absolute inset-0 h-full w-full block dark:bg-slate-800/[0.8] bg-slate-200'
+                  'absolute inset-0 h-full w-full block dark:bg-slate-800/80 bg-slate-300/20'
                 )}
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}

@@ -539,7 +539,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative bg-gradient-to-b from-base-200/0 to-blue-900/15">
+      <div className="w-full relative">
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
             <WobbleCard
@@ -593,8 +593,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative bg-gradient-to-b to-base-200/0 from-blue-900/15">
-        <div className="container mx-auto pb-20 lg:pb-40">
+      <div className="w-full relative bg-gradient-to-b from-base-200/0 to-blue-900/15">
+        <div className="container mx-auto pt-14 lg:pt-0 pb-20 lg:pb-40">
           <div className="flex flex-col md:flex-row-reverse items-center gap-14 md:gap-24 lg:gap-52 max-w-5xl mx-auto">
             <div className="flex-1 w-full md:-mt-8 space-y-4 relative text-center md:text-left">
               <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900 absolute blur-2xl z-0">
@@ -716,11 +716,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative">
-        {/* <Glow
-          variant="top"
-          className="animate-appear-zoom opacity-0 delay-1000"
-        /> */}
+      <div className="w-full relative bg-gradient-to-b to-base-200/0 from-blue-900/15">
         <div className="container mx-auto pb-20 lg:pb-40">
           <HoverEffect
             items={FEATURES.map((feature, index) => (

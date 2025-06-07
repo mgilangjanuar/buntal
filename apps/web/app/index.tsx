@@ -730,7 +730,11 @@ export default function HomePage() {
         <div className="container mx-auto pb-20 lg:pb-40">Powered by</div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto pb-20 lg:pb-40 flex justify-center">
+        <motion.div
+          className="container mx-auto pb-20 lg:pb-40 flex justify-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
           <Terminal>
             <TypingAnimation>$ bun create buntal@latest my-app</TypingAnimation>
             {`bun install v1.2.14 (6a363a38)
@@ -762,13 +766,13 @@ To get started, run: \`cd my-app && bun dev\``
                 <AnimatedSpan
                   key={index}
                   delay={index * 200 + 2500}
-                  className="text-green-500"
+                  className="text-success pr-4"
                 >
                   <span className="h-5">{line}</span>
                 </AnimatedSpan>
               ))}
           </Terminal>
-        </div>
+        </motion.div>
       </div>
     </main>
   )

@@ -62,8 +62,8 @@ export default function DocsPage() {
           const linkTop = linkRect.top - asideRect.top - 72
           const linkHeight = linkRect.height
 
-          setBorderTop(linkTop + offset)
-          setBorderHeight(linkHeight)
+          setBorderTop(8)
+          setBorderHeight(linkTop + linkHeight + offset)
         }
       }
     }
@@ -257,14 +257,11 @@ export default function DocsPage() {
           <div className="sticky top-18">
             <aside
               ref={asideRef}
-              className="container ml-0 text-base-content/60 text-sm space-y-2 relative"
-              style={{
-                borderLeft: '1px solid rgb(0 0 0 / 0.02)'
-              }}
+              className="container ml-0 text-base-content/60 text-sm space-y-2 relative border-l border-base-content/10"
             >
               {/* Animated border indicator */}
               <div
-                className="absolute left-0 w-[2px] bg-primary transition-all duration-300 ease-in-out"
+                className="absolute -left-[1.5px] w-[2px] bg-primary transition-all duration-300 ease-in-out"
                 style={{
                   top: `${borderTop}px`,
                   height: `${borderHeight}px`,

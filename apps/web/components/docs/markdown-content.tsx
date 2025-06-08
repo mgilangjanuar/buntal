@@ -148,7 +148,7 @@ export default function MarkdownContent({
       // Calculate border position and height
       if (sectionId && asideRef.current) {
         const activeLink = asideRef.current.querySelector(
-          `a[href*="${sectionId}"]`
+          `a[href="#${sectionId}:${offset}"]`
         ) as HTMLElement
         if (activeLink) {
           const linkRect = activeLink.getBoundingClientRect()

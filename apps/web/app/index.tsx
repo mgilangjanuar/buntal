@@ -2,6 +2,7 @@ import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
 import { HoverEffect } from '@/components/card-hover-effect'
 import Code from '@/components/code'
+import { LineShadowText } from '@/components/line-shadow-text'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import { MagicCard } from '@/components/magic-card'
 import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/terminal'
@@ -602,8 +603,18 @@ export default function HomePage() {
               <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900 absolute blur-2xl z-0">
                 Pure Speed
               </h1>
-              <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900 z-10">
-                Pure Speed
+              <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent z-10">
+                <span className="relative">
+                  <span className="z-20 whitespace-nowrap absolute top-1 -left-0.5 text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900">
+                    Pure Speed
+                  </span>
+                  <LineShadowText
+                    className="italic whitespace-nowrap"
+                    shadowColor={theme === 'dark' ? 'white' : 'black'}
+                  >
+                    Pure Speed
+                  </LineShadowText>
+                </span>
               </h1>
               <p className="text-lg lg:text-xl text-base-content/70 z-10">
                 Natively fast without Go

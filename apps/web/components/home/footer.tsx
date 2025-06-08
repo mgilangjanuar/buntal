@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <div className="w-full relative">
       <div className="container mx-auto border-t border-base-300">
-        <footer className="container mx-auto py-12 max-w-screen-lg">
-          <div className="grid gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-            <div className="flex flex-col gap-8 lg:col-span-2">
+        <footer className="mx-auto py-12 max-w-5xl">
+          <div className="grid gap-6 md:grid-cols-3 sm:grid-cols-2">
+            <div className="flex flex-col gap-8">
               <div className="space-y-4">
                 <div>
                   <LogoWithContextMenu
@@ -114,7 +114,7 @@ export default function Footer() {
                 <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   NAVIGATION
                 </p>
-                <div className="flex flex-wrap gap-12 text-base-content/60">
+                <div className="flex flex-wrap gap-20 text-base-content/60">
                   <div className="flex flex-col gap-2">
                     <Link
                       href="/"
@@ -127,6 +127,31 @@ export default function Footer() {
                       className="hover:underline underline-offset-4"
                     >
                       Docs
+                    </Link>
+                    <Link
+                      href="https://github.com/mgilangjanuar/buntal/releases"
+                      className="hover:underline underline-offset-4 flex items-center gap-1.5"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Changelog
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="size-4"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                        <path d="M11 13l9 -9" />
+                        <path d="M15 4h5v5" />
+                      </svg>
                     </Link>
                   </div>
                   <div className="flex flex-col gap-2">

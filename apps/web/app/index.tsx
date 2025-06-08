@@ -807,7 +807,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative">
+      <div className="w-full relative bg-gradient-to-b from-base-300/0 to-base-300/40">
         <motion.div
           className="container mx-auto py-20 lg:py-40 flex flex-col gap-12 justify-center items-center"
           initial={{ opacity: 0 }}

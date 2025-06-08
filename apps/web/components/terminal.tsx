@@ -206,11 +206,11 @@ export const Terminal = ({
             />
           </div>
         </div>
-        <div
-          className="overflow-y-auto max-h-[357px] rounded-b-xl border border-t-0"
-          data-theme="dark"
-        >
-          <pre className="overflow-x-hidden whitespace-normal p-4 pr-0">
+        <div className="overflow-y-auto max-h-[357px] rounded-b-xl border border-t-0">
+          <pre
+            className="overflow-x-hidden whitespace-normal p-4 pr-0"
+            data-theme="dark"
+          >
             <code className="grid gap-y-1">{children}</code>
           </pre>
         </div>

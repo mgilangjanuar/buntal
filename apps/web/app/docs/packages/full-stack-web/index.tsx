@@ -7,7 +7,7 @@ export const $ = {
   } satisfies MetaProps
 }
 
-export default function HTTPPkgPage() {
+export default function WebPkgPage() {
   return (
     <MarkdownContent
       title="Full-stack Web"
@@ -132,6 +132,32 @@ export default function HomePage({ data }: {
 \`\`\`
 
 See the \`Req\` type definition [here](/docs/packages/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.`}
+      tableOfContents={[
+        {
+          id: 'quick-start',
+          title: 'Quick Start',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'layout-tsx',
+          title: 'layout.tsx',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'index-tsx',
+          title: 'index.tsx',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'loader',
+          title: '$',
+          level: 1,
+          offset: 72
+        }
+      ]}
       lastModified="2025-06-05"
     />
   )

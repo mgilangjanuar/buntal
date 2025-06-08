@@ -5,6 +5,7 @@ import Code from '@/components/code'
 import { LineShadowText } from '@/components/line-shadow-text'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import { MagicCard } from '@/components/magic-card'
+import { ShineBorder } from '@/components/shine-border'
 import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/terminal'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { WobbleCard } from '@/components/wobble-card'
@@ -739,7 +740,13 @@ export default function HomePage() {
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto pb-20 lg:pb-40">
+        <div className="container mx-auto pt-14 pb-20 lg:pb-40 space-y-12">
+          <div className="flex justify-center">
+            <div className="badge badge-secondary badge-soft relative">
+              <ShineBorder shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
+              Powered by
+            </div>
+          </div>
           <div className="flex items-start flex-wrap justify-center gap-6">
             <div className="card w-full sm:w-96 bg-base-100 card-md shadow-sm">
               <MagicCard

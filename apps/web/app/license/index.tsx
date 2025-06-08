@@ -1,9 +1,11 @@
 import Footer from '@/components/home/footer'
+import Header from '@/components/home/header'
 
 export default function License() {
   return (
     <main>
-      <div className="prose min-h-screen mx-auto py-12">
+      <Header />
+      <div className="prose container min-h-screen mx-auto py-20 lg:py-40">
         <h2>MIT License</h2>
         <p>Copyright (c) 2025 M Gilang Januar</p>
         <p>

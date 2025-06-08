@@ -184,7 +184,9 @@ export default function MarkdownContent({
     }
 
     // Initial call
-    handleScroll()
+    const timer = setTimeout(() => {
+      handleScroll()
+    }, 10)
 
     // Add event listeners
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -192,6 +194,7 @@ export default function MarkdownContent({
 
     // Cleanup
     return () => {
+      clearTimeout(timer)
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
     }

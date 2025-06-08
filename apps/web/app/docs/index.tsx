@@ -66,26 +66,26 @@ To contribute, please follow these steps:
           offset: 72,
           children: [
             {
-              id: 'what-can-i-build-with-buntal-js',
+              id: 'what-can-i-build-with-buntal-js-',
               title: 'What can I build with Buntal JS?',
               level: 2,
               offset: 72
             },
             {
-              id: 'why-separate-the-http-server-and-full-stack-web-framework',
+              id: 'why-separate-the-http-server-and-full-stack-web-framework-',
               title:
                 'Why separate the HTTP server and full-stack web framework?',
               level: 2,
               offset: 72
             },
             {
-              id: 'is-it-production-ready-when-will-it-be-stable',
+              id: 'is-it-production-ready-when-will-it-be-stable-',
               title: 'Is it production-ready? When will it be stable?',
               level: 2,
               offset: 72
             },
             {
-              id: 'how-to-pronounce-buntal',
+              id: 'how-to-pronounce-buntal-',
               title: 'How to pronounce "Buntal"?',
               level: 2,
               offset: 72

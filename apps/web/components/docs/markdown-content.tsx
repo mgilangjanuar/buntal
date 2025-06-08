@@ -128,7 +128,7 @@ export default function MarkdownContent({
           currentSection = sectionId
           // Try to find a link in aside that matches this section
           const matchingLink = asideRef.current?.querySelector(
-            `a[href*="${sectionId}"]`
+            `a[href*="#${sectionId}:"]`
           )
           if (matchingLink) {
             const href = matchingLink.getAttribute('href')
@@ -136,11 +136,13 @@ export default function MarkdownContent({
             const offsetMatch = href ? href.match(/:(\d+)$/) : null
             currentOffset =
               offsetMatch && offsetMatch[1] ? parseInt(offsetMatch[1]) : 0
+          } else {
+            currentSection = ''
           }
         }
       })
 
-      setActiveSection(currentSection)
+      setActiveSection((curr) => currentSection || curr)
       updateBorderPosition(currentSection, currentOffset)
     }
 

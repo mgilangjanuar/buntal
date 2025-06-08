@@ -1,8 +1,10 @@
+import Code from '@/components/code'
 import Header from '@/components/docs/header'
 import { cn } from '@/lib/utils'
 import { Link } from 'buntal'
-import { marked } from 'marked'
 import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export interface TableOfContentsItem {
   id: string
@@ -74,21 +76,10 @@ export default function MarkdownContent({
   const asideRef = useRef<HTMLElement>(null)
 
   // Parse HTML content and extract table of contents if not provided
-  const [htmlContent, setHtmlContent] = useState<string>('')
   const [autoToc, setAutoToc] = useState<TableOfContentsItem[]>([])
 
   useEffect(() => {
-    const parseContent = async () => {
-      let html = await marked(content)
-
-      // Post-process to add IDs to headings
-      html = html.replace(/<h([1-6])>([^<]+)<\/h[1-6]>/g, (_, level, text) => {
-        const slug = generateSlug(text)
-        return `<h${level} id="${slug}">${text}</h${level}>`
-      })
-
-      setHtmlContent(html)
-
+    const parseContent = () => {
       if (!tableOfContents) {
         // Extract headings from the markdown content
         const tocItems: TableOfContentsItem[] = []
@@ -228,12 +219,83 @@ export default function MarkdownContent({
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 prose pb-6 grid grid-cols-1">
           {prependComponent}
-          <div
-            // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml
-            dangerouslySetInnerHTML={{
-              __html: htmlContent
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code: ({ className, children, ...props }) => {
+                const match = /language-(\w+)/.exec(className || '')
+                const language = match ? match[1] : undefined
+                const code = String(children).replace(/\n$/, '')
+
+                // Check if this is an inline code or code block
+                const isInline = !className?.includes('language-')
+
+                return !isInline ? (
+                  <Code language={language}>{code}</Code>
+                ) : (
+                  <code className="prose-code" {...props}>
+                    {children}
+                  </code>
+                )
+              },
+              h1: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h1 id={id} {...props}>
+                    {children}
+                  </h1>
+                )
+              },
+              h2: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h2 id={id} {...props}>
+                    {children}
+                  </h2>
+                )
+              },
+              h3: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h3 id={id} {...props}>
+                    {children}
+                  </h3>
+                )
+              },
+              h4: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h4 id={id} {...props}>
+                    {children}
+                  </h4>
+                )
+              },
+              h5: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h5 id={id} {...props}>
+                    {children}
+                  </h5>
+                )
+              },
+              h6: ({ children, ...props }) => {
+                const text = String(children)
+                const id = generateSlug(text)
+                return (
+                  <h6 id={id} {...props}>
+                    {children}
+                  </h6>
+                )
+              }
             }}
-          />
+          >
+            {content}
+          </ReactMarkdown>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified:{' '}
             {lastModified || new Date().toISOString().split('T')[0]}

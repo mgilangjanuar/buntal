@@ -1,6 +1,5 @@
-import Code from '@/components/code'
-import Header from '@/components/docs/header'
-import { Link, type MetaProps } from 'buntal'
+import MarkdownContent from '@/components/docs/markdown-content'
+import { type MetaProps } from 'buntal'
 
 export const $ = {
   _meta: {
@@ -10,85 +9,59 @@ export const $ = {
 
 export default function HTTPPkgPage() {
   return (
-    <div>
-      <Header title="Full-stack Web" />
-      <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6 grid grid-cols-1">
-          <section id="quick-start">
-            <h2 className="mt-0">Quick Start</h2>
-            <p>
-              Buntal uses <code>@buntal/core</code> under the hood to handle all
-              requests and render the selected page based on the pathname. So,
-              your web will always be hydrated by returning an exact same HTML
-              page from the server, which is great for SEO and performance.
-            </p>
-            <p>
-              After initializing a project with a template using this command:
-            </p>
-            <Code language="sh">{`bun create buntal@latest my-app`}</Code>
-            <p>
-              You will have Tailwind CSS and minimal dependencies to build your
-              web project. Here is the project structure:
-            </p>
-            <Code language="sh">
-              {`.
+    <MarkdownContent
+      title="Full-stack Web"
+      content={`## Quick Start
+
+Buntal uses \`@buntal/core\` under the hood to handle all requests and render the selected page based on the pathname. So, your web will always be hydrated by returning an exact same HTML page from the server, which is great for SEO and performance.
+
+After initializing a project with a template using this command:
+
+\`\`\`sh
+bun create buntal@latest my-app
+\`\`\`
+
+You will have Tailwind CSS and minimal dependencies to build your web project. Here is the project structure:
+
+\`\`\`sh
+.
 ├── app
-│   ├── favicon.svg
-│   ├── globals.css
-│   ├── index.tsx
-│   ├── layout.tsx
-│   └── logo.svg
+│   ├── favicon.svg
+│   ├── globals.css
+│   ├── index.tsx
+│   ├── layout.tsx
+│   └── logo.svg
 ├── buntal.config.ts
 ├── custom.d.ts
 ├── lib
-│   └── utils.ts
+│   └── utils.ts
 ├── package.json
 ├── public
-└── tsconfig.json`}
-            </Code>
-            <p>Seems familiar, right?</p>
-            <p>
-              The main modules are located in the <code>app</code> directory,
-              which contains the main entry point/page at <code>index.tsx</code>
-              , <code>globals.css</code>, and a layout file at{' '}
-              <code>layout.tsx</code>. You can create a new page such as{' '}
-              <code>about/index.tsx</code> in the <code>app</code> directory,
-              and it will be automatically available at <code>/about</code>.
-            </p>
-            <p>
-              Run the development server using <code>bun dev</code>, and the
-              output will look like this:
-            </p>
-            <Code language="sh">
-              {`  -... ..- -. - .- .-..
+└── tsconfig.json
+\`\`\`
+
+Seems familiar, right?
+
+The main modules are located in the \`app\` directory, which contains the main entry point/page at \`index.tsx\`, \`globals.css\`, and a layout file at \`layout.tsx\`. You can create a new page such as \`about/index.tsx\` in the \`app\` directory, and it will be automatically available at \`/about\`.
+
+Run the development server using \`bun dev\`, and the output will look like this:
+
+\`\`\`sh
+  -... ..- -. - .- .-..
   Local:        http://localhost:3000
   Network:      http://192.168.18.121:3000
 
-Done in 12ms`}
-            </Code>
-            <p>
-              Explore the full example on{' '}
-              <a
-                href="https://github.com/mgilangjanuar/buntal/tree/main/examples/hello-world"
-                className="underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-              .
-            </p>
-          </section>
-          <section id="layout-tsx">
-            <h2>layout.tsx</h2>
-            <p>
-              The <code>layout.tsx</code> file is the main layout for your web
-              app. It is used to wrap all pages and provide a consistent
-              structure, such as a header, footer, and other common elements.
-              Here is an example of a simple root layout:
-            </p>
-            <Code language="tsx">
-              {`export default function RootLayout({ children }: Readonly<{
+Done in 12ms
+\`\`\`
+
+Explore the full example on [GitHub](https://github.com/mgilangjanuar/buntal/tree/main/examples/hello-world).
+
+## layout.tsx
+
+The \`layout.tsx\` file is the main layout for your web app. It is used to wrap all pages and provide a consistent structure, such as a header, footer, and other common elements. Here is an example of a simple root layout:
+
+\`\`\`tsx
+export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
@@ -106,23 +79,17 @@ Done in 12ms`}
       <body>{children}</body>
     </html>
   )
-}`}
-            </Code>
-            <p>
-              You can also have a <code>layout.tsx</code> in a folder, and it
-              will be a layout for all pages in that folder. But remember that
-              your layout will never be rendered if you haven't created an{' '}
-              <code>index.tsx</code> file in the same folder.
-            </p>
-          </section>
-          <section id="index-tsx">
-            <h2>index.tsx</h2>
-            <p>
-              Basically, the <code>index.tsx</code> file is the main entry point
-              of your web page. Here is an example of a simple index page:
-            </p>
-            <Code language="tsx">
-              {`export default function HomePage({ query }: Readonly<{
+}
+\`\`\`
+
+You can also have a \`layout.tsx\` in a folder, and it will be a layout for all pages in that folder. But remember that your layout will never be rendered if you haven't created an \`index.tsx\` file in the same folder.
+
+## index.tsx
+
+Basically, the \`index.tsx\` file is the main entry point of your web page. Here is an example of a simple index page:
+
+\`\`\`tsx
+export default function HomePage({ query }: Readonly<{
   query: Record<string, string>
 }>) {
   return (
@@ -132,40 +99,21 @@ Done in 12ms`}
       </div>
     </div>
   )
-}`}
-            </Code>
-            <p>
-              The page component is exported as a default export, and it
-              receives props such as <code>params</code>, <code>query</code>,
-              and <code>data</code>.
-            </p>
-            <ul>
-              <li>
-                <code>params</code>: Contains the URL parameters, such as{' '}
-                <code>/about/[id]</code> will have <code>params.id</code>.
-              </li>
-              <li>
-                <code>query</code>: Contains the query parameters, such as{' '}
-                <code>/about?id=1</code> will have <code>query.id</code>.
-              </li>
-              <li>
-                <code>data</code>: Contains the data returned from the{' '}
-                <code>$</code> function, which is used to fetch data from the
-                server.
-              </li>
-            </ul>
-          </section>
-          <section id="loader">
-            <h2>$</h2>
-            <p>
-              The <code>$</code> function is used to fetch data from the server.
-              It is a special function that is executed on the server side and
-              can be used to fetch data from a database or an API. Here is an
-              example of a simple <code>$</code> function in the{' '}
-              <code>index.tsx</code>:
-            </p>
-            <Code language="ts">
-              {`import type { Req } from '@buntal/core'
+}
+\`\`\`
+
+The page component is exported as a default export, and it receives props such as \`params\`, \`query\`, and \`data\`.
+
+- \`params\`: Contains the URL parameters, such as \`/about/[id]\` will have \`params.id\`.
+- \`query\`: Contains the query parameters, such as \`/about?id=1\` will have \`query.id\`.
+- \`data\`: Contains the data returned from the \`$\` function, which is used to fetch data from the server.
+
+## $
+
+The \`$\` function is used to fetch data from the server. It is a special function that is executed on the server side and can be used to fetch data from a database or an API. Here is an example of a simple \`$\` function in the \`index.tsx\`:
+
+\`\`\`ts
+import type { Req } from '@buntal/core'
 
 export const $ = async (req: Req) => {
   const resp = await fetch(\`https://api.example/data/\${req.params.id}\`)
@@ -180,64 +128,11 @@ export default function HomePage({ data }: {
       Hello, {data?.name || 'there'}!
     </div>
   )
-}`}
-            </Code>
-            <p>
-              See the <code>Req</code> type definition{' '}
-              <Link
-                href="/docs/packages/http-server#req:40"
-                className="underline-offset-4"
-              >
-                here
-              </Link>
-              . This function has a similar pattern to{' '}
-              <code>getServerSideProps</code> from Next.js or{' '}
-              <code>loader</code> from Remix.
-            </p>
-          </section>
-          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified: 2025-06-05
-          </p>
-        </div>
-        <div className="xl:block hidden">
-          <aside className="sticky top-18 container ml-0 text-base-content/60 text-sm space-y-2 border-l border-base-content/5">
-            <ul className="pl-4 py-4 space-y-2">
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#quick-start:72"
-                >
-                  Quick Start
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#layout-tsx:24"
-                >
-                  layout.tsx
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#index-tsx:24"
-                >
-                  index.tsx
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-base-content hover:underline underline-offset-4"
-                  href="#loader:24"
-                >
-                  $
-                </Link>
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </main>
-    </div>
+}
+\`\`\`
+
+See the \`Req\` type definition [here](/docs/packages/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.`}
+      lastModified="2025-06-05"
+    />
   )
 }

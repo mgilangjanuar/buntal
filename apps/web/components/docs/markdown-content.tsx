@@ -239,6 +239,20 @@ export default function MarkdownContent({
                   </code>
                 )
               },
+              a: ({ href, children, ...props }) => {
+                return (
+                  <Link
+                    href={href || ''}
+                    className="underline-offset-4"
+                    {...(href?.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                    {...props}
+                  >
+                    {children}
+                  </Link>
+                )
+              },
               h1: ({ children, ...props }) => {
                 const text = String(children)
                 const id = generateSlug(text)

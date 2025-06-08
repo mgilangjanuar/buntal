@@ -2,6 +2,7 @@ import Logo from '@/app/logo.svg' with { type: 'text' }
 import { AnimatedGridPattern } from '@/components/animated-grid'
 import { HoverEffect } from '@/components/card-hover-effect'
 import Code from '@/components/code'
+import Footer from '@/components/home/footer'
 import { LineShadowText } from '@/components/line-shadow-text'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import { MagicCard } from '@/components/magic-card'
@@ -744,6 +745,30 @@ export default function HomePage() {
           <div className="flex justify-center">
             <div className="badge badge-secondary badge-soft relative">
               <ShineBorder shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="size-3.5"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
+                <path d="M9 9h6v6h-6z" />
+                <path d="M3 10h2" />
+                <path d="M3 14h2" />
+                <path d="M10 3v2" />
+                <path d="M14 3v2" />
+                <path d="M21 10h-2" />
+                <path d="M21 14h-2" />
+                <path d="M14 21v-2" />
+                <path d="M10 21v-2" />
+              </svg>
               Powered by
             </div>
           </div>
@@ -837,7 +862,7 @@ export default function HomePage() {
       </div>
       <div className="w-full relative">
         <motion.div
-          className="container mx-auto py-20 lg:py-40 flex justify-center"
+          className="container mx-auto py-20 lg:py-40 flex flex-col gap-12 justify-center items-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
         >
@@ -878,8 +903,31 @@ To get started, run: \`cd my-app && bun dev\``
                 </AnimatedSpan>
               ))}
           </Terminal>
+          <div className="w-fit">
+            <Link href="/docs" className="btn btn-primary btn-soft">
+              Learn More
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="!size-5"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l14 0" />
+                <path d="M13 18l6 -6" />
+                <path d="M13 6l6 6" />
+              </svg>
+            </Link>
+          </div>
         </motion.div>
       </div>
+      <Footer />
     </main>
   )
 }

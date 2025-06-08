@@ -172,7 +172,7 @@ export const Terminal = ({
           className
         )}
       >
-        <div className="flex flex-col gap-y-2 p-4 border border-b-0 rounded-t-xl">
+        <div className="flex flex-col gap-y-2 p-4 border rounded-t-xl">
           <div className="flex flex-row gap-x-2">
             <motion.div
               className="h-2 w-2 rounded-full bg-red-500"
@@ -207,10 +207,10 @@ export const Terminal = ({
           </div>
         </div>
         <div
-          className="overflow-y-auto max-h-[357px] rounded-b-xl"
+          className="overflow-y-auto max-h-[357px] rounded-b-xl border border-t-0"
           data-theme="dark"
         >
-          <pre className="overflow-x-auto p-4 pr-0">
+          <pre className="overflow-x-hidden whitespace-normal p-4 pr-0">
             <code className="grid gap-y-1">{children}</code>
           </pre>
         </div>

@@ -3,6 +3,7 @@ import { AnimatedGridPattern } from '@/components/animated-grid'
 import { HoverEffect } from '@/components/card-hover-effect'
 import Code from '@/components/code'
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
+import { MagicCard } from '@/components/magic-card'
 import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/terminal'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { WobbleCard } from '@/components/wobble-card'
@@ -212,14 +213,14 @@ const Feature = ({
       'dark:border-neutral-800 border-neutral-200'
     )}
   >
-    <div className="mb-4 relative z-10 px-10 text-base-content/80">{icon}</div>
+    <div className="mb-4 relative z-10 px-10 text-base-content/70">{icon}</div>
     <div className="text-lg font-bold mb-2 relative z-10 px-10">
       <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
       <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-base-content">
         {title}
       </span>
     </div>
-    <p className="text-sm text-base-content/80 max-w-xs relative z-10 px-10">
+    <p className="text-sm text-base-content/70 max-w-xs relative z-10 px-10">
       {description}
     </p>
   </div>
@@ -727,11 +728,98 @@ export default function HomePage() {
         </div>
       </div>
       <div className="w-full relative">
-        <div className="container mx-auto pb-20 lg:pb-40">Powered by</div>
+        <div className="container mx-auto pb-20 lg:pb-40">
+          <div className="flex items-start flex-wrap justify-center gap-6">
+            <div className="card w-full sm:w-96 bg-base-100 card-md shadow-sm">
+              <MagicCard
+                gradientSize={200}
+                gradientColor={theme === 'dark' ? '#262626' : '#D9D9D955'}
+                className="p-0"
+              >
+                <figure className="p-6 pb-0 w-fit">
+                  <img src="/react.svg" alt="" className="size-12" />
+                </figure>
+                <div className="card-body">
+                  <a
+                    className="group card-title hover:underline underline-offset-4"
+                    href="https://react.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    React
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="size-5 opacity-50 group-hover:opacity-100"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                      <path d="M11 13l9 -9" />
+                      <path d="M15 4h5v5" />
+                    </svg>
+                  </a>
+                  <p className="max-h-[63px] text-base-content/70">
+                    The most popular JavaScript library for building user
+                    interfaces, used by millions of developers worldwide.
+                  </p>
+                </div>
+              </MagicCard>
+            </div>
+            <div className="card w-full sm:w-96 bg-base-100 card-md shadow-sm">
+              <MagicCard
+                gradientSize={200}
+                gradientColor={theme === 'dark' ? '#262626' : '#D9D9D955'}
+                className="p-0"
+              >
+                <figure className="p-6 pb-0 w-fit">
+                  <img src="/bun.svg" alt="" className="size-12" />
+                </figure>
+                <div className="card-body">
+                  <a
+                    className="group card-title hover:underline underline-offset-4"
+                    href="https://bun.sh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Bun
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="size-5 opacity-50 group-hover:opacity-100"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                      <path d="M11 13l9 -9" />
+                      <path d="M15 4h5v5" />
+                    </svg>
+                  </a>
+                  <p className="max-h-[63px] text-base-content/70">
+                    The fastest JavaScript runtime used for bundling and
+                    server-side handling, with a focus on performance.
+                  </p>
+                </div>
+              </MagicCard>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="w-full relative">
         <motion.div
-          className="container mx-auto pb-20 lg:pb-40 flex justify-center"
+          className="container mx-auto py-20 lg:py-40 flex justify-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
         >
@@ -765,10 +853,10 @@ To get started, run: \`cd my-app && bun dev\``
               .map((line, index) => (
                 <AnimatedSpan
                   key={index}
-                  delay={index * 200 + 2500}
+                  delay={index * 100 + 2500}
                   className="text-success pr-4"
                 >
-                  <span className="h-5">{line}</span>
+                  <span className={cn(!line && 'h-5')}>{line}</span>
                 </AnimatedSpan>
               ))}
           </Terminal>

@@ -296,7 +296,7 @@ export function RouterProvider({
   return (
     <RouterContext.Provider {...props} value={contextValue}>
       <rootLayout.element {...args}>
-        {router ? (
+        {router && args ? (
           <Page
             router={router}
             args={args}

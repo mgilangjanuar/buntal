@@ -207,8 +207,8 @@ export default function MarkdownContent({
     <li key={item.id}>
       <Link
         className={cn(
-          'hover:opacity-100 opacity-70 hover:underline underline-offset-4',
-          activeSection === item.id && 'text-primary'
+          'hover:opacity-100 opacity-60 hover:underline underline-offset-4',
+          activeSection === item.id && 'text-primary opacity-100'
         )}
         href={`#${item.id}:${item.offset || 72}`}
       >

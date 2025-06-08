@@ -168,11 +168,11 @@ export const Terminal = ({
         }
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className={cn(
-          'z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background',
+          'z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl',
           className
         )}
       >
-        <div className="flex flex-col gap-y-2 border-b border-border p-4">
+        <div className="flex flex-col gap-y-2 p-4 border border-b-0 rounded-t-xl">
           <div className="flex flex-row gap-x-2">
             <motion.div
               className="h-2 w-2 rounded-full bg-red-500"
@@ -206,7 +206,10 @@ export const Terminal = ({
             />
           </div>
         </div>
-        <div className="overflow-y-auto max-h-[357px]">
+        <div
+          className="overflow-y-auto max-h-[357px] rounded-b-xl"
+          data-theme="dark"
+        >
           <pre className="overflow-x-auto p-4 pr-0">
             <code className="grid gap-y-1">{children}</code>
           </pre>

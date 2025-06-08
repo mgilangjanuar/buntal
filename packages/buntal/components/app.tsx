@@ -7,7 +7,7 @@ export function App({
   notFound
 }: Readonly<{
   routes: ServerRouterType[]
-  rootLayout?: {
+  rootLayout: {
     element: (data: any) => ReactNode
     ssr?: boolean
     data?: unknown

@@ -11,6 +11,7 @@ export function buildPages(
     render: routes
       .map((r, i) => {
         return `{ regex: ${JSON.stringify(r.regex)}, element: Page${i}, ssr: ${r.ssr}, layouts: [${r.layoutsSafeImport
+          .slice(1)
           .map((layout) => {
             const idx = layouts.findIndex((l) => l.filePath === layout.filePath)
             return `{ element: Layout${idx}, ssr: ${layout.ssr || false}${layout.data ? `, data: ${JSON.stringify(layout.data)}` : ''} }`

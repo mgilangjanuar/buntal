@@ -1,16 +1,45 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
   themes:
-    bumblebee --default,
-    halloween --prefersdark;
+    light --default,
+    dark --prefersdark;
 }
-@custom-variant dark (&:where([data-theme=halloween], [data-theme=halloween] *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @plugin '@tailwindcss/typography';
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Source Serif 4', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Plus Jakarta Sans', serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+@theme inline {
+  --animate-line-shadow: line-shadow 15s linear infinite;
+
+  @keyframes line-shadow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% -100%;
+    }
+  }
+}
+
+@theme inline {
+  --animate-shine: shine var(--duration) infinite linear;
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
 }
 
 @utility container {

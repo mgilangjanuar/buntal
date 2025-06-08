@@ -48,162 +48,23 @@ bun create buntal@latest my-app
 
 View more examples [here](/examples).
 
+## Sponsors ❤️
+
+Help up maintain this project by becoming a [sponsor](https://github.com/sponsors/mgilangjanuar)!
+
+<a href="https://m.do.co/c/4aad6c899906">
+    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
+</a>
+
+<br />
+
+<!-- sponsors --><a href="https://github.com/moerdowo"><img src="https:&#x2F;&#x2F;github.com&#x2F;moerdowo.png" width="60px" alt="User avatar: Frianto Moerdowo" /></a><!-- sponsors -->
+
 ## Benchmark Test
 
 It runs `benchmark/test.sh` script, which is a simple bash script to simulate multiple requests to various services and measure their performance.
 
 ```
-╔════════════════════════════════════════════════════════════════════════════╗
-║                         MULTI-RUN BENCHMARK SUITE                          ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-Configuration:
-  • Number of runs: 3
-  • Requests per service per run: 100
-  • Services: py-fastapi, node-express, go-gin, elysia, buntal
-
-Checking if all services are running...
-
-Checking py-fastapi at http://localhost:3103/json... ✅ OK
-Checking node-express at http://localhost:3100/json... ✅ OK
-Checking go-gin at http://localhost:3102/json... ✅ OK
-Checking elysia at http://localhost:3104/json... ✅ OK
-Checking buntal at http://localhost:3101/json... ✅ OK
-
-✅ All services are running and responding!
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                            BENCHMARK RUN #1                                ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-Starting benchmark with 100 requests per service...
-
-Benchmarking py-fastapi... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking node-express... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking go-gin... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking elysia... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking buntal... 20/100 40/100 60/100 80/100 100/100 Done!
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                           BENCHMARK RESULTS                                ║
-╠════════════════════════════════════════════════════════════════════════════╣
-║ Machine: Darwin arm64 | Apple M1 Pro | 16.0 GB                             ║
-║ Date: 2025-06-02 20:50:17 WIB                                              ║
-║ Requests per service: 100                                                  ║
-╠═══════════════╦════════════════════════╦═══════════════════════════════════╣
-║   Service     ║   Avg Latency (sec)    ║      RPS (req/sec)                ║
-╠═══════════════╬════════════════════════╬═══════════════════════════════════╣
-║ py-fastapi    ║               0.001255 ║                            796.76 ║
-║ node-express  ║               0.000727 ║                           1376.16 ║
-║ go-gin        ║               0.000536 ║                           1865.11 ║
-║ elysia        ║               0.000504 ║                           1985.27 ║
-║ buntal        ║               0.000502 ║                           1993.30 ║
-╚═══════════════╩════════════════════════╩═══════════════════════════════════╝
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                        PERFORMANCE CHART (RPS)                             ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-buntal        │██████████████████████████████████████████████████│ 1993.30 RPS
-elysia        │██████████████████████████████████████████████████│ 1985.27 RPS
-go-gin        │██████████████████████████████████████████████│ 1865.11 RPS
-node-express  │██████████████████████████████████│ 1376.16 RPS
-py-fastapi    │████████████████████│ 796.76 RPS
-
-Chart Legend: Each █ represents ~39.8 RPS
-
-
-════════════════════════════════════════════════════════════════════════════
-
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                            BENCHMARK RUN #2                                ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-Starting benchmark with 100 requests per service...
-
-Benchmarking py-fastapi... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking node-express... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking go-gin... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking elysia... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking buntal... 20/100 40/100 60/100 80/100 100/100 Done!
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                           BENCHMARK RESULTS                                ║
-╠════════════════════════════════════════════════════════════════════════════╣
-║ Machine: Darwin arm64 | Apple M1 Pro | 16.0 GB                             ║
-║ Date: 2025-06-02 20:50:27 WIB                                              ║
-║ Requests per service: 100                                                  ║
-╠═══════════════╦════════════════════════╦═══════════════════════════════════╣
-║   Service     ║   Avg Latency (sec)    ║      RPS (req/sec)                ║
-╠═══════════════╬════════════════════════╬═══════════════════════════════════╣
-║ py-fastapi    ║               0.001140 ║                            877.53 ║
-║ node-express  ║               0.000749 ║                           1334.94 ║
-║ go-gin        ║               0.000507 ║                           1972.78 ║
-║ elysia        ║               0.000481 ║                           2080.26 ║
-║ buntal        ║               0.000475 ║                           2106.02 ║
-╚═══════════════╩════════════════════════╩═══════════════════════════════════╝
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                        PERFORMANCE CHART (RPS)                             ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-buntal        │██████████████████████████████████████████████████│ 2106.02 RPS
-elysia        │█████████████████████████████████████████████████│ 2080.26 RPS
-go-gin        │██████████████████████████████████████████████│ 1972.78 RPS
-node-express  │████████████████████████████████│ 1334.94 RPS
-py-fastapi    │████████████████████│ 877.53 RPS
-
-Chart Legend: Each █ represents ~42.1 RPS
-
-
-════════════════════════════════════════════════════════════════════════════
-
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                            BENCHMARK RUN #3                                ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-Starting benchmark with 100 requests per service...
-
-Benchmarking py-fastapi... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking node-express... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking go-gin... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking elysia... 20/100 40/100 60/100 80/100 100/100 Done!
-Benchmarking buntal... 20/100 40/100 60/100 80/100 100/100 Done!
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                           BENCHMARK RESULTS                                ║
-╠════════════════════════════════════════════════════════════════════════════╣
-║ Machine: Darwin arm64 | Apple M1 Pro | 16.0 GB                             ║
-║ Date: 2025-06-02 20:50:36 WIB                                              ║
-║ Requests per service: 100                                                  ║
-╠═══════════════╦════════════════════════╦═══════════════════════════════════╣
-║   Service     ║   Avg Latency (sec)    ║      RPS (req/sec)                ║
-╠═══════════════╬════════════════════════╬═══════════════════════════════════╣
-║ py-fastapi    ║               0.001200 ║                            833.40 ║
-║ node-express  ║               0.000705 ║                           1418.16 ║
-║ go-gin        ║               0.000471 ║                           2124.18 ║
-║ elysia        ║               0.000450 ║                           2224.20 ║
-║ buntal        ║               0.000455 ║                           2199.35 ║
-╚═══════════════╩════════════════════════╩═══════════════════════════════════╝
-
-╔════════════════════════════════════════════════════════════════════════════╗
-║                        PERFORMANCE CHART (RPS)                             ║
-╚════════════════════════════════════════════════════════════════════════════╝
-
-elysia        │██████████████████████████████████████████████████│ 2224.20 RPS
-buntal        │█████████████████████████████████████████████████│ 2199.35 RPS
-go-gin        │████████████████████████████████████████████████│ 2124.18 RPS
-node-express  │████████████████████████████████│ 1418.16 RPS
-py-fastapi    │██████████████████│ 833.40 RPS
-
-Chart Legend: Each █ represents ~44.4 RPS
-
-
-════════════════════════════════════════════════════════════════════════════
-
-
 ╔════════════════════════════════════════════════════════════════════════════╗
 ║                         COMPREHENSIVE RECAP                                ║
 ║                        (3 Runs Summary)                                    ║

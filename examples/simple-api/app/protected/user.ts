@@ -35,7 +35,7 @@ const DONT_TRY_THIS_AT_HOME = 'your-secret-key'
  * @param res - The outgoing HTTP response object.
  * @returns A JSON response containing the authenticated user's data.
  */
-export const GET = h<{}, User>(
+export const GET = h(
   auth<User>({
     secret: DONT_TRY_THIS_AT_HOME,
     strategy: 'both',

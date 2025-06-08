@@ -60,14 +60,19 @@ export const builder = async (
             }
           }
         }
+
+        let regex = route.replace(/\//g, '\\/')
+        if (regex.includes('[[...')) {
+          regex = regex.replace(/\[\[\.\.\.([^\]]+)\]\]/g, '(?<$1>.+)')
+        } else {
+          regex = regex.replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')
+        }
         results.push({
           route,
           safeImport: filePath
             .replace(process.cwd(), source)
             .replace(/\.tsx$/gi, ''),
-          regex: `^${route
-            .replace(/\//g, '\\/')
-            .replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')}$`,
+          regex: `^${regex}$`,
           ssr: '$' in handler && typeof handler.$ === 'function',
           data:
             '$' in handler && typeof handler.$ !== 'function'

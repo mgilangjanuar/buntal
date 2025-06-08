@@ -6,7 +6,7 @@ export default function Header({
   title: string
 }>) {
   return (
-    <header className="flex items-center !h-14 px-4 gap-4 shadow-sm shadow-base-300/50 sticky top-0 bg-base-100 z-10">
+    <header className="!h-14 px-4 flex items-center gap-4 max-w-5xl sticky top-0 z-10 bg-gradient-to-r to-base-100/0 from-base-100/50 backdrop-blur-sm">
       <label
         htmlFor="docs-layout-drawer"
         className="btn btn-square btn-sm btn-ghost drawer-button lg:hidden"

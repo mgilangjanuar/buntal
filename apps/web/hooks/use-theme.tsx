@@ -1,11 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, use, useEffect, useMemo, useState } from 'react'
 
 type Theme = {
   theme: 'light' | 'dark'
   setTheme: (theme: 'light' | 'dark') => void
   themesMap: { [key in 'light' | 'dark']: string }
-  userPrefersDark: boolean
-  defaultTheme: 'light' | 'dark'
 }
 
 const ThemeContext = createContext<Theme>({
@@ -14,39 +12,33 @@ const ThemeContext = createContext<Theme>({
   themesMap: {
     light: 'light',
     dark: 'dark'
-  },
-  userPrefersDark: false,
-  defaultTheme: 'light'
+  }
 })
 
 type ThemeProviderProps = {
   defaultTheme?: 'light' | 'dark'
-  themesMap: { [key in 'light' | 'dark']: string }
+  themesMap?: { [key in 'light' | 'dark']: string }
   children?: React.ReactNode
 }
 
+const defaultThemesMap = { light: 'light', dark: 'dark' }
+
 export function ThemeProvider({
-  defaultTheme = 'light',
-  themesMap,
-  children,
-  ...props
+  defaultTheme,
+  themesMap = defaultThemesMap,
+  children
 }: ThemeProviderProps) {
-  const [userPrefersDark, setUserPrefersDark] = useState<boolean>(false)
-  const [theme, setTheme] = useState<'light' | 'dark'>()
+  if (typeof window === 'undefined') {
+    return children
+  }
 
-  useEffect(() => {
-    setUserPrefersDark(
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    )
-  }, [])
-
-  useEffect(() => {
-    setTheme(
-      (window.localStorage.getItem('theme') as
-        | typeof defaultTheme
-        | undefined) || defaultTheme
-    )
-  }, [defaultTheme])
+  const [theme, setTheme] = useState<'light' | 'dark'>(
+    (window.localStorage.getItem('theme') as typeof defaultTheme) ||
+      defaultTheme ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light')
+  )
 
   useEffect(() => {
     if (theme && window.localStorage.getItem('theme') !== theme) {
@@ -54,20 +46,22 @@ export function ThemeProvider({
     }
   }, [theme])
 
-  return (
-    <ThemeContext.Provider
-      value={{
-        theme: theme || defaultTheme,
-        themesMap,
-        setTheme,
-        userPrefersDark,
-        defaultTheme
-      }}
-      {...props}
-    >
-      {theme && children && <div data-theme={themesMap[theme]}>{children}</div>}
-    </ThemeContext.Provider>
+  useEffect(() => {
+    if (theme) {
+      document.body.setAttribute('data-theme', themesMap[theme])
+    }
+  }, [theme])
+
+  const contextValue = useMemo(
+    () => ({
+      theme,
+      setTheme,
+      themesMap
+    }),
+    [theme, setTheme, themesMap]
   )
+
+  return <ThemeContext value={contextValue}>{children}</ThemeContext>
 }
 
-export const useTheme = () => useContext(ThemeContext)
+export const useTheme = () => use(ThemeContext)

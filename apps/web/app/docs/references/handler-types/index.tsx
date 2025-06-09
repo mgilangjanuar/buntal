@@ -18,6 +18,10 @@ Type definitions for HTTP request handlers and route parameter extraction.
 ## AtomicHandler<P, T, R>
 
 \`\`\`typescript
+export type { AtomicHandler } from '@buntal/core'
+\`\`\`
+
+\`\`\`typescript
 type AtomicHandler<
   P = Record<string, string>,
   T = unknown,
@@ -31,6 +35,11 @@ type AtomicHandler<
 - [Http](/docs/references/http-core#http-class) - HTTP server class that uses handlers
 
 ## ExtractRouteParams<Path>
+
+\`\`\`typescript
+// ExtractRouteParams is used internally by Http class methods
+import { Http } from '@buntal/core'
+\`\`\`
 
 \`\`\`typescript
 type ExtractRouteParams<Path extends string> =

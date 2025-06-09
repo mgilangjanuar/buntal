@@ -18,6 +18,10 @@ Core class definitions for Buntal's HTTP server functionality.
 ## Http Class
 
 \`\`\`typescript
+export { Http } from '@buntal/core'
+\`\`\`
+
+\`\`\`typescript
 class Http {
   constructor(config: Config)
   start(cb?: (server: Bun.Server) => void): Bun.Server
@@ -40,6 +44,10 @@ class Http {
 ## Req Class
 
 \`\`\`typescript
+export type { Req } from '@buntal/core'
+\`\`\`
+
+\`\`\`typescript
 class Req<P = Record<string, string>, T = unknown> extends Request {
   params: P
   query?: Record<string, string>
@@ -49,6 +57,10 @@ class Req<P = Record<string, string>, T = unknown> extends Request {
 \`\`\`
 
 ## Res Class
+
+\`\`\`typescript
+export { Res } from '@buntal/core'
+\`\`\`
 
 \`\`\`typescript
 class Res {

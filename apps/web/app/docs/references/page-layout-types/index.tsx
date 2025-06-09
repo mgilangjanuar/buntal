@@ -17,6 +17,8 @@ Type definitions for page components and layout components.
 
 ## PageProps<T>
 
+PageProps is a conceptual interface for page component props, not directly exported.
+
 \`\`\`typescript
 interface PageProps<T = any> {
   params: Record<string, string>
@@ -26,6 +28,8 @@ interface PageProps<T = any> {
 \`\`\`
 
 ## LayoutProps<T>
+
+LayoutProps is a conceptual interface for layout component props, not directly exported.
 
 \`\`\`typescript
 interface LayoutProps<T = any> {

@@ -18,6 +18,10 @@ Type definitions for cookie management and options.
 ## CookieOptions
 
 \`\`\`typescript
+export { cookie } from '@buntal/core'
+\`\`\`
+
+\`\`\`typescript
 type CookieOptions = {
   maxAge?: number
   expires?: Date
@@ -30,6 +34,10 @@ type CookieOptions = {
 \`\`\`
 
 ## Constants
+
+\`\`\`typescript
+export { ALLOWED_METHODS } from '@buntal/core'
+\`\`\`
 
 \`\`\`typescript
 const ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] as const

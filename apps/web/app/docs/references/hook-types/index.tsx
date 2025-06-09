@@ -18,12 +18,20 @@ Type definitions for React hooks and their return values.
 ## useRouter
 
 \`\`\`typescript
+export { useRouter } from 'buntal'
+\`\`\`
+
+\`\`\`typescript
 function useRouter(): RouterType
 \`\`\`
 
 Returns a \`RouterType\` object with navigation methods and current route information.
 
 ## Component Functions
+
+\`\`\`typescript
+export { Meta, Link, Script, Svg, App, Notfound } from 'buntal'
+\`\`\`
 
 \`\`\`typescript
 function Meta(props: MetaProps): JSX.Element

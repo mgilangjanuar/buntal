@@ -18,6 +18,10 @@ Type definitions for authentication, authorization, and security utilities.
 ## Auth Options
 
 \`\`\`typescript
+export { auth } from '@buntal/core/middlewares'
+\`\`\`
+
+\`\`\`typescript
 type AuthOptions<T = unknown> = {
   secret: string
   strategy?: 'cookie' | 'header' | 'both'
@@ -28,6 +32,10 @@ type AuthOptions<T = unknown> = {
 \`\`\`
 
 ## CORS Options
+
+\`\`\`typescript
+export { cors } from '@buntal/core/middlewares'
+\`\`\`
 
 \`\`\`typescript
 type CORSOptions = {
@@ -43,6 +51,10 @@ type CORSOptions = {
 ## JWT Function
 
 \`\`\`typescript
+export { jwt } from '@buntal/core/security'
+\`\`\`
+
+\`\`\`typescript
 function jwt(secret: string): {
   sign: (payload: any, options?: { expiresIn?: string }) => string
   verify: <T = any>(token: string) => T
@@ -50,6 +62,10 @@ function jwt(secret: string): {
 \`\`\`
 
 ## Hash Function
+
+\`\`\`typescript
+export { hash } from '@buntal/core/security'
+\`\`\`
 
 \`\`\`typescript
 function hash(password: string): {

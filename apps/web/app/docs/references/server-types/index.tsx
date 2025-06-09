@@ -17,6 +17,8 @@ Type definitions for server-side functionality and context.
 
 ## ServerContext
 
+ServerContext is a conceptual interface for server-side context, not directly exported.
+
 \`\`\`typescript
 interface ServerContext {
   params: Record<string, string>
@@ -26,6 +28,10 @@ interface ServerContext {
 \`\`\`
 
 ## Server Functions
+
+\`\`\`typescript
+export { runServer } from 'buntal/server'
+\`\`\`
 
 \`\`\`typescript
 function runServer(config?: BuntalConfig): Promise<void>

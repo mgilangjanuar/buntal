@@ -17,6 +17,8 @@ Type definitions for client-side and server-side routing.
 
 ## RouterType
 
+RouterType is an internal type returned by the useRouter hook, not directly exported.
+
 \`\`\`typescript
 type RouterType = {
   pathname: string
@@ -33,6 +35,10 @@ type RouterType = {
 \`\`\`
 
 ## ServerRouterType
+
+\`\`\`typescript
+export type { ServerRouterType } from 'buntal'
+\`\`\`
 
 \`\`\`typescript
 type ServerRouterType = {

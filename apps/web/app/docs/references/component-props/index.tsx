@@ -18,6 +18,10 @@ Type definitions for React component properties.
 ## MetaProps
 
 \`\`\`typescript
+export type { MetaProps } from 'buntal'
+\`\`\`
+
+\`\`\`typescript
 type MetaProps = Partial<{
   title: string
   viewport: string
@@ -41,6 +45,12 @@ type MetaProps = Partial<{
 ## LinkProps
 
 \`\`\`typescript
+export { Link } from 'buntal'
+\`\`\`
+
+LinkProps are passed to the Link component but not exported as a separate type.
+
+\`\`\`typescript
 type LinkProps = {
   href: string
   children: React.ReactNode
@@ -51,6 +61,12 @@ type LinkProps = {
 \`\`\`
 
 ## ScriptProps
+
+\`\`\`typescript
+export { Script } from 'buntal'
+\`\`\`
+
+ScriptProps are passed to the Script component but not exported as a separate type.
 
 \`\`\`typescript
 type ScriptProps = {
@@ -65,6 +81,12 @@ type ScriptProps = {
 ## SvgProps
 
 \`\`\`typescript
+export { Svg } from 'buntal'
+\`\`\`
+
+SvgProps are passed to the Svg component but not exported as a separate type.
+
+\`\`\`typescript
 type SvgProps = {
   src: string
   className?: string
@@ -72,6 +94,10 @@ type SvgProps = {
 \`\`\`
 
 ## AppProps
+
+\`\`\`typescript
+export { App } from 'buntal'
+\`\`\`
 
 \`\`\`typescript
 type AppProps = {

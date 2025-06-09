@@ -100,8 +100,8 @@ function Meta(props: MetaProps): JSX.Element
 | \`description\` | \`string\` | Page description |
 | \`keywords\` | \`string\` | SEO keywords |
 | \`author\` | \`string\` | Page author |
-| \`og\` | \`object\` | Open Graph metadata |
-| \`twitter\` | \`object\` | Twitter Card metadata |
+| \`og\` | \`{ title?: string; description?: string; image?: string }\` | Open Graph metadata |
+| \`twitter\` | \`{ title?: string; description?: string; image?: string; card?: string }\` | Twitter Card metadata |
 
 **Example:**
 

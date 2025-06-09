@@ -427,6 +427,8 @@ type ServerRouterType = {
 \`\`\`sh
 my-app/
 ├── app/
+│   ├── favicon.svg
+│   └── globals.css
 │   ├── layout.tsx          # Root layout
 │   ├── index.tsx           # Home page
 │   ├── about/index.tsx     # About page
@@ -434,8 +436,6 @@ my-app/
 │       ├── index.tsx       # Users list
 │       └── [id]/index.tsx  # User detail
 ├── public/
-│   ├── favicon.svg
-│   └── globals.css
 ├── buntal.config.ts        # Configuration
 └── package.json
 \`\`\`

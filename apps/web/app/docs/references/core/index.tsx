@@ -15,20 +15,6 @@ export default function CoreAPIReferencePage() {
 
 The core HTTP server package for Buntal JS, providing low-level APIs for building HTTP servers and handling requests/responses.
 
-## Quick Start
-
-\`\`\`typescript
-import { Http } from '@buntal/core'
-
-const app = new Http({ port: 3000 })
-
-app.get('/hello/:name', (req, res) => {
-  return res.json({ message: \`Hello \${req.params.name}!\` })
-})
-
-app.start()
-\`\`\`
-
 ## Classes
 
 ### Http
@@ -259,7 +245,6 @@ app.post('/logout', (req, res) => {
 const ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] as const
 \`\`\``}
       tableOfContents={[
-        { id: 'quick-start', title: 'Quick Start', level: 1, offset: 72 },
         {
           id: 'classes',
           title: 'Classes',

@@ -55,7 +55,7 @@ ${
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-${parameters.map((p) => `| \`${p.name}\` | \`${p.type}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
+${parameters.map((p) => `| \`${p.name}\` | \`${p.type.replaceAll('|', '\\|')}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
 `
     : ''
 }
@@ -67,7 +67,7 @@ ${
 
 | Property | Type | Required | Default | Description |
 |----------|------|----------|---------|-------------|
-${properties.map((p) => `| \`${p.name}\` | \`${p.type}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
+${properties.map((p) => `| \`${p.name}\` | \`${p.type.replaceAll('|', '\\|')}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
 `
     : ''
 }
@@ -91,7 +91,7 @@ ${
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-${method.parameters.map((p) => `| \`${p.name}\` | \`${p.type}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
+${method.parameters.map((p) => `| \`${p.name}\` | \`${p.type.replaceAll('|', '\\|')}\` | ${p.required ? '✅' : '❌'} | ${p.default ? `\`${p.default}\`` : '-'} | ${p.description} |`).join('\n')}
 `
     : ''
 }

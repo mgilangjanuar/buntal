@@ -240,32 +240,6 @@ NODE_ENV=production
 const jwtUtil = jwt(process.env.JWT_SECRET || 'fallback-dev-secret')
 \`\`\`
 
-## Error Handling
-
-Both JWT and hash functions can throw errors that should be handled appropriately:
-
-\`\`\`typescript
-// JWT error handling
-try {
-  const payload = await jwtUtil.verify(token)
-  // Token is valid
-} catch (error) {
-  if (error.code === 'ERR_JWT_EXPIRED') {
-    // Token has expired
-    return res.status(401).json({ error: 'Token expired' })
-  } else if (error.code === 'ERR_JWT_INVALID') {
-    // Token is malformed
-    return res.status(401).json({ error: 'Invalid token' })
-  } else {
-    // Other JWT errors
-    return res.status(401).json({ error: 'Token verification failed' })
-  }
-}
-
-// Hash comparison is safe and won't throw
-const isValid = hash.compare(inputPassword, storedHash) // Always returns boolean
-\`\`\`
-
 ## Dependencies
 
 This package uses the following underlying libraries:
@@ -318,14 +292,14 @@ Both are battle-tested libraries widely used in production applications.`}
               title: 'Password Hashing',
               level: 2,
               offset: 72
+            },
+            {
+              id: 'example-environment-configuration',
+              title: 'Example Environment Configuration',
+              level: 2,
+              offset: 72
             }
           ]
-        },
-        {
-          id: 'error-handling',
-          title: 'Error Handling',
-          level: 1,
-          offset: 72
         },
         {
           id: 'dependencies',

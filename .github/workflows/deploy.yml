@@ -24,7 +24,7 @@ jobs:
         with:
           source: './apps/web/.buntal/*'
           host: ${{ secrets.SSH_HOST }}
-          target: '$PROJECT_NAME/apps/web'
+          target: ${{ secrets.SSH_TARGET }}
           username: ${{ secrets.SSH_USER }}
           strip_components: 3
           key: ${{ secrets.SSH_PRIVATE_KEY }}

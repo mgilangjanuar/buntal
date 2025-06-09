@@ -224,125 +224,127 @@ export default function MarkdownContent({
     <div className={className}>
       <Header title={title} />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 prose pb-6 grid grid-cols-1">
+        <div className="container ml-0 pb-6 grid grid-cols-1">
           {prependComponent}
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              pre: ({ children }) => children,
-              code: ({ className, children, ...props }) => {
-                const match = /language-(\w+)/.exec(className || '')
-                const language = match ? match[1] : undefined
-                const code = String(children).replace(/\n$/, '')
+          <div className="prose min-h-screen">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                pre: ({ children }) => children,
+                code: ({ className, children, ...props }) => {
+                  const match = /language-(\w+)/.exec(className || '')
+                  const language = match ? match[1] : undefined
+                  const code = String(children).replace(/\n$/, '')
 
-                // Check if this is an inline code or code block
-                const isInline = !className?.includes('language-')
+                  // Check if this is an inline code or code block
+                  const isInline = !className?.includes('language-')
 
-                return !isInline ? (
-                  <Code language={language}>{code}</Code>
-                ) : (
-                  <code
-                    className="prose-code whitespace-pre-line- py-3- !px-4-"
-                    {...props}
-                  >
+                  return !isInline ? (
+                    <Code language={language}>{code}</Code>
+                  ) : (
+                    <code
+                      className="prose-code whitespace-pre-line- py-3- !px-4-"
+                      {...props}
+                    >
+                      {children}
+                    </code>
+                  )
+                },
+                a: ({ href, children, ...props }) => {
+                  return (
+                    <Link
+                      href={href || ''}
+                      className="underline-offset-4"
+                      {...(href?.startsWith('http')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                      {...props}
+                    >
+                      {children}
+                    </Link>
+                  )
+                },
+                h1: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h1 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h1>
+                  )
+                },
+                h2: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h2 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h2>
+                  )
+                },
+                h3: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h3 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h3>
+                  )
+                },
+                h4: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h4 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h4>
+                  )
+                },
+                h5: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h5 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h5>
+                  )
+                },
+                h6: ({ children, ...props }) => {
+                  const text = String(children)
+                  const id = generateSlug(text)
+                  return (
+                    <h6 className="wrap-break-word" id={id} {...props}>
+                      {children}
+                    </h6>
+                  )
+                },
+                table: ({ children, ...props }) => (
+                  <div className="overflow-x-auto rounded-box border !border-base-content/5 bg-base-100">
+                    <table className="table !my-0" {...props}>
+                      {children}
+                    </table>
+                  </div>
+                ),
+                tr: ({ children, ...props }) => (
+                  <tr className="border-b !border-base-content/5" {...props}>
                     {children}
-                  </code>
+                  </tr>
+                ),
+                td: ({ children, ...props }) => (
+                  <td className="whitespace-nowrap py-3 px-4" {...props}>
+                    {children}
+                  </td>
+                ),
+                th: ({ children, ...props }) => (
+                  <th className="whitespace-nowrap py-3 px-4" {...props}>
+                    {children}
+                  </th>
                 )
-              },
-              a: ({ href, children, ...props }) => {
-                return (
-                  <Link
-                    href={href || ''}
-                    className="underline-offset-4"
-                    {...(href?.startsWith('http')
-                      ? { target: '_blank', rel: 'noopener noreferrer' }
-                      : {})}
-                    {...props}
-                  >
-                    {children}
-                  </Link>
-                )
-              },
-              h1: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h1 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h1>
-                )
-              },
-              h2: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h2 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h2>
-                )
-              },
-              h3: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h3 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h3>
-                )
-              },
-              h4: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h4 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h4>
-                )
-              },
-              h5: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h5 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h5>
-                )
-              },
-              h6: ({ children, ...props }) => {
-                const text = String(children)
-                const id = generateSlug(text)
-                return (
-                  <h6 className="wrap-break-word" id={id} {...props}>
-                    {children}
-                  </h6>
-                )
-              },
-              table: ({ children, ...props }) => (
-                <div className="overflow-x-auto rounded-box border !border-base-content/5 bg-base-100">
-                  <table className="table !my-0" {...props}>
-                    {children}
-                  </table>
-                </div>
-              ),
-              tr: ({ children, ...props }) => (
-                <tr className="border-b !border-base-content/5" {...props}>
-                  {children}
-                </tr>
-              ),
-              td: ({ children, ...props }) => (
-                <td className="whitespace-nowrap py-3 px-4" {...props}>
-                  {children}
-                </td>
-              ),
-              th: ({ children, ...props }) => (
-                <th className="whitespace-nowrap py-3 px-4" {...props}>
-                  {children}
-                </th>
-              )
-            }}
-          >
-            {content}
-          </ReactMarkdown>
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </div>
           <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
             Last modified:{' '}
             {lastModified || new Date().toISOString().split('T')[0]}

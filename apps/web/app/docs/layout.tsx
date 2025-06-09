@@ -27,27 +27,47 @@ const MENUS = [
     ]
   },
   {
-    title: 'API Reference',
+    title: 'Type Reference',
     items: [
       {
-        title: '@buntal/core',
-        href: '/docs/references/core'
+        title: 'HTTP Core Types',
+        href: '/docs/references/http-core'
       },
       {
-        title: '@buntal/core/middlewares',
-        href: '/docs/references/core-middlewares'
+        title: 'HTTP Configuration',
+        href: '/docs/references/http-config'
       },
       {
-        title: '@buntal/core/security',
-        href: '/docs/references/core-security'
+        title: 'Handler Types',
+        href: '/docs/references/handler-types'
       },
       {
-        title: 'buntal',
-        href: '/docs/references/buntal'
+        title: 'Security Types',
+        href: '/docs/references/security-types'
       },
       {
-        title: 'buntal/server',
-        href: '/docs/references/buntal-server'
+        title: 'Cookie Types',
+        href: '/docs/references/cookie-types'
+      },
+      {
+        title: 'Component Props',
+        href: '/docs/references/component-props'
+      },
+      {
+        title: 'Page & Layout Types',
+        href: '/docs/references/page-layout-types'
+      },
+      {
+        title: 'Router Types',
+        href: '/docs/references/router-types'
+      },
+      {
+        title: 'Hook Types',
+        href: '/docs/references/hook-types'
+      },
+      {
+        title: 'Server Types',
+        href: '/docs/references/server-types'
       }
     ]
   }

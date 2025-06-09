@@ -189,7 +189,7 @@ export default function DocsLayout({
         <Spotlight />
         {children}
       </div>
-      <div className="drawer-side z-20">
+      <div className="drawer-side z-20 !overscroll-none">
         <label
           htmlFor="docs-layout-drawer"
           aria-label="close sidebar"

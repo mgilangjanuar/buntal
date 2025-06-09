@@ -250,39 +250,6 @@ app.get('/api/profile', (req, res) => {
   return res.json({ user: 'authenticated user' })
 })
 \`\`\`
-
-## Error Handling
-
-Middlewares integrate with Buntal's error handling system:
-
-\`\`\`typescript
-app.onError((error) => {
-  console.error('Middleware error:', error)
-  return new Response('Internal Server Error', { status: 500 })
-})
-\`\`\`
-
-## Type Safety
-
-All middlewares are fully typed and work with Buntal's type system:
-
-\`\`\`typescript
-// Auth middleware with typed payload
-interface UserPayload {
-  userId: string
-  email: string
-  role: 'admin' | 'user'
-}
-
-app.use(auth<UserPayload>({
-  secret: 'secret',
-  onVerified: (req, res, decoded) => {
-    // decoded is typed as UserPayload
-    console.log(decoded.userId) // TypeScript knows this exists
-    req.context = decoded       // Context is properly typed
-  }
-}))
-\`\`\`
 `}
       tableOfContents={[
         {
@@ -309,18 +276,6 @@ app.use(auth<UserPayload>({
         {
           id: 'middleware-composition',
           title: 'Middleware Composition',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'error-handling',
-          title: 'Error Handling',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'type-safety',
-          title: 'Type Safety',
           level: 1,
           offset: 72
         }

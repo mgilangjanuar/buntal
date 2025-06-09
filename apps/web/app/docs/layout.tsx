@@ -14,15 +14,15 @@ const MENUS = [
     href: '/docs/install'
   },
   {
-    title: 'Variants',
+    title: 'Guides',
     items: [
       {
         title: 'HTTP Server',
-        href: '/docs/packages/http-server'
+        href: '/docs/guides/http-server'
       },
       {
         title: 'Full-stack Web',
-        href: '/docs/packages/full-stack-web'
+        href: '/docs/guides/full-stack-web'
       }
     ]
   }

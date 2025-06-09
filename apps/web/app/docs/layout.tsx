@@ -185,7 +185,7 @@ export default function DocsLayout({
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content min-h-svh relative">
+      <div className="drawer-content min-h-svh relative bg-base-100">
         <Spotlight />
         {children}
       </div>

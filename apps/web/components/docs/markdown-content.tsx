@@ -312,7 +312,29 @@ export default function MarkdownContent({
                     {children}
                   </h6>
                 )
-              }
+              },
+              table: ({ children, ...props }) => (
+                <div className="overflow-x-auto rounded-box border !border-base-content/5 bg-base-100">
+                  <table className="table !my-0" {...props}>
+                    {children}
+                  </table>
+                </div>
+              ),
+              tr: ({ children, ...props }) => (
+                <tr className="border-b !border-base-content/5" {...props}>
+                  {children}
+                </tr>
+              ),
+              td: ({ children, ...props }) => (
+                <td className="whitespace-nowrap py-3 px-4" {...props}>
+                  {children}
+                </td>
+              ),
+              th: ({ children, ...props }) => (
+                <th className="whitespace-nowrap py-3 px-4" {...props}>
+                  {children}
+                </th>
+              )
             }}
           >
             {content}

@@ -47,33 +47,6 @@ export default function ReqPage() {
             'Getter that returns all cookies from the request as an object'
         }
       ]}
-      examples={[
-        `// Route: /users/:id
-app.get('/users/:id', (req, res) => {
-  const userId = req.params.id // Type-safe parameter access
-  return res.json({ userId })
-})`,
-        `// Query parameters: /search?q=buntal&limit=10
-app.get('/search', (req, res) => {
-  const query = req.query?.q
-  const limit = req.query?.limit
-  return res.json({ query, limit })
-})`,
-        `// Accessing cookies
-app.get('/profile', (req, res) => {
-  const sessionId = req.cookies.session_id
-  return res.json({ sessionId })
-})`,
-        `// Middleware adding context
-app.use(async (req, res) => {
-  req.context = { user: await getCurrentUser(req) }
-})
-
-app.get('/dashboard', (req, res) => {
-  const user = req.context?.user
-  return res.json({ user })
-})`
-      ]}
     />
   )
 }

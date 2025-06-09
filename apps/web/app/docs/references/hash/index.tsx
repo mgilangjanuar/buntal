@@ -59,60 +59,6 @@ hash.compare = function (password: string, hashed: string): boolean`}
           returns: 'boolean'
         }
       ]}
-      examples={[
-        `import { hash } from '@buntal/core/security'
-
-// Hash a password during registration
-const password = 'user123'
-const hashedPassword = hash(password)
-console.log(hashedPassword) // $2a$10$...`,
-        `// Compare password during login
-const inputPassword = 'user123'
-const storedHash = '$2a$10$...'
-
-const isValid = hash.compare(inputPassword, storedHash)
-console.log(isValid) // true`,
-        `// Complete authentication example
-import { Http } from '@buntal/core'
-import { hash } from '@buntal/core/security'
-
-const app = new Http({ port: 3000 })
-
-// Registration endpoint
-app.post('/register', async (req, res) => {
-  const { email, password } = await req.json()
-
-  // Hash the password
-  const hashedPassword = hash(password)
-
-  // Save to database (pseudo code)
-  await db.users.create({
-    email,
-    password: hashedPassword
-  })
-
-  return res.status(201).json({ message: 'User created' })
-})
-
-// Login endpoint
-app.post('/login', async (req, res) => {
-  const { email, password } = await req.json()
-
-  // Get user from database
-  const user = await db.users.findByEmail(email)
-  if (!user) {
-    return res.status(401).json({ error: 'Invalid credentials' })
-  }
-
-  // Verify password
-  const isValid = hash.compare(password, user.password)
-  if (!isValid) {
-    return res.status(401).json({ error: 'Invalid credentials' })
-  }
-
-  return res.json({ message: 'Login successful' })
-})`
-      ]}
     />
   )
 }

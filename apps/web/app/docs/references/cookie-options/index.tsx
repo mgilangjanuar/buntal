@@ -70,32 +70,6 @@ export default function CookieOptionsPage() {
           description: 'Controls cross-site request behavior'
         }
       ]}
-      examples={[
-        `// Session cookie (expires when browser closes)
-const sessionOptions: CookieOptions = {
-  httpOnly: true,
-  secure: true,
-  sameSite: 'Strict'
-}`,
-        `// Persistent cookie with 1 week expiry
-const persistentOptions: CookieOptions = {
-  maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
-  httpOnly: true,
-  secure: true,
-  sameSite: 'Lax'
-}`,
-        `// Cookie for specific subdomain
-const subdomainOptions: CookieOptions = {
-  domain: '.example.com',
-  path: '/api',
-  secure: true
-}`,
-        `// Development cookie (less secure)
-const devOptions: CookieOptions = {
-  secure: false, // Allow HTTP in development
-  sameSite: 'Lax'
-}`
-      ]}
     />
   )
 }

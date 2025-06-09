@@ -21,34 +21,6 @@ export default function ExtractRouteParamsReference() {
             "The URL path string template containing parameter placeholders like ':id', ':name', etc."
         }
       ]}
-      examples={[
-        {
-          title: 'Basic Route Parameter Extraction',
-          code: `// For route '/users/:id'
-type UserRouteParams = ExtractRouteParams<'/users/:id'>;
-// Result: { id: string }
-
-// For route '/posts/:postId/comments/:commentId'
-type PostCommentParams = ExtractRouteParams<'/posts/:postId/comments/:commentId'>;
-// Result: { postId: string; commentId: string }
-
-// Usage in route handler
-http.get('/users/:id', (req: Req<ExtractRouteParams<'/users/:id'>>) => {
-  const { id } = req.params; // TypeScript knows 'id' exists and is a string
-  return \`User ID: \${id}\`;
-});`
-        },
-        {
-          title: 'Multiple Parameters',
-          code: `// Complex route with multiple parameters
-type ApiRouteParams = ExtractRouteParams<'/api/v1/users/:userId/posts/:postId/edit'>;
-// Result: { userId: string; postId: string }
-
-// No parameters
-type StaticRouteParams = ExtractRouteParams<'/about/contact'>;
-// Result: {}`
-        }
-      ]}
     />
   )
 }

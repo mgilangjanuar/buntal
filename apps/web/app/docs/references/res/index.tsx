@@ -148,39 +148,6 @@ export default function ResPage() {
           returns: 'Res'
         }
       ]}
-      examples={[
-        `// JSON response
-app.get('/api/users', (req, res) => {
-  return res.json({ users: ['Alice', 'Bob'] })
-})`,
-        `// Status code and headers
-app.post('/api/users', (req, res) => {
-  return res
-    .status(201)
-    .headers({ 'Location': '/api/users/123' })
-    .json({ id: 123, name: 'Alice' })
-})`,
-        `// Text response
-app.get('/ping', (req, res) => {
-  return res.text('pong')
-})`,
-        `// HTML response
-app.get('/', (req, res) => {
-  return res.html('<h1>Welcome to Buntal!</h1>')
-})`,
-        `// Redirect
-app.get('/old-path', (req, res) => {
-  return res.redirect('/new-path', 301)
-})`,
-        `// Set cookie
-app.post('/login', (req, res) => {
-  res.cookie('session', 'abc123', {
-    httpOnly: true,
-    maxAge: 3600
-  })
-  return res.json({ success: true })
-})`
-      ]}
     />
   )
 }

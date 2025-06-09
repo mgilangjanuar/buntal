@@ -67,67 +67,6 @@ type AuthOptions<T = unknown> = {
             'Callback function called after successful token verification'
         }
       ]}
-      examples={[
-        `import { Http } from '@buntal/core'
-import { auth } from '@buntal/core/middlewares'
-
-const app = new Http({ port: 3000 })
-
-// Basic authentication with header strategy
-app.use(auth({
-  secret: 'your-secret-key'
-}))
-
-// All routes after this middleware require authentication
-app.get('/protected', (req, res) => {
-  return res.json({ message: 'This is protected' })
-})`,
-        `// Cookie-based authentication
-app.use(auth({
-  secret: 'your-secret-key',
-  strategy: 'cookie',
-  cookie: { key: 'session_token' }
-}))`,
-        `// Multiple strategies (try cookie first, then header)
-app.use(auth({
-  secret: 'your-secret-key',
-  strategy: 'both'
-}))`,
-        `// With typed context and verification callback
-interface UserContext {
-  userId: string
-  role: string
-}
-
-app.use(auth<UserContext>({
-  secret: 'your-secret-key',
-  onVerified: async (req, res, decoded) => {
-    // Add user info to request context
-    req.context = decoded
-
-    // Optional: Early authorization check
-    if (decoded.role !== 'admin') {
-      return res.status(403).json({ error: 'Forbidden' })
-    }
-  }
-}))
-
-app.get('/admin', (req, res) => {
-  const user = req.context // Typed as UserContext
-  return res.json({ user })
-})`,
-        `// Route-specific authentication
-app.get('/public', (req, res) => {
-  return res.json({ message: 'Public endpoint' })
-})
-
-app.get('/private',
-  auth({ secret: 'your-secret-key' }),
-  (req, res) => {
-    return res.json({ message: 'Private endpoint' })
-  }
-)`
-      ]}
     />
   )
 }

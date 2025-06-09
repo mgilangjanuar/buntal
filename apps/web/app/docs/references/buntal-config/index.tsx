@@ -57,61 +57,6 @@ export default function BuntalConfigPage() {
           description: 'Additional Bun build configuration options'
         }
       ]}
-      examples={[
-        `// buntal.config.ts
-import type { BuntalConfig } from 'buntal'
-
-const config = {} satisfies BuntalConfig
-
-export default config`,
-        `// Custom configuration
-import type { BuntalConfig } from 'buntal'
-
-const config = {
-  appDir: './src/pages',
-  outDir: './build',
-  staticDir: './assets',
-  config: {
-    minify: true,
-    splitting: false
-  }
-} satisfies BuntalConfig
-
-export default config`,
-        `// Environment-specific configuration
-import type { BuntalConfig } from 'buntal'
-
-const isDev = process.env.NODE_ENV === 'development'
-
-const config = {
-  env: isDev ? 'development' : 'production',
-  config: {
-    minify: !isDev,
-    sourcemap: isDev ? 'inline' : 'external',
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
-    }
-  }
-} satisfies BuntalConfig
-
-export default config`,
-        `// Advanced build configuration
-import type { BuntalConfig } from 'buntal'
-
-const config = {
-  config: {
-    splitting: true,
-    chunkNames: '[name]-[hash]',
-    external: ['react', 'react-dom'],
-    loader: {
-      '.svg': 'text',
-      '.png': 'file'
-    }
-  }
-} satisfies BuntalConfig
-
-export default config`
-      ]}
     />
   )
 }

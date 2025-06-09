@@ -22,27 +22,6 @@ export default function BuildRouterPage() {
           description: 'Directory path containing route files'
         }
       ]}
-      examples={[
-        `import { buildRouter } from '@buntal/core'
-
-const router = buildRouter('./app')
-
-// Router can match requests to files
-const match = router.match(new Request('http://localhost/users/123'))
-// Returns match object with file path and parameters`,
-        `// Directory structure:
-// app/
-//   index.ts         -> /
-//   users/
-//     index.ts       -> /users
-//     [id].ts        -> /users/:id
-//   api/
-//     posts/
-//       [slug].ts    -> /api/posts/:slug
-
-const router = buildRouter('./app')
-console.log(router.routes) // Shows all available routes`
-      ]}
     />
   )
 }

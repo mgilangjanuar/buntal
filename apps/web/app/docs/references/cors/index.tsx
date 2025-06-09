@@ -75,43 +75,6 @@ type CorsOptions = {
           description: 'Whether to include credentials in CORS requests'
         }
       ]}
-      examples={[
-        `import { Http } from '@buntal/core'
-import { cors } from '@buntal/core/middlewares'
-
-const app = new Http({ port: 3000 })
-
-// Basic CORS (allows all origins)
-app.use(cors())`,
-        `// Restrict to specific origins
-app.use(cors({
-  origin: ['https://myapp.com', 'https://admin.myapp.com']
-}))`,
-        `// Development configuration
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}))`,
-        `// Production API configuration
-app.use(cors({
-  origin: ['https://app.example.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
-  exposedHeaders: ['X-Total-Count', 'X-Page-Count'],
-  maxAge: 3600, // 1 hour
-  credentials: true
-}))`,
-        `// Route-specific CORS
-app.use('/api/*', cors({
-  origin: ['https://trusted-app.com'],
-  credentials: true
-}))
-
-app.use('/public/*', cors({
-  origin: '*',
-  credentials: false
-}))`
-      ]}
     />
   )
 }

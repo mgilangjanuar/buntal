@@ -191,38 +191,6 @@ export default function HttpPage() {
           ]
         }
       ]}
-      examples={[
-        `import { Http } from '@buntal/core'
-
-const app = new Http({ port: 3000 })
-
-app.get('/hello', (req, res) => {
-  return res.text('Hello, World!')
-})
-
-app.start()`,
-        `import { Http } from '@buntal/core'
-
-const app = new Http({
-  port: 3000,
-  appDir: './routes'
-})
-
-// Add middleware
-app.use((req, res) => {
-  console.log(\`\${req.method} \${req.url}\`)
-})
-
-// Multiple handlers
-app.get('/protected',
-  authMiddleware,
-  (req, res) => res.json({ message: 'Protected resource' })
-)
-
-app.start((server) => {
-  console.log(\`Server running on port \${server.port}\`)
-})`
-      ]}
     />
   )
 }

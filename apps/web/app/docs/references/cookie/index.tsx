@@ -103,42 +103,6 @@ export default function CookiePage() {
           returns: 'string'
         }
       ]}
-      examples={[
-        `import { cookie } from '@buntal/core'
-
-app.get('/profile', (req, res) => {
-  const sessionId = cookie.get(req, 'session_id')
-
-  if (!sessionId) {
-    return res.status(401).json({ error: 'No session' })
-  }
-
-  return res.json({ sessionId })
-})`,
-        `// Get all cookies
-app.get('/debug', (req, res) => {
-  const allCookies = cookie.getAll(req)
-  return res.json({ cookies: allCookies })
-})`,
-        `// Set cookie with options
-app.post('/login', (req, res) => {
-  const sessionId = generateSessionId()
-
-  cookie.set(res, 'session_id', sessionId, {
-    httpOnly: true,
-    secure: true,
-    maxAge: 3600, // 1 hour
-    sameSite: 'Strict'
-  })
-
-  return res.json({ success: true })
-})`,
-        `// Delete cookie
-app.post('/logout', (req, res) => {
-  cookie.delete(res, 'session_id')
-  return res.json({ message: 'Logged out' })
-})`
-      ]}
     />
   )
 }

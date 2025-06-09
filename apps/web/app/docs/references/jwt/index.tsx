@@ -59,51 +59,6 @@ export default function JwtPage() {
           returns: 'Promise<T>'
         }
       ]}
-      examples={[
-        `import { jwt } from '@buntal/core/security'
-
-const jwtUtil = jwt('your-secret-key')
-
-// Sign a token
-const token = await jwtUtil.sign({
-  userId: 123,
-  role: 'admin'
-})`,
-        `// Sign with expiration
-const token = await jwtUtil.sign(
-  { userId: 123 },
-  { expiresIn: '1h' }
-)`,
-        `// Verify a token
-try {
-  const payload = await jwtUtil.verify<{ userId: number }>(token)
-  console.log('User ID:', payload.userId)
-} catch (error) {
-  console.error('Invalid token:', error.message)
-}`,
-        `// Authentication middleware example
-import { Http } from '@buntal/core'
-import { jwt } from '@buntal/core/security'
-
-const app = new Http({ port: 3000 })
-const jwtUtil = jwt(process.env.JWT_SECRET!)
-
-app.use(async (req, res) => {
-  const authHeader = req.headers.get('Authorization')
-  const token = authHeader?.replace('Bearer ', '')
-
-  if (!token) {
-    return res.status(401).json({ error: 'No token provided' })
-  }
-
-  try {
-    const user = await jwtUtil.verify(token)
-    req.context = { user }
-  } catch {
-    return res.status(401).json({ error: 'Invalid token' })
-  }
-})`
-      ]}
     />
   )
 }

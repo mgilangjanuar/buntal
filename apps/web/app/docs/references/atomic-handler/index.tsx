@@ -33,36 +33,6 @@ export default function AtomicHandlerPage() {
           description: 'Type for request context data'
         }
       ]}
-      examples={[
-        `// Basic handler
-const handler: AtomicHandler = (req, res) => {
-  return res.json({ message: 'Hello' })
-}`,
-        `// Handler with typed parameters
-const getUserHandler: AtomicHandler<{ id: string }> = (req, res) => {
-  const userId = req.params.id // Typed as string
-  return res.json({ userId })
-}`,
-        `// Handler with context type
-interface UserContext {
-  user: { id: string; name: string }
-}
-
-const protectedHandler: AtomicHandler<{}, UserContext> = (req, res) => {
-  const user = req.context?.user // Typed as UserContext['user']
-  return res.json({ user })
-}`,
-        `// Async handler
-const asyncHandler: AtomicHandler = async (req, res) => {
-  const data = await fetchData()
-  return res.json(data)
-}`,
-        `// Middleware handler (no return)
-const loggingMiddleware: AtomicHandler = (req, res) => {
-  console.log(\`\${req.method} \${req.url}\`)
-  // No return statement - passes to next handler
-}`
-      ]}
     />
   )
 }

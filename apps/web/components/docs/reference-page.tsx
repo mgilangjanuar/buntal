@@ -1,4 +1,4 @@
-import MarkdownContent from './markdown-content'
+import MarkdownContent, { type TableOfContentsItem } from './markdown-content'
 
 type Parameter = {
   name: string
@@ -15,11 +15,6 @@ type Method = {
   description: string
 }
 
-type Example = {
-  title: string
-  code: string
-}
-
 type ReferencePageProps = {
   title: string
   description: string
@@ -28,7 +23,6 @@ type ReferencePageProps = {
   parameters?: Parameter[]
   methods?: Method[]
   properties?: Parameter[]
-  examples?: (string | Example)[]
 }
 
 export default function ReferencePage({
@@ -38,8 +32,7 @@ export default function ReferencePage({
   typeDefinition,
   parameters,
   methods,
-  properties,
-  examples
+  properties
 }: ReferencePageProps) {
   const content = `# ${title}
 
@@ -117,37 +110,65 @@ ${
 `
     : ''
 }
-
-${
-  examples && examples.length > 0
-    ? `
-## Examples
-
-${examples
-  .map((example, index) => {
-    if (typeof example === 'string') {
-      return `
-### Example ${index + 1}
-
-\`\`\`typescript
-${example}
-\`\`\`
 `
-    } else {
-      return `
-### ${example.title}
 
-\`\`\`typescript
-${example.code}
-\`\`\`
-`
-    }
+  // Generate table of contents with only level 1 and level 2 headings
+  const tableOfContents: TableOfContentsItem[] = []
+
+  // Always include main sections
+  tableOfContents.push({
+    id: title.toLowerCase().replace(/\s+/g, '-'),
+    title: title,
+    level: 1,
+    offset: 72
   })
-  .join('')}
-`
-    : ''
-}
-`
 
-  return <MarkdownContent title={title} content={content} />
+  tableOfContents.push({
+    id: 'source',
+    title: 'Source',
+    level: 2,
+    offset: 72
+  })
+
+  tableOfContents.push({
+    id: 'type-definition',
+    title: 'Type Definition',
+    level: 2,
+    offset: 72
+  })
+
+  if (parameters && parameters.length > 0) {
+    tableOfContents.push({
+      id: 'parameters',
+      title: 'Parameters',
+      level: 2,
+      offset: 72
+    })
+  }
+
+  if (properties && properties.length > 0) {
+    tableOfContents.push({
+      id: 'properties',
+      title: 'Properties',
+      level: 2,
+      offset: 72
+    })
+  }
+
+  if (methods && methods.length > 0) {
+    tableOfContents.push({
+      id: 'methods',
+      title: 'Methods',
+      level: 2,
+      offset: 72
+    })
+  }
+
+  return (
+    <MarkdownContent
+      title={title}
+      content={content}
+      tableOfContents={tableOfContents}
+    />
+  )
 }

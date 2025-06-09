@@ -41,7 +41,7 @@ function runServer(config?: BuntalConfig): Promise<void>
 
 - [BuntalConfig](/docs/references/http-config) - Configuration passed to runServer function
 - [Page & Layout Types](/docs/references/page-layout-types) - PageProps has similar interface to ServerContext
-- [RouterType](/docs/references/router-types) - ServerRouterType defines server-side route structure`}
+- [Server Router Types](/docs/references/server-router-types) - ServerRouterType defines server-side route structure`}
       tableOfContents={[
         {
           id: 'servercontext',

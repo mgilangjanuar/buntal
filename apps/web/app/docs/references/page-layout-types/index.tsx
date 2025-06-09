@@ -22,7 +22,7 @@ PageProps is a conceptual interface for page component props, not directly expor
 \`\`\`typescript
 interface PageProps<T = any> {
   params: Record<string, string>
-  query?: Record<string, string>
+  query: Record<string, string>
   data?: T & { _meta?: MetaProps }
 }
 \`\`\`
@@ -34,6 +34,8 @@ LayoutProps is a conceptual interface for layout component props, not directly e
 \`\`\`typescript
 interface LayoutProps<T = any> {
   children: React.ReactNode
+  params: Record<string, string>
+  query: Record<string, string>
   data?: T & { _meta?: MetaProps }
 }
 \`\`\`

@@ -30,36 +30,92 @@ const MENUS = [
     title: 'Type Reference',
     items: [
       {
-        title: 'HTTP Core Types',
-        href: '/docs/references/http-core'
+        title: 'Http Class',
+        href: '/docs/references/http-class'
       },
       {
-        title: 'HTTP Configuration',
-        href: '/docs/references/http-config'
+        title: 'Req Class',
+        href: '/docs/references/req-class'
       },
       {
-        title: 'Handler Types',
-        href: '/docs/references/handler-types'
+        title: 'Res Class',
+        href: '/docs/references/res-class'
       },
       {
-        title: 'Security Types',
-        href: '/docs/references/security-types'
+        title: 'Config Type',
+        href: '/docs/references/config-type'
       },
       {
-        title: 'Cookie Types',
-        href: '/docs/references/cookie-types'
+        title: 'BuntalConfig',
+        href: '/docs/references/buntal-config'
       },
       {
-        title: 'Component Props',
-        href: '/docs/references/component-props'
-      },
-      {
-        title: 'Page & Layout Types',
-        href: '/docs/references/page-layout-types'
-      },
-      {
-        title: 'Router Types',
+        title: 'RouterType',
         href: '/docs/references/router-types'
+      },
+      {
+        title: 'ServerRouterType',
+        href: '/docs/references/server-router-types'
+      },
+      {
+        title: 'AtomicHandler',
+        href: '/docs/references/atomic-handler'
+      },
+      {
+        title: 'ExtractRouteParams',
+        href: '/docs/references/extract-route-params'
+      },
+      {
+        title: 'MetaProps',
+        href: '/docs/references/meta-props'
+      },
+      {
+        title: 'LinkProps',
+        href: '/docs/references/link-props'
+      },
+      {
+        title: 'ScriptProps',
+        href: '/docs/references/script-props'
+      },
+      {
+        title: 'SvgProps',
+        href: '/docs/references/svg-props'
+      },
+      {
+        title: 'AppProps',
+        href: '/docs/references/app-props'
+      },
+      {
+        title: 'PageProps',
+        href: '/docs/references/page-props'
+      },
+      {
+        title: 'LayoutProps',
+        href: '/docs/references/layout-props'
+      },
+      {
+        title: 'AuthOptions',
+        href: '/docs/references/auth-options'
+      },
+      {
+        title: 'CORSOptions',
+        href: '/docs/references/cors-options'
+      },
+      {
+        title: 'JWT Function',
+        href: '/docs/references/jwt-function'
+      },
+      {
+        title: 'Hash Function',
+        href: '/docs/references/hash-function'
+      },
+      {
+        title: 'CookieOptions',
+        href: '/docs/references/cookie-options'
+      },
+      {
+        title: 'Cookie Utilities',
+        href: '/docs/references/cookie-utilities'
       },
       {
         title: 'Hook Types',

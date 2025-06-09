@@ -13,7 +13,7 @@ export default function RouterTypesPage() {
       title="Router Types"
       content={`# Router Types
 
-Type definitions for client-side and server-side routing.
+Type definitions for client-side routing and navigation.
 
 ## RouterType
 
@@ -34,38 +34,51 @@ type RouterType = {
 }
 \`\`\`
 
-## ServerRouterType
+### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| \`pathname\` | \`string\` | Current URL pathname |
+| \`search\` | \`string\` | Current URL search string |
+| \`href\` | \`string\` | Complete current URL |
+| \`protocol\` | \`string\` | URL protocol (http/https) |
+| \`hostname\` | \`string\` | Current hostname |
+| \`hash\` | \`string\` | URL hash fragment |
+
+### Methods
+
+| Method | Type | Description |
+|--------|------|-------------|
+| \`push(url)\` | \`(url: string) => void\` | Navigate to URL (adds to history) |
+| \`replace(url)\` | \`(url: string) => void\` | Replace current URL (no history) |
+| \`back()\` | \`() => void\` | Navigate back in history |
+| \`reload()\` | \`() => void\` | Reload current page |
+
+## Usage
 
 \`\`\`typescript
-export type { ServerRouterType } from 'buntal'
-\`\`\`
+import { useRouter } from 'buntal'
 
-\`\`\`typescript
-type ServerRouterType = {
-  regex: string
-  ssr?: boolean
-  data?: {
-    _meta?: MetaProps
-    [key: string]: any
+function MyComponent() {
+  const router = useRouter()
+
+  const handleNavigation = () => {
+    router.push('/dashboard')
   }
-  element: (data: any) => ReactNode
-  layouts: {
-    element: (data: any) => ReactNode
-    ssr?: boolean
-    data?: {
-      _meta?: MetaProps
-      [key: string]: any
-    }
-  }[]
+
+  return (
+    <div>
+      <p>Current path: {router.pathname}</p>
+      <button onClick={handleNavigation}>Go to Dashboard</button>
+    </div>
+  )
 }
 \`\`\`
 
 ## Related Types
 
 - [useRouter](/docs/references/hook-types) - Hook that returns RouterType
-- [MetaProps](/docs/references/component-props) - Used in ServerRouterType data objects
-- [Page & Layout Types](/docs/references/page-layout-types) - Components receive data from ServerRouterType
-- [AppProps](/docs/references/component-props) - Uses ServerRouterType[] for routes configuration`}
+- [Server Router Types](/docs/references/server-router-types) - Server-side route configuration types`}
       tableOfContents={[
         {
           id: 'routertype',
@@ -74,8 +87,20 @@ type ServerRouterType = {
           offset: 72
         },
         {
-          id: 'serverroutertype',
-          title: 'ServerRouterType',
+          id: 'properties',
+          title: 'Properties',
+          level: 2,
+          offset: 72
+        },
+        {
+          id: 'methods',
+          title: 'Methods',
+          level: 2,
+          offset: 72
+        },
+        {
+          id: 'usage',
+          title: 'Usage',
           level: 1,
           offset: 72
         }

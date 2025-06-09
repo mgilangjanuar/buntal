@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build & Deploy
+    name: Build
     defaults:
       run:
         working-directory: apps/web
@@ -19,14 +19,31 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run build
-      - name: Upload
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: apps/web/.buntal/
+          retention-days: 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    needs: build
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: .buntal/
+      - name: Upload to server
         uses: appleboy/scp-action@v0.1.4
         with:
-          source: './apps/web/.buntal/*'
+          source: '.buntal/*'
           host: ${{ secrets.SSH_HOST }}
           target: ${{ secrets.SSH_TARGET }}
           username: ${{ secrets.SSH_USER }}
-          strip_components: 3
+          strip_components: 1
           key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Restart pm2
         uses: appleboy/ssh-action@v1.0.0

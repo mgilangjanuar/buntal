@@ -25,6 +25,23 @@ const MENUS = [
         href: '/docs/guides/full-stack-web'
       }
     ]
+  },
+  {
+    title: 'API Reference',
+    items: [
+      {
+        title: '@buntal/core',
+        href: '/docs/references/core'
+      },
+      {
+        title: '@buntal/core/middlewares',
+        href: '/docs/references/core-middlewares'
+      },
+      {
+        title: '@buntal/core/security',
+        href: '/docs/references/core-security'
+      }
+    ]
   }
 ]
 

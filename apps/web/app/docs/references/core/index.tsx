@@ -259,61 +259,91 @@ app.post('/logout', (req, res) => {
 const ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] as const
 \`\`\``}
       tableOfContents={[
-        { id: 'quick-start', title: 'Quick Start', level: 2, offset: 72 },
-        { id: 'classes', title: 'Classes', level: 2, offset: 72 },
-        { id: 'http', title: 'Http', level: 3, offset: 72 },
-        { id: 'req-p-t', title: 'Req<P, T>', level: 3, offset: 72 },
-        { id: 'res', title: 'Res', level: 3, offset: 72 },
+        { id: 'quick-start', title: 'Quick Start', level: 1, offset: 72 },
+        {
+          id: 'classes',
+          title: 'Classes',
+          level: 1,
+          offset: 72,
+          children: [
+            { id: 'http', title: 'Http', level: 2, offset: 72 },
+            { id: 'req-p-t-', title: 'Req<P, T>', level: 2, offset: 72 },
+            { id: 'res', title: 'Res', level: 2, offset: 72 }
+          ]
+        },
         {
           id: 'handler-functions',
           title: 'Handler Functions',
-          level: 2,
-          offset: 72
-        },
-        { id: 'h-handlers', title: 'h(...handlers)', level: 3, offset: 72 },
-        {
-          id: 'atomichandler-p-t-r',
-          title: 'AtomicHandler<P, T, R>',
-          level: 3,
-          offset: 72
+          level: 1,
+          offset: 72,
+          children: [
+            {
+              id: 'h-handlers-',
+              title: 'h(...handlers)',
+              level: 2,
+              offset: 72
+            },
+            {
+              id: 'atomichandler-p-t-r-',
+              title: 'AtomicHandler<P, T, R>',
+              level: 2,
+              offset: 72
+            }
+          ]
         },
         {
           id: 'file-based-routing',
           title: 'File-Based Routing',
-          level: 2,
-          offset: 72
-        },
-        {
-          id: 'buildrouter-dir',
-          title: 'buildRouter(dir)',
-          level: 3,
-          offset: 72
-        },
-        {
-          id: 'extractrouteparams-path',
-          title: 'ExtractRouteParams<Path>',
-          level: 3,
-          offset: 72
+          level: 1,
+          offset: 72,
+          children: [
+            {
+              id: 'buildrouter-dir-',
+              title: 'buildRouter(dir)',
+              level: 2,
+              offset: 72
+            },
+            {
+              id: 'extractrouteparams-path-',
+              title: 'ExtractRouteParams<Path>',
+              level: 2,
+              offset: 72
+            }
+          ]
         },
         {
           id: 'cookie-management',
           title: 'Cookie Management',
-          level: 2,
-          offset: 72
+          level: 1,
+          offset: 72,
+          children: [
+            {
+              id: 'cookie-utilities',
+              title: 'Cookie Utilities',
+              level: 2,
+              offset: 72
+            },
+            {
+              id: 'cookieoptions',
+              title: 'CookieOptions',
+              level: 2,
+              offset: 72
+            }
+          ]
         },
         {
-          id: 'cookie-utilities',
-          title: 'Cookie Utilities',
-          level: 3,
-          offset: 72
-        },
-        { id: 'cookieoptions', title: 'CookieOptions', level: 3, offset: 72 },
-        { id: 'constants', title: 'Constants', level: 2, offset: 72 },
-        {
-          id: 'allowed_methods',
-          title: 'ALLOWED_METHODS',
-          level: 3,
-          offset: 72
+          id: 'constants',
+          title: 'Constants',
+          level: 1,
+          offset: 72,
+          children: [
+            {
+              id: 'allowed_methods',
+              title: 'ALLOWED_METHODS',
+              level: 2,
+              offset: 72
+            }
+          ]
         }
       ]}
       lastModified="2025-06-09"

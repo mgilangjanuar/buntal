@@ -37,13 +37,15 @@ const MENUS: MenuItem[] = [
     items: [
       {
         title: '@buntal/core',
+        href: '/docs/references/core',
         items: [
           {
             title: 'HTTP',
+            href: '/docs/references/core/http',
             items: [
               {
                 title: 'Http',
-                href: '/docs/references/core/http'
+                href: '/docs/references/core/http/http'
               },
               {
                 title: 'Req',
@@ -73,6 +75,7 @@ const MENUS: MenuItem[] = [
           },
           {
             title: 'Security',
+            href: '/docs/references/core/security',
             items: [
               {
                 title: 'jwt',
@@ -86,6 +89,7 @@ const MENUS: MenuItem[] = [
           },
           {
             title: 'Types',
+            href: '/docs/references/core/types',
             items: [
               {
                 title: 'ExtractRouteParams',
@@ -95,6 +99,7 @@ const MENUS: MenuItem[] = [
           },
           {
             title: 'Middleware',
+            href: '/docs/references/core/middleware',
             items: [
               {
                 title: 'auth',
@@ -114,9 +119,11 @@ const MENUS: MenuItem[] = [
       },
       {
         title: 'buntal',
+        href: '/docs/references/buntal',
         items: [
           {
             title: 'Configuration',
+            href: '/docs/references/buntal/configuration',
             items: [
               {
                 title: 'BuntalConfig',
@@ -126,6 +133,7 @@ const MENUS: MenuItem[] = [
           },
           {
             title: 'Component Props',
+            href: '/docs/references/buntal/component-props',
             items: [
               {
                 title: 'MetaProps',
@@ -223,7 +231,7 @@ export default function DocsLayout({
                     <ul className="space-y-0.5">
                       {menu.items.map((item: MenuItem) => (
                         <li key={item.title}>
-                          {item.href ? (
+                          {item.href && (
                             <Link
                               href={item.href}
                               className={cn(
@@ -233,55 +241,48 @@ export default function DocsLayout({
                             >
                               {item.title}
                             </Link>
-                          ) : (
-                            <>
-                              <a>{item.title}</a>
-                              {item.items && (
-                                <ul className="space-y-0.5">
-                                  {item.items.map((subItem: MenuItem) => (
-                                    <li key={subItem.title}>
-                                      {subItem.href ? (
-                                        <Link
-                                          href={subItem.href}
-                                          className={cn(
-                                            'truncate',
-                                            pathname === subItem.href &&
-                                              'menu-active'
-                                          )}
-                                        >
-                                          {subItem.title}
-                                        </Link>
-                                      ) : (
-                                        <>
-                                          <a>{subItem.title}</a>
-                                          {subItem.items && (
-                                            <ul className="space-y-0.5">
-                                              {subItem.items.map(
-                                                (nestedItem: MenuItem) => (
-                                                  <li key={nestedItem.title}>
-                                                    <Link
-                                                      href={nestedItem.href!}
-                                                      className={cn(
-                                                        'truncate',
-                                                        pathname ===
-                                                          nestedItem.href &&
-                                                          'menu-active'
-                                                      )}
-                                                    >
-                                                      {nestedItem.title}
-                                                    </Link>
-                                                  </li>
-                                                )
-                                              )}
-                                            </ul>
-                                          )}
-                                        </>
+                          )}
+                          {!item.href && <a>{item.title}</a>}
+                          {item.items && (
+                            <ul className="space-y-0.5">
+                              {item.items.map((subItem: MenuItem) => (
+                                <li key={subItem.title}>
+                                  {subItem.href && (
+                                    <Link
+                                      href={subItem.href}
+                                      className={cn(
+                                        'truncate',
+                                        pathname === subItem.href &&
+                                          'menu-active'
                                       )}
-                                    </li>
-                                  ))}
-                                </ul>
-                              )}
-                            </>
+                                    >
+                                      {subItem.title}
+                                    </Link>
+                                  )}
+                                  {!subItem.href && <a>{subItem.title}</a>}
+                                  {subItem.items && (
+                                    <ul className="space-y-0.5">
+                                      {subItem.items.map(
+                                        (nestedItem: MenuItem) => (
+                                          <li key={nestedItem.title}>
+                                            <Link
+                                              href={nestedItem.href!}
+                                              className={cn(
+                                                'truncate',
+                                                pathname === nestedItem.href &&
+                                                  'menu-active'
+                                              )}
+                                            >
+                                              {nestedItem.title}
+                                            </Link>
+                                          </li>
+                                        )
+                                      )}
+                                    </ul>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
                           )}
                         </li>
                       ))}

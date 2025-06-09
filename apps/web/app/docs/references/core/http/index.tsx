@@ -1,196 +1,88 @@
-import ReferencePage from '@/components/docs/reference-page'
+import MarkdownContent from '@/components/docs/markdown-content'
 import { type MetaProps } from 'buntal'
 
 export const $ = {
   _meta: {
-    title: 'Http - Buntal JS'
+    title: 'HTTP - @buntal/core - Buntal JS'
   } satisfies MetaProps
 }
 
-export default function HttpPage() {
+export default function CoreHttpPage() {
   return (
-    <ReferencePage
-      title="Http"
-      description="The main HTTP server class for creating and configuring HTTP servers in Buntal."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/app.ts"
-      typeDefinition={`class Http {
-  constructor(config: Config)
-  start(cb?: (server: Bun.Server) => void): Bun.Server
-  use(handler: AtomicHandler): void
-  get<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  post<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  put<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  patch<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  delete<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  onError(handler: (error: Error) => Response): void
-  onNotFound(handler: AtomicHandler): void
-}`}
-      parameters={[
-        {
-          name: 'config',
-          type: 'Config',
-          required: true,
-          description: 'Configuration object for the HTTP server'
-        }
-      ]}
-      methods={[
-        {
-          name: 'constructor',
-          description:
-            'Creates a new HTTP server instance with the specified configuration.',
-          parameters: [
-            {
-              name: 'config',
-              type: 'Config',
-              required: true,
-              description:
-                'Server configuration including port, appDir, websocket handler, and injectHandler'
-            }
-          ]
-        },
-        {
-          name: 'start',
-          description:
-            'Starts the HTTP server and begins listening for requests.',
-          parameters: [
-            {
-              name: 'cb',
-              type: '(server: Bun.Server) => void',
-              required: false,
-              description:
-                'Optional callback function called when server starts'
-            }
-          ],
-          returns: 'Bun.Server'
-        },
-        {
-          name: 'use',
-          description:
-            'Adds middleware to the server that runs for all requests.',
-          parameters: [
-            {
-              name: 'handler',
-              type: 'AtomicHandler',
-              required: true,
-              description: 'Middleware function to execute'
-            }
-          ]
-        },
-        {
-          name: 'get',
-          description: 'Registers a GET route handler.',
-          parameters: [
-            {
-              name: 'route',
-              type: 'string',
-              required: true,
-              description: 'Route pattern (supports parameters like /users/:id)'
-            },
-            {
-              name: '...handlers',
-              type: 'AtomicHandler[]',
-              required: true,
-              description: 'One or more handler functions'
-            }
-          ]
-        },
-        {
-          name: 'post',
-          description: 'Registers a POST route handler.',
-          parameters: [
-            {
-              name: 'route',
-              type: 'string',
-              required: true,
-              description: 'Route pattern (supports parameters like /users/:id)'
-            },
-            {
-              name: '...handlers',
-              type: 'AtomicHandler[]',
-              required: true,
-              description: 'One or more handler functions'
-            }
-          ]
-        },
-        {
-          name: 'put',
-          description: 'Registers a PUT route handler.',
-          parameters: [
-            {
-              name: 'route',
-              type: 'string',
-              required: true,
-              description: 'Route pattern (supports parameters like /users/:id)'
-            },
-            {
-              name: '...handlers',
-              type: 'AtomicHandler[]',
-              required: true,
-              description: 'One or more handler functions'
-            }
-          ]
-        },
-        {
-          name: 'patch',
-          description: 'Registers a PATCH route handler.',
-          parameters: [
-            {
-              name: 'route',
-              type: 'string',
-              required: true,
-              description: 'Route pattern (supports parameters like /users/:id)'
-            },
-            {
-              name: '...handlers',
-              type: 'AtomicHandler[]',
-              required: true,
-              description: 'One or more handler functions'
-            }
-          ]
-        },
-        {
-          name: 'delete',
-          description: 'Registers a DELETE route handler.',
-          parameters: [
-            {
-              name: 'route',
-              type: 'string',
-              required: true,
-              description: 'Route pattern (supports parameters like /users/:id)'
-            },
-            {
-              name: '...handlers',
-              type: 'AtomicHandler[]',
-              required: true,
-              description: 'One or more handler functions'
-            }
-          ]
-        },
-        {
-          name: 'onError',
-          description: 'Sets a global error handler for the server.',
-          parameters: [
-            {
-              name: 'handler',
-              type: '(error: Error) => Response | Promise<Response>',
-              required: true,
-              description: 'Function to handle errors'
-            }
-          ]
-        },
-        {
-          name: 'onNotFound',
-          description: 'Sets a handler for 404 Not Found responses.',
-          parameters: [
-            {
-              name: 'handler',
-              type: 'AtomicHandler',
-              required: true,
-              description: 'Function to handle 404 requests'
-            }
-          ]
-        }
-      ]}
+    <MarkdownContent
+      title="HTTP"
+      content={`# HTTP
+
+Core HTTP server functionality and request/response handling for Buntal applications.
+
+## Overview
+
+The HTTP module provides the foundational components for building web servers with Buntal. It includes server setup, request/response handling, routing, and cookie management.
+
+## Components
+
+### Core Classes
+
+- **[Http](/docs/references/core/http/http)** - Main HTTP server class for creating and configuring web servers
+- **[Req](/docs/references/core/http/req)** - Request object containing incoming HTTP request data
+- **[Res](/docs/references/core/http/res)** - Response object for sending HTTP responses
+
+### Handlers & Routing
+
+- **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Atomic request handler for processing individual requests
+- **[buildRouter](/docs/references/core/http/build-router)** - Router builder for creating organized route structures
+
+### Utilities
+
+- **[cookie](/docs/references/core/http/cookie)** - Cookie manipulation utilities
+- **[CookieOptions](/docs/references/core/http/cookie-options)** - Configuration options for cookies
+
+## Quick Start
+
+\`\`\`typescript
+import { Http } from '@buntal/core'
+
+const server = new Http({ port: 3000 })
+
+server.get('/', (req, res) => {
+  res.json({ message: 'Hello World!' })
+})
+
+server.start()
+\`\`\`
+
+## Architecture
+
+The HTTP module follows a simple yet powerful architecture:
+
+1. **Http Class**: The main server instance that handles configuration and routing
+2. **Request/Response**: Type-safe objects for handling HTTP communication
+3. **Atomic Handlers**: Composable middleware and route handlers
+4. **Router Builder**: Utility for organizing routes in a modular way
+
+## Configuration
+
+The Http class accepts a configuration object that allows you to customize:
+
+- **Port**: Server listening port
+- **App Directory**: Location of your application files
+- **WebSocket Handler**: Optional WebSocket support
+- **Inject Handler**: Custom request injection logic
+
+\`\`\`typescript
+import { Http } from '@buntal/core'
+
+const server = new Http({
+  port: 3000,
+  appDir: './app',
+  websocket: {
+    message: (ws, message) => {
+      // Handle WebSocket messages
+    }
+  }
+})
+\`\`\`
+`}
     />
   )
 }

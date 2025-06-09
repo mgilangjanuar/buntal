@@ -48,6 +48,10 @@ const MENUS: MenuItem[] = [
                 href: '/docs/references/core/http/http'
               },
               {
+                title: 'buildRouter',
+                href: '/docs/references/core/http/build-router'
+              },
+              {
                 title: 'h',
                 href: '/docs/references/core/http/h'
               },
@@ -62,10 +66,6 @@ const MENUS: MenuItem[] = [
               {
                 title: 'Res',
                 href: '/docs/references/core/http/res'
-              },
-              {
-                title: 'buildRouter',
-                href: '/docs/references/core/http/build-router'
               },
               {
                 title: 'cookie',

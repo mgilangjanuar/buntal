@@ -60,8 +60,7 @@ export default function HttpPage() {
               description:
                 'Optional callback function called when server starts'
             }
-          ],
-          returns: 'Bun.Server'
+          ]
         },
         {
           name: 'use',

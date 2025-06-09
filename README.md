@@ -28,6 +28,9 @@
 <br/>
 
 <section align="left" markdown="1">
+
+[![Deploy](https://github.com/mgilangjanuar/buntal/actions/workflows/deploy.yml/badge.svg)](https://github.com/mgilangjanuar/buntal/actions/workflows/deploy.yml)
+
 <p>Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.</p>
 
 ```bash
@@ -56,6 +59,7 @@ Help up maintain this project by becoming a [sponsor](https://github.com/sponsor
     <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
 </a>
 
+<br />
 <br />
 
 <!-- sponsors --><a href="https://github.com/moerdowo"><img src="https:&#x2F;&#x2F;github.com&#x2F;moerdowo.png" width="60px" alt="User avatar: Frianto Moerdowo" /></a><!-- sponsors -->

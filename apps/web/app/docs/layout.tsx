@@ -40,6 +40,14 @@ const MENUS = [
       {
         title: '@buntal/core/security',
         href: '/docs/references/core-security'
+      },
+      {
+        title: 'buntal',
+        href: '/docs/references/buntal'
+      },
+      {
+        title: 'buntal/server',
+        href: '/docs/references/buntal-server'
       }
     ]
   }

@@ -27,39 +27,59 @@ const MENUS = [
     ]
   },
   {
-    title: 'Type Reference',
+    title: 'API Reference',
     items: [
       {
-        title: 'Http Class',
-        href: '/docs/references/http-class'
+        title: 'Http',
+        href: '/docs/references/http'
       },
       {
-        title: 'Req Class',
-        href: '/docs/references/req-class'
+        title: 'Req',
+        href: '/docs/references/req'
       },
       {
-        title: 'Res Class',
-        href: '/docs/references/res-class'
-      },
-      {
-        title: 'Config Type',
-        href: '/docs/references/config-type'
-      },
-      {
-        title: 'BuntalConfig',
-        href: '/docs/references/buntal-config'
-      },
-      {
-        title: 'RouterType',
-        href: '/docs/references/router-types'
-      },
-      {
-        title: 'ServerRouterType',
-        href: '/docs/references/server-router-types'
+        title: 'Res',
+        href: '/docs/references/res'
       },
       {
         title: 'AtomicHandler',
         href: '/docs/references/atomic-handler'
+      },
+      {
+        title: 'buildRouter',
+        href: '/docs/references/build-router'
+      },
+      {
+        title: 'cookie',
+        href: '/docs/references/cookie'
+      },
+      {
+        title: 'CookieOptions',
+        href: '/docs/references/cookie-options'
+      },
+      {
+        title: 'jwt',
+        href: '/docs/references/jwt'
+      },
+      {
+        title: 'hash',
+        href: '/docs/references/hash'
+      },
+      {
+        title: 'auth',
+        href: '/docs/references/auth'
+      },
+      {
+        title: 'cors',
+        href: '/docs/references/cors'
+      },
+      {
+        title: 'logger',
+        href: '/docs/references/logger'
+      },
+      {
+        title: 'BuntalConfig',
+        href: '/docs/references/buntal-config'
       },
       {
         title: 'ExtractRouteParams',
@@ -92,38 +112,6 @@ const MENUS = [
       {
         title: 'LayoutProps',
         href: '/docs/references/layout-props'
-      },
-      {
-        title: 'AuthOptions',
-        href: '/docs/references/auth-options'
-      },
-      {
-        title: 'CORSOptions',
-        href: '/docs/references/cors-options'
-      },
-      {
-        title: 'JWT Function',
-        href: '/docs/references/jwt-function'
-      },
-      {
-        title: 'Hash Function',
-        href: '/docs/references/hash-function'
-      },
-      {
-        title: 'CookieOptions',
-        href: '/docs/references/cookie-options'
-      },
-      {
-        title: 'Cookie Utilities',
-        href: '/docs/references/cookie-utilities'
-      },
-      {
-        title: 'Hook Types',
-        href: '/docs/references/hook-types'
-      },
-      {
-        title: 'Server Types',
-        href: '/docs/references/server-types'
       }
     ]
   }

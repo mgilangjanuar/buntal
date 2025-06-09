@@ -1,137 +1,114 @@
-import MarkdownContent from '@/components/docs/markdown-content'
-import { type MetaProps } from 'buntal'
+import ReferencePage from '@/components/docs/reference-page'
 
-export const $ = {
-  _meta: {
-    title: 'LinkProps - Buntal JS'
-  } satisfies MetaProps
-}
-
-export default function LinkPropsPage() {
+export default function LinkPropsReference() {
   return (
-    <MarkdownContent
+    <ReferencePage
       title="LinkProps"
-      content={`# LinkProps
+      description="Properties interface for the Link component, used for client-side navigation between pages in Buntal applications."
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/@buntal/core/components/link.tsx"
+      typeDefinition={`interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  prefetch?: boolean;
+  replace?: boolean;
+  shallow?: boolean;
+  children: React.ReactNode;
+}`}
+      properties={[
+        {
+          name: 'href',
+          type: 'string',
+          required: true,
+          description: 'The destination URL or path for the link'
+        },
+        {
+          name: 'prefetch',
+          type: 'boolean',
+          required: false,
+          description:
+            'Whether to prefetch the linked page for faster navigation (default: true)'
+        },
+        {
+          name: 'replace',
+          type: 'boolean',
+          required: false,
+          description:
+            'Replace the current entry in the history stack instead of adding a new one'
+        },
+        {
+          name: 'shallow',
+          type: 'boolean',
+          required: false,
+          description:
+            'Update the path without running data fetching methods again'
+        },
+        {
+          name: 'children',
+          type: 'React.ReactNode',
+          required: true,
+          description: 'The content to be rendered inside the link'
+        }
+      ]}
+      examples={[
+        {
+          title: 'Basic Navigation Link',
+          code: `import { Link } from '@buntal/core';
 
-Type definition for Link component properties.
-
-## Type Definition
-
-LinkProps are passed to the Link component but not exported as a separate type.
-
-\`\`\`typescript
-export { Link } from 'buntal'
-\`\`\`
-
-\`\`\`typescript
-type LinkProps = {
-  href: string
-  children: React.ReactNode
-  className?: string
-  target?: string
-  rel?: string
-}
-\`\`\`
-
-## Properties
-
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| \`href\` | \`string\` | ✅ | URL or path to navigate to |
-| \`children\` | \`React.ReactNode\` | ✅ | Content to display inside the link |
-| \`className\` | \`string\` | ❌ | CSS classes to apply to the link |
-| \`target\` | \`string\` | ❌ | Where to open the link (e.g., '_blank', '_self') |
-| \`rel\` | \`string\` | ❌ | Relationship between current and linked document |
-
-## Usage
-
-\`\`\`typescript
-import { Link } from 'buntal'
-
-// Basic link
-function Navigation() {
+export default function Navigation() {
   return (
     <nav>
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
       <Link href="/contact">Contact</Link>
     </nav>
-  )
-}
+  );
+}`
+        },
+        {
+          title: 'Link with Custom Styling',
+          code: `import { Link } from '@buntal/core';
 
-// Link with styling
-function StyledLink() {
+export default function StyledNavigation() {
   return (
     <Link
       href="/dashboard"
-      className="btn btn-primary"
+      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
     >
       Go to Dashboard
     </Link>
-  )
-}
+  );
+}`
+        },
+        {
+          title: 'Advanced Link Options',
+          code: `import { Link } from '@buntal/core';
 
-// External link
-function ExternalLink() {
+export default function AdvancedLink() {
   return (
-    <Link
-      href="https://example.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Visit External Site
-    </Link>
-  )
-}
+    <>
+      {/* Replace history entry */}
+      <Link href="/login" replace>
+        Login (Replace)
+      </Link>
 
-// Dynamic link
-function UserProfile({ userId }: { userId: string }) {
-  return (
-    <Link href={\`/users/\${userId}\`}>
-      View Profile
-    </Link>
-  )
-}
-\`\`\`
+      {/* Disable prefetching */}
+      <Link href="/heavy-page" prefetch={false}>
+        Heavy Page (No Prefetch)
+      </Link>
 
-## Behavior
+      {/* Shallow routing */}
+      <Link href="/posts?filter=new" shallow>
+        New Posts
+      </Link>
 
-- Internal links (starting with '/') trigger client-side navigation
-- External links (with protocols like 'https://') behave as normal anchor tags
-- The Link component automatically handles history management
-- CSS classes and styles can be applied normally
-
-## Related Types
-
-- [Link Component](/docs/references/buntal#link) - Component that uses LinkProps
-- [RouterType](/docs/references/router-types) - Router methods for programmatic navigation`}
-      tableOfContents={[
-        {
-          id: 'type-definition',
-          title: 'Type Definition',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'properties',
-          title: 'Properties',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'usage',
-          title: 'Usage',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'behavior',
-          title: 'Behavior',
-          level: 1,
-          offset: 72
+      {/* External link (opens in new tab) */}
+      <Link href="https://example.com" target="_blank" rel="noopener noreferrer">
+        External Link
+      </Link>
+    </>
+  );
+}`
         }
       ]}
-      lastModified="2025-06-09"
     />
   )
 }

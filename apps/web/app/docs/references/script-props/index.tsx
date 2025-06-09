@@ -1,159 +1,132 @@
-import MarkdownContent from '@/components/docs/markdown-content'
-import { type MetaProps } from 'buntal'
+import ReferencePage from '@/components/docs/reference-page'
 
-export const $ = {
-  _meta: {
-    title: 'ScriptProps - Buntal JS'
-  } satisfies MetaProps
-}
-
-export default function ScriptPropsPage() {
+export default function ScriptPropsReference() {
   return (
-    <MarkdownContent
+    <ReferencePage
       title="ScriptProps"
-      content={`# ScriptProps
-
-Type definition for Script component properties.
-
-## Type Definition
-
-ScriptProps are passed to the Script component but not exported as a separate type.
-
-\`\`\`typescript
-export { Script } from 'buntal'
-\`\`\`
-
-\`\`\`typescript
-type ScriptProps = {
-  src?: string
-  children?: string
-  async?: boolean
-  defer?: boolean
-  type?: string
-}
-\`\`\`
-
-## Properties
-
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| \`src\` | \`string\` | ❌ | External script URL to load |
-| \`children\` | \`string\` | ❌ | Inline JavaScript code |
-| \`async\` | \`boolean\` | ❌ | Load script asynchronously |
-| \`defer\` | \`boolean\` | ❌ | Defer script execution until DOM is ready |
-| \`type\` | \`string\` | ❌ | Script MIME type (default: 'text/javascript') |
-
-## Usage
-
-\`\`\`typescript
-import { Script } from 'buntal'
-
-// External script
-function GoogleAnalytics() {
-  return (
-    <Script
-      src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-      async
-    />
-  )
-}
-
-// Inline script
-function TrackingScript() {
-  return (
-    <Script>
-      {\`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-      \`}
-    </Script>
-  )
-}
-
-// Deferred script
-function DeferredScript() {
-  return (
-    <Script
-      src="/analytics.js"
-      defer
-    />
-  )
-}
-
-// Custom script type
-function JSONData() {
-  return (
-    <Script type="application/json" id="config">
-      {\`{
-        "apiUrl": "https://api.example.com",
-        "version": "1.0.0"
-      }\`}
-    </Script>
-  )
-}
-
-// In layout component
-export default function Layout({ children }: {
-  children: React.ReactNode
-}) {
-  return (
-    <html>
-      <head>
-        <Script src="/vendor.js" defer />
-        <Script>
-          {\`console.log('App initialized')\`}
-        </Script>
-      </head>
-      <body>
-        {children}
-        <Script src="/analytics.js" async />
-      </body>
-    </html>
-  )
-}
-\`\`\`
-
-## Best Practices
-
-- Use \`async\` for scripts that don't depend on DOM or other scripts
-- Use \`defer\` for scripts that need DOM to be ready but don't need to block rendering
-- Place performance-critical scripts in \`<head>\` with \`defer\`
-- Place analytics and tracking scripts at the end of \`<body>\` with \`async\`
-- Always validate and sanitize inline script content to prevent XSS
-
-## Related Types
-
-- [Script Component](/docs/references/buntal#script) - Component that uses ScriptProps
-- [MetaProps](/docs/references/meta-props) - For managing other head elements`}
-      tableOfContents={[
+      description="Properties interface for the Script component, used to load and manage JavaScript files in Buntal applications."
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/@buntal/core/components/script.tsx"
+      typeDefinition={`interface ScriptProps extends React.ScriptHTMLAttributes<HTMLScriptElement> {
+  src?: string;
+  strategy?: 'beforeInteractive' | 'afterInteractive' | 'lazyOnload';
+  onLoad?: () => void;
+  onError?: () => void;
+  onReady?: () => void;
+  children?: string;
+}`}
+      properties={[
         {
-          id: 'type-definition',
-          title: 'Type Definition',
-          level: 1,
-          offset: 72
+          name: 'src',
+          type: 'string',
+          required: false,
+          description: 'The URL of the external script to load'
         },
         {
-          id: 'properties',
-          title: 'Properties',
-          level: 1,
-          offset: 72
+          name: 'strategy',
+          type: "'beforeInteractive' | 'afterInteractive' | 'lazyOnload'",
+          required: false,
+          description:
+            "Loading strategy for the script (default: 'afterInteractive')"
         },
         {
-          id: 'usage',
-          title: 'Usage',
-          level: 1,
-          offset: 72
+          name: 'onLoad',
+          type: '() => void',
+          required: false,
+          description:
+            'Callback function executed when the script loads successfully'
         },
         {
-          id: 'best-practices',
-          title: 'Best Practices',
-          level: 1,
-          offset: 72
+          name: 'onError',
+          type: '() => void',
+          required: false,
+          description:
+            'Callback function executed when the script fails to load'
+        },
+        {
+          name: 'onReady',
+          type: '() => void',
+          required: false,
+          description:
+            'Callback function executed when the script is ready to use'
+        },
+        {
+          name: 'children',
+          type: 'string',
+          required: false,
+          description: 'Inline JavaScript code to execute'
         }
       ]}
-      lastModified="2025-06-09"
+      examples={[
+        {
+          title: 'External Script Loading',
+          code: `import { Script } from '@buntal/core';
+
+export default function AnalyticsPage() {
+  return (
+    <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log('Google Analytics loaded');
+        }}
+      />
+
+      <h1>Page with Analytics</h1>
+    </>
+  );
+}`
+        },
+        {
+          title: 'Inline Script',
+          code: `import { Script } from '@buntal/core';
+
+export default function ConfigPage() {
+  return (
+    <>
+      <Script strategy="beforeInteractive">
+        {
+          \`window.APP_CONFIG = {
+            apiUrl: 'https://api.example.com',
+            version: '1.0.0'
+          };\`
+        }
+      </Script>
+
+      <div>App content here</div>
+    </>
+  );
+}`
+        },
+        {
+          title: 'Third-party Widget',
+          code: `import { Script } from '@buntal/core';
+
+export default function WidgetPage() {
+  const handleWidgetLoad = () => {
+    // Initialize widget after it loads
+    if (window.ThirdPartyWidget) {
+      window.ThirdPartyWidget.init({
+        containerId: 'widget-container'
+      });
+    }
+  };
+
+  return (
+    <>
+      <Script
+        src="https://widget.example.com/widget.js"
+        strategy="lazyOnload"
+        onLoad={handleWidgetLoad}
+        onError={() => console.error('Widget failed to load')}
+      />
+
+      <div id="widget-container"></div>
+    </>
+  );
+}`
+        }
+      ]}
     />
   )
 }

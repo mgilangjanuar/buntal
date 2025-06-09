@@ -1,287 +1,226 @@
-import MarkdownContent from '@/components/docs/markdown-content'
-import { type MetaProps } from 'buntal'
+import ReferencePage from '@/components/docs/reference-page'
 
-export const $ = {
-  _meta: {
-    title: 'LayoutProps - Buntal JS'
-  } satisfies MetaProps
-}
-
-export default function LayoutPropsPage() {
+export default function LayoutPropsReference() {
   return (
-    <MarkdownContent
+    <ReferencePage
       title="LayoutProps"
-      content={`# LayoutProps
+      description="Properties interface for layout components in Buntal applications, providing structure and shared functionality across multiple pages."
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/@buntal/core/types/layout.ts"
+      typeDefinition={`interface LayoutProps {
+  children: React.ReactNode;
+  pathname: string;
+  searchParams: Record<string, string | string[]>;
+  params: Record<string, string>;
+  headers: Record<string, string>;
+  cookies: Record<string, string>;
+  metadata?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+  };
+}`}
+      properties={[
+        {
+          name: 'children',
+          type: 'React.ReactNode',
+          required: true,
+          description: 'Page content to be rendered within the layout'
+        },
+        {
+          name: 'pathname',
+          type: 'string',
+          required: true,
+          description: 'Current pathname of the route'
+        },
+        {
+          name: 'searchParams',
+          type: 'Record<string, string | string[]>',
+          required: true,
+          description: 'Query string parameters from the URL'
+        },
+        {
+          name: 'params',
+          type: 'Record<string, string>',
+          required: true,
+          description: 'Dynamic route parameters extracted from the URL path'
+        },
+        {
+          name: 'headers',
+          type: 'Record<string, string>',
+          required: true,
+          description: 'HTTP request headers'
+        },
+        {
+          name: 'cookies',
+          type: 'Record<string, string>',
+          required: true,
+          description: 'HTTP cookies from the request'
+        },
+        {
+          name: 'metadata',
+          type: 'object',
+          required: false,
+          description:
+            'Optional metadata for the page (title, description, keywords)'
+        }
+      ]}
+      examples={[
+        {
+          title: 'Basic Layout Component',
+          code: `import type { LayoutProps } from '@buntal/core';
+import { Meta } from '@buntal/core';
 
-Type definition for layout component properties.
-
-## Type Definition
-
-LayoutProps is a conceptual interface for layout component props, not directly exported.
-
-\`\`\`typescript
-interface LayoutProps<T = any> {
-  children: React.ReactNode
-  params: Record<string, string>
-  query: Record<string, string>
-  data?: T & { _meta?: MetaProps }
-}
-\`\`\`
-
-## Properties
-
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| \`children\` | \`React.ReactNode\` | ✅ | Child components to render inside the layout |
-| \`params\` | \`Record<string, string>\` | ✅ | Dynamic route parameters from current route |
-| \`query\` | \`Record<string, string>\` | ✅ | Query string parameters from current URL |
-| \`data\` | \`T & { _meta?: MetaProps }\` | ❌ | Server-side data with optional metadata |
-
-## Usage
-
-\`\`\`typescript
-import { Meta, type MetaProps } from 'buntal'
-
-// Root layout
 export default function RootLayout({
   children,
-  data
+  pathname,
+  metadata
 }: LayoutProps) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <Meta
-          title="My App"
-          description="A modern web application"
-          {...(data?._meta || {})}
+          title={metadata?.title || 'My Buntal App'}
+          description={metadata?.description || 'A fast web application'}
+          charset="utf-8"
+          viewport="width=device-width, initial-scale=1"
         />
-        <link rel="stylesheet" href="/globals.css" />
       </head>
       <body>
-        <div id="root">
+        <header>
+          <nav className="bg-blue-600 text-white p-4">
+            <h1>My App</h1>
+          </nav>
+        </header>
+        <main className="container mx-auto p-4">
           {children}
-        </div>
+        </main>
+        <footer className="bg-gray-800 text-white p-4 text-center">
+          <p>&copy; 2024 My App. All rights reserved.</p>
+        </footer>
       </body>
     </html>
-  )
-}
-
-// Nested layout with navigation
-export default function MainLayout({
-  children,
-  params,
-  query
-}: LayoutProps) {
-  const isActive = (path: string) => {
-    // Access current route via params/query if needed
-    return window.location.pathname === path
-  }
-
-  return (
-    <div className="min-h-screen">
-      <header>
-        <nav>
-          <a href="/" className={isActive('/') ? 'active' : ''}>
-            Home
-          </a>
-          <a href="/about" className={isActive('/about') ? 'active' : ''}>
-            About
-          </a>
-        </nav>
-      </header>
-      <main>
-        {children}
-      </main>
-      <footer>
-        <p>&copy; 2024 My App</p>
-      </footer>
-    </div>
-  )
-}
-
-// Layout with typed data
-interface DashboardData {
-  user: {
-    name: string
-    role: string
-  }
-}
+  );
+}`
+        },
+        {
+          title: 'Dashboard Layout with Sidebar',
+          code: `import type { LayoutProps } from '@buntal/core';
+import { Link } from '@buntal/core';
 
 export default function DashboardLayout({
   children,
-  data
-}: LayoutProps<DashboardData>) {
+  pathname,
+  cookies
+}: LayoutProps) {
+  const isAuthenticated = Boolean(cookies.auth_token);
+
+  if (!isAuthenticated) {
+    return <div>Please log in to access the dashboard.</div>;
+  }
+
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
-        <h2>Welcome, {data?.user?.name}</h2>
-        <p>Role: {data?.user?.role}</p>
-        <nav>
-          <a href="/dashboard">Overview</a>
-          <a href="/dashboard/settings">Settings</a>
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gray-900 text-white">
+        <div className="p-4">
+          <h2 className="text-xl font-bold">Dashboard</h2>
+        </div>
+        <nav className="mt-8">
+          <NavLink href="/dashboard" current={pathname}>
+            Overview
+          </NavLink>
+          <NavLink href="/dashboard/users" current={pathname}>
+            Users
+          </NavLink>
+          <NavLink href="/dashboard/settings" current={pathname}>
+            Settings
+          </NavLink>
         </nav>
       </aside>
-      <div className="content">
-        {children}
-      </div>
-    </div>
-  )
-}
-\`\`\`
 
-## Server-Side Data Fetching
-
-Layouts can export a function named \`$\` to fetch data on the server:
-
-\`\`\`typescript
-// Export data fetching function for layout
-export const $ = async (req: Req) => {
-  const user = await getCurrentUser(req)
-
-  return {
-    user: {
-      name: user.name,
-      role: user.role
-    },
-    _meta: {
-      title: \`Dashboard - \${user.name}\`,
-      description: 'User dashboard with personalized content'
-    }
-  }
-}
-
-// Layout component receives the data
-export default function UserLayout({ children, data }: LayoutProps) {
-  return (
-    <div>
-      <header>
-        <h1>Hello, {data?.user?.name}!</h1>
-      </header>
-      <main>
-        {children}
+      {/* Main content */}
+      <main className="flex-1 overflow-auto">
+        <div className="p-6">
+          {children}
+        </div>
       </main>
     </div>
-  )
+  );
 }
-\`\`\`
 
-## Nested Layouts
+function NavLink({
+  href,
+  current,
+  children
+}: {
+  href: string;
+  current: string;
+  children: React.ReactNode;
+}) {
+  const isActive = current === href || current.startsWith(href + '/');
 
-Layouts can be nested to create complex page structures:
-
-\`\`\`typescript
-// app/layout.tsx (Root layout)
-export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html>
-      <head>
-        <title>My App</title>
-      </head>
-      <body>
-        {children}
-      </body>
-    </html>
-  )
-}
+    <Link
+      href={href}
+      className={\`block px-4 py-2 hover:bg-gray-700 \${
+        isActive ? 'bg-gray-700 border-r-2 border-blue-500' : ''
+      }\`}
+    >
+      {children}
+    </Link>
+  );
+}`
+        },
+        {
+          title: 'Layout with Dynamic Metadata',
+          code: `import type { LayoutProps } from '@buntal/core';
+import { Meta } from '@buntal/core';
 
-// app/dashboard/layout.tsx (Dashboard layout)
-export default function DashboardLayout({ children }: LayoutProps) {
-  return (
-    <div className="dashboard">
-      <nav>Dashboard Nav</nav>
-      <main>
-        {children}
-      </main>
-    </div>
-  )
-}
-
-// app/dashboard/users/layout.tsx (Users section layout)
-export default function UsersLayout({ children }: LayoutProps) {
-  return (
-    <div className="users-section">
-      <h2>Users Management</h2>
-      <div className="users-content">
-        {children}
-      </div>
-    </div>
-  )
-}
-\`\`\`
-
-## Conditional Rendering
-
-Layouts can conditionally render content based on route parameters:
-
-\`\`\`typescript
-export default function ConditionalLayout({
+export default function BlogLayout({
   children,
-  params,
-  query
+  pathname,
+  searchParams,
+  metadata
 }: LayoutProps) {
-  const showSidebar = params.section !== 'fullscreen'
-  const theme = query.theme || 'light'
+  // Generate dynamic title based on route
+  const getPageTitle = () => {
+    if (pathname === '/blog') return 'Blog - My Site';
+    if (pathname.startsWith('/blog/')) {
+      const slug = pathname.split('/').pop();
+      return \`\${slug?.replace('-', ' ')} - Blog - My Site\`;
+    }
+    return metadata?.title || 'My Site';
+  };
 
   return (
-    <div className={\`app \${theme}\`}>
-      {showSidebar && (
-        <aside className="sidebar">
-          <nav>Navigation</nav>
-        </aside>
-      )}
-      <main className={showSidebar ? 'with-sidebar' : 'fullwidth'}>
-        {children}
-      </main>
-    </div>
-  )
-}
-\`\`\`
+    <>
+      <Meta
+        title={getPageTitle()}
+        description={metadata?.description || 'Read our latest blog posts'}
+        keywords={metadata?.keywords || 'blog, articles, news'}
+      />
 
-## Related Types
+      <div className="min-h-screen bg-gray-50">
+        <header className="bg-white shadow">
+          <div className="max-w-4xl mx-auto px-4 py-6">
+            <h1 className="text-3xl font-bold">My Blog</h1>
+            {searchParams.category && (
+              <p className="text-gray-600 mt-2">
+                Category: {searchParams.category}
+              </p>
+            )}
+          </div>
+        </header>
 
-- [MetaProps](/docs/references/meta-props) - Used in LayoutProps data for metadata
-- [PageProps](/docs/references/page-props) - Similar interface for page components
-- [AppProps](/docs/references/app-props) - Root layout configuration in App component
-- [Req](/docs/references/http-core#req-class) - Server request type for data fetching function`}
-      tableOfContents={[
-        {
-          id: 'type-definition',
-          title: 'Type Definition',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'properties',
-          title: 'Properties',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'usage',
-          title: 'Usage',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'server-side-data-fetching',
-          title: 'Server-Side Data Fetching',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'nested-layouts',
-          title: 'Nested Layouts',
-          level: 1,
-          offset: 72
-        },
-        {
-          id: 'conditional-rendering',
-          title: 'Conditional Rendering',
-          level: 1,
-          offset: 72
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}`
         }
       ]}
-      lastModified="2025-06-09"
     />
   )
 }

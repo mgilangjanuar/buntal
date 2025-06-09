@@ -70,44 +70,59 @@ export async function buildHotReloadScript(
       const newScript = doc.querySelector('script[src*="/root.js"]');
       const newUrl = newScript ? newScript.src : null;
 
-      reloadIndicator.textContent = '✨ Updating modules...';
-      reloadIndicator.style.background = '#3b82f6';
+      // Check if we need to reload
+      console.log(currentUrl, newUrl);
+      if (currentUrl !== newUrl || !currentUrl) {
+        // Update the indicator
+        reloadIndicator.textContent = '✨ Updating modules...';
+        reloadIndicator.style.background = '#3b82f6';
 
-      // Clean up existing modules and create new script
-      const existingScripts = document.querySelectorAll('script[src*="/root.js"]');
-      existingScripts.forEach(script => script.remove());
+        // Clean up existing modules and create new script
+        const existingScripts = document.querySelectorAll('script[src*="/root.js"]');
+        existingScripts.forEach(script => script.remove());
 
-      // Small delay for cleanup
-      await new Promise(resolve => setTimeout(resolve, 100));
+        // Small delay for cleanup
+        await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Create new script element
-      const newScriptElement = document.createElement('script');
-      newScriptElement.type = 'module';
-      newScriptElement.src = newUrl || \`/root.js?t=\${Date.now()}\`;
+        // Create new script element
+        const newScriptElement = document.createElement('script');
+        newScriptElement.type = 'module';
+        newScriptElement.src = newUrl || \`/root.js?t=\${Date.now()}\`;
 
-      // Handle successful reload
-      newScriptElement.onload = () => {
-        reloadIndicator.textContent = '✅ Updated!';
-        reloadIndicator.style.background = '#10b981';
+        // Handle successful reload
+        newScriptElement.onload = () => {
+          reloadIndicator.textContent = '✅ Updated!';
+          reloadIndicator.style.background = '#10b981';
+          setTimeout(() => {
+            if (reloadIndicator.parentNode) {
+              reloadIndicator.remove();
+            }
+          }, 2000);
+          console.log('🔥 Hot reload: Application updated successfully');
+        };
+
+        // Handle reload failure
+        newScriptElement.onerror = () => {
+          reloadIndicator.textContent = '❌ Failed - refreshing page';
+          reloadIndicator.style.background = '#ef4444';
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        };
+
+        // Append the new script
+        document.head.appendChild(newScriptElement);
+      } else {
+        // No changes detected
+        reloadIndicator.textContent = '✅ No changes';
+        reloadIndicator.style.background = '#6b7280';
         setTimeout(() => {
           if (reloadIndicator.parentNode) {
             reloadIndicator.remove();
           }
-        }, 2000);
-        console.log('🔥 Hot reload: Application updated successfully');
-      };
-
-      // Handle reload failure
-      newScriptElement.onerror = () => {
-        reloadIndicator.textContent = '❌ Failed - refreshing page';
-        reloadIndicator.style.background = '#ef4444';
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
-      };
-
-      // Append the new script
-      document.head.appendChild(newScriptElement);
+        }, 1500);
+        console.log('🔄 Hot reload: No changes detected');
+      }
     } catch (error) {
       console.warn('❌ Hot reload failed, falling back to page reload:', error);
       location.reload();

@@ -4,7 +4,13 @@ import { Spotlight } from '@/components/spotlight-new'
 import { cn } from '@/lib/utils'
 import { Link, useRouter } from 'buntal'
 
-const MENUS = [
+type MenuItem = {
+  title: string
+  href?: string
+  items?: MenuItem[]
+}
+
+const MENUS: MenuItem[] = [
   {
     title: 'Get Started',
     href: '/docs'
@@ -31,23 +37,135 @@ const MENUS = [
     items: [
       {
         title: '@buntal/core',
-        href: '/docs/references/core'
-      },
-      {
-        title: '@buntal/core/middlewares',
-        href: '/docs/references/core-middlewares'
-      },
-      {
-        title: '@buntal/core/security',
-        href: '/docs/references/core-security'
+        href: '/docs/references/core',
+        items: [
+          {
+            title: 'HTTP',
+            href: '/docs/references/core/http',
+            items: [
+              {
+                title: 'Http',
+                href: '/docs/references/core/http/http'
+              },
+              {
+                title: 'h',
+                href: '/docs/references/core/http/h'
+              },
+              {
+                title: 'AtomicHandler',
+                href: '/docs/references/core/http/atomic-handler'
+              },
+              {
+                title: 'Req',
+                href: '/docs/references/core/http/req'
+              },
+              {
+                title: 'Res',
+                href: '/docs/references/core/http/res'
+              },
+              {
+                title: 'buildRouter',
+                href: '/docs/references/core/http/build-router'
+              },
+              {
+                title: 'cookie',
+                href: '/docs/references/core/http/cookie'
+              },
+              {
+                title: 'CookieOptions',
+                href: '/docs/references/core/http/cookie-options'
+              }
+            ]
+          },
+          {
+            title: 'Security',
+            href: '/docs/references/core/security',
+            items: [
+              {
+                title: 'jwt',
+                href: '/docs/references/core/security/jwt'
+              },
+              {
+                title: 'hash',
+                href: '/docs/references/core/security/hash'
+              }
+            ]
+          },
+          {
+            title: 'Types',
+            href: '/docs/references/core/types',
+            items: [
+              {
+                title: 'ExtractRouteParams',
+                href: '/docs/references/core/types/extract-route-params'
+              }
+            ]
+          },
+          {
+            title: 'Middleware',
+            href: '/docs/references/core/middleware',
+            items: [
+              {
+                title: 'auth',
+                href: '/docs/references/core/middleware/auth'
+              },
+              {
+                title: 'cors',
+                href: '/docs/references/core/middleware/cors'
+              },
+              {
+                title: 'logger',
+                href: '/docs/references/core/middleware/logger'
+              }
+            ]
+          }
+        ]
       },
       {
         title: 'buntal',
-        href: '/docs/references/buntal'
-      },
-      {
-        title: 'buntal/server',
-        href: '/docs/references/buntal-server'
+        href: '/docs/references/buntal',
+        items: [
+          {
+            title: 'Configuration',
+            href: '/docs/references/buntal/configuration',
+            items: [
+              {
+                title: 'BuntalConfig',
+                href: '/docs/references/buntal/configuration/buntal-config'
+              }
+            ]
+          },
+          {
+            title: 'Components',
+            href: '/docs/references/buntal/components',
+            items: [
+              {
+                title: 'App',
+                href: '/docs/references/buntal/components/app'
+              },
+              {
+                title: 'useRouter',
+                href: '/docs/references/buntal/components/use-router'
+              },
+              {
+                title: 'Link',
+                href: '/docs/references/buntal/components/link'
+              },
+              {
+                title: 'Meta',
+                href: '/docs/references/buntal/components/meta'
+              },
+              {
+                title: 'Script',
+                href: '/docs/references/buntal/components/script'
+              },
+              {
+                title: 'Svg',
+                href: '/docs/references/buntal/components/svg'
+              }
+            ]
+          }
+        ]
       }
     ]
   }
@@ -111,17 +229,61 @@ export default function DocsLayout({
                   <h2 className="menu-title">{menu.title}</h2>
                   {menu.items && (
                     <ul className="space-y-0.5">
-                      {menu.items.map((item) => (
+                      {menu.items.map((item: MenuItem) => (
                         <li key={item.title}>
-                          <Link
-                            href={item.href}
-                            className={cn(
-                              'truncate',
-                              pathname === item.href && 'menu-active'
-                            )}
-                          >
-                            {item.title}
-                          </Link>
+                          {item.href && (
+                            <Link
+                              href={item.href}
+                              className={cn(
+                                'truncate',
+                                pathname === item.href && 'menu-active'
+                              )}
+                            >
+                              {item.title}
+                            </Link>
+                          )}
+                          {!item.href && <a>{item.title}</a>}
+                          {item.items && (
+                            <ul className="space-y-0.5">
+                              {item.items.map((subItem: MenuItem) => (
+                                <li key={subItem.title}>
+                                  {subItem.href && (
+                                    <Link
+                                      href={subItem.href}
+                                      className={cn(
+                                        'truncate',
+                                        pathname === subItem.href &&
+                                          'menu-active'
+                                      )}
+                                    >
+                                      {subItem.title}
+                                    </Link>
+                                  )}
+                                  {!subItem.href && <a>{subItem.title}</a>}
+                                  {subItem.items && (
+                                    <ul className="space-y-0.5">
+                                      {subItem.items.map(
+                                        (nestedItem: MenuItem) => (
+                                          <li key={nestedItem.title}>
+                                            <Link
+                                              href={nestedItem.href!}
+                                              className={cn(
+                                                'truncate',
+                                                pathname === nestedItem.href &&
+                                                  'menu-active'
+                                              )}
+                                            >
+                                              {nestedItem.title}
+                                            </Link>
+                                          </li>
+                                        )
+                                      )}
+                                    </ul>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </li>
                       ))}
                     </ul>

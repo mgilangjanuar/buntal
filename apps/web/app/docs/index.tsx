@@ -126,7 +126,7 @@ To contribute, please follow these steps:
               changes and missing features.
             </span>
           </div>
-          <div className="mt-8">
+          <div className="my-8">
             <img src="/banner.png" alt="banner" className="!my-0 rounded-lg" />
           </div>
         </div>

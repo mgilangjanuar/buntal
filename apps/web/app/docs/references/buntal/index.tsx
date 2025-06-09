@@ -313,8 +313,8 @@ Buntal uses Next.js-style file-based routing with these conventions:
 | \`app/index.tsx\` | \`/\` | Home page |
 | \`app/about.tsx\` | \`/about\` | About page |
 | \`app/users/index.tsx\` | \`/users\` | Users index |
-| \`app/users/[id].tsx\` | \`/users/:id\` | Dynamic user page |
-| \`app/users/[...slug].tsx\` | \`/users/*\` | Catch-all route |
+| \`app/users/[id]/index.tsx\` | \`/users/:id\` | Dynamic user page |
+| \`app/users/[[...slug]]/index.tsx\` | \`/users/*\` | Catch-all route |
 | \`app/layout.tsx\` | - | Layout component |
 
 ### Page Components
@@ -347,7 +347,7 @@ export default function AboutPage() {
 Access route parameters through the component props:
 
 \`\`\`tsx
-// app/users/[id].tsx
+// app/users/[id]/index.tsx
 export default function UserPage({
   params,
   query
@@ -424,19 +424,19 @@ type ServerRouterType = {
 
 ### 1. Project Structure
 
-\`\`\`
+\`\`\`sh
 my-app/
 ├── app/
-│   ├── layout.tsx       # Root layout
-│   ├── index.tsx        # Home page
-│   ├── about.tsx        # About page
+│   ├── layout.tsx          # Root layout
+│   ├── index.tsx           # Home page
+│   ├── about/index.tsx     # About page
 │   └── users/
-│       ├── index.tsx    # Users list
-│       └── [id].tsx     # User detail
+│       ├── index.tsx       # Users list
+│       └── [id]/index.tsx  # User detail
 ├── public/
 │   ├── favicon.svg
 │   └── globals.css
-├── buntal.config.ts     # Configuration
+├── buntal.config.ts        # Configuration
 └── package.json
 \`\`\`
 

@@ -241,7 +241,10 @@ export default function MarkdownContent({
                 return !isInline ? (
                   <Code language={language}>{code}</Code>
                 ) : (
-                  <code className="prose-code" {...props}>
+                  <code
+                    className="prose-code whitespace-pre-line- py-3- !px-4-"
+                    {...props}
+                  >
                     {children}
                   </code>
                 )

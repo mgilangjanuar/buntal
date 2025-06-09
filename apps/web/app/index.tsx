@@ -304,7 +304,7 @@ export default function HomePage() {
             duration={3}
             className={cn(
               '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-              'inset-x-0 inset-y-0 h-[100%] opacity-85 dark:opacity-35'
+              'inset-x-0 inset-y-0 h-[100%] opacity-50 dark:opacity-35'
             )}
           />
         </motion.div>
@@ -364,10 +364,10 @@ export default function HomePage() {
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl leading-relaxed tracking-tight text-base-content/80 max-w-2xl text-center">
-                <strong className="font-bold font-serif">Buntal JS</strong> is a
-                wrapper of Bun and React. With Next.js-like file system routing,
-                without the forever-loading app router.
+              <p className="text-base md:text-xl leading-relaxed tracking-tight text-base-content/70 max-w-2xl text-center">
+                <strong className="font-semibold font-serif">Buntal JS</strong>{' '}
+                is a wrapper of Bun and React. With Next.js-like file system
+                routing, without the forever-loading app router.
               </p>
             </div>
             <div className="grid grid-col-1 mt-4">
@@ -570,7 +570,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex-1 w-full">
-              <div className="mx-auto md:mr-0 w-fit text-base-content/80 space-y-3">
+              <div className="mx-auto md:mr-0 w-fit space-y-3">
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="col-start-2">
                     <p className="font-mono text-sm leading-normal text-base-content/50">
@@ -580,7 +580,9 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="text-right leading-tight">
-                    <p className="font-medium text-right">@buntal/core</p>
+                    <p className="font-medium text-right text-base-content/80">
+                      @buntal/core
+                    </p>
                     <p className="text-base-content/50 text-sm">bun</p>
                   </div>
                   <div className="leading-tight mt-[1px] space-y-[1px]">
@@ -596,7 +598,9 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="text-right leading-tight">
-                    <p className="font-medium text-right">Elysia</p>
+                    <p className="font-medium text-right text-base-content/80">
+                      Elysia
+                    </p>
                     <p className="text-base-content/50 text-sm">bun</p>
                   </div>
                   <div className="leading-tight mt-[1px] space-y-[1px]">
@@ -612,7 +616,9 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="text-right leading-tight">
-                    <p className="font-medium text-right">Gin</p>
+                    <p className="font-medium text-right text-base-content/80">
+                      Gin
+                    </p>
                     <p className="text-base-content/50 text-sm">go</p>
                   </div>
                   <div className="leading-tight mt-[1px] space-y-[1px]">
@@ -628,7 +634,9 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="text-right leading-tight">
-                    <p className="font-medium text-right">Express.js</p>
+                    <p className="font-medium text-right text-base-content/80">
+                      Express.js
+                    </p>
                     <p className="text-base-content/50 text-sm">node</p>
                   </div>
                   <div className="leading-tight mt-[1px] space-y-[1px]">
@@ -644,7 +652,9 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-[104px_160px] md:grid-cols-[104px_240px] content-center gap-4">
                   <div className="text-right leading-tight">
-                    <p className="font-medium text-right">FastAPI</p>
+                    <p className="font-medium text-right text-base-content/80">
+                      FastAPI
+                    </p>
                     <p className="text-base-content/50 text-sm">uvicorn</p>
                   </div>
                   <div className="leading-tight mt-[1px] space-y-[1px]">

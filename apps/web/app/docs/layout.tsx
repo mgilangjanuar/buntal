@@ -48,6 +48,10 @@ const MENUS: MenuItem[] = [
                 href: '/docs/references/core/http/http'
               },
               {
+                title: 'h',
+                href: '/docs/references/core/http/h'
+              },
+              {
                 title: 'Req',
                 href: '/docs/references/core/http/req'
               },

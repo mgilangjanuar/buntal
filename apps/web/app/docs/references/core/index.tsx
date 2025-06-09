@@ -26,6 +26,7 @@ The \`@buntal/core\` package provides essential utilities for building HTTP serv
 Core HTTP server functionality and request/response handling.
 
 - **[Http](/docs/references/core/http/http)** - Main HTTP server class
+- **[h](/docs/references/core/http/h)** - Handler composition function
 - **[Req](/docs/references/core/http/req)** - Request object
 - **[Res](/docs/references/core/http/res)** - Response object
 - **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Atomic request handler

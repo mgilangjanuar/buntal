@@ -25,6 +25,11 @@ The HTTP module provides the core HTTP functionality for Buntal applications, in
 
 - **[Http](/docs/references/core/http/http)** - Main HTTP server class for creating web applications
 
+### Handlers
+
+- **[h](/docs/references/core/http/h)** - Higher-order function for composing AtomicHandler functions
+- **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Type definition for request handler functions
+
 ### Utilities
 
 - **[Body](/docs/references/core/http/body)** - Request body parsing utilities

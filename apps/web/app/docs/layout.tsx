@@ -14,15 +14,40 @@ const MENUS = [
     href: '/docs/install'
   },
   {
-    title: 'Variants',
+    title: 'Guides',
     items: [
       {
         title: 'HTTP Server',
-        href: '/docs/packages/http-server'
+        href: '/docs/guides/http-server'
       },
       {
         title: 'Full-stack Web',
-        href: '/docs/packages/full-stack-web'
+        href: '/docs/guides/full-stack-web'
+      }
+    ]
+  },
+  {
+    title: 'API Reference',
+    items: [
+      {
+        title: '@buntal/core',
+        href: '/docs/references/core'
+      },
+      {
+        title: '@buntal/core/middlewares',
+        href: '/docs/references/core-middlewares'
+      },
+      {
+        title: '@buntal/core/security',
+        href: '/docs/references/core-security'
+      },
+      {
+        title: 'buntal',
+        href: '/docs/references/buntal'
+      },
+      {
+        title: 'buntal/server',
+        href: '/docs/references/buntal-server'
       }
     ]
   }

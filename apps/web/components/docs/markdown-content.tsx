@@ -29,6 +29,7 @@ function generateSlug(text: string): string {
     .toLowerCase()
     .replace(/^\$$/g, 'loader')
     .replace(/[^\w\s-]/g, '-')
+    .replace(/^[0-9]/g, '-')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .trim()
@@ -240,7 +241,10 @@ export default function MarkdownContent({
                 return !isInline ? (
                   <Code language={language}>{code}</Code>
                 ) : (
-                  <code className="prose-code" {...props}>
+                  <code
+                    className="prose-code whitespace-pre-line- py-3- !px-4-"
+                    {...props}
+                  >
                     {children}
                   </code>
                 )
@@ -263,7 +267,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h1 id={id} {...props}>
+                  <h1 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h1>
                 )
@@ -272,7 +276,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h2 id={id} {...props}>
+                  <h2 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h2>
                 )
@@ -281,7 +285,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h3 id={id} {...props}>
+                  <h3 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h3>
                 )
@@ -290,7 +294,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h4 id={id} {...props}>
+                  <h4 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h4>
                 )
@@ -299,7 +303,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h5 id={id} {...props}>
+                  <h5 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h5>
                 )
@@ -308,11 +312,33 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h6 id={id} {...props}>
+                  <h6 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h6>
                 )
-              }
+              },
+              table: ({ children, ...props }) => (
+                <div className="overflow-x-auto rounded-box border !border-base-content/5 bg-base-100">
+                  <table className="table !my-0" {...props}>
+                    {children}
+                  </table>
+                </div>
+              ),
+              tr: ({ children, ...props }) => (
+                <tr className="border-b !border-base-content/5" {...props}>
+                  {children}
+                </tr>
+              ),
+              td: ({ children, ...props }) => (
+                <td className="whitespace-nowrap py-3 px-4" {...props}>
+                  {children}
+                </td>
+              ),
+              th: ({ children, ...props }) => (
+                <th className="whitespace-nowrap py-3 px-4" {...props}>
+                  {children}
+                </th>
+              )
             }}
           >
             {content}

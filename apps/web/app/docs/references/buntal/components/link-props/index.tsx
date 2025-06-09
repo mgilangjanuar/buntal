@@ -1,11 +1,18 @@
 import ReferencePage from '@/components/docs/reference-page'
+import { type MetaProps } from 'buntal'
+
+export const $ = {
+  _meta: {
+    title: 'LinkProps - Buntal JS'
+  } satisfies MetaProps
+}
 
 export default function LinkPropsReference() {
   return (
     <ReferencePage
       title="LinkProps"
       description="Properties interface for the Link component, used for client-side navigation between pages in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/@buntal/core/components/link.tsx"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/link.tsx"
       typeDefinition={`interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   prefetch?: boolean;

@@ -52,16 +52,16 @@ const MENUS: MenuItem[] = [
                 href: '/docs/references/core/http/h'
               },
               {
+                title: 'AtomicHandler',
+                href: '/docs/references/core/http/atomic-handler'
+              },
+              {
                 title: 'Req',
                 href: '/docs/references/core/http/req'
               },
               {
                 title: 'Res',
                 href: '/docs/references/core/http/res'
-              },
-              {
-                title: 'AtomicHandler',
-                href: '/docs/references/core/http/atomic-handler'
               },
               {
                 title: 'buildRouter',
@@ -136,36 +136,32 @@ const MENUS: MenuItem[] = [
             ]
           },
           {
-            title: 'Component Props',
-            href: '/docs/references/buntal/component-props',
+            title: 'Components',
+            href: '/docs/references/buntal/components',
             items: [
               {
-                title: 'MetaProps',
-                href: '/docs/references/buntal/component-props/meta-props'
+                title: 'App',
+                href: '/docs/references/buntal/components/app'
               },
               {
-                title: 'LinkProps',
-                href: '/docs/references/buntal/component-props/link-props'
+                title: 'useRouter',
+                href: '/docs/references/buntal/components/use-router'
               },
               {
-                title: 'ScriptProps',
-                href: '/docs/references/buntal/component-props/script-props'
+                title: 'Link',
+                href: '/docs/references/buntal/components/link'
               },
               {
-                title: 'SvgProps',
-                href: '/docs/references/buntal/component-props/svg-props'
+                title: 'Meta',
+                href: '/docs/references/buntal/components/meta'
               },
               {
-                title: 'AppProps',
-                href: '/docs/references/buntal/component-props/app-props'
+                title: 'Script',
+                href: '/docs/references/buntal/components/script'
               },
               {
-                title: 'PageProps',
-                href: '/docs/references/buntal/component-props/page-props'
-              },
-              {
-                title: 'LayoutProps',
-                href: '/docs/references/buntal/component-props/layout-props'
+                title: 'Svg',
+                href: '/docs/references/buntal/components/svg'
               }
             ]
           }

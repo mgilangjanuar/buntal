@@ -27,17 +27,18 @@ Configuration options for Buntal applications.
 
 - **[BuntalConfig](/docs/references/buntal/configuration/buntal-config)** - Main configuration interface
 
-### [Component Props](/docs/references/buntal/component-props)
+### [Components](/docs/references/buntal/components)
 
-TypeScript interfaces for component properties.
+React components and hooks for building user interfaces.
 
-- **[MetaProps](/docs/references/buntal/component-props/meta-props)** - Page metadata
-- **[LinkProps](/docs/references/buntal/component-props/link-props)** - Link component
-- **[ScriptProps](/docs/references/buntal/component-props/script-props)** - Script component
-- **[SvgProps](/docs/references/buntal/component-props/svg-props)** - SVG component
-- **[AppProps](/docs/references/buntal/component-props/app-props)** - App component
-- **[PageProps](/docs/references/buntal/component-props/page-props)** - Page component
-- **[LayoutProps](/docs/references/buntal/component-props/layout-props)** - Layout component`}
+- **[App](/docs/references/buntal/components/app)** - Root application component
+- **[useRouter](/docs/references/buntal/components/use-router)** - Router hook for navigation
+- **[Link](/docs/references/buntal/components/link)** - Client-side navigation component
+- **[Meta](/docs/references/buntal/components/meta)** - HTML meta tags component
+- **[Script](/docs/references/buntal/components/script)** - External script loader component
+- **[Svg](/docs/references/buntal/components/svg)** - SVG component for rendering inline SVGs
+
+`}
       tableOfContents={[
         {
           id: 'buntal',
@@ -64,8 +65,8 @@ TypeScript interfaces for component properties.
           offset: 72
         },
         {
-          id: 'component-props',
-          title: 'Component Props',
+          id: 'components',
+          title: 'Components',
           level: 3,
           offset: 72
         }

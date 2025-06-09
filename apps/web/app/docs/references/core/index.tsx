@@ -39,6 +39,12 @@ Security utilities for authentication and data protection.
 - **jwt** - JSON Web Token utilities
 - **hash** - Hashing functions
 
+### Types
+
+TypeScript utility types for type-safe development.
+
+- **ExtractRouteParams** - Route parameter extraction
+
 ### Middleware
 
 Built-in middleware functions for common use cases.
@@ -74,6 +80,12 @@ Built-in middleware functions for common use cases.
         {
           id: 'security',
           title: 'Security',
+          level: 3,
+          offset: 72
+        },
+        {
+          id: 'types',
+          title: 'Types',
           level: 3,
           offset: 72
         },

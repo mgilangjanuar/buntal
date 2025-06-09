@@ -85,6 +85,15 @@ const MENUS: MenuItem[] = [
             ]
           },
           {
+            title: 'Types',
+            items: [
+              {
+                title: 'ExtractRouteParams',
+                href: '/docs/references/core/types/extract-route-params'
+              }
+            ]
+          },
+          {
             title: 'Middleware',
             items: [
               {
@@ -112,15 +121,6 @@ const MENUS: MenuItem[] = [
               {
                 title: 'BuntalConfig',
                 href: '/docs/references/buntal/configuration/buntal-config'
-              }
-            ]
-          },
-          {
-            title: 'Types',
-            items: [
-              {
-                title: 'ExtractRouteParams',
-                href: '/docs/references/buntal/types/extract-route-params'
               }
             ]
           },

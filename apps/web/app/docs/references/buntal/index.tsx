@@ -27,12 +27,6 @@ Configuration options for Buntal applications.
 
 - **BuntalConfig** - Main configuration interface
 
-### Types
-
-TypeScript utility types for type-safe development.
-
-- **ExtractRouteParams** - Route parameter extraction
-
 ### Component Props
 
 TypeScript interfaces for component properties.

@@ -13,75 +13,24 @@ export default function CoreHttpPage() {
       title="HTTP"
       content={`# HTTP
 
-Core HTTP server functionality and request/response handling for Buntal applications.
+HTTP server and client utilities for building web applications with Buntal.
 
 ## Overview
 
-The HTTP module provides the foundational components for building web servers with Buntal. It includes server setup, request/response handling, routing, and cookie management.
+The HTTP module provides the core HTTP functionality for Buntal applications, including server creation, request handling, and HTTP utilities. It offers a simple yet powerful API for building web servers and handling HTTP requests and responses.
 
 ## Components
 
-### Core Classes
+### Server
 
-- **[Http](/docs/references/core/http/http)** - Main HTTP server class for creating and configuring web servers
-- **[Req](/docs/references/core/http/req)** - Request object containing incoming HTTP request data
-- **[Res](/docs/references/core/http/res)** - Response object for sending HTTP responses
-
-### Handlers & Routing
-
-- **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Atomic request handler for processing individual requests
-- **[buildRouter](/docs/references/core/http/build-router)** - Router builder for creating organized route structures
+- **[Http](/docs/references/core/http/http)** - Main HTTP server class for creating web applications
 
 ### Utilities
 
-- **[cookie](/docs/references/core/http/cookie)** - Cookie manipulation utilities
-- **[CookieOptions](/docs/references/core/http/cookie-options)** - Configuration options for cookies
-
-## Quick Start
-
-\`\`\`typescript
-import { Http } from '@buntal/core'
-
-const server = new Http({ port: 3000 })
-
-server.get('/', (req, res) => {
-  res.json({ message: 'Hello World!' })
-})
-
-server.start()
-\`\`\`
-
-## Architecture
-
-The HTTP module follows a simple yet powerful architecture:
-
-1. **Http Class**: The main server instance that handles configuration and routing
-2. **Request/Response**: Type-safe objects for handling HTTP communication
-3. **Atomic Handlers**: Composable middleware and route handlers
-4. **Router Builder**: Utility for organizing routes in a modular way
-
-## Configuration
-
-The Http class accepts a configuration object that allows you to customize:
-
-- **Port**: Server listening port
-- **App Directory**: Location of your application files
-- **WebSocket Handler**: Optional WebSocket support
-- **Inject Handler**: Custom request injection logic
-
-\`\`\`typescript
-import { Http } from '@buntal/core'
-
-const server = new Http({
-  port: 3000,
-  appDir: './app',
-  websocket: {
-    message: (ws, message) => {
-      // Handle WebSocket messages
-    }
-  }
-})
-\`\`\`
+- **[Body](/docs/references/core/http/body)** - Request body parsing utilities
+- **[Cookie](/docs/references/core/http/cookie)** - Cookie handling utilities for requests and responses
+- **[Req](/docs/references/core/http/req)** - Enhanced request object with additional utilities
+- **[Res](/docs/references/core/http/res)** - Enhanced response object with additional utilities
 `}
     />
   )

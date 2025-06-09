@@ -25,26 +25,7 @@ The Types module provides essential TypeScript utility types that help ensure ty
 
 - **[ExtractRouteParams](/docs/references/core/types/extract-route-params)** - Utility type for extracting route parameters from URL patterns
 
-## Usage
 
-### Route Parameter Extraction
-
-\`\`\`typescript
-import { type ExtractRouteParams } from '@buntal/core'
-
-// Extract parameters from a route pattern
-type UserRoute = '/users/:id/posts/:postId'
-type UserParams = ExtractRouteParams<UserRoute>
-// Result: { id: string; postId: string }
-
-// Use in route handlers
-app.get('/users/:id/posts/:postId', (req: Req<UserParams>, res) => {
-  const { id, postId } = req.params // Fully typed!
-  // ...
-})
-\`\`\`
-
-This type utility ensures that your route parameters are properly typed throughout your application, catching potential errors at compile time.
 `}
     />
   )

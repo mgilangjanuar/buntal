@@ -30,51 +30,7 @@ The Middleware module provides pre-built middleware functions that can be easily
 
 - **[logger](/docs/references/core/middleware/logger)** - Request logging middleware for debugging and monitoring
 
-## Quick Start
 
-### Using Authentication Middleware
-
-\`\`\`typescript
-import { Http, auth } from '@buntal/core'
-
-const app = new Http({ port: 3000 })
-
-// Apply auth middleware to protect routes
-app.use(auth({
-  secret: 'your-jwt-secret',
-  excludePaths: ['/login', '/register']
-}))
-
-app.get('/protected', (req, res) => {
-  // This route is now protected
-  res.json({ user: req.user })
-})
-\`\`\`
-
-### Using CORS Middleware
-
-\`\`\`typescript
-import { Http, cors } from '@buntal/core'
-
-const app = new Http({ port: 3000 })
-
-// Enable CORS for all routes
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  credentials: true
-}))
-\`\`\`
-
-### Using Logger Middleware
-
-\`\`\`typescript
-import { Http, logger } from '@buntal/core'
-
-const app = new Http({ port: 3000 })
-
-// Log all requests
-app.use(logger())
-\`\`\`
 `}
     />
   )

@@ -37,32 +37,7 @@ The Component Props module provides TypeScript interfaces that define the expect
 - **[PageProps](/docs/references/buntal/component-props/page-props)** - Properties for page components
 - **[LayoutProps](/docs/references/buntal/component-props/layout-props)** - Properties for layout components
 
-## Quick Start
 
-### Using MetaProps
-
-\`\`\`typescript
-import type { MetaProps } from 'buntal'
-
-export const $ = {
-  _meta: {
-    title: 'My Page Title',
-    description: 'Page description for SEO'
-  } satisfies MetaProps
-}
-\`\`\`
-
-### Using PageProps
-
-\`\`\`typescript
-import type { PageProps } from 'buntal'
-
-export default function MyPage({ params }: PageProps<{ id: string }>) {
-  return <div>User ID: {params.id}</div>
-}
-\`\`\`
-
-These type definitions help ensure that your components receive the correct props and that your application structure follows Buntal's conventions.
 `}
     />
   )

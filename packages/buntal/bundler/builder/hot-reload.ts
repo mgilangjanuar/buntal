@@ -31,101 +31,144 @@ export async function buildHotReloadScript(
 
   const performHotReload = async () => {
     try {
-      // Add visual feedback for hot reload
-      const reloadIndicator = document.createElement('div');
-      reloadIndicator.style.cssText = \`
+      // Show subtle loading indicator
+      const indicator = document.createElement('div');
+      indicator.style.cssText = \`
         position: fixed;
-        top: 16px;
-        right: 16px;
-        background: #10b981;
+        top: 20px;
+        right: 20px;
+        background: rgba(59, 130, 246, 0.9);
         color: white;
-        padding: 8px 16px;
-        border-radius: 8px;
+        padding: 6px 12px;
+        border-radius: 6px;
         font-family: system-ui, sans-serif;
-        font-size: 14px;
-        z-index: 9999;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
+        font-size: 12px;
+        z-index: 10000;
+        backdrop-filter: blur(8px);
+        transition: all 0.2s ease;
+        pointer-events: none;
       \`;
-      reloadIndicator.textContent = '🔄 Reloading...';
-      document.body.appendChild(reloadIndicator);
+      indicator.textContent = '🔄 Checking for updates...';
+      document.body.appendChild(indicator);
 
-      // Get current script version
+      // Get current script info
       const currentScript = document.querySelector('script[src*="/root.js"]');
-      const currentUrl = currentScript ? currentScript.src : null;
+      const currentUrl = currentScript?.src;
 
-      // Fetch the latest page to get new script URL
+      // Check for updates by fetching latest build info
       const response = await fetch(window.location.href, {
         cache: 'no-cache',
-        headers: { 'Cache-Control': 'no-cache' }
+        headers: { 'Cache-Control': 'no-cache, must-revalidate' }
       });
 
-      if (!response.ok) {
-        throw new Error(\`Failed to fetch: \${response.status}\`);
-      }
+      if (!response.ok) throw new Error(\`HTTP \${response.status}\`);
 
-      const html = await response.text();
+      const newHtml = await response.text();
       const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const newScript = doc.querySelector('script[src*="/root.js"]');
-      const newUrl = newScript ? newScript.src : null;
+      const newDoc = parser.parseFromString(newHtml, 'text/html');
+      const newScript = newDoc.querySelector('script[src*="/root.js"]');
+      const newUrl = newScript?.src;
 
-      // Check if we need to reload
-      console.log(currentUrl, newUrl);
-      if (currentUrl !== newUrl || !currentUrl) {
-        // Update the indicator
-        reloadIndicator.textContent = '✨ Updating modules...';
-        reloadIndicator.style.background = '#3b82f6';
-
-        // Clean up existing modules and create new script
-        const existingScripts = document.querySelectorAll('script[src*="/root.js"]');
-        existingScripts.forEach(script => script.remove());
-
-        // Small delay for cleanup
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        // Create new script element
-        const newScriptElement = document.createElement('script');
-        newScriptElement.type = 'module';
-        newScriptElement.src = newUrl || \`/root.js?t=\${Date.now()}\`;
-
-        // Handle successful reload
-        newScriptElement.onload = () => {
-          reloadIndicator.textContent = '✅ Updated!';
-          reloadIndicator.style.background = '#10b981';
-          setTimeout(() => {
-            if (reloadIndicator.parentNode) {
-              reloadIndicator.remove();
-            }
-          }, 2000);
-          console.log('🔥 Hot reload: Application updated successfully');
-        };
-
-        // Handle reload failure
-        newScriptElement.onerror = () => {
-          reloadIndicator.textContent = '❌ Failed - refreshing page';
-          reloadIndicator.style.background = '#ef4444';
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
-        };
-
-        // Append the new script
-        document.head.appendChild(newScriptElement);
-      } else {
-        // No changes detected
-        reloadIndicator.textContent = '✅ No changes';
-        reloadIndicator.style.background = '#6b7280';
-        setTimeout(() => {
-          if (reloadIndicator.parentNode) {
-            reloadIndicator.remove();
-          }
-        }, 1500);
-        console.log('🔄 Hot reload: No changes detected');
+      // Compare URLs to detect changes
+      if (currentUrl === newUrl && currentUrl) {
+        // No changes
+        indicator.textContent = '✅ Up to date';
+        indicator.style.background = 'rgba(16, 185, 129, 0.9)';
+        setTimeout(() => indicator.remove(), 1500);
+        return;
       }
+
+      // Changes detected - perform smooth update
+      indicator.textContent = '⚡ Updating...';
+      indicator.style.background = 'rgba(245, 158, 11, 0.9)';
+
+      // Store current scroll position and form data
+      const scrollY = window.scrollY;
+      const scrollX = window.scrollX;
+      const formData = new FormData();
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (el.id || el.name) {
+          const key = el.id || el.name;
+          const value = el.type === 'checkbox' ? el.checked : el.value;
+          formData.append(key, value);
+        }
+      });
+
+      // Store current router state
+      const currentPath = window.location.pathname;
+
+      // Create module update function
+      const updateModule = () => {
+        return new Promise((resolve, reject) => {
+          // Remove old script
+          const oldScripts = document.querySelectorAll('script[src*="/root.js"]');
+          oldScripts.forEach(script => script.remove());
+
+          // Load new script
+          const script = document.createElement('script');
+          script.type = 'module';
+          script.src = newUrl || \`/root.js?t=\${Date.now()}\`;
+
+          script.onload = () => {
+            // Restore scroll position
+            setTimeout(() => {
+              window.scrollTo(scrollX, scrollY);
+
+              // Restore form values
+              formData.forEach((value, key) => {
+                const el = document.getElementById(key) || document.querySelector(\`[name="\${key}"]\`);
+                if (el) {
+                  if (el.type === 'checkbox') {
+                    el.checked = value === 'true';
+                  } else {
+                    el.value = value;
+                  }
+                }
+              });
+
+              // Ensure we're on the same route
+              if (window.location.pathname !== currentPath) {
+                window.history.replaceState({}, '', currentPath);
+              }
+            }, 100);
+
+            resolve();
+          };
+
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      };
+
+      await updateModule();
+
+      // Success
+      indicator.textContent = '✨ Updated!';
+      indicator.style.background = 'rgba(16, 185, 129, 0.9)';
+      setTimeout(() => indicator.remove(), 2000);
+
+      console.log('🔥 Hot reload: Smooth update completed');
     } catch (error) {
-      console.warn('❌ Hot reload failed, falling back to page reload:', error);
-      location.reload();
+      console.warn('❌ Hot reload failed:', error);
+      // Show error briefly then fallback
+      const errorIndicator = document.createElement('div');
+      errorIndicator.style.cssText = \`
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(239, 68, 68, 0.9);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-family: system-ui, sans-serif;
+        font-size: 12px;
+        z-index: 10000;
+        backdrop-filter: blur(8px);
+      \`;
+      errorIndicator.textContent = '❌ Update failed - refreshing...';
+      document.body.appendChild(errorIndicator);
+
+      setTimeout(() => location.reload(), 1000);
     }
   };
 

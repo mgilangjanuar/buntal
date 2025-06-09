@@ -21,23 +21,23 @@ The \`buntal\` package is the main framework package that provides configuration
 
 ## Modules
 
-### Configuration
+### [Configuration](/docs/references/buntal/configuration)
 
 Configuration options for Buntal applications.
 
-- **BuntalConfig** - Main configuration interface
+- **[BuntalConfig](/docs/references/buntal/configuration/buntal-config)** - Main configuration interface
 
-### Component Props
+### [Component Props](/docs/references/buntal/component-props)
 
 TypeScript interfaces for component properties.
 
-- **MetaProps** - Page metadata
-- **LinkProps** - Link component
-- **ScriptProps** - Script component
-- **SvgProps** - SVG component
-- **AppProps** - App component
-- **PageProps** - Page component
-- **LayoutProps** - Layout component`}
+- **[MetaProps](/docs/references/buntal/component-props/meta-props)** - Page metadata
+- **[LinkProps](/docs/references/buntal/component-props/link-props)** - Link component
+- **[ScriptProps](/docs/references/buntal/component-props/script-props)** - Script component
+- **[SvgProps](/docs/references/buntal/component-props/svg-props)** - SVG component
+- **[AppProps](/docs/references/buntal/component-props/app-props)** - App component
+- **[PageProps](/docs/references/buntal/component-props/page-props)** - Page component
+- **[LayoutProps](/docs/references/buntal/component-props/layout-props)** - Layout component`}
       tableOfContents={[
         {
           id: 'buntal',
@@ -60,12 +60,6 @@ TypeScript interfaces for component properties.
         {
           id: 'configuration',
           title: 'Configuration',
-          level: 3,
-          offset: 72
-        },
-        {
-          id: 'types',
-          title: 'Types',
           level: 3,
           offset: 72
         },

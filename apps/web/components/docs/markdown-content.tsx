@@ -263,7 +263,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h1 id={id} {...props}>
+                  <h1 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h1>
                 )
@@ -272,7 +272,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h2 id={id} {...props}>
+                  <h2 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h2>
                 )
@@ -281,7 +281,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h3 id={id} {...props}>
+                  <h3 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h3>
                 )
@@ -290,7 +290,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h4 id={id} {...props}>
+                  <h4 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h4>
                 )
@@ -299,7 +299,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h5 id={id} {...props}>
+                  <h5 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h5>
                 )
@@ -308,7 +308,7 @@ export default function MarkdownContent({
                 const text = String(children)
                 const id = generateSlug(text)
                 return (
-                  <h6 id={id} {...props}>
+                  <h6 className="wrap-break-word" id={id} {...props}>
                     {children}
                   </h6>
                 )

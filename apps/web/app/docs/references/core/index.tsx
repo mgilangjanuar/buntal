@@ -15,6 +15,20 @@ export default function CoreAPIReferencePage() {
 
 The core HTTP server package for Buntal JS, providing low-level APIs for building HTTP servers and handling requests/responses.
 
+## Quick Start
+
+\`\`\`typescript
+import { Http } from '@buntal/core'
+
+const app = new Http({ port: 3000 })
+
+app.get('/hello/:name', (req, res) => {
+  return res.json({ message: \`Hello \${req.params.name}!\` })
+})
+
+app.start()
+\`\`\`
+
 ## Classes
 
 ### Http
@@ -27,225 +41,131 @@ The main HTTP server class for creating and configuring HTTP servers.
 new Http(config: Config)
 \`\`\`
 
-#### Config
+#### Configuration
 
-Configuration object for the HTTP server.
-
-\`\`\`typescript
-type Config = {
-  port: number
-  appDir?: string
-  websocket?: WebSocketHandler
-  injectHandler?: (payload: {
-    req: Req
-    match: Bun.MatchedRoute
-    handler: any
-  }) => Promise<Response | void>
-}
-\`\`\`
-
-**Properties:**
-- \`port\` - The port number to listen on
-- \`appDir\` - Optional directory path for file-based routing
-- \`websocket\` - Optional WebSocket handler from Bun
-- \`injectHandler\` - Optional middleware injection handler
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| \`port\` | \`number\` | ✅ | The port number to listen on |
+| \`appDir\` | \`string\` | ❌ | Directory path for file-based routing |
+| \`websocket\` | \`WebSocketHandler\` | ❌ | WebSocket handler from Bun |
+| \`injectHandler\` | \`function\` | ❌ | Middleware injection handler |
 
 #### Methods
 
-##### start(cb?: (server: Bun.Server) => void)
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| \`start(cb?)\` | \`cb?: (server: Bun.Server) => void\` | \`Bun.Server\` | Starts the HTTP server |
+| \`use(handler)\` | \`handler: AtomicHandler\` | \`void\` | Adds middleware to all routes |
+| \`get(route, ...handlers)\` | \`route: string, handlers: AtomicHandler[]\` | \`void\` | Registers GET route |
+| \`post(route, ...handlers)\` | \`route: string, handlers: AtomicHandler[]\` | \`void\` | Registers POST route |
+| \`put(route, ...handlers)\` | \`route: string, handlers: AtomicHandler[]\` | \`void\` | Registers PUT route |
+| \`patch(route, ...handlers)\` | \`route: string, handlers: AtomicHandler[]\` | \`void\` | Registers PATCH route |
+| \`delete(route, ...handlers)\` | \`route: string, handlers: AtomicHandler[]\` | \`void\` | Registers DELETE route |
+| \`onError(handler)\` | \`handler: (error: Error) => Response\` | \`void\` | Sets global error handler |
+| \`onNotFound(handler)\` | \`handler: AtomicHandler\` | \`void\` | Sets 404 handler |
 
-Starts the HTTP server.
+**Example Usage:**
 
-**Parameters:**
-- \`cb\` - Optional callback function called with the Bun server instance
+\`\`\`typescript
+const app = new Http({ port: 3000 })
 
-**Returns:** \`Bun.Server\`
+// Middleware
+app.use((req, res) => {
+  console.log(\`\${req.method} \${req.url}\`)
+})
 
-##### use(handler: AtomicHandler)
+// Routes with type-safe parameters
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params // TypeScript knows this is a string
+  return res.json({ userId: id })
+})
 
-Adds a middleware handler to the server.
+// Error handling
+app.onError((error) => {
+  return new Response('Internal Server Error', { status: 500 })
+})
 
-**Parameters:**
-- \`handler\` - Middleware function to execute for all requests
-
-##### get<R, P>(route: R, ...handlers: AtomicHandler<P>[])
-
-Registers GET route handlers.
-
-**Type Parameters:**
-- \`R\` - Route string type
-- \`P\` - Route parameters type (automatically extracted from route)
-
-**Parameters:**
-- \`route\` - Route pattern string
-- \`handlers\` - Handler functions for the route
-
-##### post<R, P>(route: R, ...handlers: AtomicHandler<P>[])
-
-Registers POST route handlers.
-
-**Type Parameters:**
-- \`R\` - Route string type
-- \`P\` - Route parameters type (automatically extracted from route)
-
-**Parameters:**
-- \`route\` - Route pattern string
-- \`handlers\` - Handler functions for the route
-
-##### put<R, P>(route: R, ...handlers: AtomicHandler<P>[])
-
-Registers PUT route handlers.
-
-**Type Parameters:**
-- \`R\` - Route string type
-- \`P\` - Route parameters type (automatically extracted from route)
-
-**Parameters:**
-- \`route\` - Route pattern string
-- \`handlers\` - Handler functions for the route
-
-##### patch<R, P>(route: R, ...handlers: AtomicHandler<P>[])
-
-Registers PATCH route handlers.
-
-**Type Parameters:**
-- \`R\` - Route string type
-- \`P\` - Route parameters type (automatically extracted from route)
-
-**Parameters:**
-- \`route\` - Route pattern string
-- \`handlers\` - Handler functions for the route
-
-##### delete<R, P>(route: R, ...handlers: AtomicHandler<P>[])
-
-Registers DELETE route handlers.
-
-**Type Parameters:**
-- \`R\` - Route string type
-- \`P\` - Route parameters type (automatically extracted from route)
-
-**Parameters:**
-- \`route\` - Route pattern string
-- \`handlers\` - Handler functions for the route
-
-##### onError(handler: (error: Error) => Response | Promise<Response>)
-
-Sets a global error handler for the server.
-
-**Parameters:**
-- \`handler\` - Function to handle errors and return a response
-
-##### onNotFound(handler: AtomicHandler)
-
-Sets a custom 404 not found handler.
-
-**Parameters:**
-- \`handler\` - Function to handle 404 responses
+app.start((server) => {
+  console.log(\`Server running on port \${server.port}\`)
+})
+\`\`\`
 
 ### Req<P, T>
 
 Extended Request class with additional properties for route parameters and context.
 
-**Type Parameters:**
-- \`P\` - Type of route parameters (defaults to \`Record<string, string>\`)
-- \`T\` - Type of context data (defaults to \`unknown\`)
-
 #### Properties
 
-- \`params: P\` - Route parameters extracted from the URL
-- \`query?: Record<string, string>\` - Query string parameters
-- \`context?: T\` - Additional context data
+| Property | Type | Description |
+|----------|------|-------------|
+| \`params\` | \`P\` | Route parameters extracted from URL |
+| \`query\` | \`Record<string, string>\` | Query string parameters |
+| \`context\` | \`T\` | Additional context data |
+| \`cookies\` | \`Record<string, string>\` | All cookies from request (getter) |
 
-#### Getters
+**Example:**
 
-##### cookies
-
-Returns all cookies from the request.
-
-**Returns:** \`Record<string, string>\`
+\`\`\`typescript
+// Route: /users/:id?page=1&limit=10
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params        // "123"
+  const { page, limit } = req.query // { page: "1", limit: "10" }
+  const sessionId = req.cookies.session // Cookie value
+})
+\`\`\`
 
 ### Res
 
-Response class for building HTTP responses.
+Response class for building HTTP responses with method chaining.
 
 #### Methods
 
-##### status(status: number)
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| \`status(code)\` | \`code: number\` | \`Res\` | Sets HTTP status code |
+| \`headers(headers)\` | \`headers: Record<string, string>\` | \`Res\` | Sets response headers |
+| \`cookie(name, value, options?)\` | \`name: string, value?: string, options?: CookieOptions\` | \`Res\` | Sets or deletes cookie |
+| \`redirect(url, status?)\` | \`url: string, status?: number\` | \`Response\` | Redirects to URL |
+| \`send(data?)\` | \`data?: BodyInit\` | \`Response\` | Sends response with data |
+| \`json(data)\` | \`data: unknown\` | \`Response\` | Sends JSON response |
+| \`html(data)\` | \`data: string \\| ReadableStream\` | \`Response\` | Sends HTML response |
+| \`text(data)\` | \`data: string\` | \`Response\` | Sends plain text response |
 
-Sets the HTTP status code.
+**Example:**
 
-**Parameters:**
-- \`status\` - HTTP status code
+\`\`\`typescript
+app.get('/api/user', (req, res) => {
+  return res
+    .status(200)
+    .headers({ 'X-Custom': 'value' })
+    .cookie('session', 'abc123', { httpOnly: true })
+    .json({ user: 'John Doe' })
+})
 
-**Returns:** \`Res\` (chainable)
+app.get('/redirect', (req, res) => {
+  return res.redirect('/dashboard', 302)
+})
+\`\`\`
 
-##### headers(headers: Record<string, string>)
+## Handler Functions
 
-Sets response headers.
+### h(...handlers)
 
-**Parameters:**
-- \`headers\` - Object containing header key-value pairs
+Handler composition function that chains multiple handlers together.
 
-**Returns:** \`Res\` (chainable)
+\`\`\`typescript
+const authMiddleware = (req: Req, res: Res) => {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+}
 
-##### redirect(url: string, status = 302)
+const getUserHandler = (req: Req, res: Res) => {
+  return res.json({ user: 'John Doe' })
+}
 
-Redirects to the specified URL.
-
-**Parameters:**
-- \`url\` - URL to redirect to
-- \`status\` - HTTP status code (defaults to 302)
-
-**Returns:** \`Response\`
-
-##### send(data?: BodyInit)
-
-Sends a response with optional body data.
-
-**Parameters:**
-- \`data\` - Optional response body
-
-**Returns:** \`Response\`
-
-##### json(data: unknown)
-
-Sends a JSON response.
-
-**Parameters:**
-- \`data\` - Data to serialize as JSON
-
-**Returns:** \`Response\`
-
-##### html(data: string | ReadableStream<Uint8Array>)
-
-Sends an HTML response.
-
-**Parameters:**
-- \`data\` - HTML content or stream
-
-**Returns:** \`Response\`
-
-##### text(data: string)
-
-Sends a plain text response.
-
-**Parameters:**
-- \`data\` - Text content
-
-**Returns:** \`Response\`
-
-##### cookie(name: string, value?: string | null, options?: CookieOptions)
-
-Sets or deletes a cookie.
-
-**Parameters:**
-- \`name\` - Cookie name
-- \`value\` - Cookie value (null to delete)
-- \`options\` - Cookie configuration options
-
-**Returns:** \`Res\` (chainable)
-
-## Types
+app.get('/protected', h(authMiddleware, getUserHandler))
+\`\`\`
 
 ### AtomicHandler<P, T, R>
 
@@ -253,191 +173,146 @@ Handler function type for processing requests.
 
 \`\`\`typescript
 type AtomicHandler<
-  P = Record<string, string>,
-  T = unknown,
-  R = Response | void | undefined | Promise<Response | void | undefined>
-> = {
-  (req: Req<P, T>, res: Res): R
-}
+  P = Record<string, string>,  // Route parameters
+  T = unknown,                 // Context type
+  R = Response | void | Promise<Response | void>
+> = (req: Req<P, T>, res: Res) => R
 \`\`\`
 
-**Type Parameters:**
-- \`P\` - Route parameters type
-- \`T\` - Context type
-- \`R\` - Return type
+## File-Based Routing
 
-### CookieOptions
+### buildRouter(dir)
 
-Configuration options for cookies.
+Creates a file system router for the specified directory using Next.js-style conventions.
 
-\`\`\`typescript
-type CookieOptions = {
-  maxAge?: number
-  expires?: Date
-  path?: string
-  domain?: string
-  secure?: boolean
-  httpOnly?: boolean
-  sameSite?: 'Strict' | 'Lax' | 'None'
-}
-\`\`\`
-
-**Properties:**
-- \`maxAge\` - Cookie lifetime in seconds
-- \`expires\` - Expiration date
-- \`path\` - Cookie path
-- \`domain\` - Cookie domain
-- \`secure\` - HTTPS only flag
-- \`httpOnly\` - HTTP only flag (not accessible via JavaScript)
-- \`sameSite\` - SameSite attribute for CSRF protection
-
-### ExtractRouteParams<Path>
-
-Utility type that extracts route parameters from a path string.
-
-\`\`\`typescript
-type ExtractRouteParams<Path extends string> =
-  Path extends \`\${string}/:$\{infer Param}/\${infer Rest}\`
-    ? { [K in Param | keyof ExtractRouteParams<\`/\${Rest}\`>]: string }
-    : Path extends \`\${string}/:$\{infer Param}\`
-      ? { [K in Param]: string }
-      : Path extends \`/:$\{infer Param}\`
-        ? { [K in Param]: string }
-        : {}
-\`\`\`
-
-This type automatically extracts parameter names from route patterns like \`/users/:id\` and creates a type with those parameter names.
-
-## Functions
-
-### h(...handlers: AtomicHandler<P, T>[])
-
-Handler composition function that chains multiple handlers together.
-
-**Type Parameters:**
-- \`P\` - Route parameters type
-- \`T\` - Context type
-
-**Parameters:**
-- \`handlers\` - Array of handler functions to chain
-
-**Returns:** \`AtomicHandler<P, T, Response | Promise<Response>>\`
-
-The function executes handlers in sequence until one returns a Response, or returns a 204 No Content if no handler returns a response.
-
-### buildRouter(dir: string)
-
-Creates a file system router for the specified directory.
-
-**Parameters:**
-- \`dir\` - Directory path containing route files
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| \`dir\` | \`string\` | Directory path containing route files |
 
 **Returns:** \`Bun.FileSystemRouter\`
 
-Uses Next.js-style routing conventions for file-based routing.
+**File Naming Conventions:**
+- \`index.ts\` → \`/\`
+- \`users.ts\` → \`/users\`
+- \`users/[id].ts\` → \`/users/:id\`
+- \`users/[...slug].ts\` → \`/users/*\`
+
+### ExtractRouteParams<Path>
+
+Utility type that automatically extracts route parameters from path strings.
+
+\`\`\`typescript
+type UserRoute = ExtractRouteParams<'/users/:id/posts/:postId'>
+// Result: { id: string, postId: string }
+\`\`\`
+
+## Cookie Management
+
+### Cookie Utilities
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| \`cookie.get(req, name)\` | \`req: Req, name: string\` | \`string \\| null\` | Gets specific cookie value |
+| \`cookie.getAll(req)\` | \`req: Req\` | \`Record<string, string>\` | Gets all cookies |
+| \`cookie.set(res, name, value, options?)\` | \`res: Res, name: string, value: string, options?: CookieOptions\` | \`string\` | Sets cookie |
+| \`cookie.delete(res, name)\` | \`res: Res, name: string\` | \`string\` | Deletes cookie |
+
+### CookieOptions
+
+| Property | Type | Description |
+|----------|------|-------------|
+| \`maxAge\` | \`number\` | Cookie lifetime in seconds |
+| \`expires\` | \`Date\` | Expiration date |
+| \`path\` | \`string\` | Cookie path |
+| \`domain\` | \`string\` | Cookie domain |
+| \`secure\` | \`boolean\` | HTTPS only flag |
+| \`httpOnly\` | \`boolean\` | HTTP only (not accessible via JS) |
+| \`sameSite\` | \`'Strict' \\| 'Lax' \\| 'None'\` | SameSite attribute |
+
+**Example:**
+
+\`\`\`typescript
+import { cookie } from '@buntal/core'
+
+app.get('/login', (req, res) => {
+  const sessionId = cookie.get(req, 'session')
+  if (!sessionId) {
+    cookie.set(res, 'session', 'new-session-id', {
+      httpOnly: true,
+      maxAge: 3600
+    })
+  }
+  return res.json({ loggedIn: !!sessionId })
+})
+
+app.post('/logout', (req, res) => {
+  cookie.delete(res, 'session')
+  return res.json({ message: 'Logged out' })
+})
+\`\`\`
 
 ## Constants
 
 ### ALLOWED_METHODS
 
-Array of allowed HTTP methods.
-
 \`\`\`typescript
-const ALLOWED_METHODS = [
-  'GET',
-  'POST',
-  'PUT',
-  'PATCH',
-  'DELETE',
-  'OPTIONS'
-] as const
-\`\`\`
-
-## Cookie Utilities
-
-### cookie.get(req: Req, name: string)
-
-Gets a specific cookie value from the request.
-
-**Parameters:**
-- \`req\` - Request object
-- \`name\` - Cookie name
-
-**Returns:** \`string | null\`
-
-### cookie.getAll(req: Req)
-
-Gets all cookies from the request.
-
-**Parameters:**
-- \`req\` - Request object
-
-**Returns:** \`Record<string, string>\`
-
-### cookie.set(res: Res, name: string, value: string, options?: CookieOptions)
-
-Sets a cookie in the response.
-
-**Parameters:**
-- \`res\` - Response object
-- \`name\` - Cookie name
-- \`value\` - Cookie value
-- \`options\` - Cookie configuration options
-
-**Returns:** \`string\` - The cookie string
-
-### cookie.delete(res: Res, name: string)
-
-Deletes a cookie by setting its Max-Age to 0.
-
-**Parameters:**
-- \`res\` - Response object
-- \`name\` - Cookie name to delete
-
-**Returns:** \`string\` - The deletion cookie string`}
+const ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] as const
+\`\`\``}
       tableOfContents={[
+        { id: 'quick-start', title: 'Quick Start', level: 2, offset: 72 },
         { id: 'classes', title: 'Classes', level: 2, offset: 72 },
         { id: 'http', title: 'Http', level: 3, offset: 72 },
-        { id: 'req-p-t-', title: 'Req<P, T>', level: 3, offset: 72 },
+        { id: 'req-p-t', title: 'Req<P, T>', level: 3, offset: 72 },
         { id: 'res', title: 'Res', level: 3, offset: 72 },
-        { id: 'types', title: 'Types', level: 2, offset: 72 },
         {
-          id: 'atomichandler-p-t-r-',
+          id: 'handler-functions',
+          title: 'Handler Functions',
+          level: 2,
+          offset: 72
+        },
+        { id: 'h-handlers', title: 'h(...handlers)', level: 3, offset: 72 },
+        {
+          id: 'atomichandler-p-t-r',
           title: 'AtomicHandler<P, T, R>',
           level: 3,
           offset: 72
         },
-        { id: 'cookieoptions', title: 'CookieOptions', level: 3, offset: 72 },
         {
-          id: 'extractrouteparams-path-',
-          title: 'ExtractRouteParams<Path>',
-          level: 3,
-          offset: 72
-        },
-        { id: 'functions', title: 'Functions', level: 2, offset: 72 },
-        {
-          id: 'h-handlers-atomichandler-p-t-',
-          title: 'h(...handlers)',
-          level: 3,
+          id: 'file-based-routing',
+          title: 'File-Based Routing',
+          level: 2,
           offset: 72
         },
         {
-          id: 'buildrouter-dir-string-',
+          id: 'buildrouter-dir',
           title: 'buildRouter(dir)',
           level: 3,
           offset: 72
         },
-        { id: 'constants', title: 'Constants', level: 2, offset: 72 },
         {
-          id: 'allowed_methods',
-          title: 'ALLOWED_METHODS',
+          id: 'extractrouteparams-path',
+          title: 'ExtractRouteParams<Path>',
           level: 3,
+          offset: 72
+        },
+        {
+          id: 'cookie-management',
+          title: 'Cookie Management',
+          level: 2,
           offset: 72
         },
         {
           id: 'cookie-utilities',
           title: 'Cookie Utilities',
-          level: 2,
+          level: 3,
+          offset: 72
+        },
+        { id: 'cookieoptions', title: 'CookieOptions', level: 3, offset: 72 },
+        { id: 'constants', title: 'Constants', level: 2, offset: 72 },
+        {
+          id: 'allowed_methods',
+          title: 'ALLOWED_METHODS',
+          level: 3,
           offset: 72
         }
       ]}

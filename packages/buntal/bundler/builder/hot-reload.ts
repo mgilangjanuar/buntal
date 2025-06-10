@@ -29,26 +29,6 @@ export async function buildHotReloadScript(
     });
   };  const performHotReload = async () => {
     try {
-      // Show subtle loading indicator
-      const indicator = document.createElement('div');
-      indicator.style.cssText = \`
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(59, 130, 246, 0.9);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-family: system-ui, sans-serif;
-        font-size: 12px;
-        z-index: 10000;
-        backdrop-filter: blur(8px);
-        transition: all 0.2s ease;
-        pointer-events: none;
-      \`;
-      indicator.textContent = '🔄 Checking for updates...';
-      document.body.appendChild(indicator);
-
       // Advanced scroll position preservation setup
       const scrollState = {
         x: window.scrollX,
@@ -85,15 +65,8 @@ export async function buildHotReloadScript(
 
       // Check if script changed
       if (currentUrl === newUrl && currentUrl) {
-        indicator.textContent = '✅ Up to date';
-        indicator.style.background = 'rgba(16, 185, 129, 0.9)';
-        setTimeout(() => indicator.remove(), 1500);
         return;
       }
-
-      // Changes detected
-      indicator.textContent = '⚡ Updating...';
-      indicator.style.background = 'rgba(245, 158, 11, 0.9)';
 
       // Find the React root container (typically the main content area, not body)
       const reactRoot = document.querySelector('[data-reactroot], #root, main, [role="main"]') || document.body.children[0];
@@ -111,11 +84,7 @@ export async function buildHotReloadScript(
         throw new Error('Could not find new React root in updated content');
       }
 
-      // Advanced scroll preservation techniques
-      const originalScrollBehavior = document.documentElement.style.scrollBehavior;
-      const originalOverflow = document.documentElement.style.overflow;
-
-      // Temporarily disable smooth scrolling and prevent scrolling during update
+      // Temporarily disable smooth scrolling
       document.documentElement.style.scrollBehavior = 'auto';
 
       // Create scroll anchor element at current position
@@ -133,55 +102,28 @@ export async function buildHotReloadScript(
       document.body.appendChild(scrollAnchor);
 
       // Perform DOM update with continuous scroll preservation
-      await updateDOMNodeSelectively(reactRoot, newReactRoot, indicator, scrollState);
-
-      // Success
-      indicator.textContent = '✨ Updated!';
-      indicator.style.background = 'rgba(16, 185, 129, 0.9)';
-      setTimeout(() => indicator.remove(), 2000);
-
-      console.log('🔥 Hot reload: DOM updated successfully, scroll preserved at', scrollState);
+      await updateDOMNodeSelectively(reactRoot, newReactRoot, scrollState);
     } catch (error) {
-      console.warn('❌ Hot reload failed:', error);
-      const errorIndicator = document.createElement('div');
-      errorIndicator.style.cssText = \`
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(239, 68, 68, 0.9);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-family: system-ui, sans-serif;
-        font-size: 12px;
-        z-index: 10000;
-        backdrop-filter: blur(8px);
-      \`;
-      errorIndicator.textContent = '❌ Update failed - refreshing...';
-      document.body.appendChild(errorIndicator);
-
+      // Silent failure - optionally could reload the page
       // setTimeout(() => location.reload(), 1000);
     }
   };
 
   // More selective DOM diffing function that preserves scroll position
-  const updateDOMNodeSelectively = async (currentNode, newNode, indicator, scrollState) => {
-    // Skip the indicator element and preserve scroll-affecting elements
-    if (currentNode === indicator ||
-        (currentNode.contains && currentNode.contains(indicator)) ||
-        currentNode === document.documentElement ||
+  const updateDOMNodeSelectively = async (currentNode, newNode, scrollState) => {
+    // Skip scroll-affecting elements
+    if (currentNode === document.documentElement ||
         currentNode === document.body ||
         currentNode.hasAttribute && currentNode.hasAttribute('data-scroll-anchor')) {
       return;
     }
 
     // Preserve scroll position during updates
-    const preserveScroll = () => {
-      setTimeout(() => {
-        if (scrollState && (window.scrollY !== scrollState.y || window.scrollX !== scrollState.x)) {
-          window.scrollTo(scrollState.x, scrollState.y);
-        }
-      }, 1000);
+    const preserveScroll = () => {        setTimeout(() => {
+          if (scrollState && (window.scrollY !== scrollState.y || window.scrollX !== scrollState.x)) {
+            window.scrollTo(scrollState.x, scrollState.y);
+          }
+        }, 10);
     };
 
     // Handle text nodes
@@ -278,10 +220,9 @@ export async function buildHotReloadScript(
             currentNode.appendChild(newChild.cloneNode(true));
             preserveScroll();
           } else if (currentChild && !newChild) {
-            // Remove old child (but not if it contains the indicator or scroll anchor)
+            // Remove old child (but not if it contains the scroll anchor)
             if (!currentChild.contains ||
-                (!currentChild.contains(indicator) &&
-                 (currentChild.nodeType !== Node.ELEMENT_NODE || !(currentChild).hasAttribute('data-scroll-anchor')))) {
+                (currentChild.nodeType !== Node.ELEMENT_NODE || !(currentChild).hasAttribute('data-scroll-anchor'))) {
               currentChild.remove();
               preserveScroll();
             }
@@ -291,16 +232,14 @@ export async function buildHotReloadScript(
               currentChild.nodeType === newChild.nodeType &&
               (currentChild.nodeType === Node.TEXT_NODE ||
                (currentChild.tagName === newChild.tagName &&
-                !currentChild.contains(indicator) &&
                 (currentChild.nodeType !== Node.ELEMENT_NODE || !(currentChild).hasAttribute('data-scroll-anchor'))))
             );
 
             if (shouldUpdate) {
-              await updateDOMNodeSelectively(currentChild, newChild, indicator, scrollState);
+              await updateDOMNodeSelectively(currentChild, newChild, scrollState);
             } else if (!currentChild.contains ||
-                      (!currentChild.contains(indicator) &&
-                       (currentChild.nodeType !== Node.ELEMENT_NODE || !(currentChild).hasAttribute('data-scroll-anchor')))) {
-              // Replace with new node only if it doesn't contain our indicator or scroll anchor
+                      (currentChild.nodeType !== Node.ELEMENT_NODE || !(currentChild).hasAttribute('data-scroll-anchor'))) {
+              // Replace with new node only if it doesn't contain our scroll anchor
               currentNode.replaceChild(newChild.cloneNode(true), currentChild);
               preserveScroll();
             }
@@ -328,7 +267,9 @@ export async function buildHotReloadScript(
           connectWebSocket();
         }, reconnectInterval);
       } else {
-        console.error("Max reconnect attempts reached. Stopping reconnection.");
+        setTimeout(() => {
+          connectWebSocket();
+        }, reconnectInterval);
       }
     };
 

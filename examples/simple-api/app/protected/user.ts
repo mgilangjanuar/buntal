@@ -1,4 +1,4 @@
-import { cookie, h } from '@buntal/core'
+import { h } from '@buntal/core'
 import { auth } from '@buntal/core/middlewares'
 import { hash, jwt } from '@buntal/core/security'
 
@@ -42,6 +42,9 @@ export const GET = h(
     cookie: {
       key: 'access_token'
     },
+    header: {
+      key: 'Authorization'
+    },
     onVerified: async (req, res, decoded) => {
       if (decoded.id !== '123') {
         return res.status(401).json({
@@ -77,12 +80,14 @@ export const POST = h(async (_, res) => {
   const token = await jwt(DONT_TRY_THIS_AT_HOME).sign(user, {
     expiresIn: '2h'
   })
-  cookie.set(res, 'access_token', token, {
-    maxAge: 60 * 60 * 2,
-    httpOnly: true,
-    path: '/'
-  })
-  return res.json({
-    token
-  })
+
+  return res
+    .cookie('access_token', token, {
+      maxAge: 60 * 60 * 2,
+      httpOnly: true,
+      path: '/'
+    })
+    .json({
+      token
+    })
 })

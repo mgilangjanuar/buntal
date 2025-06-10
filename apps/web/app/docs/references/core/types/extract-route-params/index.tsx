@@ -22,6 +22,7 @@ export default function ExtractRouteParamsReference() {
             "The URL path string template containing parameter placeholders like ':id', ':name', etc."
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

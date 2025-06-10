@@ -60,6 +60,7 @@ export default function JwtPage() {
           returns: 'Promise<T>'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

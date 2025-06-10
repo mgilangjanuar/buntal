@@ -106,6 +106,7 @@ export default function UseRouterPage() {
           returns: 'void'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

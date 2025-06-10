@@ -68,6 +68,7 @@ export default function AppComponentPage() {
           description: 'Data to pass to the root layout component'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

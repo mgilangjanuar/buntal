@@ -32,6 +32,7 @@ The Middleware module provides pre-built middleware functions that can be easily
 
 
 `}
+      lastModified="2025-06-10"
     />
   )
 }

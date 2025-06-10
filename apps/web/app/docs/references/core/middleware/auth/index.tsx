@@ -68,6 +68,7 @@ type AuthOptions<T = unknown> = {
             'Callback function called after successful token verification'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

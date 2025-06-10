@@ -98,6 +98,7 @@ Built-in middleware functions for common use cases.
           offset: 72
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

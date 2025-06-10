@@ -43,6 +43,7 @@ export default function HPage() {
           returns: 'AtomicHandler<P, T, Response | Promise<Response>>'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

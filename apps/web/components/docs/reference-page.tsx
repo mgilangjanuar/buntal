@@ -24,6 +24,7 @@ type ReferencePageProps = {
   parameters?: Parameter[]
   methods?: Method[]
   properties?: Parameter[]
+  lastModified?: string
 }
 
 export default function ReferencePage({
@@ -34,7 +35,8 @@ export default function ReferencePage({
   typeDefinition,
   parameters,
   methods,
-  properties
+  properties,
+  lastModified
 }: ReferencePageProps) {
   const content = `# ${title}
 
@@ -165,12 +167,12 @@ ${
       offset: 72
     })
   }
-
   return (
     <MarkdownContent
       title={headerTitle}
       content={content}
       tableOfContents={tableOfContents}
+      lastModified={lastModified}
     />
   )
 }

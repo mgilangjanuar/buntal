@@ -104,6 +104,7 @@ export default function CookiePage() {
           returns: 'string'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

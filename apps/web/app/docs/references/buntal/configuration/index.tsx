@@ -27,6 +27,7 @@ The Configuration module defines the structure and options for configuring Bunta
 
 
 `}
+      lastModified="2025-06-10"
     />
   )
 }

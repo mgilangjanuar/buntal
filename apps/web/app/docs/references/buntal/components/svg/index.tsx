@@ -35,6 +35,7 @@ export default function SvgComponentPage() {
           description: 'CSS class name to apply to the container div'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

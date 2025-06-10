@@ -37,6 +37,7 @@ The HTTP module provides the core HTTP functionality for Buntal applications, in
 - **[Req](/docs/references/core/http/req)** - Enhanced request object with additional utilities
 - **[Res](/docs/references/core/http/res)** - Enhanced response object with additional utilities
 `}
+      lastModified="2025-06-10"
     />
   )
 }

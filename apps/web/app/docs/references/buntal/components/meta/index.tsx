@@ -128,6 +128,7 @@ type MetaProps = Partial<{
             'Twitter Card type (e.g., "summary", "summary_large_image")'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

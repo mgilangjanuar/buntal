@@ -15,6 +15,7 @@ export default function LoggerPage() {
       description="HTTP request logging middleware for Buntal applications that logs request details."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/middlewares/logger.ts"
       typeDefinition={`function logger(): AtomicHandler`}
+      lastModified="2025-06-10"
     />
   )
 }

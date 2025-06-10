@@ -60,6 +60,7 @@ hash.compare = function (password: string, hashed: string): boolean`}
           returns: 'boolean'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

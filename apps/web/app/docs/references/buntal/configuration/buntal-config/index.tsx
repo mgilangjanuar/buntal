@@ -58,6 +58,7 @@ export default function BuntalConfigPage() {
           description: 'Additional Bun build configuration options'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

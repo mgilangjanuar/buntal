@@ -149,6 +149,7 @@ export default function ResPage() {
           returns: 'Res'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

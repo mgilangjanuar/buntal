@@ -43,6 +43,7 @@ export default function ScriptComponentPage() {
             'Additional HTML script element attributes (async, defer, etc.)'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

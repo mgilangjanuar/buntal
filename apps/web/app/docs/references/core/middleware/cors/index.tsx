@@ -76,6 +76,7 @@ type CorsOptions = {
           description: 'Whether to include credentials in CORS requests'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

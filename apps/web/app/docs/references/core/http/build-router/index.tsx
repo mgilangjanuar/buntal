@@ -23,6 +23,7 @@ export default function BuildRouterPage() {
           description: 'Directory path containing route files'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

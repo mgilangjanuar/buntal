@@ -34,6 +34,7 @@ export default function AtomicHandlerPage() {
           description: 'Type for request context data'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

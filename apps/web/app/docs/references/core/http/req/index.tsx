@@ -48,6 +48,7 @@ export default function ReqPage() {
             'Getter that returns all cookies from the request as an object'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

@@ -78,6 +78,7 @@ export default function LinkComponentPage() {
             'Additional HTML anchor element attributes (className, style, onClick, etc.)'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

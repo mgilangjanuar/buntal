@@ -27,6 +27,7 @@ The Types module provides essential TypeScript utility types that help ensure ty
 
 
 `}
+      lastModified="2025-06-10"
     />
   )
 }

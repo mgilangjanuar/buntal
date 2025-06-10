@@ -71,6 +71,7 @@ export default function CookieOptionsPage() {
           description: 'Controls cross-site request behavior'
         }
       ]}
+      lastModified="2025-06-10"
     />
   )
 }

@@ -106,7 +106,7 @@ To contribute, please follow these steps:
         }
       ]}
       prependComponent={
-        <div>
+        <div className="max-w-prose">
           <div role="alert" className="alert alert-warning items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"

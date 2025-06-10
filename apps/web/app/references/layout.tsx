@@ -48,10 +48,6 @@ const MENUS: MenuItem[] = [
           {
             title: 'cookie',
             href: '/references/core/http/cookie'
-          },
-          {
-            title: 'CookieOptions',
-            href: '/references/core/http/cookie-options'
           }
         ]
       },
@@ -69,15 +65,6 @@ const MENUS: MenuItem[] = [
         ]
       },
       {
-        title: 'Types',
-        items: [
-          {
-            title: 'ExtractRouteParams',
-            href: '/references/core/types/extract-route-params'
-          }
-        ]
-      },
-      {
         title: 'Middleware',
         items: [
           {
@@ -91,6 +78,19 @@ const MENUS: MenuItem[] = [
           {
             title: 'logger',
             href: '/references/core/middleware/logger'
+          }
+        ]
+      },
+      {
+        title: 'Types',
+        items: [
+          {
+            title: 'CookieOptions',
+            href: '/references/core/types/cookie-options'
+          },
+          {
+            title: 'ExtractRouteParams',
+            href: '/references/core/types/extract-route-params'
           }
         ]
       }

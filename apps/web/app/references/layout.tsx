@@ -12,7 +12,7 @@ type MenuItem = {
 
 const MENUS: MenuItem[] = [
   {
-    title: 'API Reference',
+    title: 'Overview',
     href: '/references'
   },
   {

@@ -1,10 +1,14 @@
 import ThemeSwitcher from '@/components/theme-switcher'
+import { cn } from '@/lib/utils'
+import { Link, useRouter } from 'buntal'
 
 export default function Header({
   title
 }: Readonly<{
   title: string
 }>) {
+  const { pathname } = useRouter()
+
   return (
     <header className="!h-14 px-4 flex items-center gap-4 max-w-5xl sticky top-0 z-10 bg-gradient-to-r to-base-100/0 from-base-100/50 backdrop-blur-sm">
       <label
@@ -31,6 +35,24 @@ export default function Header({
       <div className="divider divider-horizontal mx-0 !w-1 py-3.5 lg:hidden"></div>
       <span className="text-sm truncate flex-1">{title}</span>
       <div className="flex items-center gap-1">
+        <Link
+          href="/docs"
+          className={cn(
+            'btn btn-link text-sm text-base-content/50 hover:text-base-content underline-offset-4 btn-sm no-underline',
+            pathname.startsWith('/docs') && 'text-base-content'
+          )}
+        >
+          Docs
+        </Link>
+        <Link
+          href="/references"
+          className={cn(
+            'btn btn-link text-sm text-base-content/50 hover:text-base-content underline-offset-4 btn-sm no-underline',
+            pathname.startsWith('/references') && 'text-base-content'
+          )}
+        >
+          References
+        </Link>
         <a
           href="https://github.com/mgilangjanuar/buntal"
           target="_blank"

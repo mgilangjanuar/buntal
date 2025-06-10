@@ -10,6 +10,7 @@ export const $ = {
 export default function AuthPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Middleware"
       title="auth"
       description="JWT-based authentication middleware for Buntal applications that validates tokens from cookies or headers."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/middlewares/auth.ts"

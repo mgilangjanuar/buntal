@@ -16,6 +16,7 @@ type Method = {
 }
 
 type ReferencePageProps = {
+  headerTitle: string
   title: string
   description: string
   sourceUrl: string
@@ -26,6 +27,7 @@ type ReferencePageProps = {
 }
 
 export default function ReferencePage({
+  headerTitle,
   title,
   description,
   sourceUrl,
@@ -166,7 +168,7 @@ ${
 
   return (
     <MarkdownContent
-      title={title}
+      title={headerTitle}
       content={content}
       tableOfContents={tableOfContents}
     />

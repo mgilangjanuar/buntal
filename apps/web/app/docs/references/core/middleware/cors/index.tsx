@@ -10,6 +10,7 @@ export const $ = {
 export default function CorsPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Middleware"
       title="cors"
       description="CORS (Cross-Origin Resource Sharing) middleware for handling cross-origin requests in Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/middlewares/cors.ts"

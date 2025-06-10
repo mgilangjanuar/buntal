@@ -3,14 +3,15 @@ import { type MetaProps } from 'buntal'
 
 export const $ = {
   _meta: {
-    title: 'Http - Buntal JS'
+    title: 'App - Buntal JS'
   } satisfies MetaProps
 }
 
 export default function HttpPage() {
   return (
     <ReferencePage
-      title="Http"
+      headerTitle="@buntal/core - Http"
+      title="App"
       description="The main HTTP server class for creating and configuring HTTP servers in Buntal."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/app.ts"
       typeDefinition={`class Http {

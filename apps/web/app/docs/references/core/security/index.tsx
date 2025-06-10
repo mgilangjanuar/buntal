@@ -10,7 +10,7 @@ export const $ = {
 export default function CoreSecurityPage() {
   return (
     <MarkdownContent
-      title="Security"
+      title="@buntal/core"
       content={`# Security
 
 Security utilities for authentication and data protection in Buntal applications.

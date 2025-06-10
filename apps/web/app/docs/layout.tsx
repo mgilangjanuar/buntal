@@ -40,12 +40,12 @@ const MENUS: MenuItem[] = [
         href: '/docs/references/core',
         items: [
           {
-            title: 'HTTP',
+            title: 'Http',
             href: '/docs/references/core/http',
             items: [
               {
-                title: 'Http',
-                href: '/docs/references/core/http/http'
+                title: 'App',
+                href: '/docs/references/core/http/app'
               },
               {
                 title: 'buildRouter',

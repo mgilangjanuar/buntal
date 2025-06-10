@@ -10,7 +10,7 @@ export const $ = {
 export default function BuntalConfigurationPage() {
   return (
     <MarkdownContent
-      title="Configuration"
+      title="buntal"
       content={`# Configuration
 
 Configuration options for Buntal applications.

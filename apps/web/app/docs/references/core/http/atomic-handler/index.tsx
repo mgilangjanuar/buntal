@@ -10,6 +10,7 @@ export const $ = {
 export default function AtomicHandlerPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Http"
       title="AtomicHandler"
       description="Type definition for request handler functions in Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/handler.ts"

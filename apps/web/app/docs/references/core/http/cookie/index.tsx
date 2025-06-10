@@ -10,6 +10,7 @@ export const $ = {
 export default function CookiePage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Http"
       title="cookie"
       description="Utility object for managing HTTP cookies in Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/cookie.ts"

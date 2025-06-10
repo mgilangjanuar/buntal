@@ -10,6 +10,7 @@ export const $ = {
 export default function HPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Http"
       title="h"
       description="Higher-order function for composing and chaining AtomicHandler functions in Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/handler.ts"

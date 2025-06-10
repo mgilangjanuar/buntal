@@ -10,6 +10,7 @@ export const $ = {
 export default function HashPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Security"
       title="hash"
       description="Password hashing utility function using bcrypt for secure password storage."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/security/hash.ts"

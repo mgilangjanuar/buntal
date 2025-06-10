@@ -10,7 +10,7 @@ export const $ = {
 export default function CoreMiddlewarePage() {
   return (
     <MarkdownContent
-      title="Middleware"
+      title="@buntal/core"
       content={`# Middleware
 
 Built-in middleware functions for common use cases in Buntal applications.

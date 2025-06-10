@@ -10,7 +10,7 @@ export const $ = {
 export default function BuntalComponentsPage() {
   return (
     <MarkdownContent
-      title="Components"
+      title="buntal"
       content={`# Components
 
 React components and hooks for building user interfaces in Buntal applications.

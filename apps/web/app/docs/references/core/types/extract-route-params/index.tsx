@@ -3,6 +3,7 @@ import ReferencePage from '@/components/docs/reference-page'
 export default function ExtractRouteParamsReference() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Types"
       title="ExtractRouteParams"
       description="A utility type that extracts route parameters from a URL path string, converting path segments like ':id' into typed properties."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/@buntal/core/http/router.ts"

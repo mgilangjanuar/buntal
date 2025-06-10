@@ -10,7 +10,7 @@ export const $ = {
 export default function CoreHttpPage() {
   return (
     <MarkdownContent
-      title="HTTP"
+      title="@buntal/core"
       content={`# HTTP
 
 HTTP server and client utilities for building web applications with Buntal.

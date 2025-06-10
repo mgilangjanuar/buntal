@@ -10,7 +10,7 @@ export const $ = {
 export default function CoreTypesPage() {
   return (
     <MarkdownContent
-      title="Types"
+      title="@buntal/core"
       content={`# Types
 
 TypeScript utility types for type-safe development in Buntal applications.

@@ -10,6 +10,7 @@ export const $ = {
 export default function JwtPage() {
   return (
     <ReferencePage
+      headerTitle="@buntal/core - Security"
       title="jwt"
       description="JWT (JSON Web Token) utility function for signing and verifying tokens using HS256 algorithm."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/security/jwt.ts"

@@ -10,6 +10,7 @@ export const $ = {
 export default function SvgComponentPage() {
   return (
     <ReferencePage
+      headerTitle="buntal - components"
       title="Svg"
       description="SVG component for rendering inline SVG content from string sources with optional styling classes."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/svg.tsx"

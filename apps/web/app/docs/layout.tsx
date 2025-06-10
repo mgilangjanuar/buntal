@@ -150,7 +150,7 @@ export default function DocsLayout({
               )}
             </li>
           ))}
-          <li>
+          <li className="flex md:hidden mt-4">
             <Link href="/references">
               References
               <svg

@@ -49,3 +49,12 @@
     @apply max-w-[1400px];
   }
 }
+
+@utility no-scrollbar {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

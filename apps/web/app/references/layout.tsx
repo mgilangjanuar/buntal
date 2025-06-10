@@ -12,23 +12,139 @@ type MenuItem = {
 
 const MENUS: MenuItem[] = [
   {
-    title: 'Get Started',
-    href: '/docs'
-  },
-  {
-    title: 'Installation',
-    href: '/docs/install'
-  },
-  {
-    title: 'Guides',
+    title: 'API Reference',
     items: [
       {
-        title: 'HTTP Server',
-        href: '/docs/guides/http-server'
+        title: '@buntal/core',
+        href: '/references/core',
+        items: [
+          {
+            title: 'Http',
+            href: '/references/core/http',
+            items: [
+              {
+                title: 'App',
+                href: '/references/core/http/app'
+              },
+              {
+                title: 'buildRouter',
+                href: '/references/core/http/build-router'
+              },
+              {
+                title: 'h',
+                href: '/references/core/http/h'
+              },
+              {
+                title: 'AtomicHandler',
+                href: '/references/core/http/atomic-handler'
+              },
+              {
+                title: 'Req',
+                href: '/references/core/http/req'
+              },
+              {
+                title: 'Res',
+                href: '/references/core/http/res'
+              },
+              {
+                title: 'cookie',
+                href: '/references/core/http/cookie'
+              },
+              {
+                title: 'CookieOptions',
+                href: '/references/core/http/cookie-options'
+              }
+            ]
+          },
+          {
+            title: 'Security',
+            href: '/references/core/security',
+            items: [
+              {
+                title: 'jwt',
+                href: '/references/core/security/jwt'
+              },
+              {
+                title: 'hash',
+                href: '/references/core/security/hash'
+              }
+            ]
+          },
+          {
+            title: 'Types',
+            href: '/references/core/types',
+            items: [
+              {
+                title: 'ExtractRouteParams',
+                href: '/references/core/types/extract-route-params'
+              }
+            ]
+          },
+          {
+            title: 'Middleware',
+            href: '/references/core/middleware',
+            items: [
+              {
+                title: 'auth',
+                href: '/references/core/middleware/auth'
+              },
+              {
+                title: 'cors',
+                href: '/references/core/middleware/cors'
+              },
+              {
+                title: 'logger',
+                href: '/references/core/middleware/logger'
+              }
+            ]
+          }
+        ]
       },
       {
-        title: 'Full-stack Web',
-        href: '/docs/guides/full-stack-web'
+        title: 'buntal',
+        href: '/references/buntal',
+        items: [
+          {
+            title: 'Configuration',
+            href: '/references/buntal/configuration',
+            items: [
+              {
+                title: 'BuntalConfig',
+                href: '/references/buntal/configuration/buntal-config'
+              }
+            ]
+          },
+          {
+            title: 'Components',
+            href: '/references/buntal/components',
+            items: [
+              {
+                title: 'App',
+                href: '/references/buntal/components/app'
+              },
+              {
+                title: 'useRouter',
+                href: '/references/buntal/components/use-router'
+              },
+              {
+                title: 'Link',
+                href: '/references/buntal/components/link'
+              },
+              {
+                title: 'Meta',
+                href: '/references/buntal/components/meta'
+              },
+              {
+                title: 'Script',
+                href: '/references/buntal/components/script'
+              },
+              {
+                title: 'Svg',
+                href: '/references/buntal/components/svg'
+              }
+            ]
+          }
+        ]
       }
     ]
   }

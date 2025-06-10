@@ -43,4 +43,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: PROJECT_NAME
-          script: pm2 delete $PROJECT_NAME; cd $PROJECT_NAME/apps/web && pm2 start "bun start" --name $PROJECT_NAME && pm2 save
+          script: pm2 delete $PROJECT_NAME; cd $PROJECT_NAME/apps/web && git reset --hard && git clean -f && git pull origin main && pm2 start "bun start" --name $PROJECT_NAME && pm2 save

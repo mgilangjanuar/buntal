@@ -13,136 +13,135 @@ type MenuItem = {
 const MENUS: MenuItem[] = [
   {
     title: 'API Reference',
+    href: '/references'
+  },
+  {
+    title: '@buntal/core',
+    href: '/references/core',
     items: [
       {
-        title: '@buntal/core',
-        href: '/references/core',
+        title: 'Http',
+        href: '/references/core/http',
         items: [
           {
-            title: 'Http',
-            href: '/references/core/http',
-            items: [
-              {
-                title: 'App',
-                href: '/references/core/http/app'
-              },
-              {
-                title: 'buildRouter',
-                href: '/references/core/http/build-router'
-              },
-              {
-                title: 'h',
-                href: '/references/core/http/h'
-              },
-              {
-                title: 'AtomicHandler',
-                href: '/references/core/http/atomic-handler'
-              },
-              {
-                title: 'Req',
-                href: '/references/core/http/req'
-              },
-              {
-                title: 'Res',
-                href: '/references/core/http/res'
-              },
-              {
-                title: 'cookie',
-                href: '/references/core/http/cookie'
-              },
-              {
-                title: 'CookieOptions',
-                href: '/references/core/http/cookie-options'
-              }
-            ]
+            title: 'App',
+            href: '/references/core/http/app'
           },
           {
-            title: 'Security',
-            href: '/references/core/security',
-            items: [
-              {
-                title: 'jwt',
-                href: '/references/core/security/jwt'
-              },
-              {
-                title: 'hash',
-                href: '/references/core/security/hash'
-              }
-            ]
+            title: 'buildRouter',
+            href: '/references/core/http/build-router'
           },
           {
-            title: 'Types',
-            href: '/references/core/types',
-            items: [
-              {
-                title: 'ExtractRouteParams',
-                href: '/references/core/types/extract-route-params'
-              }
-            ]
+            title: 'h',
+            href: '/references/core/http/h'
           },
           {
-            title: 'Middleware',
-            href: '/references/core/middleware',
-            items: [
-              {
-                title: 'auth',
-                href: '/references/core/middleware/auth'
-              },
-              {
-                title: 'cors',
-                href: '/references/core/middleware/cors'
-              },
-              {
-                title: 'logger',
-                href: '/references/core/middleware/logger'
-              }
-            ]
+            title: 'AtomicHandler',
+            href: '/references/core/http/atomic-handler'
+          },
+          {
+            title: 'Req',
+            href: '/references/core/http/req'
+          },
+          {
+            title: 'Res',
+            href: '/references/core/http/res'
+          },
+          {
+            title: 'cookie',
+            href: '/references/core/http/cookie'
+          },
+          {
+            title: 'CookieOptions',
+            href: '/references/core/http/cookie-options'
           }
         ]
       },
       {
-        title: 'buntal',
-        href: '/references/buntal',
+        title: 'Security',
+        href: '/references/core/security',
         items: [
           {
-            title: 'Configuration',
-            href: '/references/buntal/configuration',
-            items: [
-              {
-                title: 'BuntalConfig',
-                href: '/references/buntal/configuration/buntal-config'
-              }
-            ]
+            title: 'jwt',
+            href: '/references/core/security/jwt'
           },
           {
-            title: 'Components',
-            href: '/references/buntal/components',
-            items: [
-              {
-                title: 'App',
-                href: '/references/buntal/components/app'
-              },
-              {
-                title: 'useRouter',
-                href: '/references/buntal/components/use-router'
-              },
-              {
-                title: 'Link',
-                href: '/references/buntal/components/link'
-              },
-              {
-                title: 'Meta',
-                href: '/references/buntal/components/meta'
-              },
-              {
-                title: 'Script',
-                href: '/references/buntal/components/script'
-              },
-              {
-                title: 'Svg',
-                href: '/references/buntal/components/svg'
-              }
-            ]
+            title: 'hash',
+            href: '/references/core/security/hash'
+          }
+        ]
+      },
+      {
+        title: 'Types',
+        href: '/references/core/types',
+        items: [
+          {
+            title: 'ExtractRouteParams',
+            href: '/references/core/types/extract-route-params'
+          }
+        ]
+      },
+      {
+        title: 'Middleware',
+        href: '/references/core/middleware',
+        items: [
+          {
+            title: 'auth',
+            href: '/references/core/middleware/auth'
+          },
+          {
+            title: 'cors',
+            href: '/references/core/middleware/cors'
+          },
+          {
+            title: 'logger',
+            href: '/references/core/middleware/logger'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'buntal',
+    href: '/references/buntal',
+    items: [
+      {
+        title: 'Configuration',
+        href: '/references/buntal/configuration',
+        items: [
+          {
+            title: 'BuntalConfig',
+            href: '/references/buntal/configuration/buntal-config'
+          }
+        ]
+      },
+      {
+        title: 'Components',
+        href: '/references/buntal/components',
+        items: [
+          {
+            title: 'App',
+            href: '/references/buntal/components/app'
+          },
+          {
+            title: 'useRouter',
+            href: '/references/buntal/components/use-router'
+          },
+          {
+            title: 'Link',
+            href: '/references/buntal/components/link'
+          },
+          {
+            title: 'Meta',
+            href: '/references/buntal/components/meta'
+          },
+          {
+            title: 'Script',
+            href: '/references/buntal/components/script'
+          },
+          {
+            title: 'Svg',
+            href: '/references/buntal/components/svg'
           }
         ]
       }
@@ -204,70 +203,65 @@ export default function DocsLayout({
                   {menu.title}
                 </Link>
               ) : (
-                <>
-                  <h2 className="menu-title">{menu.title}</h2>
-                  {menu.items && (
-                    <ul className="space-y-0.5">
-                      {menu.items.map((item: MenuItem) => (
-                        <li key={item.title}>
-                          {item.href && (
-                            <Link
-                              href={item.href}
-                              className={cn(
-                                'truncate',
-                                pathname === item.href && 'menu-active'
+                <h2 className="menu-title">{menu.title}</h2>
+              )}
+              {menu.items && (
+                <ul className="space-y-0.5">
+                  {menu.items.map((item: MenuItem) => (
+                    <li key={item.title}>
+                      {item.href && (
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            'truncate',
+                            pathname === item.href && 'menu-active'
+                          )}
+                        >
+                          {item.title}
+                        </Link>
+                      )}
+                      {!item.href && <a>{item.title}</a>}
+                      {item.items && (
+                        <ul className="space-y-0.5">
+                          {item.items.map((subItem: MenuItem) => (
+                            <li key={subItem.title}>
+                              {subItem.href && (
+                                <Link
+                                  href={subItem.href}
+                                  className={cn(
+                                    'truncate',
+                                    pathname === subItem.href && 'menu-active'
+                                  )}
+                                >
+                                  {subItem.title}
+                                </Link>
                               )}
-                            >
-                              {item.title}
-                            </Link>
-                          )}
-                          {!item.href && <a>{item.title}</a>}
-                          {item.items && (
-                            <ul className="space-y-0.5">
-                              {item.items.map((subItem: MenuItem) => (
-                                <li key={subItem.title}>
-                                  {subItem.href && (
-                                    <Link
-                                      href={subItem.href}
-                                      className={cn(
-                                        'truncate',
-                                        pathname === subItem.href &&
-                                          'menu-active'
-                                      )}
-                                    >
-                                      {subItem.title}
-                                    </Link>
-                                  )}
-                                  {!subItem.href && <a>{subItem.title}</a>}
-                                  {subItem.items && (
-                                    <ul className="space-y-0.5">
-                                      {subItem.items.map(
-                                        (nestedItem: MenuItem) => (
-                                          <li key={nestedItem.title}>
-                                            <Link
-                                              href={nestedItem.href!}
-                                              className={cn(
-                                                'truncate',
-                                                pathname === nestedItem.href &&
-                                                  'menu-active'
-                                              )}
-                                            >
-                                              {nestedItem.title}
-                                            </Link>
-                                          </li>
-                                        )
-                                      )}
-                                    </ul>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </>
+                              {!subItem.href && <a>{subItem.title}</a>}
+                              {subItem.items && (
+                                <ul className="space-y-0.5">
+                                  {subItem.items.map((nestedItem: MenuItem) => (
+                                    <li key={nestedItem.title}>
+                                      <Link
+                                        href={nestedItem.href!}
+                                        className={cn(
+                                          'truncate',
+                                          pathname === nestedItem.href &&
+                                            'menu-active'
+                                        )}
+                                      >
+                                        {nestedItem.title}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               )}
             </li>
           ))}

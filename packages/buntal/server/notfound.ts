@@ -28,7 +28,7 @@ export const notfoundHandler = async (
         {
           bootstrapModules: [
             '/root.js',
-            ...(env === 'development' ? ['/🔥.js'] : [])
+            ...(env === 'development' ? ['/hot-reload.js'] : [])
           ]
         }
       ),
@@ -55,7 +55,7 @@ export const notfoundHandler = async (
       {
         bootstrapModules: [
           '/root.js',
-          ...(env === 'development' ? ['/🔥.js'] : [])
+          ...(env === 'development' ? ['/hot-reload.js'] : [])
         ]
       }
     ),

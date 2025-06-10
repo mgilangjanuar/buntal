@@ -78,8 +78,8 @@ export const injectHandler =
       return new Response(
         await renderToReadableStream(await createComponent(route.layouts), {
           bootstrapModules: [
-            `/root.js?v=${version}`,
-            ...(env === 'development' ? ['/🔥.js'] : [])
+            `/root.js?v=${version}${env === 'development' ? `&t=${Date.now()}` : ''}`,
+            ...(env === 'development' ? ['/hot-reload.js'] : [])
           ]
         }),
         {

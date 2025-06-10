@@ -23,8 +23,8 @@ The Security module provides essential security functions for protecting your Bu
 
 ### Authentication
 
-- **[jwt](/docs/references/core/security/jwt)** - JSON Web Token utilities for creating and verifying tokens
-- **[hash](/docs/references/core/security/hash)** - Secure password hashing functions using bcrypt
+- **[jwt](/references/core/security/jwt)** - JSON Web Token utilities for creating and verifying tokens
+- **[hash](/references/core/security/hash)** - Secure password hashing functions using bcrypt
 
 
 `}

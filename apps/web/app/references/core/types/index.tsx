@@ -23,7 +23,7 @@ The Types module provides essential TypeScript utility types that help ensure ty
 
 ### Route Types
 
-- **[ExtractRouteParams](/docs/references/core/types/extract-route-params)** - Utility type for extracting route parameters from URL patterns
+- **[ExtractRouteParams](/references/core/types/extract-route-params)** - Utility type for extracting route parameters from URL patterns
 
 
 `}

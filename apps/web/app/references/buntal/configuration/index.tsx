@@ -23,7 +23,7 @@ The Configuration module defines the structure and options for configuring Bunta
 
 ### Core Configuration
 
-- **[BuntalConfig](/docs/references/buntal/configuration/buntal-config)** - Main configuration interface for Buntal applications
+- **[BuntalConfig](/references/buntal/configuration/buntal-config)** - Main configuration interface for Buntal applications
 
 
 `}

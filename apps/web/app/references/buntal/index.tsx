@@ -21,22 +21,22 @@ The \`buntal\` package is the main framework package that provides configuration
 
 ## Modules
 
-### [Configuration](/docs/references/buntal/configuration)
+### [Configuration](/references/buntal/configuration)
 
 Configuration options for Buntal applications.
 
-- **[BuntalConfig](/docs/references/buntal/configuration/buntal-config)** - Main configuration interface
+- **[BuntalConfig](/references/buntal/configuration/buntal-config)** - Main configuration interface
 
-### [Components](/docs/references/buntal/components)
+### [Components](/references/buntal/components)
 
 React components and hooks for building user interfaces.
 
-- **[App](/docs/references/buntal/components/app)** - Root application component
-- **[useRouter](/docs/references/buntal/components/use-router)** - Router hook for navigation
-- **[Link](/docs/references/buntal/components/link)** - Client-side navigation component
-- **[Meta](/docs/references/buntal/components/meta)** - HTML meta tags component
-- **[Script](/docs/references/buntal/components/script)** - External script loader component
-- **[Svg](/docs/references/buntal/components/svg)** - SVG component for rendering inline SVGs
+- **[App](/references/buntal/components/app)** - Root application component
+- **[useRouter](/references/buntal/components/use-router)** - Router hook for navigation
+- **[Link](/references/buntal/components/link)** - Client-side navigation component
+- **[Meta](/references/buntal/components/meta)** - HTML meta tags component
+- **[Script](/references/buntal/components/script)** - External script loader component
+- **[Svg](/references/buntal/components/svg)** - SVG component for rendering inline SVGs
 
 `}
       tableOfContents={[

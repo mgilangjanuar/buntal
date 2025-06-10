@@ -21,39 +21,39 @@ The \`@buntal/core\` package provides essential utilities for building HTTP serv
 
 ## Modules
 
-### [HTTP](/docs/references/core/http)
+### [HTTP](/references/core/http)
 
 Core HTTP server functionality and request/response handling.
 
-- **[Http](/docs/references/core/http/http)** - Main HTTP server class
-- **[h](/docs/references/core/http/h)** - Handler composition function
-- **[Req](/docs/references/core/http/req)** - Request object
-- **[Res](/docs/references/core/http/res)** - Response object
-- **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Atomic request handler
-- **[buildRouter](/docs/references/core/http/build-router)** - Router builder
-- **[cookie](/docs/references/core/http/cookie)** - Cookie utilities
-- **[CookieOptions](/docs/references/core/http/cookie-options)** - Cookie options interface
+- **[Http](/references/core/http/http)** - Main HTTP server class
+- **[h](/references/core/http/h)** - Handler composition function
+- **[Req](/references/core/http/req)** - Request object
+- **[Res](/references/core/http/res)** - Response object
+- **[AtomicHandler](/references/core/http/atomic-handler)** - Atomic request handler
+- **[buildRouter](/references/core/http/build-router)** - Router builder
+- **[cookie](/references/core/http/cookie)** - Cookie utilities
+- **[CookieOptions](/references/core/http/cookie-options)** - Cookie options interface
 
-### [Security](/docs/references/core/security)
+### [Security](/references/core/security)
 
 Security utilities for authentication and data protection.
 
-- **[jwt](/docs/references/core/security/jwt)** - JSON Web Token utilities
-- **[hash](/docs/references/core/security/hash)** - Hashing functions
+- **[jwt](/references/core/security/jwt)** - JSON Web Token utilities
+- **[hash](/references/core/security/hash)** - Hashing functions
 
-### [Types](/docs/references/core/types)
+### [Types](/references/core/types)
 
 TypeScript utility types for type-safe development.
 
-- **[ExtractRouteParams](/docs/references/core/types/extract-route-params)** - Route parameter extraction
+- **[ExtractRouteParams](/references/core/types/extract-route-params)** - Route parameter extraction
 
-### [Middleware](/docs/references/core/middleware)
+### [Middleware](/references/core/middleware)
 
 Built-in middleware functions for common use cases.
 
-- **[auth](/docs/references/core/middleware/auth)** - Authentication middleware
-- **[cors](/docs/references/core/middleware/cors)** - CORS middleware
-- **[logger](/docs/references/core/middleware/logger)** - Request logging`}
+- **[auth](/references/core/middleware/auth)** - Authentication middleware
+- **[cors](/references/core/middleware/cors)** - CORS middleware
+- **[logger](/references/core/middleware/logger)** - Request logging`}
       tableOfContents={[
         {
           id: '@buntal/core',

@@ -23,12 +23,12 @@ The Middleware module provides pre-built middleware functions that can be easily
 
 ### Authentication & Security
 
-- **[auth](/docs/references/core/middleware/auth)** - Authentication middleware for protecting routes
-- **[cors](/docs/references/core/middleware/cors)** - Cross-Origin Resource Sharing (CORS) middleware
+- **[auth](/references/core/middleware/auth)** - Authentication middleware for protecting routes
+- **[cors](/references/core/middleware/cors)** - Cross-Origin Resource Sharing (CORS) middleware
 
 ### Development & Debugging
 
-- **[logger](/docs/references/core/middleware/logger)** - Request logging middleware for debugging and monitoring
+- **[logger](/references/core/middleware/logger)** - Request logging middleware for debugging and monitoring
 
 
 `}

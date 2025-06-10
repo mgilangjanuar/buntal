@@ -23,19 +23,19 @@ The HTTP module provides the core HTTP functionality for Buntal applications, in
 
 ### Server
 
-- **[Http](/docs/references/core/http/http)** - Main HTTP server class for creating web applications
+- **[Http](/references/core/http/http)** - Main HTTP server class for creating web applications
 
 ### Handlers
 
-- **[h](/docs/references/core/http/h)** - Higher-order function for composing AtomicHandler functions
-- **[AtomicHandler](/docs/references/core/http/atomic-handler)** - Type definition for request handler functions
+- **[h](/references/core/http/h)** - Higher-order function for composing AtomicHandler functions
+- **[AtomicHandler](/references/core/http/atomic-handler)** - Type definition for request handler functions
 
 ### Utilities
 
-- **[Body](/docs/references/core/http/body)** - Request body parsing utilities
-- **[Cookie](/docs/references/core/http/cookie)** - Cookie handling utilities for requests and responses
-- **[Req](/docs/references/core/http/req)** - Enhanced request object with additional utilities
-- **[Res](/docs/references/core/http/res)** - Enhanced response object with additional utilities
+- **[Body](/references/core/http/body)** - Request body parsing utilities
+- **[Cookie](/references/core/http/cookie)** - Cookie handling utilities for requests and responses
+- **[Req](/references/core/http/req)** - Enhanced request object with additional utilities
+- **[Res](/references/core/http/res)** - Enhanced response object with additional utilities
 `}
       lastModified="2025-06-10"
     />

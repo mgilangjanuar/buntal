@@ -312,7 +312,7 @@ export default function DocsLayout({
               )}
             </li>
           ))}
-          <li className="flex md:hidden mt-4">
+          <li className="flex md:hidden my-4">
             <Link href="/docs">
               Docs
               <svg

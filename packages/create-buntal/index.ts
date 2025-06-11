@@ -23,12 +23,10 @@ program
       projectName = await promptForProjectName()
 
       if (!projectName) {
-        console.error('Project name is required.')
-        process.exit(1)
+        program.error('Project name is required.')
       }
     }
     await createProject(projectName)
-    process.exit(0)
   })
 
 program.parse()

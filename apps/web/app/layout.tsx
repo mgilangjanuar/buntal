@@ -22,7 +22,7 @@ export default function RootLayout({
           }}
         />
         <link rel="icon" href="/favicon.svg" />
-        <link rel="stylesheet" href="/globals.css?v=27" />
+        <link rel="stylesheet" href="/globals.css?v=28" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

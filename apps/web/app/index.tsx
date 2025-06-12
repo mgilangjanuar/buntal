@@ -430,7 +430,7 @@ export default function HomePage() {
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="flex gap-8 items-center justify-center flex-col">
             <p className="text-base-content/50 text-sm">sponsored by</p>
-            <div className="flex gap-8 items-end flex-wrap justify-center mb-6">
+            <div className="flex gap-8 items-center flex-wrap justify-center mb-6">
               <a
                 href="https://m.do.co/c/4aad6c899906"
                 target="_blank"
@@ -454,7 +454,7 @@ export default function HomePage() {
                 <img
                   src="/Cloudflare.png?v=2"
                   alt="Cloudflare Badge"
-                  className="max-h-10 w-full h-auto"
+                  className="max-h-14 w-full h-auto"
                 />
               </a>
             </div>

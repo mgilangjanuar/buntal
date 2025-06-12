@@ -60,6 +60,12 @@ Help up maintain this project by becoming a [sponsor](https://github.com/sponsor
 </a>
 
 <br />
+
+<a href="https://cloudflare.com/?ref=buntaljs">
+    <img src="https://cf-assets.www.cloudflare.com/slt3lc6tev37/fdh7MDcUlyADCr49kuUs2/5f780ced9677a05d52b05605be88bc6f/cf-logo-v-rgb.png" width="140px">
+</a>
+
+<br />
 <br />
 
 <!-- sponsors --><a href="https://github.com/moerdowo"><img src="https:&#x2F;&#x2F;github.com&#x2F;moerdowo.png" width="60px" alt="User avatar: Frianto Moerdowo" /></a><!-- sponsors -->

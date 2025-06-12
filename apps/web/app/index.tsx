@@ -430,7 +430,7 @@ export default function HomePage() {
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="flex gap-8 items-center justify-center flex-col">
             <p className="text-base-content/50 text-sm">sponsored by</p>
-            <div>
+            <div className="flex gap-8 items-end flex-wrap justify-center mb-6">
               <a
                 href="https://m.do.co/c/4aad6c899906"
                 target="_blank"
@@ -443,7 +443,18 @@ export default function HomePage() {
                       : '/DO_Logo_horizontal_blue.svg'
                   }
                   alt="DigitalOcean Referral Badge"
-                  className="max-w-56 w-full h-auto"
+                  className="max-h-10 w-full h-auto"
+                />
+              </a>
+              <a
+                href="https://cloudflare.com?ref=buntaljs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/Cloudflare.png?v=2"
+                  alt="Cloudflare Badge"
+                  className="max-h-10 w-full h-auto"
                 />
               </a>
             </div>

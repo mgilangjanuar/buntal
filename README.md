@@ -55,11 +55,21 @@ View more examples [here](/examples).
 
 Help up maintain this project by becoming a [sponsor](https://github.com/sponsors/mgilangjanuar)!
 
-<a href="https://m.do.co/c/4aad6c899906">
-    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
-</a>
+<table>
+  <tr>
+    <td>
+      <a href="https://m.do.co/c/4aad6c899906">
+          <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
+      </a>
+    </td>
+    <td>
+      <a href="https://cloudflare.com/?ref=buntaljs">
+          <img src="https://cf-assets.www.cloudflare.com/slt3lc6tev37/fdh7MDcUlyADCr49kuUs2/5f780ced9677a05d52b05605be88bc6f/cf-logo-v-rgb.png" width="140px">
+      </a>
+    </td>
+  </tr>
+</table>
 
-<br />
 <br />
 
 <!-- sponsors --><a href="https://github.com/moerdowo"><img src="https:&#x2F;&#x2F;github.com&#x2F;moerdowo.png" width="60px" alt="User avatar: Frianto Moerdowo" /></a><!-- sponsors -->

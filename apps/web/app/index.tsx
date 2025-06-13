@@ -454,7 +454,7 @@ export default function HomePage() {
                 <img
                   src="/Cloudflare.png?v=2"
                   alt="Cloudflare Badge"
-                  className="max-h-14 w-full- h-auto"
+                  className="max-h-14 w-full h-auto"
                 />
               </a>
             </div>

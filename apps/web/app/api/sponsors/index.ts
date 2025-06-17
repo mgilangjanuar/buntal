@@ -24,6 +24,13 @@ export const GET = h(async (_, res) => {
     })
   })
   const json = await resp.json()
+  if (!resp.ok) {
+    return res.status(500).json({
+      error: 'Failed to fetch sponsors',
+      details: json
+    })
+  }
+
   return res.json(
     json.data.user.sponsors.nodes as {
       login: string

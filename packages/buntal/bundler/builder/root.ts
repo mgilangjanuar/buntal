@@ -21,9 +21,11 @@ export async function buildRoot(
 /// <reference lib="dom.iterable" />
 
 import { App } from 'buntal'
+import { lazy } from 'react'
 import { createRoot } from 'react-dom/client'
-${createPages.imports}${createNotFound.imports}
 ${layoutsImports}
+
+${createPages.imports}${createNotFound.imports}
 
 window.process = {} as any
 window.process.env = {}

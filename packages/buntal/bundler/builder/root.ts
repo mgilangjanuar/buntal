@@ -23,8 +23,8 @@ export async function buildRoot(
 import { App } from 'buntal'
 import { lazy } from 'react'
 import { createRoot } from 'react-dom/client'
-${layoutsImports}
 
+${layoutsImports}
 ${createPages.imports}${createNotFound.imports}
 
 window.process = {} as any

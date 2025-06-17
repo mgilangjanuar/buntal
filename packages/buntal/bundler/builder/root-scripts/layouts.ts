@@ -25,7 +25,10 @@ export function buildLayouts(
     layouts,
     rootLayout: rootIdx === -1 ? null : `Layout${rootIdx}`,
     imports: layouts
-      .map((layout, i) => `import Layout${i} from '${layout.filePath}'`)
+      .map(
+        (layout, i) =>
+          `const Layout${i} = lazy(() => import('${layout.filePath}'))`
+      )
       .join('\n'),
     renderRootLayout:
       rootIdx === -1

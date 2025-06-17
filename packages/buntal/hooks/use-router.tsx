@@ -2,6 +2,7 @@ import {
   createContext,
   createElement,
   memo,
+  Suspense,
   use,
   useCallback,
   useEffect,
@@ -9,9 +10,9 @@ import {
   useState,
   type ReactNode
 } from 'react'
-import type { ServerRouterType } from '.'
-import type { MetaProps } from '../meta'
-import { Notfound } from '../notfound'
+import type { MetaProps } from '../components'
+import { Notfound } from '../components/notfound'
+import type { ServerRouterType } from '../server/router'
 
 type RouterType = {
   pathname: string
@@ -297,13 +298,15 @@ export function RouterProvider({
     <RouterContext.Provider {...props} value={contextValue}>
       <rootLayout.element {...args}>
         {router && args ? (
-          <Page
-            router={router}
-            args={args}
-            onDataChange={handleDataChange}
-            rootLayout={rootLayout}
-            layoutIdx={0}
-          />
+          <Suspense>
+            <Page
+              router={router}
+              args={args}
+              onDataChange={handleDataChange}
+              rootLayout={rootLayout}
+              layoutIdx={0}
+            />
+          </Suspense>
         ) : router === null ? (
           notFound
         ) : (

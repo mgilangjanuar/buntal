@@ -6,7 +6,7 @@ export const buildNotfound = async (
 
   return {
     imports: notFoundPage
-      ? `\nimport NotFound from '../${appDir.replace(/^\.\//, '')}/404.tsx'`
+      ? `\nconst NotFound = lazy(() => import('../${appDir.replace(/^\.\//, '')}/404.tsx'))`
       : '',
     render: notFoundPage
       ? ` notFound={${

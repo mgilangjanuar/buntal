@@ -116,10 +116,6 @@ const MENUS: MenuItem[] = [
             href: '/references/buntal/components/app'
           },
           {
-            title: 'useRouter',
-            href: '/references/buntal/components/use-router'
-          },
-          {
             title: 'Link',
             href: '/references/buntal/components/link'
           },
@@ -134,6 +130,15 @@ const MENUS: MenuItem[] = [
           {
             title: 'Svg',
             href: '/references/buntal/components/svg'
+          }
+        ]
+      },
+      {
+        title: 'Hooks',
+        items: [
+          {
+            title: 'useRouter',
+            href: '/references/buntal/hooks/use-router'
           }
         ]
       }
@@ -179,7 +184,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.0.26</span>
+              <span className="text-xs text-base-content/60">v0.0.29</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

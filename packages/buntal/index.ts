@@ -1,4 +1,5 @@
 export * from './components'
+export * from './hooks'
 
 export type BuntalConfig = {
   env?: 'development' | 'production'

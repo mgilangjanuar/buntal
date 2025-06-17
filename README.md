@@ -53,7 +53,7 @@ View more examples [here](/examples).
 
 ## Sponsors ❤️
 
-Help up maintain this project by becoming a [sponsor](https://github.com/sponsors/mgilangjanuar)!
+Help us maintain this project by becoming a [sponsor](https://github.com/sponsors/mgilangjanuar)!
 
 <table>
   <tr>

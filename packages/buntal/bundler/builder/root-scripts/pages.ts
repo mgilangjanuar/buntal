@@ -6,7 +6,7 @@ export function buildPages(
 ) {
   return {
     imports: routes
-      .map((r, i) => `import Page${i} from '${r.safeImport}'`)
+      .map((r, i) => `const Page${i} = lazy(() => import('${r.safeImport}'))`)
       .join('\n'),
     render: routes
       .map((r, i) => {

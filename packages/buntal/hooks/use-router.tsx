@@ -9,9 +9,9 @@ import {
   useState,
   type ReactNode
 } from 'react'
-import type { ServerRouterType } from '.'
-import type { MetaProps } from '../meta'
-import { Notfound } from '../notfound'
+import type { MetaProps } from '../components'
+import { Notfound } from '../components/notfound'
+import type { ServerRouterType } from '../server/router'
 
 type RouterType = {
   pathname: string

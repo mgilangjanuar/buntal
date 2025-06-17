@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { RouterProvider, type ServerRouterType } from './hooks'
+import { RouterProvider } from '../hooks'
+import type { ServerRouterType } from '../server/router'
 
 export function App({
   rootLayout,

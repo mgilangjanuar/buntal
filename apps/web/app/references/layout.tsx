@@ -116,10 +116,6 @@ const MENUS: MenuItem[] = [
             href: '/references/buntal/components/app'
           },
           {
-            title: 'useRouter',
-            href: '/references/buntal/components/use-router'
-          },
-          {
             title: 'Link',
             href: '/references/buntal/components/link'
           },
@@ -134,6 +130,15 @@ const MENUS: MenuItem[] = [
           {
             title: 'Svg',
             href: '/references/buntal/components/svg'
+          }
+        ]
+      },
+      {
+        title: 'Hooks1',
+        items: [
+          {
+            title: 'useRouter',
+            href: '/references/buntal/hooks/use-router'
           }
         ]
       }

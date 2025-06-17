@@ -2,6 +2,7 @@ import {
   createContext,
   createElement,
   memo,
+  Suspense,
   use,
   useCallback,
   useEffect,
@@ -297,13 +298,15 @@ export function RouterProvider({
     <RouterContext.Provider {...props} value={contextValue}>
       <rootLayout.element {...args}>
         {router && args ? (
-          <Page
-            router={router}
-            args={args}
-            onDataChange={handleDataChange}
-            rootLayout={rootLayout}
-            layoutIdx={0}
-          />
+          <Suspense>
+            <Page
+              router={router}
+              args={args}
+              onDataChange={handleDataChange}
+              rootLayout={rootLayout}
+              layoutIdx={0}
+            />
+          </Suspense>
         ) : router === null ? (
           notFound
         ) : (

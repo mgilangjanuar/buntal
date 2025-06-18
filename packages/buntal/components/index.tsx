@@ -1,5 +1,6 @@
 export * from './app'
 export * from './link'
+export * from './mdx'
 export * from './meta'
 export * from './script'
 export * from './svg'

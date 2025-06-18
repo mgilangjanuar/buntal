@@ -28,10 +28,13 @@ export const Cookie = {
     const cookies = req.headers.get('cookie')
     if (!cookies) return {}
     const cookieArray = cookies.split('; ')
-    return cookieArray.reduce((acc, cookie) => {
-      const [key, value] = cookie.split('=') as [string, string?]
-      return { ...acc, [key]: decodeURIComponent(value || '') }
-    }, {})
+    return cookieArray.reduce(
+      (acc, cookie) => {
+        const [key, value] = cookie.split('=') as [string, string?]
+        return { ...acc, [key]: decodeURIComponent(value || '') }
+      },
+      {} as Record<string, string>
+    )
   },
   set: (
     res: Res,

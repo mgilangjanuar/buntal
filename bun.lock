@@ -48,7 +48,7 @@
       "name": "hello-world",
       "version": "0.0.1",
       "dependencies": {
-        "@buntal/core": "latest",
+        "@buntal/http": "latest",
         "buntal": "latest",
         "clsx": "^2.1.1",
         "react": "^19.1.0",
@@ -144,7 +144,7 @@
     },
     "packages/create-buntal": {
       "name": "create-buntal",
-      "version": "0.0.14",
+      "version": "0.0.15",
       "bin": {
         "create-buntal": "./index.ts",
       },
@@ -195,8 +195,6 @@
     "@babel/types": ["@babel/types@7.27.6", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.27.1" } }, "sha512-ETyHEk2VHHvl9b9jZP5IHPavHYk57EhanlRRuae9XCpb/j5bDCbPPMOBfCWhnl/7EDJz0jEMCi/RhccCE8r1+Q=="],
 
     "@buntal/cli": ["@buntal/cli@workspace:packages/@buntal/cli"],
-
-    "@buntal/core": ["@buntal/core@0.0.8", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-6ngj9f4mfOouVyofbuPxKD8Cp/opc8+d6+NTpYvTxfr6WHx9Anz3iwKr7hVe9qOw27yFBNrhBvTvTQSptyu4iA=="],
 
     "@buntal/http": ["@buntal/http@workspace:packages/@buntal/http"],
 
@@ -1064,6 +1062,8 @@
 
     "hello-world/@buntal/cli": ["@buntal/cli@0.0.10", "", { "dependencies": { "commander": "^14.0.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "buntal": "index.ts" } }, "sha512-+0z6suBqZm8zmRdNO33Mh4U4bcWvFcAukfp54030bpFtai0Kd0/wGoovueqs1YgcPSmwjfb/cA6gR3JbBXYkQQ=="],
 
+    "hello-world/@buntal/http": ["@buntal/http@0.0.4", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-Voyp96gtUxpgmx0JeCJudPDuu5dPBzkLQYVPskXTvJ8mkeCcx1pc7U33aBm+1ura/GcTQrIt3MknrJvHqRcE/g=="],
+
     "hello-world/buntal": ["buntal@0.1.0", "", { "dependencies": { "@buntal/http": "latest", "@buntal/middlewares": "latest", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-hijaUp9O2zC16okYfe9aqXoDP1L1AnaYNRKWwYxLic/in1kzZoxpUr6Xrg58lTAr6Zek6UgVUWYA0mV/kte7HQ=="],
 
     "lightningcss/detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
@@ -1089,8 +1089,6 @@
     "bun-types/@types/node/undici-types": ["undici-types@7.8.0", "", {}, "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="],
 
     "hastscript/@types/hast/@types/unist": ["@types/unist@2.0.11", "", {}, "sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA=="],
-
-    "hello-world/buntal/@buntal/http": ["@buntal/http@0.0.4", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-Voyp96gtUxpgmx0JeCJudPDuu5dPBzkLQYVPskXTvJ8mkeCcx1pc7U33aBm+1ura/GcTQrIt3MknrJvHqRcE/g=="],
 
     "hello-world/buntal/@buntal/middlewares": ["@buntal/middlewares@0.0.4", "", { "dependencies": { "@buntal/http": "latest", "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-4kpseuSTf+Q3ytOKVIlykb4a3QO1wHy6Atd0LxcucusCYh1memF+7MLimW/L/hEftMKIbkEpW/WpymThH5SV1w=="],
 

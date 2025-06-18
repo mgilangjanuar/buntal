@@ -1,4 +1,5 @@
 import { buildRouter } from '@buntal/http'
+import path from 'path'
 import type { RouteBuilderResult } from './types'
 
 export const builder = async (
@@ -12,14 +13,19 @@ export const builder = async (
     if (
       !filePath.endsWith('layout.tsx') &&
       !filePath.endsWith('404.tsx') &&
-      !filePath.split('/').find((p) => p.startsWith('_'))
+      !filePath.split(path.sep).find((p) => p.startsWith('_'))
     ) {
       const handler = await import(filePath)
       if ('default' in handler) {
         const layouts: RouteBuilderResult['layouts'] = []
-        const parsedPaths = filePath.replace(process.cwd(), '').split('/')
-        for (const [i, path] of Object.entries(parsedPaths)) {
-          const layoutPath = `${process.cwd()}${parsedPaths.slice(0, Number(i)).join('/')}/${path}/layout.tsx`
+        const parsedPaths = filePath.replace(process.cwd(), '').split(path.sep)
+        for (const [i, pathSegment] of Object.entries(parsedPaths)) {
+          const layoutPath = path.join(
+            process.cwd(),
+            ...parsedPaths.slice(0, Number(i)),
+            pathSegment,
+            'layout.tsx'
+          )
           if (
             (await Bun.file(layoutPath).exists()) &&
             'default' in (await import(layoutPath))
@@ -48,11 +54,11 @@ export const builder = async (
           }
         }
 
-        let regex = route.replace(/\//g, '\\/')
+        let regex = route.replace(/\//g, '\\' + path.sep)
         if (regex.includes('[[...')) {
           regex = regex.replace(/\[\[\.\.\.([^\]]+)\]\]/g, '(?<$1>.+)')
         } else {
-          regex = regex.replace(/\[([^\]]+)\]/g, '(?<$1>[^\\/]+)')
+          regex = regex.replace(/\[([^\]]+)\]/g, `(?<$1>[^\\${path.sep}]+)`)
         }
         results.push({
           route,

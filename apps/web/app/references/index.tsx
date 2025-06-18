@@ -17,7 +17,8 @@ Welcome to the Buntal JS API Reference! This section provides detailed documenta
 
 ## Main Packages
 
-- @buntal/core
+- @buntal/http
+- @buntal/middlewares
 - buntal
 
 ## Package Structure

@@ -1,15 +1,51 @@
-# @buntal/http
+<section align="center">
+  <img align="top" src="https://media.tenor.com/yjOrdcOkLPUAAAAj/green-dot.gif" width="22px" height="22px" />
+  <span>Early Development Stage</span>
+<section>
 
-To install dependencies:
+<br/>
+
+<section>
+  <img src="https://github.com/mgilangjanuar/buntal/raw/main/banner.png" alt="Buntal JS"/>
+</section>
+
+<br/>
+
+<section align="center">
+  <a href="https://buntaljs.org" target="_blank">
+    Website
+  </a>
+  <span> &nbsp;&middot; &nbsp;</span>
+  <a href="https://buntaljs.org/docs" target="_blank">
+    Docs
+  </a>
+  <span> &nbsp;&middot; &nbsp;</span>
+  <a href="https://github.com/sponsors/mgilangjanuar" target="_blank">
+    Sponsor &hearts;
+  </a>
+</section>
+
+<br/>
+
+<section align="left" markdown="1">
+<p>Ultra-lightweight type-safe modern full-stack web framework with TypeScript, React and Bun. Create HTTP servers and/or web apps without unnecessary bloatware.</p>
 
 ```bash
-bun install
+bun create buntal my-app
 ```
 
-To run:
+## Features
 
-```bash
-bun run index.ts
-```
+- **Blazing Fast**: Built on Bun, the fastest JavaScript runtime.
+- **HTTP Server**: Create type-safe HTTP servers with Bun's native HTTP server.
+- **File-based Routing**: Define routes using file structure, similar to Next.js.
+- **SSR**: Server-side rendering for dynamic content.
+- **SPA**: Single Page Application support with Bun's bundler.
+- More to come!
 
-This project was created using `bun init` in bun v1.2.16. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+View more examples [here](/examples).
+
+> [!WARNING]
+> NEVER use Buntal JS in production! Unless you are a pufferfish 🐡
+
+</section>

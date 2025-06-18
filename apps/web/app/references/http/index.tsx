@@ -10,7 +10,7 @@ export const $ = {
 export default function HttpPage() {
   return (
     <ReferencePage
-      headerTitle="@buntal/core - Http"
+      headerTitle="@buntal/http"
       title="Http"
       description="The main HTTP server class for creating and configuring HTTP servers in Buntal."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/app.ts"

@@ -10,7 +10,7 @@ export const $ = {
 export default function ResPage() {
   return (
     <ReferencePage
-      headerTitle="@buntal/core - Http"
+      headerTitle="@buntal/http/app"
       title="Res"
       description="Response class that provides methods for sending HTTP responses with various formats and status codes."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/response.ts"

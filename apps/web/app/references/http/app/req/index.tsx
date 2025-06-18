@@ -10,7 +10,7 @@ export const $ = {
 export default function ReqPage() {
   return (
     <ReferencePage
-      headerTitle="@buntal/core - Http"
+      headerTitle="@buntal/http/app"
       title="Req"
       description="Request class that extends the standard Request interface with additional properties for Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/request.ts"

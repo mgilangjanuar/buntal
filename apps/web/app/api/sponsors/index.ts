@@ -1,4 +1,4 @@
-import { h } from '@buntal/core'
+import { h } from '@buntal/http'
 
 export const GET = h(async (_, res) => {
   const resp = await fetch('https://api.github.com/graphql', {

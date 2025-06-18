@@ -11,7 +11,7 @@ export type CookieOptions = {
   sameSite?: 'Strict' | 'Lax' | 'None'
 }
 
-export const cookie = {
+export const Cookie = {
   get: (req: Req, name: string) => {
     const cookies = req.headers.get('cookie')
     if (!cookies) return null

@@ -1,4 +1,4 @@
-import { cookie } from './cookie'
+import { Cookie } from './cookie'
 
 export class Req<P = Record<string, string>, T = unknown> extends Request {
   public params: P = {} as P
@@ -6,6 +6,6 @@ export class Req<P = Record<string, string>, T = unknown> extends Request {
   public context?: T
 
   get cookies() {
-    return cookie.getAll(this)
+    return Cookie.getAll(this)
   }
 }

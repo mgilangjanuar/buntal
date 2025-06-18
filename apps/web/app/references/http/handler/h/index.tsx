@@ -13,7 +13,7 @@ export default function HPage() {
       headerTitle="@buntal/http/handler"
       title="h"
       description="Higher-order function for composing and chaining AtomicHandler functions in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/handler.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/handler/index.ts"
       typeDefinition={`function h<P = Record<string, string>, T = unknown>(
   ...handlers: AtomicHandler<P, T>[]
 ): AtomicHandler<P, T, Response | Promise<Response>>`}

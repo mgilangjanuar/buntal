@@ -13,7 +13,7 @@ export default function ResPage() {
       headerTitle="@buntal/http/app"
       title="Res"
       description="Response class that provides methods for sending HTTP responses with various formats and status codes."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/response.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/app/response.ts"
       typeDefinition={`class Res {
   status(status: number): Res
   headers(headers: Record<string, string>): Res

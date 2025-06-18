@@ -13,7 +13,7 @@ export default function UseRouterPage() {
       headerTitle="buntal - components"
       title="useRouter"
       description="React hook that provides access to router state and navigation methods in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/hooks/use-router.tsx"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/hooks/use-router.tsx"
       typeDefinition={`function useRouter(): {
   pathname: string
   search: string

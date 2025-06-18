@@ -13,7 +13,7 @@ export default function CookieOptionsPage() {
       headerTitle="@buntal/http/cookie"
       title="CookieOptions"
       description="Configuration options for HTTP cookies in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/cookie.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/app/cookie.ts"
       typeDefinition={`type CookieOptions = {
   maxAge?: number
   expires?: Date

@@ -13,7 +13,7 @@ export default function ReqPage() {
       headerTitle="@buntal/http/app"
       title="Req"
       description="Request class that extends the standard Request interface with additional properties for Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/request.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/app/request.ts"
       typeDefinition={`class Req<P = Record<string, string>, T = unknown> extends Request {
   public params: P
   public query?: Record<string, string>

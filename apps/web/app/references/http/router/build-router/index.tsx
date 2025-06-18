@@ -13,7 +13,7 @@ export default function BuildRouterPage() {
       headerTitle="@buntal/http/router"
       title="buildRouter"
       description="Function that creates a file system router for Buntal applications using Bun's built-in router."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/router.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/router/index.ts"
       typeDefinition={`function buildRouter(dir: string): Bun.FileSystemRouter`}
       parameters={[
         {

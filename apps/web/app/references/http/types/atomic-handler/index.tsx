@@ -13,7 +13,7 @@ export default function AtomicHandlerPage() {
       headerTitle="@buntal/http/handler"
       title="AtomicHandler"
       description="Type definition for request handler functions in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/handler.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/handler/types.ts"
       typeDefinition={`type AtomicHandler<P = Record<string, string>, T = unknown> = (
   req: Req<P, T>,
   res: Res

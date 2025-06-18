@@ -1,5 +1,5 @@
 import type { BodyInit } from 'bun'
-import { cookie, type CookieOptions } from './cookie'
+import { Cookie, type CookieOptions } from './cookie'
 
 export class Res {
   private options: {
@@ -59,9 +59,9 @@ export class Res {
 
   cookie(name: string, value?: string | null, options?: CookieOptions) {
     if (value) {
-      cookie.set(this, name, value, options)
+      Cookie.set(this, name, value, options)
     } else {
-      cookie.delete(this, name)
+      Cookie.delete(this, name)
     }
     return this
   }

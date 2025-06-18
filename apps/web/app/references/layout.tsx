@@ -34,7 +34,7 @@ const MENUS: MenuItem[] = [
             href: '/references/http/app/res'
           },
           {
-            title: 'cookie',
+            title: 'Cookie',
             href: '/references/http/app/cookie'
           }
         ]
@@ -67,10 +67,6 @@ const MENUS: MenuItem[] = [
           {
             title: 'CookieOptions',
             href: '/references/http/types/cookie-options'
-          },
-          {
-            title: 'ExtractRouteParams',
-            href: '/references/http/types/extract-route-params'
           }
         ]
       }

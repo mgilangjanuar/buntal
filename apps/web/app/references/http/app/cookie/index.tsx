@@ -3,7 +3,7 @@ import { type MetaProps } from 'buntal'
 
 export const $ = {
   _meta: {
-    title: 'cookie - Buntal JS'
+    title: 'Cookie - Buntal JS'
   } satisfies MetaProps
 }
 
@@ -11,9 +11,9 @@ export default function CookiePage() {
   return (
     <ReferencePage
       headerTitle="@buntal/http/app"
-      title="cookie"
+      title="Cookie"
       description="Utility object for managing HTTP cookies in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/cookie.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/app/cookie.ts"
       typeDefinition={`const cookie = {
   get: (req: Req, name: string) => string | null
   getAll: (req: Req) => Record<string, string>

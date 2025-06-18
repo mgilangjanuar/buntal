@@ -17,7 +17,7 @@ Here is a simple example of how to create an HTTP server using Buntal JS. This e
 
 \`\`\`typescript
 import { Http } from '@buntal/http'
-import { cors, logger } from '@buntal/middlewares'
+import { cors, logger } from '@buntal/http/middlewares'
 
 // initialize the HTTP server
 const app = new Http({

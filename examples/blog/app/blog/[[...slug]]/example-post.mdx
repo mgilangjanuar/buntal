@@ -1,9 +1,53 @@
 ---
-title: Example Post
-description: This is an example post for the blog.
+title: Getting Started with Buntal and MDX
+description: Learn how to build a blog with Buntal framework and MDX for content management.
 date: 2025-06-18
+author: Buntal Team
+tags: [buntal, mdx, typescript, blog]
 ---
 
-# Example Post
+# Getting Started with Buntal and MDX
 
-This is an example post for the blog. It serves as a template for creating new posts.
+This is a comprehensive guide on how to build a blog with **Buntal** framework and **MDX** for content management.
+
+## What is Buntal?
+
+Buntal is a modern web framework built on top of Bun runtime, providing:
+
+- Fast development experience
+- Type-safe routing
+- Built-in server-side rendering
+- Excellent TypeScript support
+
+## MDX Integration
+
+With Bun's macro system, we can load MDX content at compile time for better performance:
+
+```typescript
+import { mdx } from './render.tsx' with { type: 'macro' }
+
+const Post = mdx('./example-post.mdx')
+```
+
+## Features
+
+- ✅ Frontmatter support
+- ✅ Syntax highlighting
+- ✅ Fast builds with Bun
+- ✅ Type-safe components
+
+## Code Example
+
+Here's how you can create a simple API endpoint:
+
+```typescript
+import { Req } from '@buntal/http'
+
+export const $ = async (req: Req) => {
+  return { message: 'Hello from Buntal!' }
+}
+```
+
+## Conclusion
+
+Buntal makes it easy to build modern web applications with excellent developer experience and performance.

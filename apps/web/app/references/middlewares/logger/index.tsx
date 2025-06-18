@@ -10,7 +10,7 @@ export const $ = {
 export default function LoggerPage() {
   return (
     <ReferencePage
-      headerTitle="@buntal/core - Middleware"
+      headerTitle="@buntal/middlewares"
       title="logger"
       description="HTTP request logging middleware for Buntal applications that logs request details."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/middlewares/logger.ts"

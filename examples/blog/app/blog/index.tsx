@@ -1,3 +1,5 @@
+import { Link } from 'buntal'
+
 export default function Blog() {
   return (
     <div className="container mx-auto prose prose-lg max-w-4xl py-8">
@@ -11,7 +13,7 @@ export default function Blog() {
       <h2>Available Posts</h2>
       <div className="not-prose">
         <div className="grid gap-4 my-6">
-          <a
+          <Link
             href="/blog/example-post"
             className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
           >
@@ -23,20 +25,7 @@ export default function Blog() {
               content management.
             </p>
             <time className="text-sm text-gray-500">June 18, 2025</time>
-          </a>
-
-          <a
-            href="/blog/static-example"
-            className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <h3 className="font-semibold text-lg">
-              Static Example (Compile-time)
-            </h3>
-            <p className="text-gray-600">
-              Example showing compile-time MDX loading using Bun macros.
-            </p>
-            <time className="text-sm text-gray-500">June 18, 2025</time>
-          </a>
+          </Link>
         </div>
       </div>
 

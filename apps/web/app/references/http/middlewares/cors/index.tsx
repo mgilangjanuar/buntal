@@ -13,7 +13,7 @@ export default function CorsPage() {
       headerTitle="@buntal/middlewares"
       title="cors"
       description="CORS (Cross-Origin Resource Sharing) middleware for handling cross-origin requests in Buntal applications."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/middlewares/cors/index.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/middlewares/cors.ts"
       typeDefinition={`function cors(options?: CorsOptions): AtomicHandler
 
 type CorsOptions = {

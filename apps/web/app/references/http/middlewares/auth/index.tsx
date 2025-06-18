@@ -13,7 +13,7 @@ export default function AuthPage() {
       headerTitle="@buntal/middlewares"
       title="auth"
       description="JWT-based authentication middleware for Buntal applications that validates tokens from cookies or headers."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/middlewares/auth/index.ts"
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/middlewares/auth/index.ts"
       typeDefinition={`function auth<T = unknown>(options?: AuthOptions<T>): AtomicHandler<Record<string, string>, T>
 
 type AuthOptions<T = unknown> = {

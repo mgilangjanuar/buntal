@@ -1,5 +1,5 @@
 import { h } from '@buntal/http'
-import { auth, jwt } from '@buntal/middlewares'
+import { auth, jwt } from '@buntal/http/middlewares'
 import { hashSync } from 'bcryptjs'
 
 type User = {

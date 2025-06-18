@@ -1,4 +1,5 @@
-import { type AtomicHandler, type Req, type Res } from '@buntal/http'
+import type { Req, Res } from '../app'
+import type { AtomicHandler } from '../handler'
 
 type Options = {
   origin?: string | string[]

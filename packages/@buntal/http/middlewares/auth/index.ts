@@ -1,5 +1,5 @@
-import type { AtomicHandler, Req, Res } from '@buntal/http'
-import { Cookie } from '@buntal/http'
+import { Cookie, Req, Res } from '../../app'
+import type { AtomicHandler } from '../../handler'
 import { jwt } from './jwt'
 
 type Strategy = 'cookie' | 'header' | 'both'

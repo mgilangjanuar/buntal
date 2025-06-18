@@ -1,5 +1,5 @@
 import { Http } from '@buntal/http'
-import { cors, logger } from '@buntal/middlewares'
+import { cors, logger } from '@buntal/http/middlewares'
 
 // Initialize the HTTP server
 const app = new Http({

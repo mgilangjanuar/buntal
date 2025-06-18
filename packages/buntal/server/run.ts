@@ -1,5 +1,5 @@
 import { Http } from '@buntal/http'
-import { logger } from '@buntal/middlewares'
+import { logger } from '@buntal/http/middlewares'
 import { networkInterfaces } from 'os'
 import type { BuntalConfig } from '..'
 import { bundler } from '../bundler'

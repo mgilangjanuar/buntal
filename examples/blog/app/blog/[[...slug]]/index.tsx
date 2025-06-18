@@ -32,7 +32,7 @@ export default function Post({
 }: Readonly<{
   data?: Awaited<ReturnType<typeof $>>
 }>) {
-  if (!data) {
+  if (!data?.frontmatter) {
     return (
       <div className="container mx-auto prose">
         <h1>Post not found</h1>

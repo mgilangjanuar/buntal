@@ -430,13 +430,14 @@ export default function HomePage() {
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="flex gap-8 items-center justify-center flex-col">
             <p className="text-base-content/50 text-sm">sponsored by</p>
-            <div className="flex gap-8 items-center flex-wrap justify-center mb-6">
+            <div className="flex gap-8 items-end flex-wrap justify-center mb-6">
               <a
                 href="https://m.do.co/c/4aad6c899906"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
+                  loading="lazy"
                   src={
                     theme === 'dark'
                       ? '/DO_Logo_horizontal_white.svg'
@@ -452,9 +453,10 @@ export default function HomePage() {
                 rel="noopener noreferrer"
               >
                 <img
+                  loading="lazy"
                   src="/Cloudflare.png?v=2"
                   alt="Cloudflare Badge"
-                  className="max-h-14 w-full- h-auto"
+                  className="max-h-14 h-auto"
                 />
               </a>
             </div>
@@ -467,6 +469,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                 >
                   <img
+                    loading="lazy"
                     src={sponsor.avatarUrl}
                     className="size-12 rounded-md"
                     alt={sponsor.name}
@@ -521,6 +524,7 @@ export default function HomePage() {
                 </p>
               </div>
               <img
+                loading="lazy"
                 src="/08.46.20@2x.png?v=2"
                 alt="ultra-lightweight framework"
                 className="absolute -right-8 filter -bottom-2 object-contain rounded-2xl bg-center grayscale bg-cover max-w-[280px] md:max-w-xs"
@@ -548,6 +552,7 @@ export default function HomePage() {
                 </p>
               </div>
               <img
+                loading="lazy"
                 src="/2025-05-29@2x.png"
                 alt="type-safe params"
                 className="absolute -right-2 filter -bottom-6 object-contain rounded-2xl bg-center bg-cover max-w-xs md:max-w-md"
@@ -748,7 +753,12 @@ export default function HomePage() {
                 className="p-0"
               >
                 <figure className="p-6 pb-0 w-fit">
-                  <img src="/react.svg" alt="" className="size-12" />
+                  <img
+                    loading="lazy"
+                    src="/react.svg"
+                    alt=""
+                    className="size-12"
+                  />
                 </figure>
                 <div className="card-body">
                   <a
@@ -790,7 +800,12 @@ export default function HomePage() {
                 className="p-0"
               >
                 <figure className="p-6 pb-0 w-fit">
-                  <img src="/bun.svg" alt="" className="size-12" />
+                  <img
+                    loading="lazy"
+                    src="/bun.svg"
+                    alt=""
+                    className="size-12"
+                  />
                 </figure>
                 <div className="card-body">
                   <a

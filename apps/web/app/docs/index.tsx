@@ -127,7 +127,12 @@ To contribute, please follow these steps:
             </span>
           </div>
           <div className="my-8">
-            <img src="/banner.png" alt="banner" className="!my-0 rounded-lg" />
+            <img
+              src="/banner.png?v=1"
+              loading="lazy"
+              alt="banner"
+              className="!my-0 rounded-lg"
+            />
           </div>
         </div>
       }

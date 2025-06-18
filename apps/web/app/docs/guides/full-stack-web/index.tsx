@@ -13,7 +13,7 @@ export default function WebPkgPage() {
       title="Full-stack Web"
       content={`## Quick Start
 
-Buntal uses \`@buntal/core\` under the hood to handle all requests and render the selected page based on the pathname. So, your web will always be hydrated by returning an exact same HTML page from the server, which is great for SEO and performance.
+Buntal uses \`@buntal/http\` under the hood to handle all requests and render the selected page based on the pathname. So, your web will always be hydrated by returning an exact same HTML page from the server, which is great for SEO and performance.
 
 After initializing a project with a template using this command:
 
@@ -113,7 +113,7 @@ The page component is exported as a default export, and it receives props such a
 The \`$\` function is used to fetch data from the server. It is a special function that is executed on the server side and can be used to fetch data from a database or an API. Here is an example of a simple \`$\` function in the \`index.tsx\`:
 
 \`\`\`ts
-import type { Req } from '@buntal/core'
+import type { Req } from '@buntal/http'
 
 export const $ = async (req: Req) => {
   const resp = await fetch(\`https://api.example/data/\${req.params.id}\`)
@@ -158,7 +158,7 @@ See the \`Req\` type definition [here](/docs/packages/http-server#req). This fun
           offset: 72
         }
       ]}
-      lastModified="2025-06-05"
+      lastModified="2025-06-18"
     />
   )
 }

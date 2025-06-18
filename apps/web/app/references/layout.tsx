@@ -16,83 +16,80 @@ const MENUS: MenuItem[] = [
     href: '/references'
   },
   {
-    title: '@buntal/core',
+    title: '@buntal/http',
     items: [
       {
         title: 'Http',
+        href: '/references/http'
+      },
+      {
+        title: 'app',
         items: [
           {
-            title: 'App',
-            href: '/references/core/http/app'
-          },
-          {
-            title: 'buildRouter',
-            href: '/references/core/http/build-router'
-          },
-          {
-            title: 'h',
-            href: '/references/core/http/h'
-          },
-          {
-            title: 'AtomicHandler',
-            href: '/references/core/http/atomic-handler'
-          },
-          {
             title: 'Req',
-            href: '/references/core/http/req'
+            href: '/references/http/app/req'
           },
           {
             title: 'Res',
-            href: '/references/core/http/res'
+            href: '/references/http/app/res'
           },
           {
             title: 'cookie',
-            href: '/references/core/http/cookie'
+            href: '/references/http/app/cookie'
           }
         ]
       },
       {
-        title: 'Security',
+        title: 'handler',
         items: [
           {
-            title: 'jwt',
-            href: '/references/core/security/jwt'
-          },
-          {
-            title: 'hash',
-            href: '/references/core/security/hash'
+            title: 'h',
+            href: '/references/http/handler/h'
           }
         ]
       },
       {
-        title: 'Middleware',
+        title: 'router',
         items: [
           {
-            title: 'auth',
-            href: '/references/core/middleware/auth'
-          },
-          {
-            title: 'cors',
-            href: '/references/core/middleware/cors'
-          },
-          {
-            title: 'logger',
-            href: '/references/core/middleware/logger'
+            title: 'buildRouter',
+            href: '/references/http/router/build-router'
           }
         ]
       },
       {
-        title: 'Types',
+        title: 'types',
         items: [
+          {
+            title: 'AtomicHandler',
+            href: '/references/http/types/atomic-handler'
+          },
           {
             title: 'CookieOptions',
-            href: '/references/core/types/cookie-options'
+            href: '/references/http/types/cookie-options'
           },
           {
             title: 'ExtractRouteParams',
-            href: '/references/core/types/extract-route-params'
+            href: '/references/http/types/extract-route-params'
           }
         ]
+      }
+    ]
+  },
+  {
+    title: '@buntal/middlewares',
+    items: [
+      {
+        title: 'auth',
+        href: '/references/middlewares/auth'
+      },
+      {
+        title: 'cors',
+        href: '/references/middlewares/cors'
+      },
+      {
+        title: 'logger',
+        href: '/references/middlewares/logger'
       }
     ]
   },
@@ -184,7 +181,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.0.29</span>
+              <span className="text-xs text-base-content/60">v0.1.1</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

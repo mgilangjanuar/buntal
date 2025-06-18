@@ -1,18 +1,5 @@
-import { buildRouter } from '@buntal/core'
-
-export type RouteBuilderResult = {
-  route: string
-  safeImport: string
-  regex: string
-  ssr: boolean
-  data?: unknown
-  layouts: {
-    filePath: string
-    ssr?: boolean
-    data?: unknown
-  }[]
-  layoutsSafeImport: RouteBuilderResult['layouts']
-}
+import { buildRouter } from '@buntal/http'
+import type { RouteBuilderResult } from './types'
 
 export const builder = async (
   appDir: string = './app',

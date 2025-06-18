@@ -1,6 +1,6 @@
-import { h } from '@buntal/core'
-import { auth } from '@buntal/core/middlewares'
-import { hash, jwt } from '@buntal/core/security'
+import { h } from '@buntal/http'
+import { auth, jwt } from '@buntal/middlewares'
+import { hashSync } from 'bcryptjs'
 
 type User = {
   id: string
@@ -75,7 +75,7 @@ export const POST = h(async (_, res) => {
   const user: User = {
     id: '123',
     name: 'John Doe',
-    password: hash('password')
+    password: hashSync('password')
   }
   const token = await jwt(DONT_TRY_THIS_AT_HOME).sign(user, {
     expiresIn: '2h'

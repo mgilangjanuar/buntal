@@ -25,7 +25,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@buntal/core": "workspace:^",
+    "@buntal/http": "workspace:^",
     "@tailwindcss/cli": "^4.1.7",
     "buntal": "workspace:^",
     "class-variance-authority": "^0.7.1",

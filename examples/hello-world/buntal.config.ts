@@ -1,9 +1,5 @@
 import type { BuntalConfig } from 'buntal'
 
-const config = {
-  config: {
-    target: 'bun'
-  }
-} satisfies BuntalConfig
+const config = {} satisfies BuntalConfig
 
 export default config

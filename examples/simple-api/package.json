@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@buntal/http": "workspace:^",
-    "@buntal/middlewares": "workspace:^",
     "bcryptjs": "^3.0.2"
   },
   "peerDependencies": {

@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@buntal/cli": "latest",
+    "@buntal/cli": "workspace:^",
     "@eslint-react/eslint-plugin": "^1.51.0",
     "@tailwindcss/cli": "^4.1.7",
     "@types/bun": "latest",
@@ -22,8 +22,8 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@buntal/http": "latest",
-    "buntal": "latest",
+    "@buntal/http": "workspace:^",
+    "buntal": "workspace:^",
     "clsx": "^2.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

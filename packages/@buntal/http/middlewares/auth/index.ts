@@ -1,5 +1,5 @@
-import type { AtomicHandler, Req, Res } from '@buntal/http'
-import { cookie } from '@buntal/http'
+import { Cookie, Req, Res } from '../../app'
+import type { AtomicHandler } from '../../handler'
 import { jwt } from './jwt'
 
 type Strategy = 'cookie' | 'header' | 'both'
@@ -21,7 +21,7 @@ type Options<T = unknown> = {
 }
 
 const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
-  const cookieValue = cookie.get(req, opts?.cookie?.key || 'access_token')
+  const cookieValue = Cookie.get(req, opts?.cookie?.key || 'access_token')
   const headerValue = req.headers
     .get(opts?.header?.key || 'Authorization')
     ?.replace(/^Bearer\ /, '')

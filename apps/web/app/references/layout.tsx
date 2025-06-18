@@ -58,6 +58,23 @@ const MENUS: MenuItem[] = [
         ]
       },
       {
+        title: 'middlewares',
+        items: [
+          {
+            title: 'auth',
+            href: '/references/http/middlewares/auth'
+          },
+          {
+            title: 'cors',
+            href: '/references/http/middlewares/cors'
+          },
+          {
+            title: 'logger',
+            href: '/references/http/middlewares/logger'
+          }
+        ]
+      },
+      {
         title: 'types',
         items: [
           {
@@ -69,23 +86,6 @@ const MENUS: MenuItem[] = [
             href: '/references/http/types/cookie-options'
           }
         ]
-      }
-    ]
-  },
-  {
-    title: '@buntal/middlewares',
-    items: [
-      {
-        title: 'auth',
-        href: '/references/middlewares/auth'
-      },
-      {
-        title: 'cors',
-        href: '/references/middlewares/cors'
-      },
-      {
-        title: 'logger',
-        href: '/references/middlewares/logger'
       }
     ]
   },
@@ -177,7 +177,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.1.1</span>
+              <span className="text-xs text-base-content/60">v0.1.3</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

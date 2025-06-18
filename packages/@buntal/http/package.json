@@ -1,6 +1,6 @@
 {
   "name": "@buntal/http",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
@@ -15,5 +15,8 @@
   },
   "description": "HTTP client framework for Bun",
   "homepage": "https://buntaljs.org",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jose": "^6.0.11"
+  }
 }

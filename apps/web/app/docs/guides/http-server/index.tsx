@@ -16,8 +16,8 @@ export default function HTTPPkgPage() {
 Here is a simple example of how to create an HTTP server using Buntal JS. This example demonstrates how to set up a basic server with file-based routing, middleware, a declarative router, and type-safe request parameters.
 
 \`\`\`typescript
-import { Http } from '@buntal/core'
-import { cors, logger } from '@buntal/core/middlewares'
+import { Http } from '@buntal/http'
+import { cors, logger } from '@buntal/middlewares'
 
 // initialize the HTTP server
 const app = new Http({
@@ -45,7 +45,7 @@ app.start((server) => {
 And here is a simple example of a ping endpoint in the \`./app/ping.ts\` file that is automatically loaded into the app.
 
 \`\`\`typescript
-import { h } from '@buntal/core'
+import { h } from '@buntal/http'
 
 export const GET = h(
   (req, res) => res.json({
@@ -217,7 +217,7 @@ Set a cookie in the response. If the \`value\` is \`null\`, it deletes the cooki
 Here is an example of how to set a cookie in the response:
 
 \`\`\`typescript
-import { cookie } from '@buntal/core'
+import { cookie } from '@buntal/http'
 
 cookie.set(res, 'access_token', token, {
   maxAge: 60 * 60 * 2,  // 2 hours
@@ -272,7 +272,7 @@ cookie.set(res, 'access_token', token, {
           ]
         }
       ]}
-      lastModified="2025-06-04"
+      lastModified="2025-06-18"
     />
   )
 }

@@ -19,13 +19,19 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
 
 ## Installation
 
-- If you want to build an HTTP server, you only need to install the \`@buntal/core\` package:
+- If you want to build an HTTP server, you only need to install the \`@buntal/http\` package:
 
   \`\`\`sh
-  bun add @buntal/core
+  bun add @buntal/http
   \`\`\`
 
-  Then, you can continue [here](/docs/packages/http-server).
+  If you want to use the built-in middlewares, you can install them as well:
+
+  \`\`\`sh
+  bun add @buntal/middlewares
+  \`\`\`
+
+  Then, you can continue [here](/docs/guides/http-server).
 
 - If you want to build a full-stack web application, you can create it from a template:
 
@@ -62,7 +68,7 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
   To get started, run: \`cd my-app && bun dev\`
   \`\`\`
 
-  Then, you can read more about it [here](/docs/packages/full-stack-web).
+  Then, you can read more about it [here](/docs/guides/full-stack-web).
 `}
       tableOfContents={[
         {
@@ -78,7 +84,7 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
           offset: 72
         }
       ]}
-      lastModified="2025-05-29"
+      lastModified="2025-06-18"
     />
   )
 }

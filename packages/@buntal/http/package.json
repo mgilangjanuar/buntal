@@ -1,0 +1,19 @@
+{
+  "name": "@buntal/http",
+  "version": "0.0.4",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgilangjanuar/buntal.git"
+  },
+  "description": "HTTP client framework for Bun",
+  "homepage": "https://buntaljs.org",
+  "license": "MIT"
+}

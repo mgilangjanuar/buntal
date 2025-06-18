@@ -1,13 +1,5 @@
-import type { Req } from './request'
-import { Res } from './response'
-
-export type AtomicHandler<
-  P = Record<string, string>,
-  T = unknown,
-  R = Response | void | undefined | Promise<Response | void | undefined>
-> = {
-  (req: Req<P, T>, res: Res): R
-}
+import type { Req, Res } from '../app'
+import type { AtomicHandler } from './types'
 
 export const h = <P = Record<string, string>, T = unknown>(
   ...handlers: AtomicHandler<P, T>[]
@@ -22,3 +14,5 @@ export const h = <P = Record<string, string>, T = unknown>(
     return res.status(204).send()
   }
 }
+
+export * from './types'

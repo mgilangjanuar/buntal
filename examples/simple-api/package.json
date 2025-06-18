@@ -11,7 +11,9 @@
     "@types/bun": "latest"
   },
   "dependencies": {
-    "@buntal/core": "workspace:^"
+    "@buntal/http": "workspace:^",
+    "@buntal/middlewares": "workspace:^",
+    "bcryptjs": "^3.0.2"
   },
   "peerDependencies": {
     "typescript": "^5"

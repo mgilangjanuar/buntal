@@ -1,5 +1,6 @@
-import { cookie, type AtomicHandler, type Req, type Res } from '../http'
-import { jwt } from '../security'
+import type { AtomicHandler, Req, Res } from '@buntal/http'
+import { cookie } from '@buntal/http'
+import { jwt } from './jwt'
 
 type Strategy = 'cookie' | 'header' | 'both'
 
@@ -90,3 +91,5 @@ export const auth = <T = unknown>(
     }
   }
 }
+
+export * from './jwt'

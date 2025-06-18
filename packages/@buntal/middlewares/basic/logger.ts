@@ -1,4 +1,4 @@
-import { type AtomicHandler, type Req } from '../http'
+import { type AtomicHandler, type Req } from '@buntal/http'
 
 export const logger = (): AtomicHandler => {
   return async (req: Req) => {

@@ -25,7 +25,9 @@ Welcome to the Buntal JS API Reference! This section provides detailed documenta
 
 The Buntal ecosystem is organized into focused packages:
 
-- **\`@buntal/core\`** - Core utilities for HTTP servers and backend functionality
+- **\`@buntal\`**
+  - **\`@buntal/http\`** - Core utilities for HTTP servers and backend functionality
+  - **\`@buntal/middlewares\`** - Pre-built middleware for common tasks
 - **\`buntal\`** - Main package for web applications with React components
 
 Each package is designed to work independently or together, giving you the flexibility to use only what you need for your specific project requirements.

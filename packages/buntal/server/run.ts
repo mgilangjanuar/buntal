@@ -7,7 +7,6 @@ import { injectHandler } from './inject'
 import { notfoundHandler } from './notfound'
 import { builder } from './router'
 import { staticHandler } from './static'
-import { mdxHandler } from './mdx'
 
 export async function runServer({
   env = (process.env.NODE_ENV as 'development' | 'production') ||
@@ -44,11 +43,6 @@ export async function runServer({
     const resp = await staticHandler(req, outDir, staticDir)
     if (resp instanceof Response) {
       return resp
-    }
-
-    const mdxResp = await mdxHandler(req, env, appDir)
-    if (mdxResp instanceof Response) {
-      return mdxResp
     }
 
     return await notfoundHandler(env, appDir)

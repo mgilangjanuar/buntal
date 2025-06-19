@@ -1,21 +1,20 @@
 import { compile } from '@mdx-js/mdx'
 import { readFileSync } from 'fs'
 import matter from 'gray-matter'
-import path from 'path'
-import React from 'react'
+import type { ComponentType } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 
 interface MDXResult {
-  component: React.ComponentType
+  component: ComponentType
   html: string
-  frontmatter: Record<string, unknown>
+  metadata: Record<string, unknown>
 }
 
 async function renderMDXToStaticMarkup(filePath: string): Promise<MDXResult> {
   const fileContent = readFileSync(filePath, 'utf8')
-  const { content: mdxContent, data: frontmatter } = matter(fileContent)
+  const { content, data } = matter(fileContent)
 
-  const blob = await compile(mdxContent, {
+  const blob = await compile(content, {
     outputFormat: 'program',
     // Add JSX runtime for React 19
     jsxImportSource: 'react'
@@ -30,20 +29,20 @@ async function renderMDXToStaticMarkup(filePath: string): Promise<MDXResult> {
     const ComponentType = component.default
     return {
       component: ComponentType,
-      html: renderToStaticMarkup(React.createElement(ComponentType)),
-      frontmatter
+      html: renderToStaticMarkup(<ComponentType />),
+      metadata: data
     }
   } finally {
     URL.revokeObjectURL(url)
   }
 }
 
-// Macro function for compile-time MDX loading
-export function mdx(filePath: string) {
-  return renderMDXToStaticMarkup(path.join(process.cwd(), filePath))
-}
-
 // Runtime function for dynamic MDX loading
 export async function loadMDX(filePath: string): Promise<MDXResult> {
   return renderMDXToStaticMarkup(filePath)
+}
+
+export function loadMetadata(filePath: string): Record<string, unknown> {
+  const fileContent = readFileSync(filePath, 'utf8')
+  return matter(fileContent).data
 }

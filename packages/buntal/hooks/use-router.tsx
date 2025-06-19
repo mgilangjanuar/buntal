@@ -49,10 +49,12 @@ type RouterProviderProps = {
   notFound?: ReactNode
 }
 
-type PageDataProps = {
-  _meta?: MetaProps
-  [key: string]: any
-}
+type PageDataProps =
+  | {
+      _meta?: MetaProps
+      [key: string]: any
+    }
+  | undefined
 
 type PageArgs =
   | {
@@ -76,26 +78,23 @@ const Page = memo(
     rootLayout: RouterProviderProps['rootLayout']
     layoutIdx: number
   }>) => {
-    const fetchData = useCallback(
-      async (idx: number) => {
-        if (!args?.query) {
-          return undefined
+    const fetchData = useCallback(async (idx: number) => {
+      if (!args?.query) {
+        return undefined
+      }
+      const resp = await fetch(
+        `${window.location.pathname}?${new URLSearchParams({
+          ...args.query,
+          _$: idx.toString()
+        }).toString()}`
+      )
+      if (resp.ok) {
+        if (resp.headers.get('Content-Type')?.includes('application/json')) {
+          return await resp.json()
         }
-        const resp = await fetch(
-          `${window.location.pathname}?${new URLSearchParams({
-            ...args.query,
-            _$: idx.toString()
-          }).toString()}`
-        )
-        if (resp.ok) {
-          if (resp.headers.get('Content-Type')?.includes('application/json')) {
-            return await resp.json()
-          }
-          return await resp.text()
-        }
-      },
-      [args?.query]
-    )
+        return await resp.text()
+      }
+    }, [])
 
     useEffect(() => {
       if (router) {
@@ -106,7 +105,7 @@ const Page = memo(
               onDataChange(data)
             })
           } else {
-            onDataChange(layout.data || {})
+            onDataChange(layout.data)
           }
         } else {
           if (router.ssr) {
@@ -114,7 +113,7 @@ const Page = memo(
               onDataChange(data)
             })
           } else {
-            onDataChange(router.data || {})
+            onDataChange(router.data)
           }
         }
       }
@@ -264,6 +263,7 @@ export function RouterProvider({
     }
 
     return () => {
+      console.log('RouterProvider cleanup')
       setArgs(undefined)
     }
   }, [router])

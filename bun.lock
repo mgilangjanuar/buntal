@@ -48,10 +48,10 @@
       "name": "blog",
       "version": "0.0.1",
       "dependencies": {
-        "@buntal/http": "latest",
+        "@buntal/http": "workspace:^",
         "@mdx-js/esbuild": "^3.1.0",
         "@mdx-js/mdx": "^3.1.0",
-        "buntal": "latest",
+        "buntal": "workspace:^",
         "clsx": "^2.1.1",
         "gray-matter": "^4.0.3",
         "react": "^19.1.0",
@@ -60,7 +60,7 @@
         "tailwindcss": "^4.1.7",
       },
       "devDependencies": {
-        "@buntal/cli": "latest",
+        "@buntal/cli": "workspace:^",
         "@eslint-react/eslint-plugin": "^1.51.0",
         "@tailwindcss/cli": "^4.1.7",
         "@tailwindcss/typography": "^0.5.16",
@@ -926,9 +926,9 @@
 
     "picomatch": ["picomatch@4.0.2", "", {}, "sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg=="],
 
-    "playwright": ["playwright@1.53.0", "", { "dependencies": { "playwright-core": "1.53.0" }, "optionalDependencies": { "fsevents": "2.3.2" }, "bin": { "playwright": "cli.js" } }, "sha512-ghGNnIEYZC4E+YtclRn4/p6oYbdPiASELBIYkBXfaTVKreQUYbMUYQDwS12a8F0/HtIjr/CkGjtwABeFPGcS4Q=="],
+    "playwright": ["playwright@1.53.1", "", { "dependencies": { "playwright-core": "1.53.1" }, "optionalDependencies": { "fsevents": "2.3.2" }, "bin": { "playwright": "cli.js" } }, "sha512-LJ13YLr/ocweuwxyGf1XNFWIU4M2zUSo149Qbp+A4cpwDjsxRPj7k6H25LBrEHiEwxvRbD8HdwvQmRMSvquhYw=="],
 
-    "playwright-core": ["playwright-core@1.53.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-mGLg8m0pm4+mmtB7M89Xw/GSqoNC+twivl8ITteqvAndachozYe2ZA7srU6uleV1vEdAHYqjq+SV8SNxRRFYBw=="],
+    "playwright-core": ["playwright-core@1.53.1", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-Z46Oq7tLAyT0lGoFx4DOuB1IA9D1TPj0QkYxpPVUnGDqHHvDpCftu1J2hM2PiWsNMoZh8+LQaarAWcDfPBc6zg=="],
 
     "postcss-selector-parser": ["postcss-selector-parser@6.0.10", "", { "dependencies": { "cssesc": "^3.0.0", "util-deprecate": "^1.0.2" } }, "sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w=="],
 
@@ -1134,11 +1134,7 @@
 
     "@typescript-eslint/typescript-estree/semver": ["semver@7.7.2", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA=="],
 
-    "blog/@buntal/cli": ["@buntal/cli@0.0.10", "", { "dependencies": { "commander": "^14.0.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "buntal": "index.ts" } }, "sha512-+0z6suBqZm8zmRdNO33Mh4U4bcWvFcAukfp54030bpFtai0Kd0/wGoovueqs1YgcPSmwjfb/cA6gR3JbBXYkQQ=="],
-
-    "blog/@buntal/http": ["@buntal/http@0.0.9", "", { "dependencies": { "jose": "^6.0.11" }, "peerDependencies": { "typescript": "^5" } }, "sha512-xLdJSeptXVFXHIR+Jg70zurzlIokSIA/t6aJUOS7V8GXFuJFsCMvq9U170KCp8n5SDmFjWRrJKpPVDm49V7Ktg=="],
-
-    "blog/buntal": ["buntal@0.1.4", "", { "dependencies": { "@buntal/http": "workspace:^", "react": "^19.1.0", "react-dom": "^19.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-uGIra28Z4Fx6R+VA0WijUv/fGY9voiQwtpeVYW3CevSUX49OtY1GpncMw3BYCVTwdcb7dmA4wXyjW1eyRBsiTA=="],
+    "bun-types/@types/node": ["@types/node@24.0.3", "", { "dependencies": { "undici-types": "~7.8.0" } }, "sha512-R4I/kzCYAdRLzfiCabn9hxWfbuHS573x+r0dJMkkzThEa7pbrcDWK+9zu3e7aBOouf+rQAciqPFMnxwr0aWgKg=="],
 
     "decode-named-character-reference/character-entities": ["character-entities@2.0.2", "", {}, "sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ=="],
 
@@ -1174,7 +1170,7 @@
 
     "@typescript-eslint/typescript-estree/minimatch/brace-expansion": ["brace-expansion@2.0.2", "", { "dependencies": { "balanced-match": "^1.0.0" } }, "sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ=="],
 
-    "blog/buntal/@buntal/http": ["@buntal/http@workspace:packages/@buntal/http"],
+    "bun-types/@types/node/undici-types": ["undici-types@7.8.0", "", {}, "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="],
 
     "hastscript/@types/hast/@types/unist": ["@types/unist@2.0.11", "", {}, "sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA=="],
 

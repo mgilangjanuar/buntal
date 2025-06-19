@@ -1,6 +1,7 @@
-import { Req } from '@buntal/http'
-import path from 'path'
 import { loadMDX } from '@/lib/render'
+import { Req } from '@buntal/http'
+import type { MetaProps } from 'buntal'
+import path from 'path'
 
 export const $ = async (req: Req) => {
   const slug = req.params.slug
@@ -16,10 +17,13 @@ export const $ = async (req: Req) => {
   try {
     // Load and render MDX content
     const result = await loadMDX(mdPath)
+    const { title, description } = result.metadata || {}
     return {
-      html: result.html,
-      component: result.component,
-      frontmatter: result.frontmatter
+      ...result,
+      _meta: {
+        title,
+        description
+      } as MetaProps
     }
   } catch (error) {
     console.error('Error loading MDX:', error)
@@ -32,7 +36,11 @@ export default function Post({
 }: Readonly<{
   data?: Awaited<ReturnType<typeof $>>
 }>) {
-  if (!data?.frontmatter) {
+  if (!Object.keys(data || {}).length) {
+    return
+  }
+
+  if (!data?.metadata) {
     return (
       <div className="container mx-auto prose">
         <h1>Post not found</h1>
@@ -41,10 +49,10 @@ export default function Post({
     )
   }
 
-  const { frontmatter } = data
-  const title = frontmatter?.title as string | undefined
-  const description = frontmatter?.description as string | undefined
-  const date = frontmatter?.date as string | undefined
+  const { metadata } = data
+  const title = metadata?.title as string | undefined
+  const description = metadata?.description as string | undefined
+  const date = metadata?.date as string | undefined
 
   return (
     <div className="container mx-auto prose prose-lg max-w-4xl py-8">

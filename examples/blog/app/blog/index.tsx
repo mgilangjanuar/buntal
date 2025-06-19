@@ -1,6 +1,37 @@
+import { loadMetadata } from '@/lib/render'
 import { Link } from 'buntal'
+import { readdirSync } from 'fs'
+import { useEffect } from 'react'
 
-export default function Blog() {
+export const $ = async () => {
+  const files = readdirSync('./app/blog/[[...slug]]', {
+    recursive: true
+  }).filter(
+    (file) => typeof file === 'string' && file.endsWith('.mdx')
+  ) as string[]
+  return {
+    posts: files.map(
+      (file) =>
+        ({
+          ...loadMetadata(`./app/blog/[[...slug]]/${file}`),
+          slug: file.replace(/\.mdx$/, '')
+        }) as {
+          slug: string
+          [key: string]: unknown
+        }
+    )
+  }
+}
+
+export default function Blog({
+  data
+}: Readonly<{
+  data?: Awaited<ReturnType<typeof $>>
+}>) {
+  useEffect(() => {
+    console.log('Blog data loaded:', data)
+  }, [data])
+
   return (
     <div className="container mx-auto prose prose-lg max-w-4xl py-8">
       <h1>Buntal Blog Example</h1>
@@ -13,28 +44,25 @@ export default function Blog() {
       <h2>Available Posts</h2>
       <div className="not-prose">
         <div className="grid gap-4 my-6">
-          <Link
-            href="/blog/example-post"
-            className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <h3 className="font-semibold text-lg">
-              Getting Started with Buntal and MDX
-            </h3>
-            <p className="text-gray-600">
-              Learn how to build a blog with Buntal framework and MDX for
-              content management.
-            </p>
-            <time className="text-sm text-gray-500">June 18, 2025</time>
-          </Link>
+          {data?.posts?.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <h3 className="font-semibold text-lg">
+                {(post.title as string) || 'Untitled Post'}
+              </h3>
+              <p className="text-gray-600">
+                {(post.description as string) || 'No description available.'}
+              </p>
+              <time className="text-sm text-gray-500">
+                {new Date(post.date as string).toLocaleDateString('en-US')}
+              </time>
+            </Link>
+          ))}
         </div>
       </div>
-
-      <h2>Implementation</h2>
-      <p>
-        Check out the <code>MDX_README.md</code> file for detailed
-        implementation instructions and examples of both runtime and
-        compile-time MDX loading approaches.
-      </p>
     </div>
   )
 }

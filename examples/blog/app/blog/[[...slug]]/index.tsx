@@ -2,6 +2,7 @@ import { loadMDX } from '@/lib/render'
 import { Req } from '@buntal/http'
 import type { MetaProps } from 'buntal'
 import path from 'path'
+import { useMemo } from 'react'
 
 export const $ = async (req: Req) => {
   const slug = req.params.slug
@@ -11,7 +12,9 @@ export const $ = async (req: Req) => {
 
   // Check if MDX file exists
   if (!(await Bun.file(mdPath).exists())) {
-    return null
+    return {
+      notFound: true
+    }
   }
 
   try {
@@ -27,7 +30,9 @@ export const $ = async (req: Req) => {
     }
   } catch (error) {
     console.error('Error loading MDX:', error)
-    return null
+    return {
+      notFound: true
+    }
   }
 }
 
@@ -36,27 +41,32 @@ export default function Post({
 }: Readonly<{
   data?: Awaited<ReturnType<typeof $>>
 }>) {
-  if (!Object.keys(data || {}).length) {
-    return
-  }
-
-  if (!data?.metadata) {
+  if (data?.notFound) {
     return (
-      <div className="container mx-auto prose">
+      <div className="container mx-auto prose py-8">
         <h1>Post not found</h1>
         <p>The requested blog post could not be found.</p>
       </div>
     )
   }
 
-  const { metadata } = data
-  const title = metadata?.title as string | undefined
-  const description = metadata?.description as string | undefined
-  const date = metadata?.date as string | undefined
+  const metadata = useMemo(
+    () => (data && 'metadata' in data ? data.metadata : null),
+    [data]
+  )
+  const title = useMemo(() => metadata?.title as string | undefined, [metadata])
+  const description = useMemo(
+    () => metadata?.description as string | undefined,
+    [metadata]
+  )
+  const date = useMemo(
+    () => metadata?.date as string | Date | undefined,
+    [metadata]
+  )
+  const html = useMemo(() => (data && 'html' in data ? data.html : ''), [data])
 
-  return (
+  return metadata ? (
     <div className="container mx-auto prose prose-lg max-w-4xl py-8">
-      {/* Display frontmatter if available */}
       {title && (
         <header className="mb-8 border-b pb-4">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
@@ -73,7 +83,11 @@ export default function Post({
 
       {/* Render the MDX content as HTML */}
       {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
-      <div dangerouslySetInnerHTML={{ __html: data.html }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
+  ) : (
+    <div className="container mx-auto prose py-8">
+      <p>Please wait...</p>
     </div>
   )
 }

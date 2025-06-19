@@ -10,8 +10,8 @@ export default function Header({
   const { pathname } = useRouter()
 
   return (
-    <header className="!h-14 sticky top-0 z-10 bg-gradient-to-r xl:bg-none to-base-100/0 via-base-100/50 from-base-100/0 backdrop-blur-sm xl:backdrop-blur-none grid px-4">
-      <div className="flex items-center gap-4 w-full">
+    <header className="!h-14 sticky top-0 z-10 bg-gradient-to-r xl:bg-none to-base-100/0 via-base-100/50 from-base-100/0 backdrop-blur-sm xl:backdrop-blur-none grid gap-8 xl:grid-cols-[1fr_322px] px-4">
+      <div className="flex items-center lg:justify-end xl:justify-start gap-4 w-full xl:col-start-2">
         <label
           htmlFor="docs-layout-drawer"
           className="btn btn-square btn-sm btn-ghost drawer-button lg:hidden"
@@ -34,14 +34,12 @@ export default function Header({
           </svg>
         </label>
         <div className="divider divider-horizontal mx-0 !w-1 py-3.5 lg:hidden"></div>
-        <span className="text-sm truncate flex-1 opacity-100 lg:opacity-0">
-          {title}
-        </span>
-        <div className="flex items-center gap-1">
+        <span className="text-sm truncate flex-1 block lg:hidden">{title}</span>
+        <div className="flex items-center gap-1 xl:pl-8">
           <Link
             href="/docs"
             className={cn(
-              'hidden md:flex btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm no-underline',
+              'hidden sm:flex btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm no-underline',
               pathname.startsWith('/docs') && 'text-base-content'
             )}
           >
@@ -50,7 +48,7 @@ export default function Header({
           <Link
             href="/references"
             className={cn(
-              'hidden md:flex btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm no-underline',
+              'hidden sm:flex btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm no-underline',
               pathname.startsWith('/references') && 'text-base-content'
             )}
           >

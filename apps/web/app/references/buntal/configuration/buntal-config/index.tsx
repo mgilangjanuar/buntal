@@ -10,7 +10,7 @@ export const $ = {
 export default function BuntalConfigPage() {
   return (
     <ReferencePage
-      headerTitle="buntal - Configuration"
+      headerTitle="buntal"
       title="BuntalConfig"
       description="Configuration type for Buntal applications that defines build and runtime settings."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/index.ts"

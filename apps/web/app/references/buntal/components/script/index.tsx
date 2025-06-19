@@ -10,7 +10,7 @@ export const $ = {
 export default function ScriptComponentPage() {
   return (
     <ReferencePage
-      headerTitle="buntal - components"
+      headerTitle="buntal/components"
       title="Script"
       description="External script loader component that dynamically loads JavaScript files and manages script lifecycle with automatic cleanup."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/script.tsx"

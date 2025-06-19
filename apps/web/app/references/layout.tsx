@@ -139,7 +139,7 @@ const MENUS: MenuItem[] = [
   }
 ]
 
-export default function DocsLayout({
+export default function ReferenceLayout({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -147,7 +147,7 @@ export default function DocsLayout({
   const { pathname } = useRouter()
 
   return (
-    <div className="drawer lg:drawer-open max-w-[1360px] mx-auto">
+    <div className="drawer lg:drawer-open mx-auto">
       <input
         id="docs-layout-drawer"
         type="checkbox"

@@ -10,7 +10,7 @@ export const $ = {
 export default function MetaComponentPage() {
   return (
     <ReferencePage
-      headerTitle="buntal - components"
+      headerTitle="buntal/components"
       title="Meta"
       description="HTML meta tags component for managing page metadata, SEO tags, Open Graph properties, and Twitter Card data."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/meta.tsx"

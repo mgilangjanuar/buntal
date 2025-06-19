@@ -10,7 +10,7 @@ export const $ = {
 export default function LinkComponentPage() {
   return (
     <ReferencePage
-      headerTitle="buntal - components"
+      headerTitle="buntal/components"
       title="Link"
       description="Client-side navigation component that handles internal routing, hash navigation, and history management without full page reloads."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/link.tsx"

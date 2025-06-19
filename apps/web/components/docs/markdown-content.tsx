@@ -225,8 +225,8 @@ export default function MarkdownContent({
       <Header title={title} />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container ml-0 pb-6 grid grid-cols-1">
-          {prependComponent}
-          <div className="prose min-h-screen">
+          <div className="max-w-prose mx-auto">{prependComponent}</div>
+          <div className="prose min-h-screen mx-auto grid grid-cols-1">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -345,10 +345,12 @@ export default function MarkdownContent({
               {content}
             </ReactMarkdown>
           </div>
-          <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6 mt-12">
-            Last modified:{' '}
-            {lastModified || new Date().toISOString().split('T')[0]}
-          </p>
+          <div className="w-full max-w-prose mx-auto pt-12">
+            <p className="text-sm text-base-content/60 border-t border-base-content/10 pt-6">
+              Last modified:{' '}
+              {lastModified || new Date().toISOString().split('T')[0]}
+            </p>
+          </div>
         </div>
         {finalToc.length > 0 && (
           <div className="xl:block hidden">

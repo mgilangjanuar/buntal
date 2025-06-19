@@ -10,7 +10,7 @@ export const $ = {
 export default function AppComponentPage() {
   return (
     <ReferencePage
-      headerTitle="buntal - components"
+      headerTitle="buntal/components"
       title="App"
       description="Root application component that manages routing, layouts, and provides the foundation for Buntal applications."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/app.tsx"

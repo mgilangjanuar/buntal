@@ -1,6 +1,6 @@
 import { loadMDX } from '@/lib/render'
 import { Req } from '@buntal/http'
-import type { MetaProps } from 'buntal'
+import { Link, type MetaProps } from 'buntal'
 import path from 'path'
 import { useMemo } from 'react'
 
@@ -66,22 +66,27 @@ export default function Post({
   const html = useMemo(() => (data && 'html' in data ? data.html : ''), [data])
 
   return metadata ? (
-    <div className="container mx-auto prose prose-lg max-w-4xl py-8">
-      {title && (
-        <header className="mb-8 border-b pb-4">
-          <h1 className="text-4xl font-bold mb-2">{title}</h1>
-          {description && (
-            <p className="text-xl text-gray-600 mb-2">{description}</p>
-          )}
-          {date && (
-            <time className="text-sm text-gray-500">
-              {new Date(date).toLocaleDateString()}
-            </time>
-          )}
-        </header>
-      )}
+    <div className="container mx-auto prose max-w-4xl py-8">
+      <header className="mb-8 border-b pb-4">
+        <p>
+          <Link
+            href="/blog"
+            className="text-blue-600 hover:underline underline-offset-4"
+          >
+            ← Back to Blog
+          </Link>
+        </p>
+        <h1 className="font-bold my-2">{title}</h1>
+        {description && (
+          <p className="text-xl text-gray-600 mb-2">{description}</p>
+        )}
+        {date && (
+          <time className="text-sm text-gray-500">
+            {new Date(date).toLocaleDateString()}
+          </time>
+        )}
+      </header>
 
-      {/* Render the MDX content as HTML */}
       {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>

@@ -228,7 +228,13 @@ export function RouterProvider({
 
   useEffect(() => {
     // Reset args when active route changes
-    setArgs(undefined)
+    setArgs((arg) => {
+      if (!arg) return arg
+      return {
+        ...arg,
+        data: undefined
+      }
+    })
 
     const foundRoute = compiledRoutes.find((r) =>
       r.compiledRegex.test(activeRoute)

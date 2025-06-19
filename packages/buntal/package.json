@@ -1,7 +1,7 @@
 {
   "name": "buntal",
   "description": "React framework for Bun",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",

@@ -227,6 +227,9 @@ export function RouterProvider({
   }, [])
 
   useEffect(() => {
+    // Reset args when active route changes
+    setArgs(undefined)
+
     const foundRoute = compiledRoutes.find((r) =>
       r.compiledRegex.test(activeRoute)
     )
@@ -263,7 +266,6 @@ export function RouterProvider({
     }
 
     return () => {
-      console.log('RouterProvider cleanup')
       setArgs(undefined)
     }
   }, [router])

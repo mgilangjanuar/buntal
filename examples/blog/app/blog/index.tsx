@@ -1,7 +1,6 @@
 import { loadMetadata } from '@/lib/render'
 import { Link } from 'buntal'
 import { readdirSync } from 'fs'
-import { useEffect } from 'react'
 
 export const $ = async () => {
   const files = readdirSync('./app/blog/[[...slug]]', {
@@ -28,10 +27,6 @@ export default function Blog({
 }: Readonly<{
   data?: Awaited<ReturnType<typeof $>>
 }>) {
-  useEffect(() => {
-    console.log('Blog data loaded:', data)
-  }, [data])
-
   return (
     <div className="container mx-auto prose prose-lg max-w-4xl py-8">
       <h1>Buntal Blog Example</h1>
@@ -44,7 +39,7 @@ export default function Blog({
       <h2>Available Posts</h2>
       <div className="not-prose">
         <div className="grid gap-4 my-6">
-          {data?.posts?.map((post) => (
+          {data?.posts.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}

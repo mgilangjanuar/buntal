@@ -217,9 +217,7 @@ Set a cookie in the response. If the \`value\` is \`null\`, it deletes the cooki
 Here is an example of how to set a cookie in the response:
 
 \`\`\`typescript
-import { cookie } from '@buntal/http'
-
-cookie.set(res, 'access_token', token, {
+res.cookie('access_token', token, {
   maxAge: 60 * 60 * 2,  // 2 hours
   httpOnly: true,
   path: '/'
@@ -272,7 +270,7 @@ cookie.set(res, 'access_token', token, {
           ]
         }
       ]}
-      lastModified="2025-06-18"
+      lastModified="2025-06-19"
     />
   )
 }

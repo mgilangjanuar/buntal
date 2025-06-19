@@ -224,7 +224,7 @@ export default function MarkdownContent({
     <div className={className}>
       <Header title={title} />
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
-        <div className="container ml-0 pb-6 grid grid-cols-1">
+        <div className="container pb-6 grid grid-cols-1 mx-auto">
           <div className="max-w-prose mx-auto">{prependComponent}</div>
           <div className="prose min-h-screen mx-auto grid grid-cols-1">
             <ReactMarkdown

@@ -454,11 +454,7 @@ export default function HomePage() {
               >
                 <img
                   loading="lazy"
-                  src={
-                    theme === 'dark'
-                      ? '/cloudflare-dark.svg'
-                      : '/cloudflare.svg'
-                  }
+                  src={theme === 'dark' ? '/cf-dark.svg' : '/cf.svg'}
                   alt="Cloudflare Badge"
                   className="min-h-9 w-full h-auto"
                 />

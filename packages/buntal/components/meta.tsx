@@ -36,13 +36,12 @@ export function Meta(props: MetaProps) {
         property="og:title"
         content={props.og?.title || props.title || 'Buntal App'}
       />
-      {props.og?.description ||
-        (props.description && (
-          <meta
-            property="og:description"
-            content={props.og?.description || props.description}
-          />
-        ))}
+      {(props.og?.description || props.description) && (
+        <meta
+          property="og:description"
+          content={props.og?.description || props.description}
+        />
+      )}
       {props.og?.image && (
         <meta property="og:image" content={props.og?.image} />
       )}
@@ -51,13 +50,12 @@ export function Meta(props: MetaProps) {
         name="twitter:title"
         content={props.twitter?.title || props.title || 'Buntal App'}
       />
-      {props.twitter?.description ||
-        (props.description && (
-          <meta
-            name="twitter:description"
-            content={props.twitter?.description || props.description}
-          />
-        ))}
+      {(props.twitter?.description || props.description) && (
+        <meta
+          name="twitter:description"
+          content={props.twitter?.description || props.description}
+        />
+      )}
       {props.twitter?.image && (
         <meta name="twitter:image" content={props.twitter?.image} />
       )}

@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { createElement } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 import { Notfound } from '../components/notfound'
@@ -7,9 +8,9 @@ export const notfoundHandler = async (
   appDir: string = './app'
 ): Promise<Response | void> => {
   const layout =
-    (await Bun.file(`${appDir}/layout.tsx`).exists()) &&
-    (await import(`${process.cwd()}/${appDir}/layout.tsx`))
-  if (await Bun.file(`${appDir}/404.tsx`).exists()) {
+    (await Bun.file(join(appDir, 'layout.tsx')).exists()) &&
+    (await import(join(process.cwd(), appDir, 'layout.tsx')))
+  if (await Bun.file(join(appDir, '404.tsx')).exists()) {
     const { default: NotFound } = await import(
       `${process.cwd()}/${appDir}/404.tsx`
     )
@@ -33,6 +34,7 @@ export const notfoundHandler = async (
         }
       ),
       {
+        status: 404,
         headers: {
           'Content-Type': 'text/html'
         }
@@ -60,6 +62,7 @@ export const notfoundHandler = async (
       }
     ),
     {
+      status: 404,
       headers: {
         'Content-Type': 'text/html'
       }

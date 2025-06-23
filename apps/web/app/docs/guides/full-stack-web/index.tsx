@@ -131,7 +131,7 @@ export default function HomePage({ data }: {
 }
 \`\`\`
 
-See the \`Req\` type definition [here](/docs/packages/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.`}
+See the \`Req\` type definition [here](/docs/guides/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.`}
       tableOfContents={[
         {
           id: 'quick-start',

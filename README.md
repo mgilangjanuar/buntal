@@ -57,26 +57,30 @@ Help us maintain this project by becoming a [sponsor](https://github.com/sponsor
 
 <table>
   <tr>
-    <td style="padding: 12px 18px;">
+    <td style="padding: 0 18px;">
       <a href="https://m.do.co/c/4aad6c899906">
-          <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/DO_Logo_horizontal_white.svg">
+          <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/DO_Logo_horizontal_blue.svg">
+          <img src="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/DO_Logo_horizontal_blue.svg" width="201px">
+        </picture>
       </a>
     </td>
-    <td style="padding: 12px 18px;">
+    <td style="padding: 0 18px;">
       <a href="https://cloudflare.com/?ref=buntaljs">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/cf-dark.svg">
           <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/cf.svg">
-          <img src="apps/web/public/sentry-wordmark-dark-400x88.svg" width="184px">
+          <img src="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/cf.svg" width="184px">
         </picture>
       </a>
     </td>
-    <td style="padding: 12px 18px;">
+    <td style="padding: 0 18px;">
       <a href="https://sentry.io?ref=buntaljs">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/sentry-wordmark-light-400x88.svg">
           <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/sentry-wordmark-dark-400x88.svg">
-          <img src="apps/web/public/sentry-wordmark-dark-400x88.svg" width="140px">
+          <img src="https://raw.githubusercontent.com/mgilangjanuar/buntal/refs/heads/main/apps/web/public/sentry-wordmark-dark-400x88.svg" width="140px">
         </picture>
       </a>
     </td>

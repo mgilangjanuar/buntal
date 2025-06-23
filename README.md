@@ -87,8 +87,6 @@ Help us maintain this project by becoming a [sponsor](https://github.com/sponsor
   </tr>
 </table>
 
-<br />
-
 <!-- sponsors --><a href="https://github.com/moerdowo"><img src="https:&#x2F;&#x2F;github.com&#x2F;moerdowo.png" width="60px" alt="User avatar: Frianto Moerdowo" /></a><!-- sponsors -->
 
 ## Benchmark Test

@@ -37,7 +37,7 @@ export async function runServer({
           }
         : undefined,
     injectHandler: async (payload) => {
-      const resp = await staticHandler(payload.req, staticDir)
+      const resp = await staticHandler(payload.req, outDir, staticDir)
       if (resp instanceof Response) {
         return resp
       }
@@ -46,16 +46,9 @@ export async function runServer({
   })
 
   app.onNotFound(async (req) => {
-    const { pathname } = new URL(req.url)
-    if (
-      await Bun.file(`${outDir}/dist${decodeURIComponent(pathname)}`).exists()
-    ) {
-      const file = Bun.file(`${outDir}/dist${decodeURIComponent(pathname)}`)
-      return new Response(file, {
-        headers: {
-          'content-type': file.type
-        }
-      })
+    const resp = await staticHandler(req, outDir, staticDir)
+    if (resp instanceof Response) {
+      return resp
     }
     return await notfoundHandler(env, appDir)
   })

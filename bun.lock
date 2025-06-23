@@ -10,7 +10,7 @@
     },
     "apps/web": {
       "name": "web",
-      "version": "0.1.16",
+      "version": "0.1.17",
       "dependencies": {
         "@buntal/http": "workspace:^",
         "buntal": "workspace:^",
@@ -143,7 +143,7 @@
     },
     "packages/buntal": {
       "name": "buntal",
-      "version": "0.1.10",
+      "version": "0.1.11",
       "dependencies": {
         "@buntal/http": "latest",
         "react": "^19.1.0",

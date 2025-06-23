@@ -430,7 +430,7 @@ export default function HomePage() {
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="flex gap-8 items-center justify-center flex-col">
             <p className="text-base-content/50 text-sm">sponsored by</p>
-            <div className="flex gap-8 items-start flex-wrap justify-center mb-6">
+            <div className="flex gap-10 items-end flex-wrap justify-center my-6 max-w-xl mx-auto">
               <a
                 href="https://m.do.co/c/4aad6c899906"
                 target="_blank"
@@ -443,8 +443,8 @@ export default function HomePage() {
                       ? '/DO_Logo_horizontal_white.svg'
                       : '/DO_Logo_horizontal_blue.svg'
                   }
-                  alt="DigitalOcean Referral Badge"
-                  className="max-h-10 w-full h-auto"
+                  alt="DigitalOcean"
+                  className="max-h-9 w-full h-auto"
                 />
               </a>
               <a
@@ -455,8 +455,24 @@ export default function HomePage() {
                 <img
                   loading="lazy"
                   src={theme === 'dark' ? '/cf-dark.svg' : '/cf.svg'}
-                  alt="Cloudflare Badge"
+                  alt="Cloudflare"
                   className="min-h-9 w-full h-auto"
+                />
+              </a>
+              <a
+                href="https://sentry.io?ref=buntaljs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  loading="lazy"
+                  src={
+                    theme === 'dark'
+                      ? '/sentry-wordmark-light-400x88.svg'
+                      : '/sentry-wordmark-dark-400x88.svg'
+                  }
+                  alt="Sentry"
+                  className="max-h-9 w-full h-auto"
                 />
               </a>
             </div>

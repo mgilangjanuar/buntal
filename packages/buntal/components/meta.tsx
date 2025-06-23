@@ -9,6 +9,8 @@ export type MetaProps = Partial<{
     type?: string
     description?: string
     image?: string
+    url?: string
+    site_name?: string
   }
   twitter: {
     title?: string
@@ -47,6 +49,10 @@ export function Meta(props: MetaProps) {
         <meta property="og:image" content={props.og?.image} />
       )}
       {props.og?.type && <meta property="og:type" content={props.og?.type} />}
+      {props.og?.url && <meta property="og:url" content={props.og?.url} />}
+      {props.og?.site_name && (
+        <meta property="og:site_name" content={props.og?.site_name} />
+      )}
 
       <meta
         name="twitter:title"

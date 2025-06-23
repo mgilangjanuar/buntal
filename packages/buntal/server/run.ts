@@ -36,15 +36,16 @@ export async function runServer({
             message() {}
           }
         : undefined,
-    injectHandler: injectHandler(env, routes)
+    injectHandler: async (payload) => {
+      const resp = await staticHandler(payload.req, outDir, staticDir)
+      if (resp instanceof Response) {
+        return resp
+      }
+      return injectHandler(env, routes)(payload)
+    }
   })
 
-  app.onNotFound(async (req) => {
-    const resp = await staticHandler(req, outDir, staticDir)
-    if (resp instanceof Response) {
-      return resp
-    }
-
+  app.onNotFound(async () => {
     return await notfoundHandler(env, appDir)
   })
 

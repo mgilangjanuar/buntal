@@ -31,7 +31,7 @@ export const GET = h(async (_, res) => {
     })
   }
 
-  return res.json(
+  return res.status(200).json(
     json.data.user.sponsors.nodes as {
       login: string
       avatarUrl: string

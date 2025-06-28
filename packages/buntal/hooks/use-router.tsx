@@ -304,6 +304,7 @@ export function RouterProvider({
   useEffect(() => {
     document.querySelectorAll('script').forEach((script) => {
       if (script.innerText === 'document.body.style.display = "none";') {
+        document.body.style.display = 'block'
         script.remove()
       }
     })

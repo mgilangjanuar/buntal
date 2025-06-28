@@ -41,7 +41,6 @@ export class Http {
   constructor(private config: Config) {}
 
   start(cb?: (server: Bun.Server) => void) {
-    const res = new Res()
     const middlewares = this.middlewares
 
     const server = Bun.serve({
@@ -52,6 +51,7 @@ export class Http {
       fetch: async (raw: Request, server): Promise<Response | any> => {
         if (this.config.websocket && server.upgrade(raw)) return
 
+        const res = new Res()
         if (raw.method === 'OPTIONS') {
           return res.send('departed')
         }
@@ -92,6 +92,7 @@ export class Http {
         if (this.errorHandler) {
           return await this.errorHandler(error)
         }
+        const res = new Res()
         return res.status(500).json({
           error: error.message,
           details: error.stack

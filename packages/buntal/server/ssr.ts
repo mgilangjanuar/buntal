@@ -15,12 +15,18 @@ export const ssrHandler = async (
     if (typeof result === 'object') {
       return new Response(JSON.stringify(result), {
         headers: {
+          'Max-Age': '300',
+          'Cache-Control': 'public, max-age=300',
+          Etag: btoa(JSON.stringify(result)),
           'Content-Type': 'application/json'
         }
       })
     }
     return new Response(String(result), {
       headers: {
+        'Max-Age': '300',
+        'Cache-Control': 'public, max-age=300',
+        Etag: btoa(String(result)),
         'Content-Type': 'text/plain'
       }
     })

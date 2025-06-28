@@ -400,7 +400,7 @@ export default function HomePage() {
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
                 </svg>
-                v0.1.16
+                v0.1.17
               </a>
               <Link href="/docs" className="btn btn-primary btn-soft">
                 Get Started
@@ -541,7 +541,7 @@ export default function HomePage() {
               </div>
               <img
                 loading="lazy"
-                src="/08.46.20@2x.png?v=2"
+                src="/08.46.20@2x.png?v=3"
                 alt="ultra-lightweight framework"
                 className="absolute -right-8 filter -bottom-2 object-contain rounded-2xl bg-center grayscale bg-cover max-w-[280px] md:max-w-xs"
               />
@@ -554,7 +554,7 @@ export default function HomePage() {
                 Everything out of the box. Building web apps without headaches.
               </p>
             </WobbleCard>
-            <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+            <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[470px] md:min-h-[560px] lg:min-h-[300px]">
               <div className="max-w-sm">
                 <h2 className="max-w-sm md:max-w-lg text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                   Blazing fast & type-safe by default
@@ -569,7 +569,7 @@ export default function HomePage() {
               </div>
               <img
                 loading="lazy"
-                src="/2025-05-29@2x.png"
+                src="/2025-05-29@2x.png?v=2"
                 alt="type-safe params"
                 className="absolute -right-2 filter -bottom-6 object-contain rounded-2xl bg-center bg-cover max-w-xs md:max-w-md"
               />

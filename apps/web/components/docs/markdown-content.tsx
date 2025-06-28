@@ -226,7 +226,7 @@ export default function MarkdownContent({
       <main className="grid gap-8 xl:grid-cols-[1fr_322px] py-4">
         <div className="container pb-6 grid grid-cols-1 mx-auto">
           <div className="max-w-prose mx-auto">{prependComponent}</div>
-          <div className="prose min-h-screen mx-auto grid grid-cols-1">
+          <div className="prose min-h-screen mx-auto grid grid-cols-1 w-full content-start">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

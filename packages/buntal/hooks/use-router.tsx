@@ -301,6 +301,14 @@ export function RouterProvider({
     }
   }, [router])
 
+  useEffect(() => {
+    document.querySelectorAll('script').forEach((script) => {
+      if (script.innerText === 'document.body.style.display = "none";') {
+        script.remove()
+      }
+    })
+  }, [])
+
   return (
     <RouterContext.Provider {...props} value={contextValue}>
       <rootLayout.element {...args}>

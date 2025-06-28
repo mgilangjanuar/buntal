@@ -17,7 +17,7 @@ export const ssrHandler = async (
         headers: {
           'Max-Age': '300',
           'Cache-Control': 'public, max-age=300',
-          Etag: btoa(JSON.stringify(result)),
+          Etag: String(new Date().getTime()),
           'Content-Type': 'application/json'
         }
       })
@@ -26,7 +26,7 @@ export const ssrHandler = async (
       headers: {
         'Max-Age': '300',
         'Cache-Control': 'public, max-age=300',
-        Etag: btoa(String(result)),
+        Etag: String(new Date().getTime()),
         'Content-Type': 'text/plain'
       }
     })

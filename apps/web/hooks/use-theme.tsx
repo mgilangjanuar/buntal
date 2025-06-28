@@ -49,6 +49,7 @@ export function ThemeProvider({
   useEffect(() => {
     if (theme) {
       document.body.setAttribute('data-theme', themesMap[theme])
+      document.body.style.visibility = 'visible'
     }
   }, [theme])
 

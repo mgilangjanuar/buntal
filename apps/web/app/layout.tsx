@@ -22,7 +22,7 @@ export default function RootLayout({
           }}
         />
         <link rel="icon" href="/favicon.svg" />
-        <link rel="stylesheet" href="/globals.css?v=1.15" />
+        <link rel="stylesheet" href="/globals.css?v=1.16" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -34,7 +34,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen w-full">
+      <body className="min-h-screen w-full" style={{ visibility: 'hidden' }}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

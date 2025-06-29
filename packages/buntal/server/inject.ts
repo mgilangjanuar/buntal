@@ -77,7 +77,6 @@ export const injectHandler =
       } catch {}
       return new Response(
         await renderToReadableStream(await createComponent(route.layouts), {
-          bootstrapScriptContent: 'document.body.style.display = "none";',
           bootstrapModules: [
             `/root.js?v=${version}${env === 'development' ? `&t=${Date.now()}` : ''}`,
             ...(env === 'development' ? ['/hot-reload.js'] : [])

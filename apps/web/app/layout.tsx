@@ -36,6 +36,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen w-full" style={{ visibility: 'hidden' }}>
         <ThemeProvider>{children}</ThemeProvider>
+        <script
+          src="https://app.rybbit.io/api/script.js"
+          data-site-id="1502"
+          defer
+        ></script>
       </body>
     </html>
   )

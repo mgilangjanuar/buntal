@@ -7,4 +7,5 @@ export type BuntalConfig = {
   outDir?: string
   staticDir?: string
   config?: Partial<Bun.BuildConfig>
+  serverOptions?: Partial<Bun.ServeFunctionOptions<any, any>>
 }

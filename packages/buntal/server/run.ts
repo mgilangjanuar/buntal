@@ -16,7 +16,8 @@ export async function runServer({
   appDir = './app',
   outDir = '.buntal',
   staticDir = './public',
-  config = {}
+  config = {},
+  serverOptions = undefined
 }: BuntalConfig = {}) {
   const routes = await builder(appDir)
 
@@ -42,7 +43,8 @@ export async function runServer({
         return resp
       }
       return injectHandler(env, routes)(payload)
-    }
+    },
+    options: serverOptions
   })
 
   app.onNotFound(async (req) => {

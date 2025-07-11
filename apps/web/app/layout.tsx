@@ -1,5 +1,12 @@
 import { ThemeProvider } from '@/hooks/use-theme'
+import { SearchProvider, useSearch } from '@/hooks/use-search'
+import SearchDialog from '@/components/search/search-dialog'
 import { Meta, type MetaProps } from 'buntal'
+
+function SearchDialogWrapper() {
+  const { isOpen, close } = useSearch()
+  return <SearchDialog open={isOpen} onOpenChange={close} />
+}
 
 export default function RootLayout({
   children,
@@ -35,7 +42,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen w-full" style={{ visibility: 'hidden' }}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <SearchProvider>
+            {children}
+            <SearchDialogWrapper />
+          </SearchProvider>
+        </ThemeProvider>
         <script
           src="https://app.rybbit.io/api/script.js"
           data-site-id="1502"

@@ -47,6 +47,7 @@ export default function SearchTrigger({
       onClick={open}
       className={`btn btn-ghost btn-sm ${className}`}
       title="Search documentation (⌘K)"
+      aria-label="Search documentation (⌘K)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

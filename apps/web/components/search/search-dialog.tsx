@@ -70,10 +70,18 @@ export default function SearchDialog({
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="search-dialog-title"
+    >
       <div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-full max-w-lg">
         <Command className="rounded-box border border-base-content/10 bg-base-100 shadow-xl">
-          <div className="flex items-center border-b border-base-content/10 px-3">
+          <div
+            id="search-dialog-title"
+            className="flex items-center border-b border-base-content/10 px-3"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

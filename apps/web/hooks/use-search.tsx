@@ -2,7 +2,7 @@
 
 import {
   createContext,
-  use,
+  useContext,
   useState,
   useEffect,
   useMemo,
@@ -61,11 +61,15 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     [isOpen]
   )
 
-  return <SearchContext value={contextValue}>{children}</SearchContext>
+  return (
+    <SearchContext.Provider value={contextValue}>
+      {children}
+    </SearchContext.Provider>
+  )
 }
 
 export function useSearch() {
-  const context = use(SearchContext)
+  const context = useContext(SearchContext)
   if (context === undefined) {
     throw new Error('useSearch must be used within a SearchProvider')
   }

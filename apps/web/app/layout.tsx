@@ -1,3 +1,5 @@
+'use client'
+
 import { ThemeProvider } from '@/hooks/use-theme'
 import { SearchProvider, useSearch } from '@/hooks/use-search'
 import SearchDialog from '@/components/search/search-dialog'

@@ -5,12 +5,11 @@ export interface SearchItem {
   type: 'docs' | 'reference'
   category: string
   description: string
-  content?: string // Add actual content for better search
+  content?: string
   keywords: string[]
   breadcrumb: string[]
 }
 
-// Extract menu items recursively and flatten to search items
 type MenuItem = { title: string; href?: string; items?: MenuItem[] }
 
 function extractMenuItems(
@@ -24,7 +23,6 @@ function extractMenuItems(
     const breadcrumb = [...parentBreadcrumb, item.title]
 
     if (item.href) {
-      // Create search item for this menu item
       const searchItem: SearchItem = {
         id: item.href,
         title: item.title,
@@ -38,7 +36,6 @@ function extractMenuItems(
       searchItems.push(searchItem)
     }
 
-    // Recursively process nested items
     if (item.items) {
       searchItems.push(...extractMenuItems(item.items, type, breadcrumb))
     }
@@ -117,7 +114,6 @@ function generateKeywords(title: string, href: string): string[] {
     .filter((part) => part && part !== 'docs' && part !== 'references')
   keywords.push(...urlParts)
 
-  // Add common aliases and related terms
   const aliases: Record<string, string[]> = {
     http: ['server', 'api', 'endpoint', 'request', 'response'],
     req: ['request', 'http', 'input'],
@@ -138,7 +134,7 @@ function generateKeywords(title: string, href: string): string[] {
     keywords.push(...aliases[titleLower])
   }
 
-  return [...new Set(keywords)] // Remove duplicates
+  return [...new Set(keywords)]
 }
 
 // References menu items (from references/layout.tsx)
@@ -362,12 +358,10 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
   }
 ]
 
-// Generate search index with content-based docs and menu-based references
 export function generateSearchIndex(): SearchItem[] {
   const referenceItems = extractMenuItems(REFERENCES_MENUS, 'reference')
 
   return [...CONTENT_BASED_SEARCH_ITEMS, ...referenceItems]
 }
 
-// Export the search index
 export const searchIndex = generateSearchIndex()

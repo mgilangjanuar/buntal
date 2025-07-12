@@ -22,7 +22,6 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>([])
   const router = useRouter()
 
-  // Configure Fuse.js for fuzzy search
   const fuse = useMemo(() => {
     const options = {
       keys: [
@@ -36,7 +35,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
       distance: 200,
       minMatchCharLength: 1,
       includeScore: true,
-      ignoreLocation: true // Don't consider position of match in string
+      ignoreLocation: true
     }
     return new Fuse(searchIndex, options)
   }, [])

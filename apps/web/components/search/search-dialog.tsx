@@ -79,8 +79,8 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
       aria-modal="true"
       aria-labelledby="search-dialog-title"
     >
-      <div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-full max-w-lg">
-        <Command className="rounded-box border border-base-content/10 bg-base-100 shadow-xl">
+      <div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[calc(100%-2rem)] max-w-lg">
+        <Command className="rounded-box border border-base-content/10 bg-base-100 shadow-xl overflow-hidden">
           <div
             id="search-dialog-title"
             className="flex items-center border-b border-base-content/10 px-3"
@@ -105,7 +105,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               onValueChange={setSearch}
               placeholder="Search documentation..."
               autoFocus
-              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-base-content/50 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-base-content/50 disabled:cursor-not-allowed disabled:opacity-50 min-w-0"
             />
             <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border border-base-content/20 bg-base-200 px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
               <span className="text-xs">ESC</span>
@@ -125,15 +125,17 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                     onSelect={() => handleSelect(item)}
                     className="cursor-pointer rounded-md my-2 px-2 py-3 text-sm aria-selected:bg-primary/10 aria-selected:text-primary flex flex-col items-start gap-1"
                   >
-                    <div className="flex w-full items-center justify-between">
-                      <span className="font-medium">{item.title}</span>
-                      <div className="flex items-center gap-1">
+                    <div className="flex w-full items-center justify-between min-w-0">
+                      <span className="font-medium truncate flex-1 mr-2">
+                        {item.title}
+                      </span>
+                      <div className="flex items-center gap-1 flex-shrink-0">
                         <span className="rounded bg-base-200 px-1.5 py-0.5 text-xs text-base-content/60">
                           {item.category}
                         </span>
                       </div>
                     </div>
-                    <div className="text-xs text-base-content/60 line-clamp-1">
+                    <div className="text-xs text-base-content/60 truncate w-full">
                       {item.description}
                     </div>
                   </Command.Item>

@@ -34,8 +34,10 @@ export default function SearchTrigger({
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.35-4.35" />
         </svg>
-        <span className="text-base-content/60">Search documentation...</span>
-        <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border border-base-content/20 bg-base-100 px-1.5 font-mono text-[10px] font-medium sm:flex">
+        <span className="text-base-content/60 truncate flex-1 min-w-0">
+          Search documentation...
+        </span>
+        <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border border-base-content/20 bg-base-100 px-1.5 font-mono text-[10px] font-medium sm:flex flex-shrink-0">
           <span className="text-xs">⌘K</span>
         </kbd>
       </button>
@@ -64,10 +66,6 @@ export default function SearchTrigger({
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.35-4.35" />
       </svg>
-      <span className="hidden sm:inline">Search</span>
-      <kbd className="pointer-events-none ml-1 hidden h-5 select-none items-center gap-1 rounded border border-base-content/20 bg-base-200 px-1.5 font-mono text-[10px] font-medium md:flex">
-        <span className="text-xs">⌘K</span>
-      </kbd>
     </button>
   )
 }

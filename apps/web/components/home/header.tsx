@@ -1,5 +1,6 @@
 import Logo from '@/app/logo.svg' with { type: 'text' }
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
+import SearchTrigger from '@/components/search/search-trigger'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { Link } from 'buntal'
 import {
@@ -45,6 +46,7 @@ export default function Header({
           >
             Docs
           </Link>
+          <SearchTrigger />
           <a
             href="https://github.com/mgilangjanuar/buntal"
             target="_blank"

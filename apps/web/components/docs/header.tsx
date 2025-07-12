@@ -1,4 +1,5 @@
 import ThemeSwitcher from '@/components/theme-switcher'
+import SearchTrigger from '@/components/search/search-trigger'
 import { cn } from '@/lib/utils'
 import { Link, useRouter } from 'buntal'
 
@@ -54,6 +55,7 @@ export default function Header({
           >
             References
           </Link>
+          <SearchTrigger />
           <a
             href="https://github.com/mgilangjanuar/buntal"
             target="_blank"

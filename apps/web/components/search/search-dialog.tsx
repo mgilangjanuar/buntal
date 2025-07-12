@@ -5,16 +5,19 @@ import { useRouter } from 'buntal'
 import { useEffect, useState, useMemo } from 'react'
 import { searchIndex, type SearchItem } from '@/lib/search-index'
 import Fuse from 'fuse.js'
+import { useSearch } from '@/hooks/use-search'
 
 interface SearchDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-export default function SearchDialog({
-  open,
-  onOpenChange
-}: SearchDialogProps) {
+export function SearchDialogWrapper() {
+  const { isOpen, close } = useSearch()
+  return <SearchDialog open={isOpen} onOpenChange={close} />
+}
+
+export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [search, setSearch] = useState('')
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>([])
   const router = useRouter()

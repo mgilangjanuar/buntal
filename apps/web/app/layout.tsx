@@ -1,14 +1,7 @@
-'use client'
-
 import { ThemeProvider } from '@/hooks/use-theme'
-import { SearchProvider, useSearch } from '@/hooks/use-search'
-import SearchDialog from '@/components/search/search-dialog'
+import { SearchProvider } from '@/hooks/use-search'
+import { SearchDialogWrapper } from '@/components/search/search-dialog'
 import { Meta, type MetaProps } from 'buntal'
-
-function SearchDialogWrapper() {
-  const { isOpen, close } = useSearch()
-  return <SearchDialog open={isOpen} onOpenChange={close} />
-}
 
 export default function RootLayout({
   children,

@@ -77,6 +77,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="search-dialog-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onOpenChange(false)
+        }
+      }}
     >
       <div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[calc(100%-2rem)] max-w-lg">
         <Command className="rounded-box border border-base-content/10 bg-base-100 shadow-xl overflow-hidden">

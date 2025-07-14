@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { useSearch } from '@/hooks/use-search'
 
 interface SearchTriggerProps {

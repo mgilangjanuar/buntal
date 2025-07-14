@@ -47,7 +47,7 @@ export default function SearchTrigger({
   return (
     <button
       onClick={open}
-      className={`btn btn-ghost btn-sm ${className}`}
+      className={cn('btn btn-square btn-sm btn-ghost opacity-60 hover:opacity-100', className)}
       title="Search documentation (⌘K)"
       aria-label="Search documentation (⌘K)"
     >

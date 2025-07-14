@@ -18,7 +18,7 @@ export default function SearchTrigger({
     return (
       <button
         onClick={open}
-        className={`flex items-center w-full max-w-sm px-3 py-2 text-sm text-left bg-base-200 border border-base-content/10 rounded-md hover:bg-base-300 transition-colors ${className}`}
+        className={cn('flex items-center w-full max-w-sm px-3 py-2 text-sm text-left bg-base-200 border border-base-content/10 rounded-md hover:bg-base-300 transition-colors', className)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

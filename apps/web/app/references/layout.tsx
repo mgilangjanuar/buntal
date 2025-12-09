@@ -157,7 +157,7 @@ export default function ReferenceLayout({
         <Spotlight />
         {children}
       </div>
-      <div className="drawer-side z-20 !overscroll-none no-scrollbar">
+      <div className="drawer-side z-20 overscroll-none! no-scrollbar">
         <label
           htmlFor="docs-layout-drawer"
           aria-label="close sidebar"
@@ -166,18 +166,18 @@ export default function ReferenceLayout({
         <ul className="menu text-base-content min-h-full w-80 p-4 gap-0.5 backdrop-blur-sm bg-base-200 md:bg-base-100/0">
           <Link
             href="/"
-            className="flex items-center gap-4 px-3 !h-10 group mb-3.5"
+            className="flex items-center gap-4 px-3 h-10! group mb-3.5"
           >
             <LogoWithContextMenu
               src={Logo}
-              className="[&>*]:size-10"
+              className="*:size-10"
               filename="buntal-logo.svg"
             />
             <div className="flex flex-col -space-y-1">
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.1.20</span>
+              <span className="text-xs text-base-content/60">v0.1.22</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

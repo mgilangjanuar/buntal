@@ -1,7 +1,7 @@
 {
   "name": "buntal",
   "description": "React framework for Bun",
-  "version": "0.1.20",
+  "version": "0.1.22",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@buntal/http": "latest",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "19.1.2",
+    "react-dom": "19.1.2"
   }
 }

@@ -303,15 +303,15 @@ export default function HomePage() {
             maxOpacity={0.1}
             duration={3}
             className={cn(
-              '[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]',
-              'inset-x-0 inset-y-0 h-[100%] opacity-50 dark:opacity-35'
+              'mask-[radial-gradient(800px_circle_at_center,white,transparent)]',
+              'inset-x-0 inset-y-0 h-full opacity-50 dark:opacity-35'
             )}
           />
         </motion.div>
         <div className="container mx-auto py-20 lg:py-40">
           <div className="flex gap-4 items-center justify-center flex-col [&>div]:z-10">
             <motion.div
-              className="flex justify-center !z-20"
+              className="flex justify-center z-20!"
               animate={{
                 scale: scrollY > 50 ? 0.17 : 1,
                 opacity: scrollY > 50 ? 0 : 1,
@@ -322,7 +322,7 @@ export default function HomePage() {
             >
               <LogoWithContextMenu
                 src={Logo}
-                className="[&>*]:size-28 md:[&>*]:size-44 flex justify-center"
+                className="*:size-28 md:*:size-44 flex justify-center"
                 filename="buntal-logo.svg"
               />
             </motion.div>
@@ -381,7 +381,7 @@ export default function HomePage() {
             <div className="flex flex-row gap-3 mt-2">
               <a
                 href="https://github.com/mgilangjanuar/buntal"
-                className="btn btn-ghost btn-neutral"
+                className="btn btn-ghost btn-neutral dark:text-base-content"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -395,7 +395,7 @@ export default function HomePage() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="!size-5"
+                  className="size-5!"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
@@ -414,7 +414,7 @@ export default function HomePage() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="!size-5"
+                  className="size-5!"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M5 12l14 0" />
@@ -497,7 +497,7 @@ export default function HomePage() {
                   href="https://github.com/sponsors/mgilangjanuar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="!size-12 rounded-md flex items-center justify-center flex-col border border-dashed opacity-50 hover:opacity-100"
+                  className="size-12! rounded-md flex items-center justify-center flex-col border border-dashed opacity-50 hover:opacity-100"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -521,7 +521,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative bg-gradient-to-b from-base-300/0 to-blue-900/15">
+      <div className="w-full relative bg-linear-to-b from-base-300/0 to-blue-900/15">
         <div className="container mx-auto pb-20 lg:pb-40">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto w-full">
             <WobbleCard
@@ -550,7 +550,7 @@ export default function HomePage() {
               <h2 className="max-w-80  text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                 SSR, SPA, file-based routing, and more
               </h2>
-              <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+              <p className="mt-4 max-w-104 text-left  text-base/6 text-neutral-200">
                 Everything out of the box. Building web apps without headaches.
               </p>
             </WobbleCard>
@@ -559,7 +559,7 @@ export default function HomePage() {
                 <h2 className="max-w-sm md:max-w-lg text-left text-balance text-lg md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                   Blazing fast & type-safe by default
                 </h2>
-                <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+                <p className="mt-4 max-w-104 text-left  text-base/6 text-neutral-200">
                   Built on Bun's native HTTP server, known for its speed and
                   reaching{' '}
                   <strong className="font-semibold">&gt; 2k RPS.</strong> Also
@@ -577,16 +577,16 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative bg-gradient-to-b to-blue-900/0 from-blue-900/15">
+      <div className="w-full relative bg-linear-to-b to-blue-900/0 from-blue-900/15">
         <div className="container mx-auto pt-14 lg:pt-0 pb-20 lg:pb-40">
           <div className="flex flex-col md:flex-row-reverse items-center gap-14 md:gap-24 lg:gap-52 max-w-5xl mx-auto">
             <div className="flex-1 w-full md:-mt-8 space-y-4 relative text-center md:text-left">
-              <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900 absolute blur-2xl z-0">
+              <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-linear-to-tr from-primary via-secondary to-blue-900 absolute blur-2xl z-0">
                 Pure Speed
               </h1>
               <h1 className="italic text-5xl lg:text-6xl font-bold tracking-tight text-transparent z-10">
                 <span className="relative">
-                  <span className="z-20 whitespace-nowrap absolute top-1 -left-0.5 text-transparent bg-clip-text bg-gradient-to-tr from-primary via-secondary to-blue-900">
+                  <span className="z-20 whitespace-nowrap absolute top-1 -left-0.5 text-transparent bg-clip-text bg-linear-to-tr from-primary via-secondary to-blue-900">
                     Pure Speed
                   </span>
                   <LineShadowText
@@ -617,7 +617,7 @@ export default function HomePage() {
                     </p>
                     <p className="text-base-content/50 text-sm">bun</p>
                   </div>
-                  <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <div className="leading-tight mt-px space-y-px">
                     <progress
                       className="progress h-3 progress-secondary w-40 md:w-60"
                       value="100"
@@ -635,7 +635,7 @@ export default function HomePage() {
                     </p>
                     <p className="text-base-content/50 text-sm">bun</p>
                   </div>
-                  <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <div className="leading-tight mt-px space-y-px">
                     <progress
                       className="progress h-3 w-40 md:w-60"
                       value={(2096.58 / 2099.56) * 100}
@@ -653,7 +653,7 @@ export default function HomePage() {
                     </p>
                     <p className="text-base-content/50 text-sm">go</p>
                   </div>
-                  <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <div className="leading-tight mt-px space-y-px">
                     <progress
                       className="progress h-3 w-40 md:w-60"
                       value={(1987.36 / 2099.56) * 100}
@@ -671,7 +671,7 @@ export default function HomePage() {
                     </p>
                     <p className="text-base-content/50 text-sm">node</p>
                   </div>
-                  <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <div className="leading-tight mt-px space-y-px">
                     <progress
                       className="progress h-3 w-40 md:w-60"
                       value={(1376.42 / 2099.56) * 100}
@@ -689,7 +689,7 @@ export default function HomePage() {
                     </p>
                     <p className="text-base-content/50 text-sm">uvicorn</p>
                   </div>
-                  <div className="leading-tight mt-[1px] space-y-[1px]">
+                  <div className="leading-tight mt-px space-y-px">
                     <progress
                       className="progress h-3 w-40 md:w-60"
                       value={(835.9 / 2099.56) * 100}
@@ -859,7 +859,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="w-full relative bg-gradient-to-b from-base-300/0 to-base-300/40">
+      <div className="w-full relative bg-linear-to-b from-base-300/0 to-base-300/40">
         <motion.div
           className="container mx-auto py-20 lg:py-40 flex flex-col gap-12 justify-center items-center"
           initial={{ opacity: 0 }}
@@ -915,7 +915,7 @@ To get started, run: \`cd my-app && bun dev\``
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="!size-5"
+                className="size-5!"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M5 12l14 0" />

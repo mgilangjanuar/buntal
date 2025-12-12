@@ -26,11 +26,11 @@
     "@buntal/http": "0.0.11",
     "@mdx-js/esbuild": "^3.1.0",
     "@mdx-js/mdx": "^3.1.0",
-    "buntal": "0.1.22",
+    "buntal": "^0.1.23",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
-    "react": "19.1.2",
-    "react-dom": "19.1.2",
+    "react": "19.1.4",
+    "react-dom": "19.1.4",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7"
   }

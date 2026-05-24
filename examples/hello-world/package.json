@@ -19,14 +19,14 @@
     "typescript-eslint": "^8.33.1"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "dependencies": {
-    "@buntal/http": "0.0.11",
-    "buntal": "^0.1.23",
+    "@buntal/http": "0.0.13",
+    "buntal": "^0.1.24",
     "clsx": "^2.1.1",
-    "react": "19.1.4",
-    "react-dom": "19.1.4",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7"
   }

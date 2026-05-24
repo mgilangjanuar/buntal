@@ -1,4 +1,4 @@
-import type { ServeFunctionOptions, WebSocketHandler } from 'bun'
+import type { Server, WebSocketHandler } from 'bun'
 import { Req, Res } from './app'
 import { h, type AtomicHandler } from './handler'
 import type { ALLOWED_METHODS } from './lib/const'
@@ -7,13 +7,13 @@ import { buildRouter } from './router'
 type Config = {
   port: number
   appDir?: string
-  websocket?: WebSocketHandler
+  websocket?: WebSocketHandler<any>
   injectHandler?: (payload: {
     req: Req
     match: Bun.MatchedRoute
     handler: any
   }) => Promise<Response | void>
-  options?: Partial<ServeFunctionOptions<any, any>>
+  options?: any
 }
 
 type ExtractRouteParams<Path extends string> =
@@ -41,11 +41,11 @@ export class Http {
 
   constructor(private config: Config) {}
 
-  start(cb?: (server: Bun.Server) => void) {
+  start(cb?: (server: Server<any>) => void) {
     const middlewares = this.middlewares
 
     const server = Bun.serve({
-      ...(this.config.options as any),
+      ...this.config.options,
       port: this.config.port,
       reusePort: true,
       routes: this.routes,

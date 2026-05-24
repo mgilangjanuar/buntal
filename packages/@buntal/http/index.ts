@@ -13,7 +13,7 @@ type Config = {
     match: Bun.MatchedRoute
     handler: any
   }) => Promise<Response | void>
-  options?: any
+  options?: Partial<Bun.Serve.Options<any>>
 }
 
 type ExtractRouteParams<Path extends string> =
@@ -45,7 +45,7 @@ export class Http {
     const middlewares = this.middlewares
 
     const server = Bun.serve({
-      ...this.config.options,
+      ...(this.config.options as any),
       port: this.config.port,
       reusePort: true,
       routes: this.routes,

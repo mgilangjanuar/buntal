@@ -1,26 +1,26 @@
 {
   "name": "buntal",
   "description": "React framework for Bun",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgilangjanuar/buntal.git"
+    "url": "git+https://github.com/mgilangjanuar/buntal.git"
   },
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/bun": "1.3.14",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "dependencies": {
     "@buntal/http": "latest",
-    "react": "19.1.4",
-    "react-dom": "19.1.4"
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
   }
 }

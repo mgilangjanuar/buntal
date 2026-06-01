@@ -1,5 +1,6 @@
 import type { RouteBuilderResult } from '../server/router'
 import { buildFavicon, buildHotReloadScript, buildRoot } from './builder'
+import { createTypeOnlyImportsPlugin } from './transform'
 
 type BundlerConfig = {
   env?: 'development' | 'production'
@@ -30,9 +31,15 @@ export async function bundler(
       syntax: true,
       whitespace: true
     },
-    ...(config || {})
+    ...(config || {}),
+    plugins: [
+      createTypeOnlyImportsPlugin(),
+      ...((config?.plugins as BunPlugin[] | undefined) || [])
+    ]
   })
 
   await buildFavicon(appDir, outDir)
   await buildHotReloadScript(env, outDir)
 }
+
+type BunPlugin = import('bun').BunPlugin

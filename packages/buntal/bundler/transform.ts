@@ -154,6 +154,11 @@ export const createTypeOnlyImportsPlugin = (): BunPlugin => {
             continue
           }
 
+          // `import type Default, { ... }` is invalid syntax
+          if (stmt.importClause.name) {
+            continue
+          }
+
           let allTypeOnly = namedBindings.elements.length > 0
           for (const element of namedBindings.elements) {
             if (element.isTypeOnly) continue

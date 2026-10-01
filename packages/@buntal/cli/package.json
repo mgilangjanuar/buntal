@@ -1,7 +1,7 @@
 {
   "name": "@buntal/cli",
   "description": "Command line interface for Buntal",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",
@@ -14,13 +14,12 @@
     "buntal": "./index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/commander": "^2.12.5"
+    "@types/bun": "1.4.2"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "dependencies": {
-    "commander": "^14.0.0"
+    "commander": "^15.0.0"
   }
 }

@@ -1,4 +1,3 @@
-import type { BodyInit } from 'bun'
 import { Cookie, type CookieOptions } from './cookie'
 
 export class Res {
@@ -35,7 +34,7 @@ export class Res {
     return this.send()
   }
 
-  send(data?: BodyInit) {
+  send(data?: ConstructorParameters<typeof Response>[0]) {
     return new Response(data, this.options)
   }
 

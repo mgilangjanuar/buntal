@@ -23,15 +23,18 @@ type ThemeProviderProps = {
 
 const defaultThemesMap = { light: 'light', dark: 'dark' }
 
-export function ThemeProvider({
+export function ThemeProvider(props: ThemeProviderProps) {
+  if (typeof window === 'undefined') {
+    return props.children
+  }
+  return <ClientThemeProvider {...props} />
+}
+
+function ClientThemeProvider({
   defaultTheme,
   themesMap = defaultThemesMap,
   children
 }: ThemeProviderProps) {
-  if (typeof window === 'undefined') {
-    return children
-  }
-
   const [theme, setTheme] = useState<'light' | 'dark'>(
     (window.localStorage.getItem('theme') as typeof defaultTheme) ||
       defaultTheme ||

@@ -19,7 +19,7 @@ async function renderMDXToStaticMarkup(filePath: string): Promise<MDXResult> {
     // Add JSX runtime for React 19
     jsxImportSource: 'react'
   }).then((code) => {
-    return new Blob([code.value], { type: 'application/javascript' })
+    return new Blob([String(code.value)], { type: 'application/javascript' })
   })
 
   const url = URL.createObjectURL(blob)

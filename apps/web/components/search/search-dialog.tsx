@@ -73,18 +73,13 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+      className="modal modal-open backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="search-dialog-title"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onOpenChange(false)
-        }
-      }}
     >
-      <div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[calc(100%-2rem)] max-w-lg">
-        <Command className="rounded-box border border-base-content/10 bg-base-100 shadow-xl overflow-hidden">
+      <div className="modal-box w-[calc(100%-2rem)] max-w-lg p-0 overflow-hidden">
+        <Command>
           <div
             id="search-dialog-title"
             className="flex items-center border-b border-base-content/10 px-3"
@@ -109,10 +104,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               onValueChange={setSearch}
               placeholder="Search documentation..."
               autoFocus
-              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-base-content/50 disabled:cursor-not-allowed disabled:opacity-50 min-w-0"
+              className="flex h-12 w-full bg-transparent py-3 text-sm outline-none placeholder:text-base-content/50 disabled:cursor-not-allowed disabled:opacity-50 min-w-0"
             />
-            <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border border-base-content/20 bg-base-200 px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-              <span className="text-xs">ESC</span>
+            <kbd className="kbd kbd-sm pointer-events-none ml-auto hidden sm:inline-flex">
+              Esc
             </kbd>
           </div>
           <Command.List className="max-h-[400px] overflow-y-auto p-3">
@@ -127,14 +122,14 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                     key={item.id}
                     value={`${item.title} ${item.description} ${item.keywords.join(' ')}`}
                     onSelect={() => handleSelect(item)}
-                    className="cursor-pointer rounded-md my-2 px-2 py-3 text-sm aria-selected:bg-primary/10 aria-selected:text-primary flex flex-col items-start gap-1"
+                    className="cursor-pointer rounded-field my-2 px-2 py-3 text-sm aria-selected:bg-primary/10 aria-selected:text-primary flex flex-col items-start gap-1"
                   >
                     <div className="flex w-full items-center justify-between min-w-0">
                       <span className="font-medium truncate flex-1 mr-2">
                         {item.title}
                       </span>
                       <div className="flex items-center gap-1 flex-shrink-0">
-                        <span className="rounded bg-base-200 px-1.5 py-0.5 text-xs text-base-content/60">
+                        <span className="badge badge-sm badge-ghost">
                           {item.category}
                         </span>
                       </div>
@@ -149,6 +144,12 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           </Command.List>
         </Command>
       </div>
+      <button
+        type="button"
+        aria-label="Close search"
+        className="modal-backdrop"
+        onClick={() => onOpenChange(false)}
+      />
     </div>
   )
 }

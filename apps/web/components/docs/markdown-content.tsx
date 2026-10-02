@@ -319,14 +319,14 @@ export default function MarkdownContent({
                   )
                 },
                 table: ({ children, ...props }) => (
-                  <div className="overflow-x-auto rounded-box border !border-base-content/5 bg-base-100">
-                    <table className="table !my-0" {...props}>
+                  <div className="overflow-x-auto rounded-box border border-base-content/5! bg-base-100">
+                    <table className="table my-0!" {...props}>
                       {children}
                     </table>
                   </div>
                 ),
                 tr: ({ children, ...props }) => (
-                  <tr className="border-b !border-base-content/5" {...props}>
+                  <tr className="border-b border-base-content/5!" {...props}>
                     {children}
                   </tr>
                 ),

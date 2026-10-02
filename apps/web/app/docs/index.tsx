@@ -112,7 +112,7 @@ To contribute, please follow these steps:
               src="/banner.png?v=1"
               loading="lazy"
               alt="banner"
-              className="!my-0 rounded-lg"
+              className="my-0! rounded-lg"
             />
           </div>
         </div>

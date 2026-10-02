@@ -53,7 +53,7 @@ export const injectHandler = (
     const route = entry?.route
     if (
       !route ||
-      !entry.regex.test(match.pathname) ||
+      !entry.regex.test(new URL(req.url).pathname) ||
       !('default' in handler) ||
       (req.method !== 'GET' && req.method !== 'HEAD')
     ) {

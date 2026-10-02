@@ -11,9 +11,9 @@ export function Script({
   useEffect(() => {
     const script = document.createElement('script')
     script.src = src
-    for (const el of document.querySelectorAll('script[src]')) {
+    document.querySelectorAll('script[src]').forEach((el) => {
       if ((el as HTMLScriptElement).src === script.src) el.remove()
-    }
+    })
 
     for (const [key, value] of Object.entries(props)) {
       if (value === undefined || value === null || value === false) continue

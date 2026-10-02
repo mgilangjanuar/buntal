@@ -90,6 +90,10 @@ const Page = memo(
             _$: idx.toString()
           }).toString()}`
         )
+        if (resp.redirected) {
+          window.location.assign(resp.url)
+          return new Promise<never>(() => {})
+        }
         if (resp.ok) {
           if (resp.headers.get('Content-Type')?.includes('application/json')) {
             return await resp.json()

@@ -76,9 +76,9 @@ export class Res {
   }
 
   private copyHeaders(target: Headers) {
-    for (const [key, value] of this._headers!) {
+    this._headers!.forEach((value, key) => {
       if (key !== 'set-cookie' && !target.has(key)) target.set(key, value)
-    }
+    })
     for (const cookie of this._headers!.getSetCookie()) {
       target.append('set-cookie', cookie)
     }

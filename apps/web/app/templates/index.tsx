@@ -37,20 +37,22 @@ function TemplateTile({
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group flex flex-col gap-5 p-5 text-left rounded-box border border-base-300 bg-base-200/40 transition hover:border-base-content/30 hover:bg-base-200/70 focus-visible:outline-2 focus-visible:outline-primary"
+      className="card card-border border-base-300 group bg-base-200/40 text-left transition hover:border-base-content/30 hover:bg-base-200/70 focus-visible:outline-2 focus-visible:outline-primary"
     >
-      <div className="aspect-[16/10] w-full overflow-hidden rounded-field border border-base-300 bg-base-200">
-        <img
-          src={shot(template.name, cover, scheme)}
-          alt=""
-          width={1280}
-          height={800}
-          loading="lazy"
-          className="size-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
-        />
-      </div>
-      <div className="space-y-1.5">
-        <h2 className="text-lg font-semibold truncate">{template.title}</h2>
+      <figure className="px-5 pt-5">
+        <div className="aspect-[16/10] w-full overflow-hidden rounded-field border border-base-300 bg-base-200">
+          <img
+            src={shot(template.name, cover, scheme)}
+            alt=""
+            width={1280}
+            height={800}
+            loading="lazy"
+            className="size-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
+          />
+        </div>
+      </figure>
+      <div className="card-body p-5 gap-1.5">
+        <h2 className="card-title text-lg truncate">{template.title}</h2>
         <p className="text-sm text-base-content/70 line-clamp-2">
           {template.summary}
         </p>
@@ -136,7 +138,7 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
         </p>
         <Code
           language="sh"
-          className="text-sm [&_pre]:!pr-10 [&_pre]:!whitespace-pre-wrap [&_code]:!whitespace-pre-wrap [&_code]:!break-normal"
+          className="text-sm [&_pre]:pr-10! [&_pre]:whitespace-pre-wrap! [&_code]:whitespace-pre-wrap! [&_code]:break-normal!"
         >
           {`bun create buntal@latest my-app --template ${template.name}`}
         </Code>
@@ -171,19 +173,21 @@ function Filters({
   onToggle: (tag: string) => void
 }) {
   return (
-    <fieldset className="space-y-3">
-      <legend className="font-semibold mb-3">Filter Templates</legend>
+    <fieldset className="fieldset gap-2">
+      <legend className="fieldset-legend text-base pt-0">
+        Filter Templates
+      </legend>
       <div className="flex flex-wrap gap-2 lg:flex-col">
         {TAGS.map((tag) => (
           <label
             key={tag}
-            className="flex items-center gap-3 rounded-field border border-base-300 bg-base-200/60 px-3 py-2 text-sm cursor-pointer transition hover:border-base-content/30 has-checked:border-primary/60 lg:py-2.5"
+            className="label gap-3 rounded-field border border-base-300 bg-base-200/60 px-3 py-2 text-sm text-base-content cursor-pointer transition hover:border-base-content/30 has-checked:border-primary/60 lg:py-2.5"
           >
             <input
               type="checkbox"
               checked={selected.includes(tag)}
               onChange={() => onToggle(tag)}
-              className="checkbox checkbox-sm rounded-sm"
+              className="checkbox checkbox-sm"
             />
             {tag}
           </label>

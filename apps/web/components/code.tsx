@@ -44,7 +44,7 @@ export default function Code({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="!size-4 swap-on"
+          className="size-4! swap-on"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M5 12l5 5l10 -10" />
@@ -59,7 +59,7 @@ export default function Code({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="!size-4 swap-off"
+          className="size-4! swap-off"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />

@@ -330,10 +330,10 @@ export default function HomePage() {
             </motion.div>
             <div className="flex items-center gap-2 text-sm badge badge-ghost">
               <div className="inline-grid *:[grid-area:1/1]">
-                <div className="status status-warning animate-ping"></div>
-                <div className="status status-warning"></div>
+                <div className="status status-success animate-ping"></div>
+                <div className="status status-success"></div>
               </div>{' '}
-              Early Development
+              Stable v1
             </div>
             <div className="flex gap-4 flex-col max-w-2xl w-full">
               <h1 className="text-4xl md:text-7xl tracking-tight text-center font-regular">

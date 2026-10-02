@@ -28,9 +28,9 @@ Our principle is to keep things simple and modular. By separating the HTTP serve
 
 On the other hand, if you want to build a full-stack web application, you don't need to worry about the HTTP server setup. Buntal JS will handle it for you, allowing you to focus on building your application.
 
-#### Is it production-ready? When will it be stable?
+#### Is it production-ready?
 
-Buntal JS is unstable, *like all of us.* It is in the super early stages of development, and we are working hard to make it stable. Please keep an eye on the v1 release for the stable version.
+Yes. Since v1.0.0 Buntal JS is stable and follows [semantic versioning](https://semver.org): breaking changes only land in a new major version. Pre-releases are published under the \`next\` tag on npm.
 
 #### How to pronounce "Buntal"?
 
@@ -50,7 +50,7 @@ Buntal */bʌnˈtɑːl/*
 
 ## How to Contribute
 
-We welcome contributions! Since we're in the early stages of development, you can learn how to build a web framework from scratch and help us build a better framework.
+We welcome contributions! You can learn how to build a web framework from scratch and help us build a better framework.
 
 To contribute, please follow these steps:
 
@@ -79,8 +79,8 @@ To contribute, please follow these steps:
               offset: 72
             },
             {
-              id: 'is-it-production-ready-when-will-it-be-stable-',
-              title: 'Is it production-ready? When will it be stable?',
+              id: 'is-it-production-ready-',
+              title: 'Is it production-ready?',
               level: 2,
               offset: 72
             },
@@ -107,25 +107,6 @@ To contribute, please follow these steps:
       ]}
       prependComponent={
         <div className="max-w-prose">
-          <div role="alert" className="alert alert-warning items-start">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-6 shrink-0 stroke-current"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-            <span>
-              Warning: This is an early development stage, expect breaking
-              changes and missing features.
-            </span>
-          </div>
           <div className="my-8">
             <img
               src="/banner.png?v=1"

@@ -1,46 +1,91 @@
 name: Deploy
 
-env:
-  PROJECT_NAME: buntal
-
 on:
   push:
     branches: ['main']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    name: Build and Deploy
     defaults:
       run:
         working-directory: apps/web
     steps:
-      # Build phase
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-      - name: Install dependencies
-        run: bun install
-      - name: Build project
-        run: bun run build
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bunx tsc --noEmit -p .
+      - run: bun run build
 
-      # Deploy phase
-      - name: Upload built files
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          source: 'apps/web/.buntal/*'
-          host: ${{ secrets.SSH_HOST }}
-          target: ${{ secrets.SSH_TARGET }}
-          username: ${{ secrets.SSH_USER }}
-          strip_components: 2
-          overwrite: true
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Restart pm2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: PROJECT_NAME
-          script: pm2 delete $PROJECT_NAME; cd $PROJECT_NAME/apps/web && git reset --hard && git clean -f && git pull origin main && pm2 start "bun start" --name $PROJECT_NAME && pm2 save
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Install cloudflared
+        run: |
+          curl -fsSL -o cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared.deb
+
+      - name: Configure SSH through Cloudflare Access
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            checking=yes
+          else
+            checking=accept-new
+          fi
+          cat > ~/.ssh/config <<EOF
+          Host server
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking $checking
+            ProxyCommand cloudflared access ssh --hostname %h
+          EOF
+
+      - name: Pull, build and restart
+        env:
+          TUNNEL_SERVICE_TOKEN_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          TUNNEL_SERVICE_TOKEN_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+          APP_DIR: ${{ secrets.SSH_TARGET }}
+        run: |
+          ssh server "APP_DIR='$APP_DIR' bash -s" <<'EOF'
+          set -euo pipefail
+          export PATH="$HOME/.bun/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
+          command -v pm2 >/dev/null || { echo "pm2 not found on PATH" >&2; exit 1; }
+          cd "$APP_DIR"
+          git fetch origin main
+          git reset --hard origin/main
+          cd apps/web
+          bun install --frozen-lockfile
+          bun run build
+          if pm2 describe buntal >/dev/null 2>&1; then
+            pm2 restart buntal
+          else
+            pm2 start "bun start" --name buntal --cwd "$PWD"
+          fi
+          pm2 save
+          for i in $(seq 1 20); do
+            if curl -fsS -o /dev/null http://localhost:3000/; then
+              echo "healthy"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "app did not become healthy" >&2
+          pm2 logs buntal --lines 50 --nostream
+          exit 1
+          EOF

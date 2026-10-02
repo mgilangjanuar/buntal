@@ -20,6 +20,12 @@ for (const dir of PACKAGES) {
   console.log(`${dir} -> ${version}`)
 }
 
+await Bun.write(
+  'apps/web/lib/version.ts',
+  `export const VERSION = 'v${version}'\n`
+)
+console.log(`apps/web/lib/version.ts -> v${version}`)
+
 console.log(
   `\nNext: open a PR, merge it, then tag main:\n  git tag v${version} && git push origin v${version}`
 )

@@ -1,6 +1,6 @@
 # Buntal JS: complete reference for AI agents
 
-> Buntal JS is an ultra-lightweight, type-safe full-stack framework for Bun and React with Next.js-like file-system routing. This file is the whole API in one place. Versions: buntal 0.2, @buntal/http 0.0.15, @buntal/cli 0.0.12. Requires Bun >= 1.2.
+> Buntal JS is an ultra-lightweight, type-safe full-stack framework for Bun and React with Next.js-like file-system routing. This file is the whole API in one place. All packages share one version (see npm). Requires Bun >= 1.2.
 
 ## Ground rules
 

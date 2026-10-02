@@ -2,6 +2,7 @@ import Logo from '@/app/logo.svg' with { type: 'text' }
 import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import { Spotlight } from '@/components/spotlight-new'
 import { cn } from '@/lib/utils'
+import { VERSION } from '@/lib/version'
 import { Link, useRouter } from 'buntal'
 
 type MenuItem = {
@@ -84,7 +85,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.2.1</span>
+              <span className="text-xs text-base-content/60">{VERSION}</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

@@ -1,6 +1,6 @@
 import { $ } from 'bun'
 import { cpSync, existsSync, readdirSync, renameSync } from 'fs'
-import { join } from 'path'
+import { join, relative } from 'path'
 
 export type Template = { name: string; description: string }
 
@@ -21,6 +21,15 @@ const templatesDir = () => {
   if (existsSync(bundled)) return bundled
   return join(import.meta.dir, '..', '..', '..', 'templates')
 }
+
+const SKIP =
+  /(^|[\\/])(node_modules|\.buntal|data)([\\/]|$)|(^|[\\/])bun\.lock$/
+
+export const copyTemplate = (source: string, dest: string) =>
+  cpSync(source, dest, {
+    recursive: true,
+    filter: (src) => !SKIP.test(relative(source, src))
+  })
 
 export async function createProject(name: string, template = 'default') {
   if (!/^[a-zA-Z_][a-zA-Z0-9_\-]*$/.test(name)) {
@@ -50,12 +59,7 @@ export async function createProject(name: string, template = 'default') {
     process.exit(1)
   }
 
-  cpSync(source, name, {
-    recursive: true,
-    filter: (src) =>
-      !/[\\/](node_modules|\.buntal|data)([\\/]|$)/.test(src) &&
-      !src.endsWith('bun.lock')
-  })
+  copyTemplate(source, name)
   process.chdir(name)
 
   if (existsSync('_gitignore')) renameSync('_gitignore', '.gitignore')

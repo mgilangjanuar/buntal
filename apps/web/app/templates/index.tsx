@@ -37,23 +37,23 @@ function TemplateTile({
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group flex flex-col text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-base-content/30 focus-visible:outline-2 focus-visible:outline-primary"
+      className="group flex flex-col gap-5 p-5 text-left rounded-box border border-base-300 bg-base-200/40 transition hover:border-base-content/30 hover:bg-base-200/70 focus-visible:outline-2 focus-visible:outline-primary"
     >
-      <div className="px-6 pt-6 space-y-2">
-        <h2 className="text-lg font-semibold truncate">{template.title}</h2>
-        <p className="text-base-content/70 line-clamp-2 min-h-12">
-          {template.summary}
-        </p>
-      </div>
-      <div className="relative mt-6 h-40 overflow-hidden">
+      <div className="aspect-[16/10] w-full overflow-hidden rounded-field border border-base-300 bg-base-200">
         <img
           src={shot(template.name, cover, scheme)}
           alt=""
           width={1280}
           height={800}
           loading="lazy"
-          className="absolute left-10 top-4 w-[110%] max-w-none rounded-lg border border-base-300 shadow-xl origin-top-left -rotate-[4deg] transition duration-300 group-hover:-rotate-2 group-hover:-translate-y-1"
+          className="size-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
         />
+      </div>
+      <div className="space-y-1.5">
+        <h2 className="text-lg font-semibold truncate">{template.title}</h2>
+        <p className="text-sm text-base-content/70 line-clamp-2">
+          {template.summary}
+        </p>
       </div>
     </button>
   )
@@ -165,70 +165,31 @@ const matches = (t: TemplateInfo, query: string, tags: string[]) => {
 
 function Filters({
   selected,
-  onToggle,
-  onClear
+  onToggle
 }: {
   selected: string[]
   onToggle: (tag: string) => void
-  onClear: () => void
 }) {
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="font-semibold">Filter Templates</h2>
-        <button
-          type="button"
-          onClick={onClear}
-          disabled={selected.length === 0}
-          className="btn btn-ghost btn-xs gap-1 text-base-content/60 disabled:bg-transparent"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="size-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+    <fieldset className="space-y-3">
+      <legend className="font-semibold mb-3">Filter Templates</legend>
+      <div className="flex flex-wrap gap-2 lg:flex-col">
+        {TAGS.map((tag) => (
+          <label
+            key={tag}
+            className="flex items-center gap-3 rounded-field border border-base-300 bg-base-200/60 px-3 py-2 text-sm cursor-pointer transition hover:border-base-content/30 has-checked:border-primary/60 lg:py-2.5"
           >
-            <circle cx="12" cy="12" r="9" />
-            <path d="m15 9-6 6M9 9l6 6" />
-          </svg>
-          Clear
-        </button>
+            <input
+              type="checkbox"
+              checked={selected.includes(tag)}
+              onChange={() => onToggle(tag)}
+              className="checkbox checkbox-sm rounded-sm"
+            />
+            {tag}
+          </label>
+        ))}
       </div>
-      <details open className="group">
-        <summary className="flex items-center gap-2 cursor-pointer list-none py-1 text-sm font-medium [&::-webkit-details-marker]:hidden">
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="size-4 transition -rotate-90 group-open:rotate-0"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-          Use Case
-        </summary>
-        <fieldset className="mt-3 flex flex-wrap gap-2 lg:flex-col">
-          <legend className="sr-only">Use case</legend>
-          {TAGS.map((tag) => (
-            <label
-              key={tag}
-              className="flex items-center gap-3 rounded-field border border-base-300 bg-base-200/60 px-3 py-2 text-sm cursor-pointer transition hover:border-base-content/30 has-checked:border-primary/60 lg:py-2.5"
-            >
-              <input
-                type="checkbox"
-                checked={selected.includes(tag)}
-                onChange={() => onToggle(tag)}
-                className="checkbox checkbox-sm rounded-sm"
-              />
-              {tag}
-            </label>
-          ))}
-        </fieldset>
-      </details>
-    </div>
+    </fieldset>
   )
 }
 
@@ -267,7 +228,10 @@ export default function TemplatesPage() {
   useEffect(() => {
     const el = dialogRef.current
     if (!el) return
-    if (active && !el.open) el.showModal()
+    if (active && !el.open) {
+      el.showModal()
+      el.querySelector<HTMLElement>('.modal-box')?.focus()
+    }
     if (!active && el.open) el.close()
   }, [active])
 
@@ -318,11 +282,7 @@ export default function TemplatesPage() {
 
         <div className="grid gap-10 lg:gap-12 lg:grid-cols-[15rem_1fr]">
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <Filters
-              selected={tags}
-              onToggle={toggle}
-              onClear={() => setTags([])}
-            />
+            <Filters selected={tags} onToggle={toggle} />
           </aside>
           <section aria-live="polite" className="min-w-0">
             {shown.length > 0 ? (
@@ -346,11 +306,14 @@ export default function TemplatesPage() {
 
       <dialog
         ref={dialogRef}
-        className="modal modal-bottom sm:modal-middle"
+        className="modal"
         aria-labelledby="template-title"
         onClose={() => setHash('')}
       >
-        <div className="modal-box w-full max-w-6xl max-sm:p-4 max-sm:pt-12 max-sm:max-h-[92svh]">
+        <div
+          tabIndex={-1}
+          className="modal-box w-11/12 max-w-6xl max-h-[90svh] p-5 pt-12 sm:p-8 sm:pt-12 outline-none"
+        >
           <form method="dialog">
             <button
               type="submit"

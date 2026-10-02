@@ -1,28 +1,24 @@
-import type { BodyInit } from 'bun'
 import { Cookie, type CookieOptions } from './cookie'
 
-export class Res {
-  private options: {
-    status: number
-    headers: Record<string, string>
-  } = {
-    status: 200,
-    headers: {
-      'X-Powered-By': 'Buntal v0.0.1'
-    }
-  }
+const owners = new WeakMap<Response, Res>()
 
-  constructor() {}
+export class Res {
+  private _status = 200
+  private _headers?: Headers
 
   status(status: number) {
-    this.options.status = status
+    this._status = status
     return this
   }
 
   headers(headers: Record<string, string>) {
-    this.options.headers = {
-      ...(this.options.headers || {}),
-      ...headers
+    const target = (this._headers ??= new Headers())
+    for (const key in headers) {
+      if (key.toLowerCase() === 'set-cookie') {
+        target.append(key, headers[key]!)
+      } else {
+        target.set(key, headers[key]!)
+      }
     }
     return this
   }
@@ -35,33 +31,64 @@ export class Res {
     return this.send()
   }
 
-  send(data?: BodyInit) {
-    return new Response(data, this.options)
+  private own(response: Response) {
+    if (this._headers) owners.set(response, this)
+    return response
+  }
+
+  send(data?: ConstructorParameters<typeof Response>[0]) {
+    return this.own(
+      new Response(data, { status: this._status, headers: this._headers })
+    )
   }
 
   json(data: unknown) {
-    return this.headers({
-      'content-type': 'application/json'
-    }).send(JSON.stringify(data))
+    return this.own(
+      Response.json(data, {
+        status: this._status,
+        headers: this._headers
+      })
+    )
   }
 
   html(data: string | ReadableStream<Uint8Array>) {
     return this.headers({
-      'content-type': 'text/html'
+      'content-type': 'text/html; charset=utf-8'
     }).send(data)
   }
 
   text(data: string) {
     return this.headers({
-      'content-type': 'text/plain'
+      'content-type': 'text/plain; charset=utf-8'
     }).send(data)
+  }
+
+  applyTo(response: Response) {
+    if (!this._headers || owners.get(response) === this) return response
+    let target = response
+    try {
+      this.copyHeaders(target.headers)
+    } catch {
+      target = new Response(response.body, response)
+      this.copyHeaders(target.headers)
+    }
+    return target
+  }
+
+  private copyHeaders(target: Headers) {
+    this._headers!.forEach((value, key) => {
+      if (key !== 'set-cookie' && !target.has(key)) target.set(key, value)
+    })
+    for (const cookie of this._headers!.getSetCookie()) {
+      target.append('set-cookie', cookie)
+    }
   }
 
   cookie(name: string, value?: string | null, options?: CookieOptions) {
     if (value) {
       Cookie.set(this, name, value, options)
     } else {
-      Cookie.delete(this, name)
+      Cookie.delete(this, name, options)
     }
     return this
   }

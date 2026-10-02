@@ -20,6 +20,8 @@ export default function BuntalConfigPage() {
   outDir?: string
   staticDir?: string
   config?: Partial<Bun.BuildConfig>
+  serverOptions?: Partial<Bun.Serve.Options<any>>
+  middlewares?: AtomicHandler[]
 }`}
       properties={[
         {
@@ -56,9 +58,23 @@ export default function BuntalConfigPage() {
           required: false,
           default: '{}',
           description: 'Additional Bun build configuration options'
+        },
+        {
+          name: 'serverOptions',
+          type: 'Partial<Bun.Serve.Options<any>>',
+          required: false,
+          description: 'Options passed through to Bun.serve'
+        },
+        {
+          name: 'middlewares',
+          type: 'AtomicHandler[]',
+          required: false,
+          default: '[]',
+          description:
+            'Middlewares run before every page, $ loader and API route (e.g. auth, cors, secureHeaders). Static assets are served before them.'
         }
       ]}
-      lastModified="2025-06-10"
+      lastModified="2026-10-02"
     />
   )
 }

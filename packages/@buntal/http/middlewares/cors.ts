@@ -18,22 +18,36 @@ export const cors = ({
   maxAge = 600,
   credentials = true
 }: Options = {}): AtomicHandler => {
-  return async (_: Req, res: Res) => {
-    res.headers({
-      'Access-Control-Allow-Origin': Array.isArray(origin)
-        ? origin.join(', ')
-        : origin,
-      'Access-Control-Allow-Methods': Array.isArray(methods)
-        ? methods.join(', ')
-        : methods,
-      'Access-Control-Allow-Headers': Array.isArray(allowedHeaders)
-        ? allowedHeaders.join(', ')
-        : allowedHeaders,
-      'Access-Control-Expose-Headers': Array.isArray(exposedHeaders)
-        ? exposedHeaders.join(', ')
-        : exposedHeaders,
-      'Access-Control-Max-Age': String(maxAge),
-      'Access-Control-Allow-Credentials': String(credentials)
-    })
+  const list = (value: string | string[]) =>
+    Array.isArray(value) ? value.join(', ') : value
+  const allowed = Array.isArray(origin) ? new Set(origin) : null
+  const headers = {
+    'Access-Control-Allow-Methods': list(methods),
+    'Access-Control-Allow-Headers': list(allowedHeaders),
+    'Access-Control-Expose-Headers': list(exposedHeaders),
+    'Access-Control-Max-Age': String(maxAge)
+  }
+
+  return (req: Req, res: Res) => {
+    const requestOrigin = req.headers.get('origin')
+    const allowOrigin = allowed
+      ? requestOrigin && allowed.has(requestOrigin)
+        ? requestOrigin
+        : null
+      : (origin as string)
+
+    if (allowOrigin) {
+      res.headers({
+        ...headers,
+        'Access-Control-Allow-Origin': allowOrigin,
+        ...(credentials && allowOrigin !== '*'
+          ? { 'Access-Control-Allow-Credentials': 'true' }
+          : {}),
+        ...(allowed ? { Vary: 'Origin' } : {})
+      })
+    }
+    if (req.method === 'OPTIONS') {
+      return res.status(204).send()
+    }
   }
 }

@@ -6,7 +6,10 @@ export function buildPages(
 ) {
   return {
     imports: routes
-      .map((r, i) => `const Page${i} = lazy(() => import('${r.safeImport}'))`)
+      .map(
+        (r, i) =>
+          `const Page${i} = lazy(() => import(${JSON.stringify(r.safeImport)}))`
+      )
       .join('\n'),
     render: routes
       .map((r, i) => {

@@ -1,6 +1,7 @@
 import { Http } from '@buntal/http'
 import { logger } from '@buntal/http/middlewares'
 import { networkInterfaces } from 'os'
+import { relative } from 'path'
 import type { BuntalConfig } from '..'
 import { bundler } from '../bundler'
 import { injectHandler } from './inject'
@@ -17,9 +18,10 @@ export async function runServer({
   outDir = '.buntal',
   staticDir = './public',
   config = {},
-  serverOptions = undefined
+  serverOptions = undefined,
+  middlewares = []
 }: BuntalConfig = {}) {
-  const routes = await builder(appDir)
+  const routes = await builder(appDir, relative(outDir, '.') || '.')
 
   if (process.argv[2] !== '--serve') {
     await bundler(routes, { env, appDir, outDir, config })
@@ -37,30 +39,22 @@ export async function runServer({
             message() {}
           }
         : undefined,
-    injectHandler: async (payload) => {
-      const resp = await staticHandler(payload.req, outDir, staticDir)
-      if (resp instanceof Response) {
-        return resp
-      }
-      return injectHandler(env, routes)(payload)
-    },
+    assets: (req) => staticHandler(req, outDir, staticDir),
+    injectHandler: injectHandler(env, routes),
     options: serverOptions
   })
 
-  app.onNotFound(async (req) => {
-    const resp = await staticHandler(req, outDir, staticDir)
-    if (resp instanceof Response) {
-      return resp
-    }
-    return await notfoundHandler(env, appDir)
-  })
+  app.onNotFound(() => notfoundHandler(env, appDir))
 
   app.use(logger())
+  for (const middleware of middlewares) {
+    app.use(middleware)
+  }
 
   app.start((server) => {
-    const ip = networkInterfaces().en0?.find(
-      (i) => i.family === 'IPv4' && !i.internal
-    )?.address
+    const ip = Object.values(networkInterfaces())
+      .flat()
+      .find((i) => i?.family === 'IPv4' && !i.internal)?.address
     console.log(
       '\n  -... ..- -. - .- .-..\n' +
         `  Local:\thttp://localhost:${server.port}\n` +

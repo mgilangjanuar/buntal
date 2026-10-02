@@ -65,8 +65,13 @@ function getDescription(
     const descriptions: Record<string, string> = {
       'Get Started': 'Introduction to Buntal JS framework and basic concepts',
       Installation: 'How to install and set up Buntal JS in your project',
+      'Best Practices':
+        'Structure, data loading, SEO, performance, accessibility, testing and deployment',
       'HTTP Server': 'Learn how to create HTTP servers with Buntal',
-      'Full-stack Web': 'Build full-stack web applications with React and SSR'
+      'Full-stack Web': 'Build full-stack web applications with React and SSR',
+      Security:
+        'Authentication, cookies, CORS, security headers and safe file access',
+      'Build with AI': 'Prompts and llms.txt for AI coding agents'
     }
     return descriptions[title] || `${title} documentation`
   }
@@ -82,6 +87,7 @@ function getDescription(
       buildRouter: 'Router builder for defining HTTP routes',
       auth: 'Authentication middleware for protecting routes',
       cors: 'Cross-Origin Resource Sharing middleware',
+      secureHeaders: 'Security headers middleware (nosniff, HSTS, CSP)',
       logger: 'Request logging middleware for debugging',
       AtomicHandler: 'Type definition for atomic HTTP handlers',
       CookieOptions: 'Configuration options for HTTP cookies'
@@ -121,6 +127,7 @@ function generateKeywords(title: string, href: string): string[] {
     router: ['routing', 'routes', 'navigation'],
     auth: ['authentication', 'login', 'security'],
     cors: ['cross-origin', 'headers'],
+    secureheaders: ['security', 'headers', 'csp', 'hsts', 'helmet'],
     cookie: ['session', 'storage'],
     app: ['application', 'root', 'main'],
     link: ['navigation', 'routing', 'anchor'],
@@ -199,6 +206,10 @@ const REFERENCES_MENUS = [
           {
             title: 'logger',
             href: '/references/http/middlewares/logger'
+          },
+          {
+            title: 'secureHeaders',
+            href: '/references/http/middlewares/secure-headers'
           }
         ]
       },
@@ -299,7 +310,7 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
     type: 'docs',
     category: 'Installation',
     description: 'How to install and set up Buntal JS in your project',
-    content: `Prerequisite Before you start using Buntal JS, ensure you have the following prerequisites installed on your system: Bun ^1.2.14 - Buntal JS is built on top of the Bun runtime and API, so you need to have it installed. Installation If you want to build an HTTP server, you only need to install the @buntal/http package: bun add @buntal/http If you want to use the built-in middlewares, you can install them as well: bun add @buntal/middlewares If you want to build a full-stack web application, you can create it from a template: bun create buntal@latest my-app Change my-app to your desired project name. It will initialize your project and install all the necessary dependencies.`,
+    content: `Prerequisite Before you start using Buntal JS, ensure you have the following prerequisites installed on your system: Bun ^1.2 - Buntal JS is built on top of the Bun runtime and API, so you need to have it installed. Installation If you want to build an HTTP server, you only need to install the @buntal/http package: bun add @buntal/http The built-in middlewares (auth, cors, logger, secureHeaders) are included in @buntal/http/middlewares If you want to build a full-stack web application, you can create it from a template: bun create buntal@latest my-app Change my-app to your desired project name. It will initialize your project and install all the necessary dependencies.`,
     keywords: [
       'installation',
       'setup',
@@ -311,6 +322,33 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
       'dependencies'
     ],
     breadcrumb: ['Documentation', 'Installation']
+  },
+  {
+    id: '/docs/best-practice',
+    title: 'Best Practices',
+    url: '/docs/best-practice',
+    type: 'docs',
+    category: 'Documentation',
+    description:
+      'Structure, data loading, SEO, performance, accessibility, testing and deployment',
+    content: `Project structure app components lib content public. Data loading $ loader static $ Response redirect query database directly. SEO titles descriptions Meta _meta Open Graph Twitter card canonical URL structured data JSON-LD schema.org sitemap.xml robots.txt RSS noindex not found 404 soft 404 headings alt text human-readable URLs. Performance code splitting Promise.all cache CDN images fonts. Accessibility semantic HTML labels focus contrast reduced motion. Security validation cookies CORS CSP. Errors logging. Testing bun test tsc. Deployment bun start NODE_ENV PORT proxy HSTS health check. Working with AI agents llms-full.txt AGENTS.md.`,
+    keywords: [
+      'best practices',
+      'seo',
+      'meta',
+      'open graph',
+      'canonical',
+      'sitemap',
+      'robots',
+      'json-ld',
+      'structured data',
+      'performance',
+      'accessibility',
+      'a11y',
+      'deploy',
+      'testing'
+    ],
+    breadcrumb: ['Documentation', 'Best Practices']
   },
   {
     id: '/docs/guides/http-server',
@@ -355,6 +393,53 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
       'components'
     ],
     breadcrumb: ['Documentation', 'Guides', 'Full-stack Web']
+  },
+  {
+    id: '/docs/guides/security',
+    title: 'Security',
+    url: '/docs/guides/security',
+    type: 'docs',
+    category: 'Guides',
+    description:
+      'Authentication, cookies, CORS, security headers and safe file access',
+    content: `Defaults path traversal dotfiles private no-store loader data production errors nosniff Link same-origin Svg sanitized. Authentication jwt sign verify auth middleware HS256 req.context Bun.password. Protecting pages buntal.config.ts middlewares redirect from $. Cookies httpOnly secure SameSite Lax CSRF Origin header. CORS origin allow list credentials preflight. Security headers secureHeaders Content-Security-Policy HSTS X-Frame-Options. Your own code validate input file paths parameterized queries scope data secrets BUNTAL_PUBLIC_.`,
+    keywords: [
+      'security',
+      'auth',
+      'jwt',
+      'login',
+      'cookie',
+      'csrf',
+      'cors',
+      'csp',
+      'headers',
+      'xss'
+    ],
+    breadcrumb: ['Documentation', 'Guides', 'Security']
+  },
+  {
+    id: '/docs/guides/ai',
+    title: 'Build with AI',
+    url: '/docs/guides/ai',
+    type: 'docs',
+    category: 'Guides',
+    description: 'Prompts and llms.txt for AI coding agents',
+    content: `Give your agent the docs llms.txt llms-full.txt Claude Code Cursor Copilot AGENTS.md CLAUDE.md rules file. Prompts landing page docs website blog CMS e-commerce store SaaS dashboard REST API portfolio. Tips work in steps keep secrets on the server review security tests.`,
+    keywords: [
+      'ai',
+      'llm',
+      'llms.txt',
+      'agent',
+      'prompt',
+      'claude',
+      'cursor',
+      'copilot',
+      'landing',
+      'cms',
+      'ecommerce',
+      'dashboard'
+    ],
+    breadcrumb: ['Documentation', 'Guides', 'Build with AI']
   }
 ]
 

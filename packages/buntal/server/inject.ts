@@ -4,12 +4,43 @@ import { renderToReadableStream } from 'react-dom/server'
 import { type RouteBuilderResult } from './router'
 import { ssrHandler } from './ssr'
 
-export const injectHandler =
-  (
-    env: 'development' | 'production' = 'development',
-    routes: RouteBuilderResult[]
-  ) =>
-  async ({
+let version: Promise<string> | undefined
+const appVersion = () =>
+  (version ??= import(`${process.cwd()}/package.json`)
+    .then((pkg) => pkg.default.version || '0.0.1')
+    .catch(() => '0.0.1'))
+
+export const pageHeaders = {
+  'Content-Type': 'text/html; charset=utf-8',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin'
+}
+
+export const bootstrapModules = async (
+  env: 'development' | 'production' = 'development'
+) => [
+  `/root.js?v=${await appVersion()}${env === 'development' ? `&t=${Date.now()}` : ''}`,
+  ...(env === 'development' ? ['/hot-reload.js'] : [])
+]
+
+class Halt {
+  constructor(public response: Response) {}
+}
+
+const load = async (mod: any, req: Req) => {
+  const data = await mod.$(req)
+  if (data instanceof Response) throw new Halt(data)
+  return data
+}
+
+export const injectHandler = (
+  env: 'development' | 'production' = 'development',
+  routes: RouteBuilderResult[]
+) => {
+  const byName = new Map(
+    routes.map((r) => [r.route, { route: r, regex: new RegExp(r.regex) }])
+  )
+  return async ({
     req,
     match,
     handler
@@ -18,34 +49,33 @@ export const injectHandler =
     match: Bun.MatchedRoute
     handler: any
   }) => {
-    const route = routes.find((r) => r.route === match.name)
+    const entry = byName.get(match.name)
+    const route = entry?.route
     if (
-      route &&
-      new RegExp(route.regex).test(new URL(req.url).pathname) &&
-      'default' in handler &&
-      req.method === 'GET'
+      !route ||
+      !entry.regex.test(new URL(req.url).pathname) ||
+      !('default' in handler) ||
+      (req.method !== 'GET' && req.method !== 'HEAD')
     ) {
-      // Handle SSR requests
-      if (req.query?._$ && (route.ssr || route.layouts?.some((l) => l.ssr))) {
-        let _handler: any = handler
-        if (req.query._$ !== '-1') {
-          _handler = route.layouts[Number(req.query._$)]
-            ? await import(route.layouts[Number(req.query._$)]!.filePath)
-            : {}
-        }
-        const resp = await ssrHandler(req, _handler)
-        if (resp) {
-          return resp
-        }
-      }
+      return
+    }
 
+    if (req.query?._$ && (route.ssr || route.layouts?.some((l) => l.ssr))) {
+      if (req.query._$ === '-1') {
+        return ssrHandler(req, handler)
+      }
+      const idx = Number(req.query._$)
+      const layout = Number.isInteger(idx) ? route.layouts[idx] : undefined
+      return ssrHandler(req, layout?.ssr ? await import(layout.filePath) : {})
+    }
+
+    try {
       const args = {
         query: req.query,
         params: req.params,
-        data: route.ssr ? await handler.$(req) : route.data
+        data: route.ssr ? await load(handler, req) : route.data
       }
 
-      // Recursively create the component with layouts
       const createComponent = async (
         layouts: RouteBuilderResult['layouts']
       ): Promise<ReactNode> => {
@@ -54,7 +84,7 @@ export const injectHandler =
         }
         const layout = await import(layouts[0].filePath)
         const dataLayout = layouts[0].ssr
-          ? await layout.$(req)
+          ? await load(layout, req)
           : layouts[0].data
         return createElement(layout.default, {
           ...args,
@@ -69,24 +99,15 @@ export const injectHandler =
         })
       }
 
-      // Render the component to a readable stream
-      let version = '0.0.1'
-      try {
-        const pkg = await import(`${process.cwd()}/package.json`)
-        version = pkg.default.version || version
-      } catch {}
       return new Response(
         await renderToReadableStream(await createComponent(route.layouts), {
-          bootstrapModules: [
-            `/root.js?v=${version}${env === 'development' ? `&t=${Date.now()}` : ''}`,
-            ...(env === 'development' ? ['/hot-reload.js'] : [])
-          ]
+          bootstrapModules: await bootstrapModules(env)
         }),
-        {
-          headers: {
-            'Content-Type': 'text/html'
-          }
-        }
+        { headers: pageHeaders }
       )
+    } catch (error) {
+      if (error instanceof Halt) return error.response
+      throw error
     }
   }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "buntal-landing",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "buntal dev",
+    "build": "buntal build",
+    "start": "buntal start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "bun scripts/migrate.ts"
+  },
+  "devDependencies": {
+    "@buntal/cli": "latest",
+    "@eslint-react/eslint-plugin": "^5.23.3",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/cli": "^4.3.3",
+    "@types/bun": "latest",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^10.11.0",
+    "typescript-eslint": "^8.71.0"
+  },
+  "peerDependencies": {
+    "typescript": "^6"
+  },
+  "dependencies": {
+    "@buntal/http": "latest",
+    "buntal": "latest",
+    "clsx": "^2.1.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

@@ -43,7 +43,6 @@ interface TypingAnimationProps extends MotionProps {
   className?: string
   duration?: number
   delay?: number
-  as?: React.ElementType
 }
 
 export const TypingAnimation = ({
@@ -51,7 +50,6 @@ export const TypingAnimation = ({
   className,
   duration = 60,
   delay = 0,
-  as: Component = 'span',
   ...props
 }: TypingAnimationProps) => {
   if (typeof children !== 'string') {
@@ -59,9 +57,6 @@ export const TypingAnimation = ({
   }
 
   const { animationStarted } = use(TerminalAnimationContext)
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: true
-  })
 
   const [displayedText, setDisplayedText] = useState<string>('')
   const [started, setStarted] = useState(false)
@@ -99,13 +94,13 @@ export const TypingAnimation = ({
   }, [children, duration, started])
 
   return (
-    <MotionComponent
+    <motion.span
       ref={elementRef}
       className={cn('text-sm font-normal tracking-tight', className)}
       {...props}
     >
       {displayedText}
-    </MotionComponent>
+    </motion.span>
   )
 }
 

@@ -6,9 +6,10 @@ export const h = <P = Record<string, string>, T = unknown>(
 ): AtomicHandler<P, T, Response | Promise<Response>> => {
   return async (req: Req<P, T>, res: Res) => {
     for (const handler of handlers) {
-      const result = await handler(req, res)
+      let result = handler(req, res)
+      if (result instanceof Promise) result = await result
       if (result instanceof Response) {
-        return result
+        return res.applyTo(result)
       }
     }
     return res.status(204).send()

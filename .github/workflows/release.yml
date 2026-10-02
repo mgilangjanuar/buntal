@@ -7,23 +7,82 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
-  release:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set node
-        uses: actions/setup-node@v4
+      - name: Tagged commit must be on main
+        run: |
+          git fetch origin main
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Check versions match the tag
+        run: bun scripts/release.ts --check
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+
+      - name: Install workspace
+        run: bun install
+
+      - name: Test and typecheck
+        run: |
+          for dir in packages/@buntal/http packages/buntal packages/@buntal/cli packages/create-buntal; do
+            echo "::group::$dir"
+            (cd "$dir" && bunx tsc --noEmit -p . && bun test --pass-with-no-tests)
+            echo "::endgroup::"
+          done
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: actions/setup-node@v4
         with:
-          registry-url: https://registry.npmjs.org/
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Use an npm CLI with trusted publishing
+        run: npm install -g npm@^11.5.1
+
+      - name: Install workspace
+        run: bun install
+
+      - name: Publish to npm (trusted publishing, no token)
+        run: bun scripts/release.ts
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+
+  changelog:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
           node-version: lts/*
 
-      - run: npx changelogithub # or changelogithub@0.12 if ensure the stable result
-        continue-on-error: true
+      - run: npx changelogithub
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

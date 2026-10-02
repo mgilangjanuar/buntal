@@ -6,7 +6,7 @@ type Strategy = 'cookie' | 'header' | 'both'
 
 type Options<T = unknown> = {
   secret: string
-  strategy?: Strategy
+  strategy?: Strategy | Strategy[]
   cookie?: {
     key: string
   }
@@ -24,7 +24,7 @@ const getToken = (req: Req, strategy: Strategy, opts: Partial<Options>) => {
   const cookieValue = Cookie.get(req, opts?.cookie?.key || 'access_token')
   const headerValue = req.headers
     .get(opts?.header?.key || 'Authorization')
-    ?.replace(/^Bearer\ /, '')
+    ?.replace(/^Bearer\s+/i, '')
   switch (strategy) {
     case 'cookie':
       return cookieValue
@@ -52,7 +52,10 @@ export const auth = <T = unknown>(
     secret: process.env.JWT_SECRET || process.env.SECRET || ''
   }
 ): AtomicHandler<Record<string, string>, T> => {
+  const verifier = jwt(secret)
   return async (req, res) => {
+    if (req.method === 'OPTIONS') return
+
     let token: string | null | undefined
 
     if (Array.isArray(strategy)) {
@@ -78,13 +81,14 @@ export const auth = <T = unknown>(
 
     let decoded: T | null = null
     try {
-      decoded = await jwt(secret).verify<T>(token)
-    } catch (error) {
+      decoded = await verifier.verify<T>(token)
+    } catch {
       return res.status(401).json({
         error: 'Unauthorized'
       })
     }
 
+    req.context = decoded
     const resp = await onVerified?.(req, res, decoded)
     if (resp instanceof Response) {
       return resp

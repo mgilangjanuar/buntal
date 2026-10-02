@@ -2,16 +2,17 @@ import { loadMDX } from '@/lib/render'
 import { Req } from '@buntal/http'
 import { Link, type MetaProps } from 'buntal'
 import path from 'path'
-import { useMemo } from 'react'
 
 export const $ = async (req: Req) => {
   const slug = req.params.slug
   if (!slug) return
 
-  const mdPath = path.join(__dirname, slug + '.mdx')
+  const mdPath = path.resolve(__dirname, slug + '.mdx')
 
-  // Check if MDX file exists
-  if (!(await Bun.file(mdPath).exists())) {
+  if (
+    !mdPath.startsWith(__dirname + path.sep) ||
+    !(await Bun.file(mdPath).exists())
+  ) {
     return {
       notFound: true
     }
@@ -50,20 +51,11 @@ export default function Post({
     )
   }
 
-  const metadata = useMemo(
-    () => (data && 'metadata' in data ? data.metadata : null),
-    [data]
-  )
-  const title = useMemo(() => metadata?.title as string | undefined, [metadata])
-  const description = useMemo(
-    () => metadata?.description as string | undefined,
-    [metadata]
-  )
-  const date = useMemo(
-    () => metadata?.date as string | Date | undefined,
-    [metadata]
-  )
-  const html = useMemo(() => (data && 'html' in data ? data.html : ''), [data])
+  const metadata = data && 'metadata' in data ? data.metadata : null
+  const title = metadata?.title as string | undefined
+  const description = metadata?.description as string | undefined
+  const date = metadata?.date as string | Date | undefined
+  const html = data && 'html' in data ? data.html : ''
 
   return metadata ? (
     <div className="container mx-auto prose max-w-4xl py-8">
@@ -87,7 +79,7 @@ export default function Post({
         )}
       </header>
 
-      {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
+      {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml */}
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   ) : (

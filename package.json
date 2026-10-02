@@ -23,9 +23,10 @@
   ],
   "devDependencies": {
     "husky": "^9.1.7",
-    "prettier": "3.5.3"
+    "prettier": "3.9.9"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "release:version": "bun scripts/version.ts"
   }
 }

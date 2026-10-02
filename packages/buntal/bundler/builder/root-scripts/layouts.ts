@@ -27,7 +27,7 @@ export function buildLayouts(
     imports: layouts
       .map(
         (layout, i) =>
-          `const Layout${i} = lazy(() => import('${layout.filePath}'))`
+          `const Layout${i} = lazy(() => import(${JSON.stringify(layout.filePath)}))`
       )
       .join('\n'),
     renderRootLayout:

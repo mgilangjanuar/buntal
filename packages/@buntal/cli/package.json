@@ -1,26 +1,26 @@
 {
   "name": "@buntal/cli",
   "description": "Command line interface for Buntal",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "module": "index.ts",
   "type": "module",
   "homepage": "https://buntaljs.org",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgilangjanuar/buntal.git"
+    "url": "git+https://github.com/mgilangjanuar/buntal.git",
+    "directory": "packages/@buntal/cli"
   },
   "bin": {
-    "buntal": "./index.ts"
+    "buntal": "index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/commander": "^2.12.5"
+    "@types/bun": "1.4.2"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "dependencies": {
-    "commander": "^14.0.0"
+    "commander": "^15.0.0"
   }
 }

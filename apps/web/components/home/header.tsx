@@ -3,17 +3,13 @@ import LogoWithContextMenu from '@/components/logo-with-context-menu'
 import SearchTrigger from '@/components/search/search-trigger'
 import ThemeSwitcher from '@/components/theme-switcher'
 import { Link } from 'buntal'
-import {
-  motion,
-  type AnimationControls,
-  type TargetAndTransition,
-  type VariantLabels
-} from 'motion/react'
+import { motion } from 'motion/react'
+import type { ComponentProps } from 'react'
 
 export default function Header({
   animate
 }: Readonly<{
-  animate?: AnimationControls | TargetAndTransition | VariantLabels | boolean
+  animate?: ComponentProps<typeof motion.header>['animate']
 }>) {
   return (
     <motion.header

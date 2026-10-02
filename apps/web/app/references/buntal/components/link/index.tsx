@@ -12,7 +12,7 @@ export default function LinkComponentPage() {
     <ReferencePage
       headerTitle="buntal/components"
       title="Link"
-      description="Client-side navigation component that handles internal routing, hash navigation, and history management without full page reloads."
+      description="Client-side navigation component that handles internal routing, hash navigation, and history management without full page reloads. Only same-origin URLs are routed client-side; external links, mailto:, javascript:, modifier or middle clicks, target other than _self, and download links behave like a normal anchor. Your onClick runs first and can call preventDefault()."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/buntal/components/link.tsx"
       typeDefinition={`function Link({
   href,
@@ -78,7 +78,7 @@ export default function LinkComponentPage() {
             'Additional HTML anchor element attributes (className, style, onClick, etc.)'
         }
       ]}
-      lastModified="2025-06-10"
+      lastModified="2026-10-02"
     />
   )
 }

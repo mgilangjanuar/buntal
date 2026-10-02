@@ -1,7 +1,10 @@
+import { sameOriginPath, scrollToHash } from '../lib/navigation'
+
 export function Link({
   href,
   ref,
   children,
+  onClick,
   ...props
 }: {
   href: string
@@ -9,38 +12,40 @@ export function Link({
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
+      {...props}
+      ref={ref}
       href={href === '-1' ? '#' : href}
       onClick={(e) => {
-        if (!href.startsWith('http')) {
-          if (href === '-1') {
-            e.preventDefault()
-            window.history.back()
-            window.dispatchEvent(new PopStateEvent('popstate'))
-          } else if (href.startsWith('#')) {
-            e.preventDefault()
-            const [selector, top] = href.split(':') as [
-              string,
-              string | undefined
-            ]
-            const target = document.querySelector(selector)
-            if (target) {
-              location.hash = href
-              window.scrollTo({
-                behavior: 'smooth',
-                top:
-                  target.getBoundingClientRect().top +
-                  window.scrollY -
-                  (top ? Number(top) : 80)
-              })
-            }
-          } else {
-            e.preventDefault()
+        onClick?.(e)
+        if (
+          e.defaultPrevented ||
+          e.button !== 0 ||
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey ||
+          (props.target && props.target !== '_self') ||
+          props.download !== undefined
+        ) {
+          return
+        }
+
+        if (href === '-1') {
+          e.preventDefault()
+          window.history.back()
+        } else if (href.startsWith('#')) {
+          e.preventDefault()
+          if (scrollToHash(href)) {
             window.history.pushState({}, '', href)
-            window.dispatchEvent(new PopStateEvent('popstate'))
           }
+        } else {
+          const path = sameOriginPath(href)
+          if (path === null) return
+          e.preventDefault()
+          window.history.pushState({}, '', path)
+          window.dispatchEvent(new PopStateEvent('popstate'))
         }
       }}
-      {...props}
     >
       {children}
     </a>

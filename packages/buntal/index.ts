@@ -1,3 +1,5 @@
+import type { AtomicHandler } from '@buntal/http'
+
 export * from './components'
 export * from './hooks'
 
@@ -8,4 +10,5 @@ export type BuntalConfig = {
   staticDir?: string
   config?: Partial<Bun.BuildConfig>
   serverOptions?: Partial<Bun.Serve.Options<any>>
+  middlewares?: AtomicHandler<any, any>[]
 }

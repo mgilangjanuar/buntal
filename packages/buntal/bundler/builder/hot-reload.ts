@@ -6,7 +6,7 @@ export async function buildHotReloadScript(
     await Bun.write(
       `${outDir}/dist/hot-reload.js`,
       `(() => {
-  const wsUrl = "ws://localhost:${process.env.PORT || 3000}";
+  const wsUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host;
   let ws = null;
   let isInitialLoad = true;
 

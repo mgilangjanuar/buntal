@@ -14,7 +14,7 @@ export async function buildRoot(
     imports: layoutsImports
   } = buildLayouts(routes, appDir)
   const createPages = buildPages(routes, layouts)
-  const createNotFound = await buildNotfound(appDir, rootLayout)
+  const createNotFound = await buildNotfound(appDir, rootLayout, outDir)
 
   // Create the entrypoint script
   const entrypointScript = `/// <reference lib="dom" />

@@ -1,11 +1,20 @@
 import type { Req } from '@buntal/http'
 
+const headers = (contentType: string) => ({
+  'Cache-Control': 'private, no-store',
+  'Content-Type': contentType,
+  'X-Content-Type-Options': 'nosniff'
+})
+
 export const ssrHandler = async (
   req: Req,
   handler: {
-    $: (req: Req) => unknown
+    $?: (req: Req) => unknown
   }
 ): Promise<Response | void> => {
+  if (typeof handler?.$ !== 'function') {
+    return Response.json({ error: 'Not found' }, { status: 404 })
+  }
   try {
     const result = await handler.$(req)
 
@@ -14,35 +23,24 @@ export const ssrHandler = async (
     }
     if (typeof result === 'object') {
       return new Response(JSON.stringify(result), {
-        headers: {
-          'Max-Age': '300',
-          'Cache-Control': 'public, max-age=300',
-          Etag: String(new Date().getTime()),
-          'Content-Type': 'application/json'
-        }
+        headers: headers('application/json')
       })
     }
     return new Response(String(result), {
-      headers: {
-        'Max-Age': '300',
-        'Cache-Control': 'public, max-age=300',
-        Etag: String(new Date().getTime()),
-        'Content-Type': 'text/plain'
-      }
+      headers: headers('text/plain; charset=utf-8')
     })
   } catch (error) {
-    return new Response(
-      JSON.stringify({
+    if (process.env.NODE_ENV === 'production') {
+      console.error(error)
+      return Response.json({ error: 'Internal Server Error' }, { status: 500 })
+    }
+    return Response.json(
+      {
         error: 'Internal Server Error',
         details: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : JSON.stringify(error)
-      }),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+        stack: error instanceof Error ? error.stack : undefined
+      },
+      { status: 500 }
     )
   }
 }

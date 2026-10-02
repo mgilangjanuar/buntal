@@ -11,6 +11,7 @@ import {
 } from 'react'
 import type { MetaProps } from '../components'
 import { Notfound } from '../components/notfound'
+import { scrollToHash } from '../lib/navigation'
 import type { ServerRouterType } from '../server/router'
 
 type RouterType = {
@@ -78,44 +79,43 @@ const Page = memo(
     rootLayout: RouterProviderProps['rootLayout']
     layoutIdx: number
   }>) => {
-    const fetchData = useCallback(async (idx: number) => {
-      if (!args?.query) {
-        return undefined
-      }
-      const resp = await fetch(
-        `${window.location.pathname}?${new URLSearchParams({
-          ...args.query,
-          _$: idx.toString()
-        }).toString()}`
-      )
-      if (resp.ok) {
-        if (resp.headers.get('Content-Type')?.includes('application/json')) {
-          return await resp.json()
+    const fetchData = useCallback(
+      async (idx: number) => {
+        if (!args?.query) {
+          return undefined
         }
-        return await resp.text()
-      }
-    }, [])
+        const resp = await fetch(
+          `${window.location.pathname}?${new URLSearchParams({
+            ...args.query,
+            _$: idx.toString()
+          }).toString()}`
+        )
+        if (resp.ok) {
+          if (resp.headers.get('Content-Type')?.includes('application/json')) {
+            return await resp.json()
+          }
+          return await resp.text()
+        }
+      },
+      [args?.query]
+    )
 
     useEffect(() => {
-      if (router) {
-        if (router.layouts[layoutIdx]) {
-          const layout = router.layouts[layoutIdx]
-          if (layout.ssr) {
-            fetchData(layoutIdx + 1).then((data) => {
-              onDataChange(data)
-            })
-          } else {
-            onDataChange(layout.data)
-          }
-        } else {
-          if (router.ssr) {
-            fetchData(-1).then((data) => {
-              onDataChange(data)
-            })
-          } else {
-            onDataChange(router.data)
-          }
-        }
+      if (!router) return
+      let active = true
+      const apply = (data: PageDataProps) => {
+        if (active) onDataChange(data)
+      }
+      const layout = router.layouts[layoutIdx]
+      if (layout ? layout.ssr : router.ssr) {
+        fetchData(layout ? layoutIdx + 1 : -1).then(apply, (error) =>
+          console.error(error)
+        )
+      } else {
+        apply(layout ? layout.data : router.data)
+      }
+      return () => {
+        active = false
       }
     }, [router, fetchData, layoutIdx, onDataChange])
 
@@ -173,7 +173,6 @@ export function RouterProvider({
       },
       back: () => {
         window.history.back()
-        window.dispatchEvent(new PopStateEvent('popstate'))
       },
       reload: () => {
         window.location.reload()
@@ -255,11 +254,14 @@ export function RouterProvider({
   useEffect(() => {
     if (router) {
       const match = new RegExp(router.regex).exec(window.location.pathname)
-      const params: Record<string, string> = Object.entries(
-        match?.groups || {}
-      ).reduce((acc, [key, value]) => {
-        return { ...acc, [key]: decodeURIComponent(value) }
-      }, {})
+      const params: Record<string, string> = {}
+      for (const [key, value] of Object.entries(match?.groups || {})) {
+        try {
+          params[key] = decodeURIComponent(value)
+        } catch {
+          params[key] = value
+        }
+      }
 
       const query: Record<string, string> =
         Object.fromEntries(new URLSearchParams(window.location.search)) || {}
@@ -279,22 +281,8 @@ export function RouterProvider({
   useEffect(() => {
     if (router) {
       if (window.location.hash) {
-        setTimeout(() => {
-          const [selector, top] = window.location.hash.split(':') as [
-            string,
-            string | undefined
-          ]
-          const target = document.querySelector(selector)
-          if (target) {
-            window.scrollTo({
-              behavior: 'smooth',
-              top:
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                (top ? Number(top) : 80)
-            })
-          }
-        }, 500)
+        const timer = setTimeout(() => scrollToHash(window.location.hash), 500)
+        return () => clearTimeout(timer)
       } else {
         window.scrollTo({ top: 0, behavior: 'instant' })
       }

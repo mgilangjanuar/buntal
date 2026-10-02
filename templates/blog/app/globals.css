@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@utility container {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+
+@layer components {
+  .prose {
+    @apply text-lg leading-relaxed text-zinc-800 dark:text-zinc-200;
+  }
+  .prose > * + * {
+    @apply mt-6;
+  }
+  .prose h2 {
+    @apply mt-12 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white;
+  }
+  .prose h3 {
+    @apply mt-8 text-xl font-semibold text-zinc-950 dark:text-white;
+  }
+  .prose a {
+    @apply text-indigo-600 underline underline-offset-4 dark:text-indigo-400;
+  }
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+  .prose ol {
+    @apply list-decimal pl-6;
+  }
+  .prose li + li {
+    @apply mt-2;
+  }
+  .prose li:has(> input[type='checkbox']) {
+    @apply list-none -ml-6;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-zinc-300 pl-4 italic dark:border-zinc-700;
+  }
+  .prose :not(pre) > code {
+    @apply rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-zinc-800;
+  }
+  .prose pre {
+    @apply overflow-x-auto rounded-xl bg-zinc-950 p-4 font-mono text-sm text-zinc-100 dark:bg-zinc-900;
+  }
+  .prose table {
+    @apply w-full border-collapse text-base;
+  }
+  .prose th,
+  .prose td {
+    @apply border-b border-zinc-200 px-3 py-2 text-left dark:border-zinc-800;
+  }
+  .prose img {
+    @apply rounded-xl;
+  }
+}

@@ -5,6 +5,7 @@ node_modules
 out
 dist
 *.tgz
+.buntal
 
 # code coverage
 coverage
@@ -33,5 +34,5 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Finder (MacOS) folder config
 .DS_Store
 
-# copied from ../../templates at pack time
-templates/
+# local database
+data/

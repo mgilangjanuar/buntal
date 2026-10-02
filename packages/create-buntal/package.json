@@ -1,7 +1,7 @@
 {
   "name": "create-buntal",
   "description": "Template for creating Buntal projects",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "module": "index.ts",
   "type": "module",
   "main": "index.ts",
@@ -22,5 +22,14 @@
   },
   "dependencies": {
     "commander": "^15.0.0"
-  }
+  },
+  "scripts": {
+    "prepack": "rm -rf templates && cp -R ../../templates templates && find templates \\( -name node_modules -o -name .buntal -o -name data \\) -prune -exec rm -rf {} +"
+  },
+  "files": [
+    "index.ts",
+    "cmd",
+    "templates",
+    "README.md"
+  ]
 }

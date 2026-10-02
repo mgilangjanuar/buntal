@@ -7,10 +7,12 @@ export const $ = async (req: Req) => {
   const slug = req.params.slug
   if (!slug) return
 
-  const mdPath = path.join(__dirname, slug + '.mdx')
+  const mdPath = path.resolve(__dirname, slug + '.mdx')
 
-  // Check if MDX file exists
-  if (!(await Bun.file(mdPath).exists())) {
+  if (
+    !mdPath.startsWith(__dirname + path.sep) ||
+    !(await Bun.file(mdPath).exists())
+  ) {
     return {
       notFound: true
     }

@@ -14,7 +14,7 @@ async function promptForProjectName() {
 program
   .name('create-buntal')
   .description('Create a new Buntal project')
-  .version('0.0.1')
+  .version((await import('./package.json')).default.version)
 
 program
   .argument('[project-name]', 'Name of the project')

@@ -33,7 +33,8 @@ buntal.config.ts
 
 - One responsibility per file: a page renders, \`lib/\` fetches and validates.
 - Import with the \`@/\` alias (\`@/lib/db\`) instead of long relative paths.
-- Put database and secret-using code only in \`$\` loaders, API routes and \`lib/\` modules they import. Components also run in the browser.
+- Put database and secret-using code only in \`$\` loaders, API routes and \`lib/\` modules they import. Buntal strips \`$\` from the browser bundle, but components also run in the browser.
+- Start from a [template](/docs/install#templates) (\`landing\`, \`blog\`) to get this structure, a \`Bun.SQL\` database layer and SEO routes out of the box.
 
 ## Data loading
 
@@ -240,7 +241,7 @@ Follow the [Security guide](/docs/guides/security). In short:
 - Build with \`bun run build\` and run \`bun start\` (sets \`NODE_ENV=production\`, listens on \`PORT\`, default 3000).
 - Run behind a reverse proxy or CDN that terminates TLS and sets \`x-forwarded-proto\`, so \`secureHeaders()\` can send HSTS.
 - Configure secrets (\`JWT_SECRET\`, database URLs) as environment variables, never in the repo.
-- Keep data files (such as SQLite databases) on a persistent volume outside the build output.
+- Keep data files (such as SQLite databases) on a persistent volume. \`buntal start\` serves from \`.buntal/\`, so resolve relative paths from \`process.env.BUNTAL_ROOT\` (the project folder), as the templates do, and run migrations as a deploy step.
 - Add a health route (\`app/api/health/index.ts\` returning \`{ ok: true }\`) for your load balancer.
 
 ## Working with AI agents

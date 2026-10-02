@@ -6,7 +6,8 @@ Important notes for AI agents:
 
 - Buntal is NOT Next.js. There is no App Router, no `getServerSideProps`, no `next/*` imports, no server components, and no `"use client"`. Pages are plain React components; server data comes from an exported `$`.
 - Packages: `buntal` (React framework), `@buntal/http` (HTTP server, `Req`, `Res`, `h`), `@buntal/http/middlewares` (`auth`, `jwt`, `cors`, `logger`, `secureHeaders`), `@buntal/cli` (`buntal dev|build|start`), `create-buntal` (scaffolder).
-- New project: `bun create buntal@latest my-app`, then `bun dev` (port 3000, or `PORT`).
+- New project: `bun create buntal@latest my-app`, then `bun dev` (port 3000, or `PORT`). Templates: `-t default` (minimal), `-t landing` (landing page / portfolio with contact form), `-t blog` (Markdown blog with SQL database, RSS, sitemap).
+- Databases: use Bun's built-in `Bun.SQL` (`import { SQL } from 'bun'`), not an ORM. SQLite by default, Postgres via `DATABASE_URL`.
 - For the full API with examples in one file, read https://buntaljs.org/llms-full.txt
 
 ## Docs
@@ -36,6 +37,8 @@ Important notes for AI agents:
 - [hello-world](https://github.com/mgilangjanuar/buntal/tree/main/examples/hello-world): minimal full-stack app
 - [blog](https://github.com/mgilangjanuar/buntal/tree/main/examples/blog): MDX blog with a catch-all route and `$` loader
 - [simple-api](https://github.com/mgilangjanuar/buntal/tree/main/examples/simple-api): REST API with JWT auth and file routes
+
+- [Templates](https://github.com/mgilangjanuar/buntal/tree/main/templates): `landing` and `blog` show the recommended structure, `Bun.SQL` data layer, migrations and SEO routes
 
 ## Optional
 

@@ -134,6 +134,7 @@ export default function HomePage({ data }: {
 See the \`Req\` type definition [here](/docs/guides/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.
 
 - \`$\` runs on the server for the first render, and is fetched as JSON when the user navigates with \`<Link>\`. Its responses are never cached publicly.
+- \`$\` never reaches the browser: Buntal removes it from the client bundle along with helpers and imports only it uses, so you can import database clients, \`bun:*\` modules and secrets in a page's \`$\`.
 - Put SEO tags in \`data._meta\` (see [Meta](/references/buntal/components/meta)); layouts merge it with their own.
 - For data that does not depend on the request, export an object instead: \`export const $ = { _meta: { title: 'About' } }\`.
 - Return a \`Response\` to stop rendering, for example to redirect visitors who are not logged in:

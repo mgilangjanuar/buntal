@@ -66,6 +66,22 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
 
   Then, you can read more about it [here](/docs/guides/full-stack-web).
 
+## Templates
+
+\`create-buntal\` asks which template to start from, or pass \`--template\`:
+
+\`\`\`sh
+bun create buntal@latest my-app -t landing
+\`\`\`
+
+| Template | What you get |
+| --- | --- |
+| \`default\` | Minimal starter with Tailwind CSS |
+| \`landing\` | Landing page and portfolio: sections, case studies, a contact form saved to a database, full SEO |
+| \`blog\` | Markdown blog with posts in a database, tags, pagination, RSS, sitemap and structured data |
+
+Templates that use a database come with \`Bun.SQL\` (Bun's built-in SQL client, no ORM to install), SQLite by default and Postgres through \`DATABASE_URL\`. Migrations and sample content are applied for you on create. Browse them on [GitHub](https://github.com/mgilangjanuar/buntal/tree/main/templates).
+
 ## Using an AI agent
 
 Building with Claude Code, Cursor or another coding agent? Give it [/llms-full.txt](/llms-full.txt) and start from one of the ready-made prompts in [Build with AI](/docs/guides/ai).
@@ -80,6 +96,12 @@ Building with Claude Code, Cursor or another coding agent? Give it [/llms-full.t
         {
           id: 'installation',
           title: 'Installation',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'templates',
+          title: 'Templates',
           level: 1,
           offset: 72
         },

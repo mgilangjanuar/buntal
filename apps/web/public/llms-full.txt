@@ -5,7 +5,7 @@
 ## Ground rules
 
 - Buntal is NOT Next.js. Never import from `next/*`. There is no App Router, no server components, no `"use client"`, no `getServerSideProps`, no `generateMetadata`. Use the APIs below only.
-- Runtime is Bun. Prefer Bun built-ins: `bun:sqlite`, `Bun.password`, `Bun.file`, `Bun.write`, `bun test`.
+- Runtime is Bun. Prefer Bun built-ins: `Bun.SQL` (database), `Bun.markdown`, `Bun.password`, `Bun.file`, `Bun.write`, `bun test`.
 - TypeScript everywhere. `.tsx` for pages and layouts, `.ts` for API routes.
 
 ## Packages
@@ -21,7 +21,9 @@
 ## Full-stack project
 
 ```sh
-bun create buntal@latest my-app
+bun create buntal@latest my-app            # interactive template picker
+bun create buntal@latest my-app -t landing # landing page / portfolio
+bun create buntal@latest my-app -t blog    # Markdown blog with a SQL database
 cd my-app
 bun dev                      # http://localhost:3000 (PORT env overrides)
 bun run build && bun start   # production
@@ -111,6 +113,7 @@ export default function PostPage({ data }: { data?: Awaited<ReturnType<typeof $>
 
 - Static data: `export const $ = { _meta: { title: 'About' } }` (an object, not a function) is inlined at build time.
 - Return a `Response` to stop rendering, e.g. a redirect: `return Response.redirect('/login', 302)` or `new Response(null, { status: 302, headers: { location: '/login' } })`. Works on full loads and client navigation.
+- `$` is removed from the browser bundle together with helpers and imports only it uses, so it can import database clients, `bun:*` modules and secrets. Do not read `$` as a value from the component.
 - Loader responses are sent with `Cache-Control: private, no-store`. In production, thrown errors return a generic 500 without details.
 - Validate `req.params` before touching the filesystem. Resolve paths and check they stay inside your content folder.
 
@@ -260,6 +263,37 @@ Always sets `X-Content-Type-Options: nosniff` and `Cross-Origin-Opener-Policy: s
 
 `logger()` prints `[HH:MM:SS] > METHOD /path`.
 
+## Database with Bun.SQL
+
+Use Bun's built-in SQL client; no ORM or driver package. Every `${value}` is a bound parameter.
+
+```ts
+// lib/db.ts
+import { SQL } from 'bun'
+import { mkdirSync } from 'fs'
+import { dirname, isAbsolute, resolve } from 'path'
+
+const root = process.env.BUNTAL_ROOT || process.cwd()   // project folder; `buntal start` runs from .buntal/
+const resolveUrl = (url: string) => {
+  if (!url.startsWith('sqlite://') || url === 'sqlite://:memory:') return url
+  const file = url.slice('sqlite://'.length)
+  const path = isAbsolute(file) ? file : resolve(root, file)
+  mkdirSync(dirname(path), { recursive: true })
+  return `sqlite://${path}`
+}
+export const db = new SQL(resolveUrl(process.env.DATABASE_URL || 'sqlite://data/app.db'))
+
+// usage
+const posts = await db`SELECT slug, title FROM posts WHERE status = ${'published'} LIMIT ${10}`
+const [count] = await db`SELECT COUNT(*) AS n FROM posts`
+await db`SELECT * FROM post_tags WHERE post_id IN ${db(ids)}`
+await db.begin(async (tx) => { await tx`INSERT ...`; await tx`UPDATE ...` })
+```
+
+- Postgres: `DATABASE_URL=postgres://user:pass@host:5432/db`. Keep schema SQL portable (TEXT ids from `crypto.randomUUID()`, ISO timestamps as TEXT, `ON CONFLICT (...) DO UPDATE`).
+- Migrations: an array in `lib/migrations.ts` applied by `scripts/migrate.ts` (`bun run db:migrate`), tracked in a `_migrations` table. Run them as a deploy step, not on server start.
+- Markdown: `Bun.markdown.html(src, { noHtmlBlocks: true, noHtmlSpans: true, tables: true, headings: { ids: true } })`, then remove `javascript:` URLs from `href`/`src` before rendering with `dangerouslySetInnerHTML`.
+
 ## Recipes
 
 ### Protect only some pages
@@ -279,21 +313,19 @@ export const $ = async (req: Req) => {
 }
 ```
 
-### Login API with sqlite and Bun.password
+### Login API with Bun.SQL and Bun.password
 
 ```ts
 // app/api/login/index.ts
 import { h } from '@buntal/http'
 import { jwt } from '@buntal/http/middlewares'
-import { Database } from 'bun:sqlite'
-
-const db = new Database('data/app.db')
+import { db } from '@/lib/db'
 
 export const POST = h(async (req, res) => {
   const body = (await req.json().catch(() => null)) as { email?: string; password?: string } | null
-  const user = body?.email
-    ? db.query<{ id: string; hash: string }, [string]>('select id, hash from users where email = ?').get(body.email)
-    : null
+  const [user]: { id: string; hash: string }[] = body?.email
+    ? await db`SELECT id, hash FROM users WHERE email = ${body.email} LIMIT 1`
+    : []
   if (!user || !body?.password || !(await Bun.password.verify(body.password, user.hash))) {
     return res.status(401).json({ error: 'Invalid credentials' })
   }

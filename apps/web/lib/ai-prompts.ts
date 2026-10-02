@@ -1,5 +1,6 @@
 export type UseCase = {
   id: string
+  template?: 'landing' | 'blog'
   title: string
   noun: string
   summary: string
@@ -12,7 +13,7 @@ const BASE = `You are building a web app with Buntal JS, a full-stack React fram
 Before writing code, read ${SITE}/llms.txt and ${SITE}/llms-full.txt (including its Best practices section) and follow them exactly. Do not use Next.js, Remix or Express APIs; Buntal only looks similar.
 
 Setup
-- Scaffold with \`bun create buntal@latest <project-name>\`, then work inside that folder.
+- Scaffold with \`bun create buntal@latest <project-name> -t <template>\`, then work inside that folder.
 - Run \`bun dev\` while developing and \`bun run build && bun start\` to check production.
 
 Buntal rules
@@ -30,18 +31,19 @@ Quality bar
 - Responsive, accessible (semantic HTML, labels, alt text, keyboard focus), light and dark mode.
 - SEO on public pages: unique title and description in \`_meta\`, Open Graph tags, a canonical link, JSON-LD where it fits, \`app/sitemap.xml/index.ts\` and \`public/robots.txt\`; \`noindex\` on private and not-found pages.
 - Validate every request body on the server; never trust client input.
-- Keep dependencies minimal; prefer Bun built-ins (bun:sqlite, Bun.password, Bun.file).
+- Keep dependencies minimal; prefer Bun built-ins: \`Bun.SQL\` for the database (SQLite by default, Postgres via DATABASE_URL), Bun.password, Bun.file, Bun.markdown.
 - Finish with a short README: what was built, how to run it, required env vars.`
 
 export const USE_CASES: UseCase[] = [
   {
     id: 'landing',
+    template: 'landing',
     title: 'Landing page',
     noun: 'a landing page',
     summary: 'Marketing site with hero, features, pricing and a waitlist.',
     requirements: [
       'Single page at `/` with sections: hero with primary CTA, social proof, features grid, pricing table (3 tiers), FAQ accordion, footer.',
-      'Waitlist form that POSTs to `app/api/waitlist/index.ts`; validate the email server-side and store it in bun:sqlite (`data/app.db`).',
+      'Waitlist form that POSTs to `app/api/waitlist/index.ts`; validate the email server-side and store it with Bun.SQL (SQLite in `data/app.db`).',
       'Full SEO via `$` and `_meta`: title, description, Open Graph and Twitter card tags, plus `public/robots.txt`.',
       'Smooth in-page anchor navigation with `<Link href="#pricing">`.',
       'Lighthouse-friendly: no layout shift, lazy-loaded images, system or Google fonts preconnected in the layout.'
@@ -62,6 +64,7 @@ export const USE_CASES: UseCase[] = [
   },
   {
     id: 'blog',
+    template: 'blog',
     title: 'Blog',
     noun: 'a blog',
     summary: 'MDX blog with tags, RSS feed and reading time.',
@@ -79,7 +82,7 @@ export const USE_CASES: UseCase[] = [
     noun: 'a CMS',
     summary: 'Admin panel to manage pages and posts, with a public site.',
     requirements: [
-      'bun:sqlite schema for users, pages and posts (title, slug, body as Markdown, status draft/published, timestamps). Write a migration script in `scripts/migrate.ts`.',
+      'Bun.SQL schema (SQLite by default, Postgres-compatible) for users, pages and posts (title, slug, body as Markdown, status draft/published, timestamps). Write a migration script in `scripts/migrate.ts`.',
       'Auth: `/login` form posting to `app/api/auth/login/index.ts`; hash passwords with `Bun.password`; issue a JWT with `jwt(secret).sign()` in an httpOnly, secure, SameSite=Lax cookie.',
       'Protect `/admin/**` and `/api/admin/**` by checking the token in the `$` loader (return a redirect Response) and with the `auth()` middleware on API routes.',
       'Admin UI: list with search and status filter, create/edit form with Markdown preview, delete with confirmation, slug uniqueness checks.',
@@ -93,7 +96,7 @@ export const USE_CASES: UseCase[] = [
     noun: 'an e-commerce store',
     summary: 'Product catalog, cart and checkout with order history.',
     requirements: [
-      'bun:sqlite tables for products (with variants and stock), carts, orders and order items; seed 12 sample products.',
+      'Bun.SQL tables (SQLite by default, Postgres-compatible) for products (with variants and stock), carts, orders and order items; seed 12 sample products.',
       'Pages: `/` (featured), `/products` (filters by category and price, sort, pagination via query), `/products/[slug]`, `/cart`, `/checkout`, `/orders/[id]`.',
       'Cart stored server-side and keyed by an httpOnly cookie; API routes under `app/api/cart/` to add, update and remove items.',
       'Checkout recalculates prices and stock on the server inside a transaction; never trust prices from the client.',
@@ -121,7 +124,7 @@ export const USE_CASES: UseCase[] = [
     summary: 'Standalone JSON API with @buntal/http, no React.',
     requirements: [
       'Use only `@buntal/http` (no `buntal` package): `new Http({ port, appDir: "./app" })` in `index.ts` with file routes under `app/`.',
-      'Resource: tasks with CRUD at `/tasks` and `/tasks/[id]`, backed by bun:sqlite; consistent JSON error shape `{ error, details? }`.',
+      'Resource: tasks with CRUD at `/tasks` and `/tasks/[id]`, backed by Bun.SQL; consistent JSON error shape `{ error, details? }`.',
       'Validation for every body and query param; 400 on invalid input, 404 on missing rows.',
       'JWT auth with `auth()` and `jwt()`, `cors({ origin: [...] })` with an explicit allow list, `secureHeaders()`, and `logger()`.',
       'Tests with `bun test` that start the server on port 0 and cover happy paths, validation and auth.'
@@ -129,6 +132,7 @@ export const USE_CASES: UseCase[] = [
   },
   {
     id: 'portfolio',
+    template: 'landing',
     title: 'Portfolio',
     noun: 'a portfolio site',
     summary: 'Personal site with projects, writing and a contact form.',
@@ -145,7 +149,11 @@ export const USE_CASES: UseCase[] = [
 export const buildPrompt = (useCase: UseCase, projectName = 'my-app') =>
   `Build ${useCase.noun} with Buntal JS: ${useCase.summary}
 
-${BASE.replace('<project-name>', projectName)}
+${BASE.replace('<project-name>', projectName).replace('<template>', useCase.template ?? 'default')}${
+    useCase.template
+      ? `\n\nStart from the \`${useCase.template}\` template: it already has the page structure, a Bun.SQL data layer with migrations, and SEO routes. Read its README, then adapt it rather than rebuilding from scratch.`
+      : ''
+  }
 
 What to build
 ${useCase.requirements.map((r) => `- ${r}`).join('\n')}

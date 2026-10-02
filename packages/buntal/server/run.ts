@@ -40,11 +40,11 @@ export async function runServer({
           }
         : undefined,
     assets: (req) => staticHandler(req, outDir, staticDir),
-    injectHandler: injectHandler(env, routes),
+    injectHandler: injectHandler(env, routes, outDir),
     options: serverOptions
   })
 
-  app.onNotFound(() => notfoundHandler(env, appDir))
+  app.onNotFound(() => notfoundHandler(env, appDir, outDir))
 
   app.use(logger())
   for (const middleware of middlewares) {

@@ -4,11 +4,19 @@ import { renderToReadableStream } from 'react-dom/server'
 import { type RouteBuilderResult } from './router'
 import { ssrHandler } from './ssr'
 
-let version: Promise<string> | undefined
-const appVersion = () =>
-  (version ??= import(`${process.cwd()}/package.json`)
-    .then((pkg) => pkg.default.version || '0.0.1')
-    .catch(() => '0.0.1'))
+const buildIds = new Map<string, Promise<string>>()
+
+export const buildId = (outDir = '.buntal') => {
+  let id = buildIds.get(outDir)
+  if (!id) {
+    id = Bun.file(`${outDir}/dist/root.js`)
+      .bytes()
+      .then((bytes) => Bun.hash(bytes).toString(36))
+      .catch(() => Date.now().toString(36))
+    buildIds.set(outDir, id)
+  }
+  return id
+}
 
 export const pageHeaders = {
   'Content-Type': 'text/html; charset=utf-8',
@@ -17,9 +25,12 @@ export const pageHeaders = {
 }
 
 export const bootstrapModules = async (
-  env: 'development' | 'production' = 'development'
+  env: 'development' | 'production' = 'development',
+  outDir = '.buntal'
 ) => [
-  `/root.js?v=${await appVersion()}${env === 'development' ? `&t=${Date.now()}` : ''}`,
+  env === 'development'
+    ? `/root.js?t=${Date.now()}`
+    : `/root.js?v=${await buildId(outDir)}`,
   ...(env === 'development' ? ['/hot-reload.js'] : [])
 ]
 
@@ -35,7 +46,8 @@ const load = async (mod: any, req: Req) => {
 
 export const injectHandler = (
   env: 'development' | 'production' = 'development',
-  routes: RouteBuilderResult[]
+  routes: RouteBuilderResult[],
+  outDir = '.buntal'
 ) => {
   const byName = new Map(
     routes.map((r) => [r.route, { route: r, regex: new RegExp(r.regex) }])
@@ -101,7 +113,7 @@ export const injectHandler = (
 
       return new Response(
         await renderToReadableStream(await createComponent(route.layouts), {
-          bootstrapModules: await bootstrapModules(env)
+          bootstrapModules: await bootstrapModules(env, outDir)
         }),
         { headers: pageHeaders }
       )

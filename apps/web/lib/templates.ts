@@ -5,6 +5,7 @@ export type TemplateInfo = {
   features: string[]
   pages: string[]
   database: boolean
+  tags: string[]
 }
 
 export const TEMPLATES: TemplateInfo[] = [
@@ -21,7 +22,8 @@ export const TEMPLATES: TemplateInfo[] = [
       'Content-Security-Policy through secureHeaders()'
     ],
     pages: ['/', '/projects', '/projects/[slug]', '/api/contact'],
-    database: true
+    database: true,
+    tags: ['Marketing', 'Portfolio', 'Forms', 'Database', 'SEO']
   },
   {
     name: 'blog',
@@ -36,7 +38,8 @@ export const TEMPLATES: TemplateInfo[] = [
       'noindex for missing posts and empty pages'
     ],
     pages: ['/', '/posts/[slug]', '/tags', '/tags/[tag]', '/rss.xml'],
-    database: true
+    database: true,
+    tags: ['Blog', 'Markdown', 'Database', 'SEO']
   },
   {
     name: 'default',
@@ -49,7 +52,8 @@ export const TEMPLATES: TemplateInfo[] = [
       'ESLint and TypeScript configured'
     ],
     pages: ['/'],
-    database: false
+    database: false,
+    tags: ['Starter']
   }
 ]
 

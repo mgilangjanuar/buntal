@@ -33,7 +33,7 @@ export async function bundler(
     },
     ...(config || {}),
     plugins: [
-      createTypeOnlyImportsPlugin(),
+      createTypeOnlyImportsPlugin({ appDir }),
       ...((config?.plugins as BunPlugin[] | undefined) || [])
     ]
   })

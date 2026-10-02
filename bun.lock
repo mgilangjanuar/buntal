@@ -6,12 +6,13 @@
       "name": "buntaljs",
       "devDependencies": {
         "husky": "^9.1.7",
+        "playwright": "1.63.0",
         "prettier": "3.9.9",
       },
     },
     "packages/@buntal/cli": {
       "name": "@buntal/cli",
-      "version": "0.0.11",
+      "version": "1.0.1",
       "bin": {
         "buntal": "./index.ts",
       },
@@ -27,7 +28,7 @@
     },
     "packages/@buntal/http": {
       "name": "@buntal/http",
-      "version": "0.0.14",
+      "version": "1.0.1",
       "dependencies": {
         "jose": "^6.2.12",
       },
@@ -40,7 +41,7 @@
     },
     "packages/buntal": {
       "name": "buntal",
-      "version": "0.1.26",
+      "version": "1.0.1",
       "dependencies": {
         "@buntal/http": "^0.0.14",
         "react": "19.3.0",
@@ -57,7 +58,7 @@
     },
     "packages/create-buntal": {
       "name": "create-buntal",
-      "version": "0.0.17",
+      "version": "1.0.1",
       "bin": {
         "create-buntal": "./index.ts",
       },
@@ -98,6 +99,10 @@
     "husky": ["husky@9.1.7", "", { "bin": { "husky": "bin.js" } }, "sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA=="],
 
     "jose": ["jose@6.2.12", "", {}, "sha512-9NiFmJEex0sy2Dk58j2UGBSHgUs2ypF9eZSu4L6vjOX3Dp96Sw1F3uL+H+D1sx02jZZdzUT0HgvCy59CuvXcWw=="],
+
+    "playwright": ["playwright@1.63.0", "", { "dependencies": { "playwright-core": "1.63.0" }, "bin": { "playwright": "cli.js" } }, "sha512-+7ziBLidS4NaNCdt57SUDT+wYmmd5fmiQejUic/kb+YsYSCPyOOE9sebzMjNmQrsnNpDJqd4WHvV/8lfKfUDUg=="],
+
+    "playwright-core": ["playwright-core@1.63.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg=="],
 
     "prettier": ["prettier@3.9.9", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg=="],
 

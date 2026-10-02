@@ -80,7 +80,7 @@ bun create buntal@latest my-app --template landing
 | \`landing\` | Landing page and portfolio: sections, case studies, a contact form saved to a database, full SEO |
 | \`blog\` | Markdown blog with posts in a database, tags, pagination, RSS, sitemap and structured data |
 
-Templates that use a database come with \`Bun.SQL\` (Bun's built-in SQL client, no ORM to install), SQLite by default and Postgres through \`DATABASE_URL\`. Migrations and sample content are applied for you on create. Browse them on [GitHub](https://github.com/mgilangjanuar/buntal/tree/main/templates).
+Templates that use a database come with \`Bun.SQL\` (Bun's built-in SQL client, no ORM to install), SQLite by default and Postgres through \`DATABASE_URL\`. Migrations and sample content are applied for you on create. See screenshots on the [Templates](/templates) page, or browse the source on [GitHub](https://github.com/mgilangjanuar/buntal/tree/main/templates).
 
 ## Using an AI agent
 

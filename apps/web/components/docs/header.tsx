@@ -55,6 +55,15 @@ export default function Header({
           >
             References
           </Link>
+          <Link
+            href="/templates"
+            className={cn(
+              'hidden sm:flex btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm no-underline',
+              pathname.startsWith('/templates') && 'text-base-content'
+            )}
+          >
+            Templates
+          </Link>
           <SearchTrigger />
           <a
             href="https://github.com/mgilangjanuar/buntal"

@@ -42,6 +42,12 @@ export default function Header({
           >
             Docs
           </Link>
+          <Link
+            href="/templates"
+            className="btn btn-link text-sm text-base-content/60 hover:text-base-content underline-offset-4 btn-sm"
+          >
+            Templates
+          </Link>
           <SearchTrigger />
           <a
             href="https://github.com/mgilangjanuar/buntal"

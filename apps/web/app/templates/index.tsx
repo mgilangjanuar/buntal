@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 export const $ = {
   _meta: {
-    title: 'Templates - Buntal JS',
+    title: 'Starter templates - Buntal JS',
     description:
       'Starter templates for Buntal: landing page and portfolio, Markdown blog with a SQL database, and a minimal app.'
   } satisfies MetaProps
@@ -37,22 +37,22 @@ function TemplateTile({
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group flex flex-col text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-primary"
+      className="group flex flex-col text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-base-content/30 focus-visible:outline-2 focus-visible:outline-primary"
     >
-      <div className="p-5 space-y-1.5">
-        <h2 className="font-semibold truncate">{template.title}</h2>
-        <p className="text-sm text-base-content/70 line-clamp-2 min-h-10">
+      <div className="px-6 pt-6 space-y-2">
+        <h2 className="text-lg font-semibold truncate">{template.title}</h2>
+        <p className="text-base-content/70 line-clamp-2 min-h-12">
           {template.summary}
         </p>
       </div>
-      <div className="relative mt-auto h-44 overflow-hidden">
+      <div className="relative mt-6 h-40 overflow-hidden">
         <img
           src={shot(template.name, cover, scheme)}
           alt=""
           width={1280}
           height={800}
           loading="lazy"
-          className="absolute left-8 top-2 w-[115%] max-w-none rounded-lg border border-base-300 shadow-md origin-top-left -rotate-3 transition duration-300 group-hover:-rotate-1 group-hover:-translate-y-1"
+          className="absolute left-10 top-4 w-[110%] max-w-none rounded-lg border border-base-300 shadow-xl origin-top-left -rotate-[4deg] transition duration-300 group-hover:-rotate-2 group-hover:-translate-y-1"
         />
       </div>
     </button>
@@ -173,36 +173,62 @@ function Filters({
   onClear: () => void
 }) {
   return (
-    <fieldset className="space-y-3">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <legend className="text-sm font-semibold">Filter templates</legend>
-        {selected.length > 0 && (
-          <button
-            type="button"
-            onClick={onClear}
-            className="link link-hover text-xs text-base-content/60"
+        <h2 className="font-semibold">Filter Templates</h2>
+        <button
+          type="button"
+          onClick={onClear}
+          disabled={selected.length === 0}
+          className="btn btn-ghost btn-xs gap-1 text-base-content/60 disabled:bg-transparent"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
           >
-            Clear
-          </button>
-        )}
+            <circle cx="12" cy="12" r="9" />
+            <path d="m15 9-6 6M9 9l6 6" />
+          </svg>
+          Clear
+        </button>
       </div>
-      <div className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
-        {TAGS.map((tag) => (
-          <label
-            key={tag}
-            className="flex items-center gap-2 text-sm cursor-pointer max-lg:badge max-lg:badge-lg max-lg:badge-outline max-lg:has-checked:badge-primary"
+      <details open className="group">
+        <summary className="flex items-center gap-2 cursor-pointer list-none py-1 text-sm font-medium [&::-webkit-details-marker]:hidden">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-4 transition -rotate-90 group-open:rotate-0"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
           >
-            <input
-              type="checkbox"
-              checked={selected.includes(tag)}
-              onChange={() => onToggle(tag)}
-              className="checkbox checkbox-xs max-lg:hidden"
-            />
-            {tag}
-          </label>
-        ))}
-      </div>
-    </fieldset>
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+          Use Case
+        </summary>
+        <fieldset className="mt-3 flex flex-wrap gap-2 lg:flex-col">
+          <legend className="sr-only">Use case</legend>
+          {TAGS.map((tag) => (
+            <label
+              key={tag}
+              className="flex items-center gap-3 rounded-field border border-base-300 bg-base-200/60 px-3 py-2 text-sm cursor-pointer transition hover:border-base-content/30 has-checked:border-primary/60 lg:py-2.5"
+            >
+              <input
+                type="checkbox"
+                checked={selected.includes(tag)}
+                onChange={() => onToggle(tag)}
+                className="checkbox checkbox-sm rounded-sm"
+              />
+              {tag}
+            </label>
+          ))}
+        </fieldset>
+      </details>
+    </div>
   )
 }
 
@@ -249,9 +275,9 @@ export default function TemplatesPage() {
     <main>
       <Header />
       <div className="container mx-auto px-4 py-16 lg:py-28 max-w-7xl">
-        <header className="max-w-2xl mb-10 lg:mb-14 space-y-4">
+        <header className="max-w-3xl space-y-4">
           <h1 className="text-4xl md:text-5xl font-serif tracking-tight">
-            Templates
+            Buntal starter templates
           </h1>
           <p className="text-lg text-base-content/70">
             Start from a working app instead of a blank page. Each template is
@@ -268,28 +294,30 @@ export default function TemplatesPage() {
             .
           </p>
         </header>
-        <div className="grid gap-8 lg:grid-cols-[14rem_1fr]">
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <label className="input w-full">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="size-4 opacity-50"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <circle cx="11" cy="11" r="7" />
-                <path d="m20 20-3.5-3.5" />
-              </svg>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search templates..."
-                aria-label="Search templates"
-              />
-            </label>
+
+        <label className="input input-lg w-full mt-10 mb-10 lg:mb-14">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-5 opacity-50"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search templates..."
+            aria-label="Search templates"
+          />
+        </label>
+
+        <div className="grid gap-10 lg:gap-12 lg:grid-cols-[15rem_1fr]">
+          <aside className="lg:sticky lg:top-24 lg:self-start">
             <Filters
               selected={tags}
               onToggle={toggle}
@@ -298,7 +326,7 @@ export default function TemplatesPage() {
           </aside>
           <section aria-live="polite" className="min-w-0">
             {shown.length > 0 ? (
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-6 lg:gap-8 sm:grid-cols-2 xl:grid-cols-3">
                 {shown.map((t) => (
                   <TemplateTile
                     key={t.name}

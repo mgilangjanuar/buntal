@@ -40,9 +40,11 @@ runServer(${confFileExist ? 'config' : ''})
 `
 }
 
+const projectRoot = process.cwd()
+
 const withEnv = (NODE_ENV: string) => ({
   ...spawnOpts,
-  env: { ...process.env, NODE_ENV }
+  env: { ...process.env, NODE_ENV, BUNTAL_ROOT: projectRoot }
 })
 
 const run = async (cmd: string[], NODE_ENV = 'production') => {

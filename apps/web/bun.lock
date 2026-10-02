@@ -5,8 +5,8 @@
     "": {
       "name": "web",
       "dependencies": {
-        "@buntal/http": "0.0.14",
-        "buntal": "^0.1.26",
+        "@buntal/http": "0.0.16",
+        "buntal": "^0.2.1",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
@@ -23,7 +23,7 @@
         "tailwindcss": "^4.3.3",
       },
       "devDependencies": {
-        "@buntal/cli": "0.0.11",
+        "@buntal/cli": "0.0.13",
         "@eslint-react/eslint-plugin": "^5.23.3",
         "@eslint/js": "^10.0.1",
         "@tailwindcss/cli": "^4.3.3",
@@ -79,9 +79,9 @@
 
     "@babel/types": ["@babel/types@7.29.0", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.28.5" } }, "sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A=="],
 
-    "@buntal/cli": ["@buntal/cli@0.0.11", "", { "dependencies": { "commander": "^15.0.0" }, "peerDependencies": { "typescript": "^6" }, "bin": { "buntal": "index.ts" } }, "sha512-cZpRBVtpVHh45Ct7iZ2roufIB7T6v7sDTMbqLrvbXsE5Mx+ZdHY6c1Uh3vs6Wz/svV6t9njTxOdMQ5MpZEBSIw=="],
+    "@buntal/cli": ["@buntal/cli@0.0.13", "", { "dependencies": { "commander": "^15.0.0" }, "peerDependencies": { "typescript": "^6" }, "bin": { "buntal": "index.ts" } }, "sha512-fAcddc+NJO2NqwyZ57eWe1EgbI+QHZtSB0QPBHECfuSeUf4rbWNsfDNT37vk6itaT/SNfmBbhP7Z/MM1LFwo1w=="],
 
-    "@buntal/http": ["@buntal/http@0.0.14", "", { "dependencies": { "jose": "^6.2.12" }, "peerDependencies": { "typescript": "^6" } }, "sha512-XqDo1uv7PtgJ7bEEM2CFTce7fsgelKqAv43fFIUGpN6UIQnk5NMuAG0vJEIE32IoO2qO2Wqg94Ll5n0OXKP/RA=="],
+    "@buntal/http": ["@buntal/http@0.0.16", "", { "dependencies": { "jose": "^6.2.12" }, "peerDependencies": { "typescript": "^6" } }, "sha512-6KUYohx8JwtA0f4yVZy0KueB0PxwL2I63fEauJQ4m/5Sdff9kqIZppiiPP2GZ6nIHDkbunWajpIoz7LN4GH4+A=="],
 
     "@cacheable/memory": ["@cacheable/memory@2.2.0", "", { "dependencies": { "@cacheable/utils": "^2.5.0", "@keyv/bigmap": "^1.3.1", "hookified": "^1.15.1", "keyv": "^5.6.0" } }, "sha512-CTLKqLItRCEixEAewD3/j9DB3/o96gpTPD4eJ1v+DGOlxZRZncRQkGYqqnAGCscYd6RNeXfGeiuCphsPtqyIfQ=="],
 
@@ -487,7 +487,7 @@
 
     "bun-types": ["bun-types@1.4.2", "", { "dependencies": { "@types/node": "*" } }, "sha512-bxV1FgK7yBIzjRe5zBozIM4Bem11ZJcCXSrjWRG3YWLt8yFDePu4cLjpebO8OvPeIE9trbyPF4fuj3Cia4Fj3w=="],
 
-    "buntal": ["buntal@0.1.26", "", { "dependencies": { "@buntal/http": "^0.0.14", "react": "19.3.0", "react-dom": "19.3.0" }, "peerDependencies": { "typescript": "^6" } }, "sha512-yoqL+BpSj9smuSrLN5xZQ/x6K/iDHZs3HQO7Ma2aCtwkL04JiCkzIsoOkr5YPFACu9aBiSI38845w0/tnsxNPA=="],
+    "buntal": ["buntal@0.2.1", "", { "dependencies": { "@buntal/http": "^0.0.16", "react": "19.3.0", "react-dom": "19.3.0" }, "peerDependencies": { "typescript": "^6" } }, "sha512-xv2mFYT7OeKDO9RqGNIO+Y8bhqd5xSxjRD+6O/zgydYD98bblTRcpE4kA3f6Ust2YYlvGVnV/wADQ27GmpjbyA=="],
 
     "cacheable": ["cacheable@2.5.0", "", { "dependencies": { "@cacheable/memory": "^2.2.0", "@cacheable/utils": "^2.5.0", "hookified": "^1.15.0", "keyv": "^5.6.0", "qified": "^0.10.1" } }, "sha512-60cyAOytib/OzBw1JNSoSV/boK1AtHryDIjvVBk7XbN4ugfkM3+Sry7fEjNgPMGgOjuaZPAp8ruZ0Cxafwyq9g=="],
 

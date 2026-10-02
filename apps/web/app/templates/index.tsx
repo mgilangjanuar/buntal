@@ -37,30 +37,23 @@ function TemplateTile({
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-primary"
+      className="group flex flex-col text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-primary"
     >
-      <div className="aspect-[16/10] overflow-hidden border-b border-base-300 bg-base-200">
+      <div className="p-5 space-y-1.5">
+        <h2 className="font-semibold truncate">{template.title}</h2>
+        <p className="text-sm text-base-content/70 line-clamp-2 min-h-10">
+          {template.summary}
+        </p>
+      </div>
+      <div className="relative mt-auto h-44 overflow-hidden">
         <img
           src={shot(template.name, cover, scheme)}
-          alt={`${template.title} template preview`}
+          alt=""
           width={1280}
           height={800}
           loading="lazy"
-          className="w-full h-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
+          className="absolute left-8 top-2 w-[115%] max-w-none rounded-lg border border-base-300 shadow-md origin-top-left -rotate-3 transition duration-300 group-hover:-rotate-1 group-hover:-translate-y-1"
         />
-      </div>
-      <div className="p-5 space-y-2">
-        <div className="flex items-center gap-2">
-          <h2 className="text-lg font-semibold">{template.title}</h2>
-          {template.database && (
-            <span className="badge badge-soft badge-secondary badge-sm">
-              Bun.SQL
-            </span>
-          )}
-        </div>
-        <p className="text-sm text-base-content/70 line-clamp-2">
-          {template.summary}
-        </p>
       </div>
     </button>
   )
@@ -72,11 +65,11 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
   const [page, setPage] = useState(pages[0]!.name)
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[3fr_2fr] items-start">
-      <div className="space-y-3">
+    <div className="grid gap-6 lg:gap-8 lg:grid-cols-[3fr_2fr] items-start">
+      <div className="space-y-3 min-w-0">
         <div className="mockup-browser border border-base-300 bg-base-200">
           <div className="mockup-browser-toolbar">
-            <div className="input text-xs">
+            <div className="input text-xs truncate">
               localhost:3000
               {pages.find((p) => p.name === page)?.path}
             </div>
@@ -90,7 +83,11 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
           />
         </div>
         {pages.length > 1 && (
-          <div role="tablist" aria-label="Pages" className="flex gap-2">
+          <div
+            role="tablist"
+            aria-label="Pages"
+            className="flex flex-wrap gap-2"
+          >
             {pages.map((p) => (
               <button
                 key={p.name}
@@ -110,9 +107,9 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
         )}
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5 min-w-0">
         <div>
-          <div className="flex items-center gap-2 pr-8">
+          <div className="flex flex-wrap items-center gap-2 pr-8">
             <h2 id="template-title" className="text-2xl font-semibold">
               {template.title}
             </h2>
@@ -129,15 +126,18 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
             <li key={f}>{f}</li>
           ))}
         </ul>
-        <p className="text-sm text-base-content/60">
-          Routes:{' '}
+        <p className="text-sm text-base-content/60 flex flex-wrap gap-x-2 gap-y-1">
+          Routes:
           {template.pages.map((p) => (
-            <code key={p} className="mr-2 text-xs">
+            <code key={p} className="text-xs">
               {p}
             </code>
           ))}
         </p>
-        <Code language="sh" className="text-sm">
+        <Code
+          language="sh"
+          className="text-sm [&_pre]:!pr-10 [&_pre]:!whitespace-pre-wrap [&_code]:!whitespace-pre-wrap [&_code]:!break-normal"
+        >
           {`bun create buntal@latest my-app --template ${template.name}`}
         </Code>
         <a
@@ -150,6 +150,59 @@ function TemplateDetail({ template }: { template: TemplateInfo }) {
         </a>
       </div>
     </div>
+  )
+}
+
+const TAGS = [...new Set(TEMPLATES.flatMap((t) => t.tags))].sort()
+
+const matches = (t: TemplateInfo, query: string, tags: string[]) => {
+  const q = query.trim().toLowerCase()
+  const text = [t.title, t.summary, t.name, ...t.tags, ...t.features]
+    .join(' ')
+    .toLowerCase()
+  return (!q || text.includes(q)) && tags.every((tag) => t.tags.includes(tag))
+}
+
+function Filters({
+  selected,
+  onToggle,
+  onClear
+}: {
+  selected: string[]
+  onToggle: (tag: string) => void
+  onClear: () => void
+}) {
+  return (
+    <fieldset className="space-y-3">
+      <div className="flex items-center justify-between">
+        <legend className="text-sm font-semibold">Filter templates</legend>
+        {selected.length > 0 && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="link link-hover text-xs text-base-content/60"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+        {TAGS.map((tag) => (
+          <label
+            key={tag}
+            className="flex items-center gap-2 text-sm cursor-pointer max-lg:badge max-lg:badge-lg max-lg:badge-outline max-lg:has-checked:badge-primary"
+          >
+            <input
+              type="checkbox"
+              checked={selected.includes(tag)}
+              onChange={() => onToggle(tag)}
+              className="checkbox checkbox-xs max-lg:hidden"
+            />
+            {tag}
+          </label>
+        ))}
+      </div>
+    </fieldset>
   )
 }
 
@@ -177,6 +230,13 @@ export default function TemplatesPage() {
     () => ''
   )
   const active = TEMPLATES.find((t) => `#${t.name}` === hash) ?? null
+  const [query, setQuery] = useState('')
+  const [tags, setTags] = useState<string[]>([])
+  const shown = TEMPLATES.filter((t) => matches(t, query, tags))
+  const toggle = (tag: string) =>
+    setTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    )
 
   useEffect(() => {
     const el = dialogRef.current
@@ -188,8 +248,8 @@ export default function TemplatesPage() {
   return (
     <main>
       <Header />
-      <div className="container mx-auto px-4 py-20 lg:py-28 max-w-6xl">
-        <header className="max-w-2xl mb-16 space-y-4">
+      <div className="container mx-auto px-4 py-16 lg:py-28 max-w-7xl">
+        <header className="max-w-2xl mb-10 lg:mb-14 space-y-4">
           <h1 className="text-4xl md:text-5xl font-serif tracking-tight">
             Templates
           </h1>
@@ -208,29 +268,66 @@ export default function TemplatesPage() {
             .
           </p>
         </header>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TEMPLATES.map((t) => (
-            <TemplateTile
-              key={t.name}
-              template={t}
-              onOpen={() => setHash(`#${t.name}`)}
+        <div className="grid gap-8 lg:grid-cols-[14rem_1fr]">
+          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+            <label className="input w-full">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="size-4 opacity-50"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search templates..."
+                aria-label="Search templates"
+              />
+            </label>
+            <Filters
+              selected={tags}
+              onToggle={toggle}
+              onClear={() => setTags([])}
             />
-          ))}
+          </aside>
+          <section aria-live="polite" className="min-w-0">
+            {shown.length > 0 ? (
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {shown.map((t) => (
+                  <TemplateTile
+                    key={t.name}
+                    template={t}
+                    onOpen={() => setHash(`#${t.name}`)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="py-16 text-center text-base-content/60">
+                No templates match your search.
+              </p>
+            )}
+          </section>
         </div>
       </div>
 
       <dialog
         ref={dialogRef}
-        className="modal"
+        className="modal modal-bottom sm:modal-middle"
         aria-labelledby="template-title"
         onClose={() => setHash('')}
       >
-        <div className="modal-box w-11/12 max-w-6xl">
+        <div className="modal-box w-full max-w-6xl max-sm:p-4 max-sm:pt-12 max-sm:max-h-[92svh]">
           <form method="dialog">
             <button
               type="submit"
               aria-label="Close"
-              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10"
             >
               ✕
             </button>

@@ -1,0 +1,341 @@
+# Buntal JS: complete reference for AI agents
+
+> Buntal JS is an ultra-lightweight, type-safe full-stack framework for Bun and React with Next.js-like file-system routing. This file is the whole API in one place. Versions: buntal 0.2, @buntal/http 0.0.15, @buntal/cli 0.0.12. Requires Bun >= 1.2.
+
+## Ground rules
+
+- Buntal is NOT Next.js. Never import from `next/*`. There is no App Router, no server components, no `"use client"`, no `getServerSideProps`, no `generateMetadata`. Use the APIs below only.
+- Runtime is Bun. Prefer Bun built-ins: `bun:sqlite`, `Bun.password`, `Bun.file`, `Bun.write`, `bun test`.
+- TypeScript everywhere. `.tsx` for pages and layouts, `.ts` for API routes.
+
+## Packages
+
+| Package | Purpose |
+| --- | --- |
+| `buntal` | React framework: pages, layouts, `Link`, `Meta`, `Script`, `Svg`, `useRouter`, `BuntalConfig` |
+| `@buntal/http` | HTTP server: `Http`, `h`, `Req`, `Res`, `Cookie` |
+| `@buntal/http/middlewares` | `auth`, `jwt`, `cors`, `logger`, `secureHeaders` |
+| `@buntal/cli` | `buntal dev`, `buntal build`, `buntal start` |
+| `create-buntal` | `bun create buntal@latest my-app` |
+
+## Full-stack project
+
+```sh
+bun create buntal@latest my-app
+cd my-app
+bun dev                      # http://localhost:3000 (PORT env overrides)
+bun run build && bun start   # production
+```
+
+Structure:
+
+```
+app/
+  layout.tsx        root layout: renders <html>, <head>, <body>
+  index.tsx         page for /
+  globals.css       Tailwind CSS v4 entry (compiled to /globals.css)
+  favicon.svg
+  about/index.tsx   page for /about
+  posts/[id]/index.tsx          dynamic segment -> params.id
+  docs/[[...slug]]/index.tsx    optional catch-all -> params.slug ("a/b")
+  api/hello/index.ts            API route for /api/hello
+  404.tsx           optional custom not-found page
+public/             static files served as-is (dotfiles are not served, except .well-known/)
+buntal.config.ts    optional config
+```
+
+Rules:
+
+- A page is `app/<route>/index.tsx` with a default export. Folders starting with `_` are ignored.
+- `layout.tsx` wraps every page in its folder and below. A folder's layout only renders when that folder has a page.
+- The `@/` import alias maps to the project root (see tsconfig).
+- Import text files with `import Logo from '@/app/logo.svg' with { type: 'text' }`.
+
+### Root layout
+
+```tsx
+import { Meta, type MetaProps } from 'buntal'
+
+export default function RootLayout({
+  children,
+  data
+}: Readonly<{ children: React.ReactNode; data?: { _meta?: MetaProps } }>) {
+  return (
+    <html lang="en">
+      <head>
+        <Meta title="My App" description="Built with Buntal" {...data?._meta} />
+        <link rel="icon" href="/favicon.svg" />
+        <link rel="stylesheet" href="/globals.css" />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### Pages and props
+
+```tsx
+export default function Page({
+  params,
+  query,
+  data
+}: {
+  params: Record<string, string>
+  query: Record<string, string>
+  data?: unknown
+}) {
+  return <h1>Hello {query.name ?? 'there'}</h1>
+}
+```
+
+### `$`: server data loader
+
+Export `$` from a page or layout. It runs on the server for the initial render and is re-fetched as JSON on client navigation. The page receives the return value as `data`. `data._meta` sets SEO tags (merged with layout `_meta`, page wins).
+
+```tsx
+import type { Req } from '@buntal/http'
+import type { MetaProps } from 'buntal'
+
+export const $ = async (req: Req) => {
+  const post = await getPost(req.params.id)
+  if (!post) return { notFound: true }
+  return { post, _meta: { title: post.title, description: post.excerpt } satisfies MetaProps }
+}
+
+export default function PostPage({ data }: { data?: Awaited<ReturnType<typeof $>> }) {
+  if (!data || 'notFound' in data) return <p>Not found</p>
+  return <article>{data.post.title}</article>
+}
+```
+
+- Static data: `export const $ = { _meta: { title: 'About' } }` (an object, not a function) is inlined at build time.
+- Return a `Response` to stop rendering, e.g. a redirect: `return Response.redirect('/login', 302)` or `new Response(null, { status: 302, headers: { location: '/login' } })`. Works on full loads and client navigation.
+- Loader responses are sent with `Cache-Control: private, no-store`. In production, thrown errors return a generic 500 without details.
+- Validate `req.params` before touching the filesystem. Resolve paths and check they stay inside your content folder.
+
+### API routes inside a full-stack app
+
+```ts
+// app/api/todos/index.ts
+import { h } from '@buntal/http'
+
+export const GET = h((req, res) => res.json({ todos: [] }))
+
+export const POST = h(async (req, res) => {
+  const body = (await req.json().catch(() => null)) as { title?: unknown } | null
+  if (!body || typeof body.title !== 'string' || !body.title.trim()) {
+    return res.status(400).json({ error: 'title is required' })
+  }
+  return res.status(201).json({ title: body.title.trim() })
+})
+```
+
+Exports named GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD are dispatched. HEAD falls back to GET. Any other method gets 404.
+
+### buntal.config.ts
+
+```ts
+import { auth, secureHeaders } from '@buntal/http/middlewares'
+import type { BuntalConfig } from 'buntal'
+
+export default {
+  appDir: './app',          // default
+  outDir: '.buntal',        // default; must stay inside the project
+  staticDir: './public',    // default
+  config: {},               // extra Bun.build options for the client bundle
+  serverOptions: {},        // passed to Bun.serve
+  middlewares: [secureHeaders()]
+} satisfies BuntalConfig
+```
+
+`middlewares` run before every page, `$` loader and API route. Static files and bundles are served before middlewares, so a login page still gets its JS and CSS. A global `auth()` therefore protects all pages; for public pages, protect per route instead (see Security).
+
+Environment: only variables named `BUNTAL_PUBLIC_*` are inlined into the browser bundle. Everything else stays on the server.
+
+### Components and hooks (from `buntal`)
+
+- `<Link href="/about">`: client-side navigation for same-origin links. External, `mailto:`, modifier-clicks, `target="_blank"` and `download` behave like a normal `<a>`. `href="#id"` smooth-scrolls (`#id:120` uses a 120px offset). `href="-1"` goes back.
+- `<Meta title description keywords author viewport og={{...}} twitter={{...}} />`: head tags.
+- `<Script src="..." async onLoad={...} />`: load a script after hydration.
+- `<Svg src={svgString} className="..." />`: inline SVG; sanitized (scripts, event handlers, foreignObject, javascript: URLs removed). Pass `unsafe` only for trusted markup.
+- `useRouter()` returns `{ pathname, search, hash, href, hostname, protocol, push(url), replace(url), back(), reload() }`. Read `params` and `query` from page props, not from the hook.
+
+## @buntal/http (APIs without React)
+
+```ts
+import { Http } from '@buntal/http'
+import { cors, logger, secureHeaders } from '@buntal/http/middlewares'
+
+const app = new Http({ port: 4000, appDir: './app' })   // appDir optional: file routes
+
+app.use(logger())
+app.use(secureHeaders())
+app.use(cors({ origin: ['https://app.example.com'] }))
+
+app.get('/hello/:name', (req, res) => res.json({ hello: req.params.name }))  // params are typed
+app.post('/items', handler)
+app.put(path, ...handlers); app.patch(...); app.delete(...); app.options(...)
+app.route('GET', '/x', ...handlers)   // same as app.get
+// GET and POST on the same path are both kept.
+
+app.onNotFound((req, res) => res.status(404).json({ error: 'Not found' }))
+app.onError((error) => Response.json({ error: 'Oops' }, { status: 500 }))
+
+app.start((server) => console.log(`http://localhost:${server.port}`))
+```
+
+File routes with `appDir`: `app/ping.ts` -> `/ping`, `app/users/[id].ts` or `app/users/[id]/index.ts` -> `/users/:id`.
+
+### h and AtomicHandler
+
+`type AtomicHandler<P, T> = (req: Req<P, T>, res: Res) => Response | void | Promise<Response | void>`
+
+`h(...handlers)` runs handlers in order; the first one to return a `Response` wins. Returning nothing passes control to the next handler. If none returns, the result is 204. Middlewares are just AtomicHandlers.
+
+```ts
+export const GET = h<{ id: string }, { userId: string }>(
+  (req, res) => {
+    if (!req.headers.get('x-api-key')) return res.status(401).json({ error: 'Unauthorized' })
+    req.context = { userId: 'u_1' }
+  },
+  (req, res) => res.json({ id: req.params.id, by: req.context?.userId })
+)
+```
+
+### Req (extends the Web `Request`)
+
+- `req.params`: route params. `req.query`: query string as an object. `req.cookies`: parsed cookies.
+- `req.context`: typed slot for data shared between handlers (set by `auth()` to the decoded token).
+- Standard Request API: `req.method`, `req.url`, `req.headers.get()`, `await req.json()`, `await req.formData()`, `await req.text()`.
+
+### Res (builder, chainable)
+
+- `res.status(201)`, `res.headers({ 'Cache-Control': 'no-store' })`
+- Terminal methods return a `Response`: `res.json(data)`, `res.text(str)`, `res.html(str)`, `res.send(body)`, `res.redirect(url, 302)`
+- `res.cookie(name, value, options)` sets a cookie; `res.cookie(name, null, { path })` deletes it. Multiple cookies are all sent.
+- Headers and cookies set on `res` by middlewares are also applied when a handler returns its own `new Response(...)`.
+
+### Cookies
+
+`CookieOptions = { maxAge?: number; expires?: Date; path?: string; domain?: string; secure?: boolean; httpOnly?: boolean; sameSite?: 'Strict' | 'Lax' | 'None' }`
+
+- Invalid names, or `path`/`domain` containing `;` or spaces, throw a TypeError.
+- `sameSite: 'None'` always adds `Secure`. `maxAge: 0` expires the cookie.
+- Session cookie recommendation: `{ httpOnly: true, secure: true, sameSite: 'Lax', path: '/', maxAge: 60 * 60 * 2 }`.
+
+## Middlewares (`@buntal/http/middlewares`)
+
+### auth and jwt
+
+```ts
+import { auth, jwt } from '@buntal/http/middlewares'
+
+const tokens = jwt(process.env.JWT_SECRET!)        // throws if the secret is empty
+const token = await tokens.sign({ sub: user.id }, { expiresIn: '2h' })   // HS256
+const payload = await tokens.verify<{ sub: string }>(token)
+
+app.get('/me', auth<{ sub: string }>({ secret: process.env.JWT_SECRET! }), (req, res) =>
+  res.json({ id: req.context?.sub })
+)
+```
+
+Options: `secret` (required, non-empty), `strategy: 'header' | 'cookie' | 'both' | Strategy[]` (default `'header'`), `cookie: { key }` (default `access_token`), `header: { key }` (default `Authorization`, `Bearer` prefix optional, case-insensitive), `onVerified(req, res, decoded)` (return a Response to reject). Missing or invalid tokens get 401. OPTIONS preflight requests pass through.
+
+### cors
+
+`cors({ origin = '*', methods, allowedHeaders, exposedHeaders, maxAge = 600, credentials = true })`
+
+- `origin` as an array is an allow list: the matching request origin is echoed with `Vary: Origin`, others get no CORS headers.
+- `Access-Control-Allow-Credentials` is only sent for allow-listed origins, never with `*`.
+- Answers OPTIONS preflight with 204. Register `cors()` before `auth()`.
+
+### secureHeaders
+
+`secureHeaders({ contentSecurityPolicy = false, frameOptions = 'SAMEORIGIN', hsts = 'max-age=15552000; includeSubDomains', referrerPolicy = 'strict-origin-when-cross-origin', permissionsPolicy = 'camera=(), microphone=(), geolocation=()' })`
+
+Always sets `X-Content-Type-Options: nosniff` and `Cross-Origin-Opener-Policy: same-origin`. HSTS is only sent over https (or `x-forwarded-proto: https`). Pass `false` to disable any header.
+
+### logger
+
+`logger()` prints `[HH:MM:SS] > METHOD /path`.
+
+## Recipes
+
+### Protect only some pages
+
+```tsx
+// app/dashboard/index.tsx
+import type { Req } from '@buntal/http'
+import { jwt } from '@buntal/http/middlewares'
+
+export const $ = async (req: Req) => {
+  const token = req.cookies.access_token
+  const user = token
+    ? await jwt(process.env.JWT_SECRET!).verify<{ sub: string }>(token).catch(() => null)
+    : null
+  if (!user) return Response.redirect(new URL('/login', req.url), 302)
+  return { userId: user.sub }
+}
+```
+
+### Login API with sqlite and Bun.password
+
+```ts
+// app/api/login/index.ts
+import { h } from '@buntal/http'
+import { jwt } from '@buntal/http/middlewares'
+import { Database } from 'bun:sqlite'
+
+const db = new Database('data/app.db')
+
+export const POST = h(async (req, res) => {
+  const body = (await req.json().catch(() => null)) as { email?: string; password?: string } | null
+  const user = body?.email
+    ? db.query<{ id: string; hash: string }, [string]>('select id, hash from users where email = ?').get(body.email)
+    : null
+  if (!user || !body?.password || !(await Bun.password.verify(body.password, user.hash))) {
+    return res.status(401).json({ error: 'Invalid credentials' })
+  }
+  const token = await jwt(process.env.JWT_SECRET!).sign({ sub: user.id })
+  return res
+    .cookie('access_token', token, { httpOnly: true, secure: true, sameSite: 'Lax', path: '/', maxAge: 7200 })
+    .json({ ok: true })
+})
+```
+
+### Safe content loading for catch-all routes
+
+```ts
+import path from 'path'
+
+const ROOT = path.resolve('content/docs')
+const file = path.resolve(ROOT, `${req.params.slug || 'index'}.mdx`)
+if (!file.startsWith(ROOT + path.sep) || !(await Bun.file(file).exists())) {
+  return { notFound: true }
+}
+```
+
+### Testing an API
+
+```ts
+import { expect, test } from 'bun:test'
+import { Http } from '@buntal/http'
+
+test('GET /ping', async () => {
+  const app = new Http({ port: 0 })
+  app.get('/ping', (_, res) => res.json({ pong: 1 }))
+  const server = app.start()
+  const resp = await fetch(`http://localhost:${server.port}/ping`)
+  expect(await resp.json()).toEqual({ pong: 1 })
+  server.stop(true)
+})
+```
+
+## Common mistakes
+
+- Importing from `next/link` or `next/router`: use `Link` and `useRouter` from `buntal`.
+- Fetching your own API from `$`: query the database directly inside `$` instead.
+- Setting `Access-Control-Allow-Origin: *` with credentials: use `cors({ origin: [...] })`.
+- Reading secrets in components: components also run in the browser. Keep secrets in `$` and API routes.
+- Putting `auth()` in `buntal.config.ts` middlewares when the site has public pages: protect per route.

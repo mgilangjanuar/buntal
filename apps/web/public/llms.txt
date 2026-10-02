@@ -1,0 +1,42 @@
+# Buntal JS
+
+> Buntal JS is an ultra-lightweight, type-safe full-stack framework for Bun and React. It has Next.js-like file-system routing, server-side rendering with `$` data loaders, and a separate HTTP server package (`@buntal/http`) for APIs without React. Requires Bun >= 1.2.
+
+Important notes for AI agents:
+
+- Buntal is NOT Next.js. There is no App Router, no `getServerSideProps`, no `next/*` imports, no server components, and no `"use client"`. Pages are plain React components; server data comes from an exported `$`.
+- Packages: `buntal` (React framework), `@buntal/http` (HTTP server, `Req`, `Res`, `h`), `@buntal/http/middlewares` (`auth`, `jwt`, `cors`, `logger`, `secureHeaders`), `@buntal/cli` (`buntal dev|build|start`), `create-buntal` (scaffolder).
+- New project: `bun create buntal@latest my-app`, then `bun dev` (port 3000, or `PORT`).
+- For the full API with examples in one file, read https://buntaljs.org/llms-full.txt
+
+## Docs
+
+- [Get Started](https://buntaljs.org/docs): what Buntal is and when to use it
+- [Installation](https://buntaljs.org/docs/install): prerequisites and project setup
+- [HTTP Server](https://buntaljs.org/docs/guides/http-server): `Http`, `h`, `Req`, `Res`, file routes, middleware
+- [Full-stack Web](https://buntaljs.org/docs/guides/full-stack-web): pages, layouts, `$` loaders, config middlewares
+- [Security](https://buntaljs.org/docs/guides/security): auth, cookies, CORS, security headers, safe file access
+- [Build with AI](https://buntaljs.org/docs/guides/ai): ready-made prompts for landing pages, docs, blogs, CMS, e-commerce, dashboards and APIs
+
+## API Reference
+
+- [Http](https://buntaljs.org/references/http): server class, routing methods, `start`, `onError`, `onNotFound`
+- [Req](https://buntaljs.org/references/http/app/req): `params`, `query`, `cookies`, `context`
+- [Res](https://buntaljs.org/references/http/app/res): `status`, `headers`, `json`, `text`, `html`, `send`, `redirect`, `cookie`
+- [Cookie](https://buntaljs.org/references/http/app/cookie) and [CookieOptions](https://buntaljs.org/references/http/types/cookie-options)
+- [h](https://buntaljs.org/references/http/handler/h) and [AtomicHandler](https://buntaljs.org/references/http/types/atomic-handler)
+- [auth](https://buntaljs.org/references/http/middlewares/auth), [cors](https://buntaljs.org/references/http/middlewares/cors), [secureHeaders](https://buntaljs.org/references/http/middlewares/secure-headers), [logger](https://buntaljs.org/references/http/middlewares/logger)
+- [BuntalConfig](https://buntaljs.org/references/buntal/configuration/buntal-config)
+- Components: [Link](https://buntaljs.org/references/buntal/components/link), [Meta](https://buntaljs.org/references/buntal/components/meta), [Script](https://buntaljs.org/references/buntal/components/script), [Svg](https://buntaljs.org/references/buntal/components/svg), [App](https://buntaljs.org/references/buntal/components/app)
+- Hooks: [useRouter](https://buntaljs.org/references/buntal/hooks/use-router)
+
+## Examples
+
+- [hello-world](https://github.com/mgilangjanuar/buntal/tree/main/examples/hello-world): minimal full-stack app
+- [blog](https://github.com/mgilangjanuar/buntal/tree/main/examples/blog): MDX blog with a catch-all route and `$` loader
+- [simple-api](https://github.com/mgilangjanuar/buntal/tree/main/examples/simple-api): REST API with JWT auth and file routes
+
+## Optional
+
+- [Source code](https://github.com/mgilangjanuar/buntal)
+- [Benchmarks](https://github.com/mgilangjanuar/buntal/tree/main/benchmark)

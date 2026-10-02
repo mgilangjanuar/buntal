@@ -29,6 +29,14 @@ const MENUS: MenuItem[] = [
       {
         title: 'Full-stack Web',
         href: '/docs/guides/full-stack-web'
+      },
+      {
+        title: 'Security',
+        href: '/docs/guides/security'
+      },
+      {
+        title: 'Build with AI',
+        href: '/docs/guides/ai'
       }
     ]
   }
@@ -72,7 +80,7 @@ export default function DocsLayout({
               <h3 className="font-semibold text-lg group-hover:underline underline-offset-2 font-serif">
                 Buntal JS
               </h3>
-              <span className="text-xs text-base-content/60">v0.1.24</span>
+              <span className="text-xs text-base-content/60">v0.2.1</span>
             </div>
           </Link>
           {MENUS.map((menu) => (

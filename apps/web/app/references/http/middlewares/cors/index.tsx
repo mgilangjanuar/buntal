@@ -12,7 +12,7 @@ export default function CorsPage() {
     <ReferencePage
       headerTitle="@buntal/http/middlewares"
       title="cors"
-      description="CORS (Cross-Origin Resource Sharing) middleware for handling cross-origin requests in Buntal applications."
+      description="CORS (Cross-Origin Resource Sharing) middleware for handling cross-origin requests in Buntal applications. Answers OPTIONS preflight requests with 204; register it before auth()."
       sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/middlewares/cors.ts"
       typeDefinition={`function cors(options?: CorsOptions): AtomicHandler
 
@@ -38,7 +38,8 @@ type CorsOptions = {
           type: 'string | string[]',
           required: false,
           default: '*',
-          description: 'Allowed origins for cross-origin requests'
+          description:
+            'Allowed origins. An array is an allow list: the matching request origin is echoed with Vary: Origin, other origins get no CORS headers'
         },
         {
           name: 'methods',
@@ -73,10 +74,11 @@ type CorsOptions = {
           type: 'boolean',
           required: false,
           default: 'true',
-          description: 'Whether to include credentials in CORS requests'
+          description:
+            'Send Access-Control-Allow-Credentials for allow-listed origins. Never sent with origin *'
         }
       ]}
-      lastModified="2025-06-10"
+      lastModified="2026-10-02"
     />
   )
 }

@@ -15,7 +15,7 @@ export default function InstallPage() {
 
 Before you start using Buntal JS, ensure you have the following prerequisites installed on your system:
 
-- **Bun** ^1.2.14 - Buntal JS is built on top of the Bun runtime and API, so you need to have it installed. You can download it from the [Bun website](https://bun.sh).
+- **Bun** ^1.2 - Buntal JS is built on top of the Bun runtime and API, so you need to have it installed. You can download it from the [Bun website](https://bun.sh).
 
 ## Installation
 
@@ -25,11 +25,7 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
   bun add @buntal/http
   \`\`\`
 
-  If you want to use the built-in middlewares, you can install them as well:
-
-  \`\`\`sh
-  bun add @buntal/middlewares
-  \`\`\`
+  The built-in middlewares (\`auth\`, \`cors\`, \`logger\`, \`secureHeaders\`) are included and imported from \`@buntal/http/middlewares\`.
 
   Then, you can continue [here](/docs/guides/http-server).
 
@@ -69,6 +65,10 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
   \`\`\`
 
   Then, you can read more about it [here](/docs/guides/full-stack-web).
+
+## Using an AI agent
+
+Building with Claude Code, Cursor or another coding agent? Give it [/llms-full.txt](/llms-full.txt) and start from one of the ready-made prompts in [Build with AI](/docs/guides/ai).
 `}
       tableOfContents={[
         {
@@ -82,9 +82,15 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
           title: 'Installation',
           level: 1,
           offset: 72
+        },
+        {
+          id: 'using-an-ai-agent',
+          title: 'Using an AI agent',
+          level: 1,
+          offset: 72
         }
       ]}
-      lastModified="2025-06-18"
+      lastModified="2026-10-02"
     />
   )
 }

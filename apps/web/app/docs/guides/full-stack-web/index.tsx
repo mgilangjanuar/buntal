@@ -131,7 +131,74 @@ export default function HomePage({ data }: {
 }
 \`\`\`
 
-See the \`Req\` type definition [here](/docs/guides/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.`}
+See the \`Req\` type definition [here](/docs/guides/http-server#req). This function has a similar pattern to \`getServerSideProps\` from Next.js or \`loader\` from Remix.
+
+- \`$\` runs on the server for the first render, and is fetched as JSON when the user navigates with \`<Link>\`. Its responses are never cached publicly.
+- Put SEO tags in \`data._meta\` (see [Meta](/references/buntal/components/meta)); layouts merge it with their own.
+- For data that does not depend on the request, export an object instead: \`export const $ = { _meta: { title: 'About' } }\`.
+- Return a \`Response\` to stop rendering, for example to redirect visitors who are not logged in:
+
+\`\`\`ts
+export const $ = async (req: Req) => {
+  if (!req.cookies.access_token) {
+    return Response.redirect(new URL('/login', req.url), 302)
+  }
+  return { user: await getUser(req) }
+}
+\`\`\`
+
+## Routes
+
+| File | URL | Props |
+| --- | --- | --- |
+| \`app/index.tsx\` | \`/\` | |
+| \`app/about/index.tsx\` | \`/about\` | |
+| \`app/posts/[id]/index.tsx\` | \`/posts/42\` | \`params.id = '42'\` |
+| \`app/docs/[[...slug]]/index.tsx\` | \`/docs\`, \`/docs/a/b\` | \`params.slug = 'a/b'\` |
+| \`app/api/todos/index.ts\` | \`/api/todos\` | API route |
+| \`app/404.tsx\` | any unknown URL | custom not-found page |
+
+Pages inside folders starting with \`_\` are not rendered, which is handy for colocated components. Validate params before using them in file paths or queries; see [Security](/docs/guides/security#your-own-code).
+
+### API routes
+
+Any \`.ts\` file in \`app/\` that exports HTTP methods becomes an API route, using the same \`h\` handlers as the [HTTP Server](/docs/guides/http-server):
+
+\`\`\`ts
+// app/api/todos/index.ts
+import { h } from '@buntal/http'
+
+export const GET = h((req, res) => res.json({ todos: [] }))
+\`\`\`
+
+## Configuration
+
+\`buntal.config.ts\` is optional. Every field has a default:
+
+\`\`\`ts
+import { secureHeaders } from '@buntal/http/middlewares'
+import type { BuntalConfig } from 'buntal'
+
+export default {
+  appDir: './app',
+  outDir: '.buntal',
+  staticDir: './public',
+  middlewares: [secureHeaders()]
+} satisfies BuntalConfig
+\`\`\`
+
+\`middlewares\` run before every page, \`$\` loader and API route. Static files and the client bundle are served first, so they are never blocked. See [BuntalConfig](/references/buntal/configuration/buntal-config) for all options.
+
+## Environment variables
+
+Server code (\`$\`, API routes, config) can read any \`process.env\` value. Only variables prefixed with \`BUNTAL_PUBLIC_\` are inlined into the browser bundle, so never put secrets in them.
+
+## Deploy
+
+\`\`\`sh
+bun run build   # bundles into .buntal/
+bun start       # serves with NODE_ENV=production on PORT (default 3000)
+\`\`\``}
       tableOfContents={[
         {
           id: 'quick-start',
@@ -156,9 +223,36 @@ See the \`Req\` type definition [here](/docs/guides/http-server#req). This funct
           title: '$',
           level: 1,
           offset: 72
+        },
+        {
+          id: 'routes',
+          title: 'Routes',
+          level: 1,
+          offset: 72,
+          children: [
+            { id: 'api-routes', title: 'API routes', level: 2, offset: 72 }
+          ]
+        },
+        {
+          id: 'configuration',
+          title: 'Configuration',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'environment-variables',
+          title: 'Environment variables',
+          level: 1,
+          offset: 72
+        },
+        {
+          id: 'deploy',
+          title: 'Deploy',
+          level: 1,
+          offset: 72
         }
       ]}
-      lastModified="2025-06-18"
+      lastModified="2026-10-02"
     />
   )
 }

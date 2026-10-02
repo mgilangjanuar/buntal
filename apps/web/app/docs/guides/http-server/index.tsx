@@ -17,7 +17,7 @@ Here is a simple example of how to create an HTTP server using Buntal JS. This e
 
 \`\`\`typescript
 import { Http } from '@buntal/http'
-import { cors, logger } from '@buntal/http/middlewares'
+import { cors, logger, secureHeaders } from '@buntal/http/middlewares'
 
 // initialize the HTTP server
 const app = new Http({
@@ -26,8 +26,9 @@ const app = new Http({
 })
 
 // add middlewares
-app.use(cors())
 app.use(logger())
+app.use(secureHeaders())
+app.use(cors({ origin: ['http://localhost:3000'] }))
 
 // define a simple GET endpoint with a type-safe params
 app.get('/hello/:name', (req, res) => {
@@ -64,8 +65,30 @@ The \`Http\` class is the main entry point for creating an HTTP server in Buntal
 
 The \`Http\` constructor takes an options object with the following properties:
 
-- \`port\`: The port number on which the server will listen. This is a required property.
+- \`port\`: The port number on which the server will listen. This is a required property. Use \`0\` for a random free port (handy in tests).
 - \`appDir\`: An optional property that specifies the directory where the app files are located. If provided, the server will automatically load routes from this directory.
+- \`websocket\`, \`options\`: passed through to \`Bun.serve\`.
+
+#### Routes
+
+Register handlers with \`get\`, \`post\`, \`put\`, \`patch\`, \`delete\` and \`options\`, or \`route(method, path, ...handlers)\`. Different methods on the same path are all kept. Path params such as \`:id\` are typed on \`req.params\`.
+
+\`\`\`typescript
+app.get('/todos/:id', (req, res) => res.json({ id: req.params.id }))
+app.put('/todos/:id', updateTodo)
+app.route('DELETE', '/todos/:id', deleteTodo)
+\`\`\`
+
+In file routes, export one function per method: \`GET\`, \`POST\`, \`PUT\`, \`PATCH\`, \`DELETE\`, \`OPTIONS\` or \`HEAD\`. \`HEAD\` falls back to \`GET\`, and any other method gets a 404.
+
+#### Errors and not found
+
+\`\`\`typescript
+app.onNotFound((req, res) => res.status(404).json({ error: 'Not found' }))
+app.onError((error) => Response.json({ error: 'Something went wrong' }, { status: 500 }))
+\`\`\`
+
+Without \`onError\`, unhandled errors return 500 with the message and stack in development, and only \`{ "error": "Internal Server Error" }\` when \`NODE_ENV=production\`.
 
 ## h
 
@@ -90,6 +113,17 @@ The pattern is similar to [Express.js](https://expressjs.com/) or other Node.js 
 ### Middleware
 
 Middleware actually is same as the \`AtomicHandler\` function, but it is used to modify the request or response before it reaches the final handler. You can use middleware to add authorization, logging, or any other functionality that you want to apply to all/some requests.
+
+Register it for every route with \`app.use()\`, or for one route by passing it before the handler. Headers and cookies a middleware sets on \`res\` are kept even when a later handler returns its own \`Response\`.
+
+Built-in middlewares from \`@buntal/http/middlewares\`:
+
+- [\`auth\`](/references/http/middlewares/auth): verify a JWT from a header or cookie and put the payload on \`req.context\`.
+- [\`cors\`](/references/http/middlewares/cors): CORS headers and preflight responses, with an origin allow list.
+- [\`secureHeaders\`](/references/http/middlewares/secure-headers): \`nosniff\`, frame options, referrer policy, HSTS and an optional CSP.
+- [\`logger\`](/references/http/middlewares/logger): one log line per request.
+
+See the [Security guide](/docs/guides/security) for how to combine them.
 
 Here is an example of how to build your own middleware:
 
@@ -156,14 +190,14 @@ export const GET = h<{}, User>(
     }
   },
   (req, res) => res.json({
-    name: req.context?.user.name  // access a type-safe context
+    name: req.context?.name  // access a type-safe context
   })
 )
 \`\`\`
 
 #### cookies
 
-Get a cookie by name from the request with \`req.cookies\`.
+All request cookies as an object, for example \`req.cookies.access_token\`. Values are URL-decoded.
 
 ### Res
 
@@ -180,6 +214,14 @@ Send a JSON response with the given data. It automatically sets the \`Content-Ty
 #### text → Http.Response
 
 Send a plain text response with the given data. It automatically sets the \`Content-Type\` header to \`text/plain\`.
+
+#### html → Http.Response
+
+Send an HTML string or stream with \`Content-Type: text/html\`.
+
+#### redirect → Http.Response
+
+Redirect to another URL: \`res.redirect('/login')\` (302 by default) or \`res.redirect('/new', 301)\`.
 
 #### status → Res
 
@@ -212,7 +254,7 @@ export const GET = h((req, res) => res
 
 #### cookie → Res
 
-Set a cookie in the response. If the \`value\` is \`null\`, it deletes the cookie. Otherwise, it sets the cookie with the given name and value.
+Set a cookie in the response. If the \`value\` is \`null\`, it deletes the cookie (pass the same \`path\`/\`domain\` you set it with). Otherwise, it sets the cookie with the given name and value. Calling it several times sends several cookies.
 
 Here is an example of how to set a cookie in the response:
 
@@ -220,6 +262,8 @@ Here is an example of how to set a cookie in the response:
 res.cookie('access_token', token, {
   maxAge: 60 * 60 * 2,  // 2 hours
   httpOnly: true,
+  secure: true,
+  sameSite: 'Lax',
   path: '/'
 })
 \`\`\`
@@ -270,7 +314,7 @@ res.cookie('access_token', token, {
           ]
         }
       ]}
-      lastModified="2025-06-19"
+      lastModified="2026-10-02"
     />
   )
 }

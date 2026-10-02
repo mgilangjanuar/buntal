@@ -12,17 +12,19 @@ export default function HttpPage() {
     <ReferencePage
       headerTitle="@buntal/http"
       title="Http"
-      description="The main HTTP server class for creating and configuring HTTP servers in Buntal."
-      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/core/http/app.ts"
+      description="The main HTTP server class for creating and configuring HTTP servers in Buntal. Route methods return the instance, so calls can be chained, and different methods on the same path are all kept. File routes (appDir) dispatch only exported GET, POST, PUT, PATCH, DELETE, OPTIONS and HEAD (HEAD falls back to GET). Global middlewares run for programmatic routes, file routes and preflight requests."
+      sourceUrl="https://github.com/mgilangjanuar/buntal/blob/main/packages/%40buntal/http/index.ts"
       typeDefinition={`class Http {
   constructor(config: Config)
   start(cb?: (server: Bun.Server) => void): Bun.Server
   use(handler: AtomicHandler): void
-  get<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  post<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  put<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  patch<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
-  delete<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): void
+  get<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  post<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  put<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  patch<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  delete<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  options<R extends string, P = ExtractRouteParams<R>>(route: R, ...handlers: AtomicHandler<P>[]): this
+  route<R extends string, P = ExtractRouteParams<R>>(method: Method, route: R, ...handlers: AtomicHandler<P>[]): this
   onError(handler: (error: Error) => Response): void
   onNotFound(handler: AtomicHandler): void
 }`}
@@ -191,7 +193,7 @@ export default function HttpPage() {
           ]
         }
       ]}
-      lastModified="2025-06-10"
+      lastModified="2026-10-02"
     />
   )
 }

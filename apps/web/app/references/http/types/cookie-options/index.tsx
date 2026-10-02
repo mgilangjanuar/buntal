@@ -28,7 +28,8 @@ export default function CookieOptionsPage() {
           name: 'maxAge',
           type: 'number',
           required: false,
-          description: 'Cookie lifetime in seconds'
+          description:
+            'Cookie lifetime in seconds. 0 expires the cookie immediately'
         },
         {
           name: 'expires',
@@ -40,21 +41,23 @@ export default function CookieOptionsPage() {
           name: 'path',
           type: 'string',
           required: false,
-          default: '/',
-          description: 'URL path where the cookie is valid'
+          description:
+            'URL path where the cookie is valid. Not set unless given (delete defaults to /). Must not contain ; or spaces'
         },
         {
           name: 'domain',
           type: 'string',
           required: false,
-          description: 'Domain where the cookie is valid'
+          description:
+            'Domain where the cookie is valid. Must not contain ; or spaces'
         },
         {
           name: 'secure',
           type: 'boolean',
           required: false,
           default: 'false',
-          description: 'Whether cookie should only be sent over HTTPS'
+          description:
+            'Whether cookie should only be sent over HTTPS. Always added when sameSite is None'
         },
         {
           name: 'httpOnly',
@@ -67,11 +70,11 @@ export default function CookieOptionsPage() {
           name: 'sameSite',
           type: "'Strict' | 'Lax' | 'None'",
           required: false,
-          default: 'Lax',
-          description: 'Controls cross-site request behavior'
+          description:
+            'Controls cross-site request behavior. Not set unless given (browsers then treat it as Lax). Lax is recommended for sessions'
         }
       ]}
-      lastModified="2025-06-10"
+      lastModified="2026-10-02"
     />
   )
 }

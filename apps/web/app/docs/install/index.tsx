@@ -68,10 +68,10 @@ Before you start using Buntal JS, ensure you have the following prerequisites in
 
 ## Templates
 
-\`create-buntal\` asks which template to start from, or pass \`--template\`:
+\`create-buntal\` asks which template to start from, or pass \`--template\` (use the long form: \`bun create\` keeps short flags like \`-t\` for itself):
 
 \`\`\`sh
-bun create buntal@latest my-app -t landing
+bun create buntal@latest my-app --template landing
 \`\`\`
 
 | Template | What you get |

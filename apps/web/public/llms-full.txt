@@ -22,8 +22,9 @@
 
 ```sh
 bun create buntal@latest my-app            # interactive template picker
-bun create buntal@latest my-app -t landing # landing page / portfolio
-bun create buntal@latest my-app -t blog    # Markdown blog with a SQL database
+bun create buntal@latest my-app --template landing # landing page / portfolio
+bun create buntal@latest my-app --template blog    # Markdown blog with a SQL database
+# use --template, not -t: `bun create` consumes short flags itself
 cd my-app
 bun dev                      # http://localhost:3000 (PORT env overrides)
 bun run build && bun start   # production

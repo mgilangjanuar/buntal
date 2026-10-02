@@ -6,7 +6,7 @@ Important notes for AI agents:
 
 - Buntal is NOT Next.js. There is no App Router, no `getServerSideProps`, no `next/*` imports, no server components, and no `"use client"`. Pages are plain React components; server data comes from an exported `$`.
 - Packages: `buntal` (React framework), `@buntal/http` (HTTP server, `Req`, `Res`, `h`), `@buntal/http/middlewares` (`auth`, `jwt`, `cors`, `logger`, `secureHeaders`), `@buntal/cli` (`buntal dev|build|start`), `create-buntal` (scaffolder).
-- New project: `bun create buntal@latest my-app`, then `bun dev` (port 3000, or `PORT`). Templates: `-t default` (minimal), `-t landing` (landing page / portfolio with contact form), `-t blog` (Markdown blog with SQL database, RSS, sitemap).
+- New project: `bun create buntal@latest my-app`, then `bun dev` (port 3000, or `PORT`). Templates: `--template default` (minimal), `--template landing` (landing page / portfolio with contact form), `--template blog` (Markdown blog with SQL database, RSS, sitemap). Use `--template`, not `-t`: `bun create` consumes short flags.
 - Databases: use Bun's built-in `Bun.SQL` (`import { SQL } from 'bun'`), not an ORM. SQLite by default, Postgres via `DATABASE_URL`.
 - For the full API with examples in one file, read https://buntaljs.org/llms-full.txt
 

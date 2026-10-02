@@ -4,7 +4,7 @@ Starter projects used by `create-buntal`:
 
 ```sh
 bun create buntal@latest my-app              # asks which template to use
-bun create buntal@latest my-app -t landing   # or pick one directly
+bun create buntal@latest my-app --template landing   # or pick one directly
 ```
 
 | Template               | What you get                                                                                    |

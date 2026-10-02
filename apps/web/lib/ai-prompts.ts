@@ -13,7 +13,7 @@ const BASE = `You are building a web app with Buntal JS, a full-stack React fram
 Before writing code, read ${SITE}/llms.txt and ${SITE}/llms-full.txt (including its Best practices section) and follow them exactly. Do not use Next.js, Remix or Express APIs; Buntal only looks similar.
 
 Setup
-- Scaffold with \`bun create buntal@latest <project-name> -t <template>\`, then work inside that folder.
+- Scaffold with \`bun create buntal@latest <project-name> --template <template>\`, then work inside that folder.
 - Run \`bun dev\` while developing and \`bun run build && bun start\` to check production.
 
 Buntal rules

@@ -15,7 +15,7 @@ type Method = {
   description: string
 }
 
-type ReferencePageProps = {
+export type ReferencePageProps = {
   headerTitle: string
   title: string
   description: string
@@ -27,18 +27,16 @@ type ReferencePageProps = {
   lastModified?: string
 }
 
-export default function ReferencePage({
-  headerTitle,
+export function referenceMarkdown({
   title,
   description,
   sourceUrl,
   typeDefinition,
   parameters,
   methods,
-  properties,
-  lastModified
-}: ReferencePageProps) {
-  const content = `# ${title}
+  properties
+}: Omit<ReferencePageProps, 'headerTitle' | 'lastModified'>) {
+  return `# ${title}
 
 ${description}
 
@@ -115,6 +113,28 @@ ${
     : ''
 }
 `
+}
+
+export default function ReferencePage({
+  headerTitle,
+  title,
+  description,
+  sourceUrl,
+  typeDefinition,
+  parameters,
+  methods,
+  properties,
+  lastModified
+}: ReferencePageProps) {
+  const content = referenceMarkdown({
+    title,
+    description,
+    sourceUrl,
+    typeDefinition,
+    parameters,
+    methods,
+    properties
+  })
 
   // Generate table of contents with only level 1 and level 2 headings
   const tableOfContents: TableOfContentsItem[] = []

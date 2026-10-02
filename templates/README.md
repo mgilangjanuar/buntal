@@ -23,5 +23,6 @@ Each folder is a complete, runnable Buntal app. To add one:
 4. If the template needs a database, use `Bun.SQL` in `lib/db.ts` and expose `db:migrate` (and optionally `db:seed`) scripts. `create-buntal` runs them after install.
 5. Register the template in `packages/create-buntal/cmd/default.ts` (`TEMPLATES`).
 6. Check it: `bun install && bun run typecheck && bun run build && bun start`.
+7. Add it to `apps/web/lib/templates.ts` (description and pages to capture) and run `bun run screenshots` from the repo root. It builds every template against the local packages and saves light and dark screenshots to `apps/web/public/templates/` for the [Templates](https://buntaljs.org/templates) page. Pass names to capture only some: `bun run screenshots blog`.
 
 Templates are copied into the `create-buntal` package at publish time (`prepack`), so the version on npm always matches this folder.

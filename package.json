@@ -23,10 +23,12 @@
   ],
   "devDependencies": {
     "husky": "^9.1.7",
+    "playwright": "1.63.0",
     "prettier": "3.9.9"
   },
   "scripts": {
     "prepare": "husky",
-    "release:version": "bun scripts/version.ts"
+    "release:version": "bun scripts/version.ts",
+    "screenshots": "bun scripts/screenshot-templates.ts"
   }
 }

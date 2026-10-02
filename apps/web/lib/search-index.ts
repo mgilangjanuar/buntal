@@ -395,6 +395,25 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
     breadcrumb: ['Documentation', 'Guides', 'Full-stack Web']
   },
   {
+    id: '/templates',
+    title: 'Templates',
+    url: '/templates',
+    type: 'docs',
+    category: 'Documentation',
+    description: 'Starter templates: landing page, portfolio, blog, minimal',
+    content: `Templates landing page portfolio blog minimal starter bun create buntal --template Bun.SQL SQLite Postgres contact form Markdown RSS sitemap SEO screenshots.`,
+    keywords: [
+      'templates',
+      'starter',
+      'landing',
+      'portfolio',
+      'blog',
+      'boilerplate',
+      'example'
+    ],
+    breadcrumb: ['Templates']
+  },
+  {
     id: '/docs/guides/security',
     title: 'Security',
     url: '/docs/guides/security',

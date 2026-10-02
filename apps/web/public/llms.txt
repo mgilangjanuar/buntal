@@ -18,6 +18,7 @@ Important notes for AI agents:
 - [HTTP Server](https://buntaljs.org/docs/guides/http-server): `Http`, `h`, `Req`, `Res`, file routes, middleware
 - [Full-stack Web](https://buntaljs.org/docs/guides/full-stack-web): pages, layouts, `$` loaders, config middlewares
 - [Security](https://buntaljs.org/docs/guides/security): auth, cookies, CORS, security headers, safe file access
+- [Templates](https://buntaljs.org/templates): landing page / portfolio, Markdown blog with Bun.SQL, minimal starter, with screenshots
 - [Build with AI](https://buntaljs.org/docs/guides/ai): ready-made prompts for landing pages, docs, blogs, CMS, e-commerce, dashboards and APIs
 
 ## API Reference

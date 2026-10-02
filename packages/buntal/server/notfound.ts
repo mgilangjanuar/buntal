@@ -6,7 +6,8 @@ import { bootstrapModules, pageHeaders } from './inject'
 
 export const notfoundHandler = async (
   env: 'development' | 'production' = 'development',
-  appDir: string = './app'
+  appDir: string = './app',
+  outDir: string = '.buntal'
 ): Promise<Response | void> => {
   const layout =
     (await Bun.file(join(appDir, 'layout.tsx')).exists()) &&
@@ -24,7 +25,7 @@ export const notfoundHandler = async (
             children: createElement(NotFound)
           })
         : createElement(NotFound),
-      { bootstrapModules: await bootstrapModules(env) }
+      { bootstrapModules: await bootstrapModules(env, outDir) }
     ),
     { status: 404, headers: pageHeaders }
   )

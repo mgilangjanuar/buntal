@@ -2,7 +2,7 @@ import { Http } from '@buntal/http'
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs'
 import { join } from 'path'
-import { injectHandler } from './inject'
+import { buildId, injectHandler } from './inject'
 import { builder } from './router'
 
 let dir: string
@@ -73,6 +73,25 @@ describe('injectHandler', () => {
       expect(resp.status).toBe(302)
       expect(resp.headers.get('location')).toBe(`${base}/about`)
     }
+  })
+
+  test('root.js is versioned by the build content, not package.json', async () => {
+    const html = await (await fetch(`${base}/about`)).text()
+    const v = /\/root\.js\?v=([a-z0-9]+)/.exec(html)?.[1]
+    expect(v).toBe(await buildId('.buntal'))
+  })
+
+  test('a rebuilt bundle gets a new root.js version', async () => {
+    for (const [name, code] of [
+      ['a', 'console.log(1)'],
+      ['b', 'console.log(2)']
+    ]) {
+      mkdirSync(join(dir, name, 'dist'), { recursive: true })
+      writeFileSync(join(dir, name, 'dist', 'root.js'), code!)
+    }
+    const a = await buildId(join(dir, 'a'))
+    expect(a).toBe(await buildId(join(dir, 'a')))
+    expect(a).not.toBe(await buildId(join(dir, 'b')))
   })
 
   test('invalid _$ values return 404 without crashing', async () => {

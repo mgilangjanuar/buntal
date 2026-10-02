@@ -1,6 +1,6 @@
 <section align="center">
   <img align="top" src="https://media.tenor.com/yjOrdcOkLPUAAAAj/green-dot.gif" width="22px" height="22px" />
-  <span>Early Development Stage</span>
+  <span>Stable v1</span>
 <section>
 
 <br/>

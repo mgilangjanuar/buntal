@@ -26,6 +26,7 @@
     "prettier": "3.9.9"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "release:version": "bun scripts/version.ts"
   }
 }

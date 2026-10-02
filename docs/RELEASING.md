@@ -4,7 +4,7 @@ All npm packages (`@buntal/http`, `buntal`, `@buntal/cli`, `create-buntal`) shar
 
 ## Steps
 
-1. On a branch, bump every package and the internal dependency ranges:
+1. On a branch, bump every package, the internal dependency ranges and the version shown on the website (`apps/web/lib/version.ts`):
 
    ```sh
    bun run release:version 1.0.0

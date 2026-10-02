@@ -4,5 +4,6 @@ export const ALLOWED_METHODS = [
   'PUT',
   'PATCH',
   'DELETE',
-  'OPTIONS'
+  'OPTIONS',
+  'HEAD'
 ] as const

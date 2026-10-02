@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@/hooks/use-theme'
 import { SearchProvider } from '@/hooks/use-search'
 import { SearchDialogWrapper } from '@/components/search/search-dialog'
+import { cssHref } from '@/lib/css-href'
 import { Meta, type MetaProps } from 'buntal'
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
           }}
         />
         <link rel="icon" href="/favicon.svg" />
-        <link rel="stylesheet" href="/globals.css?v=1.17" />
+        <link rel="stylesheet" href={cssHref()} data-app-css="" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

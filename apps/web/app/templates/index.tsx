@@ -5,7 +5,7 @@ import { useTheme } from '@/hooks/use-theme'
 import { shot, SHOTS, TEMPLATES, type TemplateInfo } from '@/lib/templates'
 import { cn } from '@/lib/utils'
 import { Link, type MetaProps } from 'buntal'
-import { useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 export const $ = {
   _meta: {
@@ -17,17 +17,62 @@ export const $ = {
 
 const SOURCE = 'https://github.com/mgilangjanuar/buntal/tree/main/templates'
 
-function TemplateCard({ template }: { template: TemplateInfo }) {
+function useScheme() {
   const { theme } = useTheme()
-  const pages = SHOTS[template.name]
-  const [page, setPage] = useState(pages[0]!.name)
-  const scheme = theme === 'dark' ? 'dark' : 'light'
+  return theme === 'dark' ? 'dark' : 'light'
+}
+
+function TemplateTile({
+  template,
+  onOpen
+}: {
+  template: TemplateInfo
+  onOpen: () => void
+}) {
+  const scheme = useScheme()
+  const cover = SHOTS[template.name][0]!.name
 
   return (
-    <article
-      id={template.name}
-      className="scroll-mt-24 grid gap-8 lg:grid-cols-[3fr_2fr] items-start"
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-haspopup="dialog"
+      className="group text-left rounded-box border border-base-300 bg-base-200/40 overflow-hidden transition hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-primary"
     >
+      <div className="aspect-[16/10] overflow-hidden border-b border-base-300 bg-base-200">
+        <img
+          src={shot(template.name, cover, scheme)}
+          alt={`${template.title} template preview`}
+          width={1280}
+          height={800}
+          loading="lazy"
+          className="w-full h-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
+        />
+      </div>
+      <div className="p-5 space-y-2">
+        <div className="flex items-center gap-2">
+          <h2 className="text-lg font-semibold">{template.title}</h2>
+          {template.database && (
+            <span className="badge badge-soft badge-secondary badge-sm">
+              Bun.SQL
+            </span>
+          )}
+        </div>
+        <p className="text-sm text-base-content/70 line-clamp-2">
+          {template.summary}
+        </p>
+      </div>
+    </button>
+  )
+}
+
+function TemplateDetail({ template }: { template: TemplateInfo }) {
+  const scheme = useScheme()
+  const pages = SHOTS[template.name]
+  const [page, setPage] = useState(pages[0]!.name)
+
+  return (
+    <div className="grid gap-8 lg:grid-cols-[3fr_2fr] items-start">
       <div className="space-y-3">
         <div className="mockup-browser border border-base-300 bg-base-200">
           <div className="mockup-browser-toolbar">
@@ -41,7 +86,6 @@ function TemplateCard({ template }: { template: TemplateInfo }) {
             alt={`${template.title} template, ${page} page`}
             width={1280}
             height={800}
-            loading="lazy"
             className="w-full h-auto"
           />
         </div>
@@ -68,8 +112,10 @@ function TemplateCard({ template }: { template: TemplateInfo }) {
 
       <div className="space-y-5">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-semibold">{template.title}</h2>
+          <div className="flex items-center gap-2 pr-8">
+            <h2 id="template-title" className="text-2xl font-semibold">
+              {template.title}
+            </h2>
             {template.database && (
               <span className="badge badge-soft badge-secondary badge-sm">
                 Bun.SQL
@@ -103,11 +149,42 @@ function TemplateCard({ template }: { template: TemplateInfo }) {
           View source on GitHub
         </a>
       </div>
-    </article>
+    </div>
   )
 }
 
+const HASH_EVENT = 'templatehash'
+
+const subscribe = (cb: () => void) => {
+  window.addEventListener('hashchange', cb)
+  window.addEventListener(HASH_EVENT, cb)
+  return () => {
+    window.removeEventListener('hashchange', cb)
+    window.removeEventListener(HASH_EVENT, cb)
+  }
+}
+
+const setHash = (hash: string) => {
+  history.replaceState(null, '', hash || window.location.pathname)
+  window.dispatchEvent(new Event(HASH_EVENT))
+}
+
 export default function TemplatesPage() {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const hash = useSyncExternalStore(
+    subscribe,
+    () => window.location.hash,
+    () => ''
+  )
+  const active = TEMPLATES.find((t) => `#${t.name}` === hash) ?? null
+
+  useEffect(() => {
+    const el = dialogRef.current
+    if (!el) return
+    if (active && !el.open) el.showModal()
+    if (!active && el.open) el.close()
+  }, [active])
+
   return (
     <main>
       <Header />
@@ -131,12 +208,41 @@ export default function TemplatesPage() {
             .
           </p>
         </header>
-        <div className="space-y-24">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TEMPLATES.map((t) => (
-            <TemplateCard key={t.name} template={t} />
+            <TemplateTile
+              key={t.name}
+              template={t}
+              onOpen={() => setHash(`#${t.name}`)}
+            />
           ))}
         </div>
       </div>
+
+      <dialog
+        ref={dialogRef}
+        className="modal"
+        aria-labelledby="template-title"
+        onClose={() => setHash('')}
+      >
+        <div className="modal-box w-11/12 max-w-6xl">
+          <form method="dialog">
+            <button
+              type="submit"
+              aria-label="Close"
+              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+            >
+              ✕
+            </button>
+          </form>
+          {active && <TemplateDetail key={active.name} template={active} />}
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button type="submit" aria-label="Close">
+            close
+          </button>
+        </form>
+      </dialog>
       <Footer />
     </main>
   )

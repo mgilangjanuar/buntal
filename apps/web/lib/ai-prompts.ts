@@ -9,7 +9,7 @@ export type UseCase = {
 const SITE = 'https://buntaljs.org'
 
 const BASE = `You are building a web app with Buntal JS, a full-stack React framework for Bun.
-Before writing code, read ${SITE}/llms.txt and ${SITE}/llms-full.txt and follow them exactly. Do not use Next.js, Remix or Express APIs; Buntal only looks similar.
+Before writing code, read ${SITE}/llms.txt and ${SITE}/llms-full.txt (including its Best practices section) and follow them exactly. Do not use Next.js, Remix or Express APIs; Buntal only looks similar.
 
 Setup
 - Scaffold with \`bun create buntal@latest <project-name>\`, then work inside that folder.
@@ -28,6 +28,7 @@ Buntal rules
 Quality bar
 - TypeScript strict, no \`any\` where a type is known. Run \`bunx tsc --noEmit\` before finishing.
 - Responsive, accessible (semantic HTML, labels, alt text, keyboard focus), light and dark mode.
+- SEO on public pages: unique title and description in \`_meta\`, Open Graph tags, a canonical link, JSON-LD where it fits, \`app/sitemap.xml/index.ts\` and \`public/robots.txt\`; \`noindex\` on private and not-found pages.
 - Validate every request body on the server; never trust client input.
 - Keep dependencies minimal; prefer Bun built-ins (bun:sqlite, Bun.password, Bun.file).
 - Finish with a short README: what was built, how to run it, required env vars.`

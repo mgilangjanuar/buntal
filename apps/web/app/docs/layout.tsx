@@ -20,6 +20,10 @@ const MENUS: MenuItem[] = [
     href: '/docs/install'
   },
   {
+    title: 'Best Practices',
+    href: '/docs/best-practice'
+  },
+  {
     title: 'Guides',
     items: [
       {

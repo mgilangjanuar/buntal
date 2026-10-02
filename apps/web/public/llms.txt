@@ -13,6 +13,7 @@ Important notes for AI agents:
 
 - [Get Started](https://buntaljs.org/docs): what Buntal is and when to use it
 - [Installation](https://buntaljs.org/docs/install): prerequisites and project setup
+- [Best Practices](https://buntaljs.org/docs/best-practice): project structure, data loading, SEO (meta, Open Graph, canonical, JSON-LD, sitemap, robots.txt, noindex), performance, accessibility, testing and deployment
 - [HTTP Server](https://buntaljs.org/docs/guides/http-server): `Http`, `h`, `Req`, `Res`, file routes, middleware
 - [Full-stack Web](https://buntaljs.org/docs/guides/full-stack-web): pages, layouts, `$` loaders, config middlewares
 - [Security](https://buntaljs.org/docs/guides/security): auth, cookies, CORS, security headers, safe file access

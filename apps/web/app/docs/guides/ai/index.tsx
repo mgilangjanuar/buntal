@@ -62,6 +62,7 @@ ${prompts}
 - **Work in steps.** Ask the agent to scaffold, run \`bun dev\`, and check each page before adding the next feature.
 - **Keep secrets on the server.** Data access belongs in \`$\` loaders and API routes. Only \`BUNTAL_PUBLIC_*\` variables reach the browser.
 - **Review security-sensitive code.** Login, payments and file access deserve a human read. The [Security guide](/docs/guides/security) lists what to look for.
+- **Share the rules.** [Best Practices](/docs/best-practice) covers SEO, performance and accessibility; agents already get it through \`/llms-full.txt\`.
 - **Ask for tests.** \`bun test\` can start a Buntal server on port 0, so API tests are fast and need no setup.`}
       tableOfContents={[
         {

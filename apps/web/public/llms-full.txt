@@ -332,6 +332,37 @@ test('GET /ping', async () => {
 })
 ```
 
+## Best practices
+
+Full page: https://buntaljs.org/docs/best-practice
+
+Structure and data
+- Keep `app/` for routes; put data access and validation in `lib/`, shared UI in `components/`, page-only components in `app/**/_components/` (folders starting with `_` are not rendered as pages).
+- Load page data in `$`, querying the database directly. Use a static `$` object for request-independent pages. Run independent queries with `Promise.all`.
+
+SEO (every page is server-rendered, so crawlers see full HTML)
+- Root layout: `<html lang="en">` and one `<Meta>` with site defaults (`og.site_name`, `twitter.card`), spread with `data?._meta`.
+- Each page's `$` returns `_meta` with a unique `title` (50-60 chars), `description` (<= 155 chars), and absolute `og.url` / `og.image` (1200x630).
+- Canonical URL: render `<link rel="canonical" href="https://your.site/path" />` in the page; React 19 hoists it into `<head>`. Build it from your public origin, not `req.url`.
+- Structured data: `<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(obj).replace(/</g, '\u003c') }} />` (Organization, WebSite, Article, Product, BreadcrumbList).
+- Sitemap: `app/sitemap.xml/index.ts` exporting GET that returns `application/xml` built from your data. RSS: `app/rss.xml/index.ts` with `application/rss+xml`.
+- `public/robots.txt` with `Sitemap: https://your.site/sitemap.xml`; disallow admin/account paths.
+- Unknown URLs render `app/404.tsx` with status 404. When `$` finds no record the page renders with status 200, so render `<meta name="robots" content="noindex" />` in that branch, and on admin, cart, account and search pages.
+- One `<h1>` per page, ordered headings, descriptive link text, `alt` on meaningful images, readable URLs (`/products/blue-mug`). Use `<Link>` for internal links (real `<a href>`, crawlable).
+
+Performance
+- Routes are code-split; keep heavy libraries inside the pages that use them.
+- Loader responses are `private, no-store`; cache shared expensive data in memory in `lib/`. Put a CDN in front of static files and the bundle; bump `package.json` version per release (it versions `/root.js`).
+- Images with `width`/`height`, `loading="lazy"` below the fold, modern formats. Fonts preconnected with `display=swap` or self-hosted.
+
+Accessibility
+- Semantic landmarks, labels on every input, visible focus, keyboard support, 4.5:1 contrast, `prefers-reduced-motion`.
+
+Errors, testing, deployment
+- Consistent API errors `{ error, details? }` with correct status codes; `logger()` plus an error tracker.
+- `bun test` (server on port 0), `bunx tsc --noEmit` in CI, check `bun run build && bun start` before release.
+- Deploy with `bun start` behind a TLS proxy that sets `x-forwarded-proto`; secrets via env vars; SQLite on a persistent volume; add `app/api/health/index.ts`.
+
 ## Common mistakes
 
 - Importing from `next/link` or `next/router`: use `Link` and `useRouter` from `buntal`.
@@ -339,3 +370,5 @@ test('GET /ping', async () => {
 - Setting `Access-Control-Allow-Origin: *` with credentials: use `cors({ origin: [...] })`.
 - Reading secrets in components: components also run in the browser. Keep secrets in `$` and API routes.
 - Putting `auth()` in `buntal.config.ts` middlewares when the site has public pages: protect per route.
+- Returning `{ notFound: true }` from `$` without a `noindex` meta tag: search engines index the empty page as a soft 404.
+- Using `req.url` for canonical or Open Graph URLs: behind a proxy it can be an internal host. Use your public origin.

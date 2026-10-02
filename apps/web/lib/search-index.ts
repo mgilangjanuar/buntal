@@ -65,6 +65,8 @@ function getDescription(
     const descriptions: Record<string, string> = {
       'Get Started': 'Introduction to Buntal JS framework and basic concepts',
       Installation: 'How to install and set up Buntal JS in your project',
+      'Best Practices':
+        'Structure, data loading, SEO, performance, accessibility, testing and deployment',
       'HTTP Server': 'Learn how to create HTTP servers with Buntal',
       'Full-stack Web': 'Build full-stack web applications with React and SSR',
       Security:
@@ -320,6 +322,33 @@ const CONTENT_BASED_SEARCH_ITEMS: SearchItem[] = [
       'dependencies'
     ],
     breadcrumb: ['Documentation', 'Installation']
+  },
+  {
+    id: '/docs/best-practice',
+    title: 'Best Practices',
+    url: '/docs/best-practice',
+    type: 'docs',
+    category: 'Documentation',
+    description:
+      'Structure, data loading, SEO, performance, accessibility, testing and deployment',
+    content: `Project structure app components lib content public. Data loading $ loader static $ Response redirect query database directly. SEO titles descriptions Meta _meta Open Graph Twitter card canonical URL structured data JSON-LD schema.org sitemap.xml robots.txt RSS noindex not found 404 soft 404 headings alt text human-readable URLs. Performance code splitting Promise.all cache CDN images fonts. Accessibility semantic HTML labels focus contrast reduced motion. Security validation cookies CORS CSP. Errors logging. Testing bun test tsc. Deployment bun start NODE_ENV PORT proxy HSTS health check. Working with AI agents llms-full.txt AGENTS.md.`,
+    keywords: [
+      'best practices',
+      'seo',
+      'meta',
+      'open graph',
+      'canonical',
+      'sitemap',
+      'robots',
+      'json-ld',
+      'structured data',
+      'performance',
+      'accessibility',
+      'a11y',
+      'deploy',
+      'testing'
+    ],
+    breadcrumb: ['Documentation', 'Best Practices']
   },
   {
     id: '/docs/guides/http-server',

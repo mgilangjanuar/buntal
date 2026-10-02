@@ -82,12 +82,13 @@ describe('injectHandler', () => {
   })
 
   test('a rebuilt bundle gets a new root.js version', async () => {
-    for (const [name, code] of [
+    const bundles = [
       ['a', 'console.log(1)'],
       ['b', 'console.log(2)']
-    ]) {
+    ] as const
+    for (const [name, code] of bundles) {
       mkdirSync(join(dir, name, 'dist'), { recursive: true })
-      writeFileSync(join(dir, name, 'dist', 'root.js'), code!)
+      writeFileSync(join(dir, name, 'dist', 'root.js'), code)
     }
     const a = await buildId(join(dir, 'a'))
     expect(a).toBe(await buildId(join(dir, 'a')))

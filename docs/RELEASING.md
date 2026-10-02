@@ -29,8 +29,17 @@ Tags with a pre-release suffix (`v1.1.0-rc.1`) publish under the `next` dist-tag
 
 ## One-time setup
 
-- **npm token:** create a granular access token on npmjs.com with read and write access to `buntal`, `create-buntal` and the `@buntal` scope, with "Bypass two-factor authentication" enabled for publishing. Store it as the `NPM_TOKEN` secret of the `npm` environment (Settings > Environments). Add required reviewers to that environment if releases should need an approval.
-- Never move or re-push an existing tag. If a release is broken, fix it on `main` and release the next patch version.
+Publishing uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers): GitHub Actions proves its identity to npm with OIDC, so there is no npm token to store or rotate, and every release gets a provenance attestation.
+
+1. For each package (`@buntal/http`, `buntal`, `@buntal/cli`, `create-buntal`), open its page on npmjs.com > Settings > Trusted Publisher > GitHub Actions and enter:
+   - Organization or user: `mgilangjanuar`
+   - Repository: `buntal`
+   - Workflow filename: `release.yml`
+   - Environment: `npm`
+2. In GitHub, create the `npm` environment (Settings > Environments). Add required reviewers if releases should need an approval.
+3. Once a release has gone through, set each package's Publishing access to "Require two-factor authentication and disallow tokens", and delete any old automation tokens.
+
+Never move or re-push an existing tag. If a release is broken, fix it on `main` and release the next patch version.
 
 ## Dry run
 

@@ -50,5 +50,5 @@ for (const [i, dir] of PACKAGES.entries()) {
   )
   const args = ['--access', 'public', '--tag', distTag]
   if (dryRun) args.push('--dry-run')
-  await $`bun publish ${args}`.cwd(dir)
+  await $`npm publish ${args}`.cwd(dir)
 }

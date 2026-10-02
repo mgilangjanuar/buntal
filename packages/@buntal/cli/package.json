@@ -8,10 +8,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgilangjanuar/buntal.git"
+    "url": "git+https://github.com/mgilangjanuar/buntal.git",
+    "directory": "packages/@buntal/cli"
   },
   "bin": {
-    "buntal": "./index.ts"
+    "buntal": "index.ts"
   },
   "devDependencies": {
     "@types/bun": "1.4.2"

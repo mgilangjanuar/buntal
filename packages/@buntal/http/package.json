@@ -11,7 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mgilangjanuar/buntal.git"
+    "url": "git+https://github.com/mgilangjanuar/buntal.git",
+    "directory": "packages/@buntal/http"
   },
   "description": "HTTP client framework for Bun",
   "homepage": "https://buntaljs.org",

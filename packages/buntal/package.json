@@ -8,7 +8,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mgilangjanuar/buntal.git"
+    "url": "git+https://github.com/mgilangjanuar/buntal.git",
+    "directory": "packages/buntal"
   },
   "devDependencies": {
     "@types/bun": "1.4.2",

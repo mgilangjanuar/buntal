@@ -47,19 +47,29 @@ jobs:
     needs: verify
     runs-on: ubuntu-latest
     environment: npm
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: oven-sh/setup-bun@v2
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Use an npm CLI with trusted publishing
+        run: npm install -g npm@^11.5.1
+
       - name: Install workspace
         run: bun install
 
-      - name: Publish to npm
+      - name: Publish to npm (trusted publishing, no token)
         run: bun scripts/release.ts
         env:
           RELEASE_TAG: ${{ github.ref_name }}
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   changelog:
     needs: publish
